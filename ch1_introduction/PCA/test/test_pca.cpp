@@ -1,3 +1,4 @@
+#include "opencv_utils.h"
 #include "pca.h"
 #include <iostream>
 #include <opencv2/core/core.hpp>
@@ -6,17 +7,15 @@
 
 int main(int argc, char **argv) {
   cv::Mat img = cv::imread(argv[1], cv::IMREAD_GRAYSCALE);
-  cv::imshow("original img", img);
-  cv::waitKey(0);
 
-  int pca_dim = 10;
+  int pca_dim = 30;
   cv::Mat pca_output;
 
   if (pca_dim <= std::min(img.rows, img.cols)) {
     pca_output = pca(img, pca_dim);
   }
   cv::Mat vis_pca_output;
-  cv::normalize(pca_output, vis_pca_output, cv::NORM_MINMAX);
+  cv::normalize(pca_output, vis_pca_output, 0, 1, cv::NORM_MINMAX);
   cv::imshow("pca image", vis_pca_output);
   cv::waitKey(0);
 

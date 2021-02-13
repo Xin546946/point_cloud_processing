@@ -14,7 +14,19 @@ opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
 -
 
+../utils/opencv_utils.h
+iostream
+-
+opencv2/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+
 /home/kit/point_cloud/ch1_introduction/PCA/test/test_pca.cpp
+opencv_utils.h
+/home/kit/point_cloud/ch1_introduction/PCA/test/opencv_utils.h
 pca.h
 /home/kit/point_cloud/ch1_introduction/PCA/test/pca.h
 iostream

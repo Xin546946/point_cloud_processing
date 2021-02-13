@@ -136,6 +136,19 @@ test_pca/fast:
 	$(MAKE) -f test/CMakeFiles/test_pca.dir/build.make test/CMakeFiles/test_pca.dir/build
 .PHONY : test_pca/fast
 
+#=============================================================================
+# Target rules for targets named utils
+
+# Build rule for target.
+utils: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 utils
+.PHONY : utils
+
+# fast build rule for target.
+utils/fast:
+	$(MAKE) -f utils/CMakeFiles/utils.dir/build.make utils/CMakeFiles/utils.dir/build
+.PHONY : utils/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -146,6 +159,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... pca"
 	@echo "... test_pca"
+	@echo "... utils"
 .PHONY : help
 
 

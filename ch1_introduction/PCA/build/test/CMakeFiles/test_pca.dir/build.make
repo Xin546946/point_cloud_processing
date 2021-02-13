@@ -91,6 +91,7 @@ test_pca_EXTERNAL_OBJECTS =
 test/test_pca: test/CMakeFiles/test_pca.dir/test_pca.cpp.o
 test/test_pca: test/CMakeFiles/test_pca.dir/build.make
 test/test_pca: src/libpca.a
+test/test_pca: utils/libutils.a
 test/test_pca: /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0
 test/test_pca: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0
 test/test_pca: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0

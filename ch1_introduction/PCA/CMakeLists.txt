@@ -2,7 +2,7 @@ project (PCAIMAGE)
 cmake_minimum_required(VERSION 3.0)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -o3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 find_package(OpenMP)
 if (OPENMP_FOUND)
@@ -21,6 +21,8 @@ MESSAGE ( STATUS "include path ${OpenCV_INCLUDE_DIRS}" )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/utils)
 
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(utils)
