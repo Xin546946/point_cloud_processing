@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kit/point_cloud/ch1_introduction/PCA/src/pca.cpp
+pca.h
+/home/kit/point_cloud/ch1_introduction/PCA/src/pca.h
+
+/home/kit/point_cloud/ch1_introduction/PCA/src/pca.h
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+
