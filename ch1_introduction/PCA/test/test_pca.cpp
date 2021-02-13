@@ -8,7 +8,7 @@
 int main(int argc, char **argv) {
   cv::Mat img = cv::imread(argv[1], cv::IMREAD_GRAYSCALE);
 
-  int pca_dim = 30;
+  int pca_dim = 49;
   cv::Mat pca_output;
 
   if (pca_dim <= std::min(img.rows, img.cols)) {

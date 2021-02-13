@@ -9,29 +9,19 @@ cv::Mat pca(cv::Mat img, int dim) {
   assert(img.channels() == 1);
   img.convertTo(img, CV_64FC1);
 
-  cv::Mat img_vector = img.reshape(1, img.rows * img.cols);
-
-  double img_aver = cv::sum(img)[0] / img_vector.rows;
-  cv::Mat zero_mean_img_vector = img_vector - img_aver;
-
-  cv::Mat cov_matrix(img_vector.rows, img_vector.rows, CV_64FC1);
-  for (int i = 0; i < img_vector.rows; i++) {
-    cov_matrix.at<double>(i, i) =
-        img_vector.at<double>(i, 0) * img_vector.at<double>(i, 0);
-  }
-
+  double img_aver = cv::sum(img)[0] / (img.rows * img.cols);
+  cv::Mat zero_mean_img = img - img_aver;
+  cv::Mat img_covar, img_mean;
+  cv::calcCovarMatrix(zero_mean_img, img_covar, img_mean, CV_COVAR_ROWS);
   cv::Mat e_values, e_vectors;
-  cv::eigen(cov_matrix, e_values, e_vectors);
+  cv::eigen(img_covar, e_values, e_vectors);
 
-  cv::Mat main_component(
-      cv::Mat::zeros(cov_matrix.rows, cov_matrix.rows, cov_matrix.type()));
-  for (int i = 0; i < dim; i++) {
-    main_component.at<double>(i, i) = cov_matrix.at<double>(i, i);
-  }
+  cv::Mat e_vectors_main_components = e_vectors.colRange(cv::Range(0, dim));
 
   cv::Mat result;
-  result = e_vectors * main_component;
+  result = zero_mean_img * e_vectors_main_components *
+               e_vectors_main_components.t() +
+           img_aver;
 
-  result = result.reshape(1, 50) + img_aver;
   return result;
 }
