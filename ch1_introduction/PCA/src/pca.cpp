@@ -2,7 +2,7 @@
 #include <iostream>
 
 cv::Mat pca(cv::Mat img, int dim) {
-  cv::resize(img, img, cv::Size(50, 50));
+  cv::resize(img, img, cv::Size(80, 80));
   cv::imshow("img", img);
   cv::waitKey(0);
 
