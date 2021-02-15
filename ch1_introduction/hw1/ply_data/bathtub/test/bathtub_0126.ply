@@ -1,0 +1,30 @@
+ply
+format binary_little_endian 1.0
+element vertex 220
+comment vertices
+property float x
+property float y
+property float z
+end_header
+¡¸¸BÏgZÃ¨—B¡¸¸BgZC¨—B I¼Bš	]ÃR§
+B I¼BX	]CR§
+B®¸¸ÂgZC¨—B­I¼ÂX	]CR§
+B¡¸¸BgZC¨—B I¼BX	]CR§
+BÖeµB×óWÃyXBÖeµB×óWCyXB­I¼Âš	]ÃR§
+B¡¸¸BÏgZÃ¨—B®¸¸ÂÏgZÃ¨—BxÚ¿Bd«_Ã¨—BxÚ¿B#«_C¨—B®¸¸ÂÏgZÃ¨—B­I¼Âš	]ÃR§
+B®¸¸ÂgZC¨—B­I¼ÂX	]CR§
+BðeµÂ×óWCyXBÖeµB×óWCyXB­Ú¿Â#«_C¨—BxÚ¿B#«_C¨—BD‹²B´ØUÃ§¹BD‹²B´ØUC§¹BÖeµB×óWÃyXBðeµÂ×óWÃyXB­Ú¿Âd«_Ã¨—BxÚ¿Bd«_Ã¨—BxÚ¿B#«_C¨—Bj-ÃBbÃyXBj-ÃBbCyXBðeµÂ×óWÃyXBðeµÂ×óWCyXB­Ú¿Âd«_Ã¨—B­Ú¿Â#«_C¨—BQ‹²Â´ØUC§¹BD‹²B´ØUC§¹B­Ú¿Â#«_C¨—Bw-ÃÂbCyXBxÚ¿B#«_C¨—Bj-ÃBbCyXB­Z°B;TÃænB­Z°BÁ:TCænBD‹²B´ØUÃ§¹BQ‹²Â´ØUÃ§¹Bw-ÃÂbÃyXBxÚ¿Bd«_Ã¨—B­Ú¿Âd«_Ã¨—B
+ÆB=:dÃ§¹B
+ÆB=:dC§¹BQ‹²Â´ØUÃ§¹BQ‹²Â´ØUC§¹B­Ú¿Âd«_Ã¨—Bw-ÃÂbÃyXB­Ú¿Â#«_C¨—Bw-ÃÂbCyXBºZ°ÂÁ:TCænB­Z°BÁ:TCænB
+ÆÂ=:dC§¹B
+ÆB=:dC§¹BDú®Bé6SÃaBDú®Bé6SCaB­Z°B;TÃænBºZ°Â;TÃænB
+ÆÂ=:dÃ§¹B®8ÈBð×eCænB®8ÈB1ØeÃænBºZ°ÂÁ:TCænBºZ°Â;TÃænB
+ÆÂ=:dÃ§¹B
+ÆÂ=:dC§¹BDú®Bé6SCaBQú®Âé6SCaB®8ÈÂð×eCænB®8ÈBð×eCænB‚®BÞRÃ`6&B‚®BÞRC`6&BDú®Bé6SÃaBQú®Âé6SÃaB®8ÈÂ1ØeÃænBï˜ÉBÜfCaBï˜ÉBJÜfÃaBQú®Âé6SCaBQú®Âé6SÃaB®8ÈÂ1ØeÃænB®8ÈÂð×eCænB‚®BÞRC`6&B'‚®ÂÞRC`6&Bï˜ÉBÜfCaB	™ÉÂÜfCaBDú®Bé6SÃ_X-BDú®Bé6SC_X-B‚®BÞRÃ`6&B'‚®ÂÞRÃ`6&B	™ÉÂJÜfÃaBAÊBÝ4gC`6&BAÊBÝ4gÃ`6&B'‚®ÂÞRC`6&B'‚®ÂÞRÃ`6&B	™ÉÂJÜfÃaB	™ÉÂÜfCaBDú®Bé6SC_X-BQú®Âé6SC_X-BAÊBÝ4gC`6&BAÊÂÝ4gC`6&B­Z°B;TÃôý3B­Z°BÁ:TCôý3BDú®Bé6SÃ_X-BQú®Âé6SÃ_X-BAÊÂÝ4gÃ`6&Bï˜ÉBÜfC_X-Bï˜ÉBJÜfÃ_X-BQú®Âé6SC_X-BQú®Âé6SÃ_X-BAÊÂÝ4gÃ`6&BAÊÂÝ4gC`6&B­Z°BÁ:TCôý3BºZ°ÂÁ:TCôý3Bï˜ÉBÜfC_X-B	™ÉÂÜfC_X-BD‹²B´ØUÃ³9BD‹²B´ØUC³9B­Z°B;TÃôý3BºZ°Â;TÃôý3B	™ÉÂJÜfÃ_X-B®8ÈBð×eCôý3B®8ÈB1ØeÃôý3BºZ°ÂÁ:TCôý3BºZ°Â;TÃôý3B	™ÉÂJÜfÃ_X-B	™ÉÂÜfC_X-BQ‹²Â´ØUC³9BD‹²B´ØUC³9B®8ÈBð×eCôý3B®8ÈÂð×eCôý3BÖeµB×óWÃa>BÖeµB×óWCa>BQ‹²Â´ØUÃ³9BD‹²B´ØUÃ³9B®8ÈÂ1ØeÃôý3B
+ÆB=:dC³9B
+ÆB=:dÃ³9BQ‹²Â´ØUC³9BQ‹²Â´ØUÃ³9B®8ÈÂ1ØeÃôý3B®8ÈÂð×eCôý3BðeµÂ×óWCa>BÖeµB×óWCa>B
+ÆÂ=:dC³9B
+ÆB=:dC³9B¡¸¸BÏgZÃÕ@B¡¸¸BgZCÕ@BðeµÂ×óWÃa>BÖeµB×óWÃa>B
+ÆÂ=:dÃ³9Bj-ÃBbÃa>Bj-ÃBbCa>BðeµÂ×óWÃa>BðeµÂ×óWCa>B
+ÆÂ=:dÃ³9B
+ÆÂ=:dC³9B®¸¸ÂgZCÕ@B¡¸¸BgZCÕ@Bw-ÃÂbCa>Bj-ÃBbCa>B I¼Bš	]ÃˆÅAB I¼BX	]CˆÅAB®¸¸ÂÏgZÃÕ@B¡¸¸BÏgZÃÕ@Bw-ÃÂbÃa>BxÚ¿Bd«_ÃÕ@BxÚ¿B#«_CÕ@B®¸¸ÂÏgZÃÕ@B®¸¸ÂgZCÕ@Bw-ÃÂbÃa>Bw-ÃÂbCa>B­I¼ÂX	]CˆÅAB I¼BX	]CˆÅAB­Ú¿Â#«_CÕ@BxÚ¿B#«_CÕ@B­I¼Âš	]ÃˆÅAB I¼Bš	]ÃˆÅAB­Ú¿Âd«_ÃÕ@B­I¼Âš	]ÃˆÅAB­I¼ÂX	]CˆÅAB­Ú¿Âd«_ÃÕ@B­Ú¿Â#«_CÕ@B­Ú¿Âd«_Ã¨—BðeµÂºÙaCôAðeµÂìAXÃôA­Ú¿Â#«_C¨—B­Ú¿Â#«_C¨—B­Ú¿Âd«_Ã¨—BðeµÂºÙaCôAðeµÂìAXÃôA­Z°Bö˜VÃôA­Z°Bö˜VÃôA­Z°BucCôA­Z°BucCôAðeµÂºÙaCˆÅAÂðeµÂy9:ÃˆÅAÂðeµÂºÙaCˆÅAÂðeµÂy9:ÃˆÅAÂxÚ¿Bd«_Ã¨—BxÚ¿Bd«_Ã¨—BxÚ¿B#«_C¨—BxÚ¿B#«_C¨—B­Z°BháMÃˆÅAÂ­Z°BºÙaCˆÅAÂ­Z°BháMÃˆÅAÂ­Z°BºÙaCˆÅAÂxÚ¿Bd«_Ã¨—BxÚ¿Bd«_Ã¨—Bj-ÃBbÃyXBxÚ¿Bd«_Ã¨—B­Z°Bö˜VÃôA­Z°Bö˜VÃôAxÚ¿Bd«_Ã¨—Bj-ÃBbÃyXB

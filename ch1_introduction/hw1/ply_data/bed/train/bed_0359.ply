@@ -1,0 +1,66 @@
+ply
+format binary_little_endian 1.0
+element vertex 354
+comment vertices
+property float x
+property float y
+property float z
+end_header
+ £EBñtvB"ŸA £EBñtvBÔH„À £EB‡B"ŸA £EB‡ÂÔH„À £EB‡Â+‡3Á £EB‡B¾Á £EB‡Â¾Á £EB‡B¾ÁåÐ;B‡B+‡3Á £EB‡B"ŸA4Ñ;Â‡B+‡3Á £EÂ‡B"ŸA4Ñ;Â‡B¾Á £EÂ‡B¾ÁåÐ;B‡B¾Á £EB‡Â¾ÁåÐ;B‡Â¾Á £EB‡B¾ÁåÐ;B‡B¾Á4Ñ;Â‡Â+‡3Á £EÂ‡Â¾Á4Ñ;Â‡Â¾Á £EB‡Â+‡3Á £EB‡ÂÔH„À £EB‡Â¾ÁåÐ;B‡Â¾ÁåÐ;B‡Â+‡3Á £EÂ‡ÂÔH„À £EB‡ÂÔH„ÀŒ
+9ÂñtvÂÔH„À £EÂ‡ÂÔH„ÀŒ
+9ÂABÔH„ÀŒ
+9ÂÉv+BÔH„À £EÂñtvBÔH„ÀŒ
+9ÂñtvBÔH„ÀÕ	9BñtvÂÔH„ÀÕ	9BABÔH„ÀÕ	9BÉv+BÔH„ÀÕ	9BñtvBÔH„À £EBñtvBÔH„ÀŒ
+9ÂñtvBF”
+@ £EÂñtvBÔH„ÀŒ
+9ÂñtvBÔH„À £EBñtvBÔH„À £EBñtvB"ŸAÕ	9BñtvBÔH„ÀÕ	9BñtvBF”
+@Õ	9BñtvB"ŸA £EÂñtvB"ŸA £EB‡B¾A £EBñtvB"ŸA £EB‡B"ŸA £EB…«vBkš¢A £EB«wBY¦A £EBB wB{©A £EBÚ[xB¾¬A £EBƒ@yBmÖ¯A £EBáKzB½²A £EBd{{B­iµA £EBÇË|BÐÕ·A £EB§9~Bû¹A £EBoÁBÃÓ»A £EBv¯€BîZ½AÕ	9BñtvB"ŸA £EBñtvB"ŸA £EÂñtvB"ŸA £EÂ‡B"ŸA £EB‡B"ŸA £EÂñtvBÔH„À £EÂ‡Â¾Á £EÂ‡ÂÔH„À £EÂñtvB"ŸA £EÂ‡B"ŸA £EÂ‡B¾Á4Ñ;Â‡Â¾Á £EÂ‡Â¾Á4Ñ;Â‡B¾Á £EÂ‡B¾Á4Ñ;Â‡B+‡3Á4Ñ;Â‡Â+‡3Á4Ñ;Â‡B¾Á4Ñ;Â‡Â¾ÁåÐ;B‡Â+‡3Á4Ñ;Â‡Â+‡3ÁåÐ;B‡B+‡3Á4Ñ;Â‡B+‡3ÁåÐ;B‡Â+‡3ÁåÐ;B‡B+‡3ÁåÐ;B‡Â¾ÁåÐ;B‡B¾Á £EB‡B¾A £EÂ‡B"ŸA £EÂ‡B¾A £EB‡B"ŸAÕ	9BñtvB"ŸA £EÂ…«vBkš¢A £EÂñtvB"ŸA £EB…«vBkš¢A £EBñtvB"ŸA £EÂv¯€BîZ½A £EB‡B¾A £EÂ‡B¾A £EBv¯€BîZ½A £EÂoÁBÃÓ»A £EBoÁBÃÓ»A £EÂ§9~Bû¹A £EB§9~Bû¹A £EÂÇË|BÐÕ·A £EBÇË|BÐÕ·A £EÂd{{B­iµA £EBd{{B­iµA £EBáKzB½²A £EÂáKzB½²A £EBƒ@yBmÖ¯A £EÂƒ@yBmÖ¯A £EBÚ[xB¾¬A £EÂÚ[xB¾¬A £EBB wB{©A £EÂB wB{©A £EB«wBY¦A £EÂ«wBY¦A £EBñtvB"ŸA £EÂ‡B"ŸA £EB‡B"ŸA £EÂñtvB"ŸAÕ	9BñtvB"ŸA £EÂ…«vBkš¢A £EÂ‡B¾A £EÂ«wBY¦A £EÂB wB{©A £EÂÚ[xB¾¬A £EÂƒ@yBmÖ¯A £EÂáKzB½²A £EÂd{{B­iµA £EÂÇË|BÐÕ·A £EÂ§9~Bû¹A £EÂoÁBÃÓ»A £EÂv¯€BîZ½AŒ
+9ÂABF”
+@Õ	9BABF”
+@Œ
+9ÂÉv+BF”
+@Õ	9BÉv+BF”
+@Õ	9BÉv+BÔH„ÀÕ	9BABÔH„ÀŒ
+9ÂABÔH„ÀŒ
+9ÂÉv+BÔH„ÀŒ
+9ÂÉv+BF”
+@Œ
+9ÂñtvBF”
+@Œ
+9ÂÉv+BÔH„ÀŒ
+9ÂñtvBÔH„ÀÕ	9BÉv+BF”
+@Õ	9BñtvBF”
+@Õ	9BñtvBF”
+@Õ	9BÉv+BF”
+@Õ	9BñtvBÔH„ÀÕ	9BÉv+BÔH„ÀÕ	9BABF”
+@Õ	9BñtvÂF”
+@Õ	9BABÔH„ÀÕ	9BñtvÂÔH„ÀŒ
+9ÂñtvÂF”
+@Œ
+9ÂABF”
+@Õ	9BñtvÂÔH„ÀŒ
+9ÂñtvÂÔH„ÀŒ
+9ÂñtvÂÔH„ÀŒ
+9ÂABÔH„À¹<	Â5/iBþeõ@}P‚ÁëâSBåÐ">+˜àÁä”SBÉå÷?+˜àÁä”SBÉå÷?}P‚ÁëâSBåÐ">¹<	Â5/iBþeõ@—°Á]ÜfB£Ê@—°Á]ÜfB£Ê@IÁ*©9B=Ã?ZDÁ•7BÎÑ?IÁ*©9B=Ã?ZDÁ•7BÎÑ? #Âä”SBÉå÷? #Âä”SBÉå÷?ÓÂÁ|arBh‘PAÓÂÁ|arBh‘PAƒ/ÁµhBÞà@ƒ/ÁµhBÞà@zÇÑÀ•7BÎÑ?ZDÁ•7BÎÑ?ZDÁ•7BÎÑ?zÇÑÀ•7BÎÑ?4ÑÂŠpIB§è\@o°ÂóNGBRIq@o°ÂóNGBRIq@4ÑÂŠpIB§è\@ØÁÂ|arBh‘PAUÂ|arBh‘PAUÂ|arBh‘PAØÁÂ|arBh‘PA·ûÀ)mJB½R˜@VŸåÀµ¦IBñc¤@·ûÀ)mJB½R˜@VŸåÀµ¦IBñc¤@ZDÁ•7BÎÑ?zÇÑÀ•7BÎÑ?ZDÁ†¸?B8gAZDÁ†¸?B8gAzÇÑÀ•7BÎÑ?ZDÁ•7BÎÑ? #Â•7BÎÑ? #Â•7BÎÑ?UÂ•7BÎÑ?o°ÂóNGBRIq@o°ÂóNGBRIq@UÂ•7BÎÑ?¥ŽÂ¥`Bö(Ao°Â†ø]Bœ¢Ao°Â†ø]Bœ¢A¥ŽÂ¥`Bö(Ao°Â†ø]Bœ¢Ao°Â†ø]Bœ¢AUÂ|arBh‘PA­ºÂ´UBš<A­ºÂ´UBš<AUÂ|arBh‘PAñc?Á|arBh‘PAñc?Á|arBh‘PAd;ÇÀ|arBh‘PAd;ÇÀ|arBh‘PAVŸåÀHP`BA‚AVŸåÀHP`BA‚AVŸåÀµ¦IBñc¤@VŸåÀµ¦IBñc¤@ #Â•7BÎÑ?ZDÁ•7BÎÑ?ZDÁ•7BÎÑ? #Â•7BÎÑ? #Â•7BÎÑ? #Â•7BÎÑ?UÂ•7BÎÑ?aÂ/.:BóŽå@o°ÂóNGBRIq@o°ÂóNGBRIq@aÂ/.:BóŽå@UÂ•7BÎÑ?µæÂÜ†\BÂAgÂKêGB¼tƒ@o°Â†ø]Bœ¢Ao°Â†ø]Bœ¢AgÂKêGB¼tƒ@µæÂÜ†\BÂAäWÁdÌGBÀ[ AäWÁdÌGBÀ[ Ad;ÇÀ|arBh‘PAd;ÇÀ|arBh‘PAVŸåÀHP`BA‚A·ûÀårIB§yµ@VŸåÀHP`BA‚A·ûÀårIB§yµ@ÙßüÁ\8BŽu@²®Á†¸?B8gA²®Á†¸?B8gAÙßüÁ\8BŽu@&PA{ÔiB?5A™;øAˆTB·Ñ0?%õ™A:TBDú@%õ™A:TBDú@™;øAˆTB·Ñ0?&PA{ÔiB?5A~ÊA£gBSÛ@~ÊA£gBSÛ@òBVN:B‡§@Ò/B­:8BF”
+@òBVN:B‡§@Ò/B­:8BF”
+@ÛŠdA:TBDú@ÛŠdA:TBDú@ï¸·AÂsB@YAï¸·AÂsB@YAxºBûºhB‚âñ@xºBûºhB‚âñ@j#B­:8BF”
+@Ò/B­:8BF”
+@Ò/B­:8BF”
+@j#B­:8BF”
+@9Ö-AÐJBªñ~@?W"A9ôGB*©‰@?W"A9ôGB*©‰@9Ö-AÐJBªñ~@ùbAÂsB@YA{	AÂsB@YA{	AÂsB@YAùbAÂsB@YAvÏBoKB?W©@o’ BûKJBshµ@vÏBoKB?W©@o’ BûKJBshµ@Ò/B­:8BF”
+@j#B­:8BF”
+@Ò/BÌ]@ByéAÒ/BÌ]@ByéAj#B­:8BF”
+@Ò/B­:8BF”
+@ÛŠdA­:8BF”
+@ÛŠdA­:8BF”
+@{	A­:8BF”
+@?W"A9ôGB*©‰@?W"A9ôGB*©‰@{	A­:8BF”
+@/Ý*Aë³`BÎª	A?W"AÌ^BÝ$A?W"AÌ^BÝ$A/Ý*Aë³`BÎª	A?W"AÌ^BÝ$A?W"AÌ^BÝ$A{	AÂsB@YA-bA1YVBCEA-bA1YVBCEA{	AÂsB@YA]mBÂsB@YA]mBÂsB@YAí^$BÂsB@YAí^$BÂsB@YAo’ Btõ`B!Ao’ Btõ`B!Ao’ BûKJBshµ@o’ BûKJBshµ@ÛŠdA­:8BF”
+@Ò/B­:8BF”
+@Ò/B­:8BF”
+@ÛŠdA­:8BF”
+@ÛŠdA­:8BF”
+@ÛŠdA­:8BF”
+@{	A­:8BF”
+@aAuÓ:Bu“ö@?W"A9ôGB*©‰@?W"A9ôGB*©‰@aAuÓ:Bu“ö@{	A­:8BF”
+@¿}-A,]BÐDA1%A‘HB>y”@?W"AÌ^BÝ$A?W"AÌ^BÝ$A1%A‘HB>y”@¿}-A,]BÐDA„MBªqHBÞ(A„MBªqHBÞ(Aí^$BÂsB@YAí^$BÂsB@YAo’ Btõ`B!AvÏBJBV}Æ@o’ Btõ`B!AvÏBJBV}Æ@Z{AU9B‘~3@ÌÝéAÌ]@ByéAÌÝéAÌ]@ByéAZ{AU9B‘~3@

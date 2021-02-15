@@ -1,0 +1,31 @@
+ply
+format binary_little_endian 1.0
+element vertex 602
+comment vertices
+property float x
+property float y
+property float z
+end_header
+¯TÂ€HÁ¾AòA¯TÂ=,ÖÀázA¯TÂ=,ÖÀ¾AòA¯TÂ€HÁázA¯TÂ€HÁûzÂûzÂ€HÁûzBûzÂ€HÁûzÂ¯TÂ€HÁ]þåÁ¯TÂ€HÁ	yÜÁ¯TÂ€HÁ¡x‡Á¯TÂ€HÁâX‡Á¯TB€HÁ¡x‡Á¯TB€HÁâX‡Á¯TÂ€HÁ8ø{Á¯TÂ€HÁ
+h¤À¯TÂ€HÁÏ÷{À¯TÂ€HÁ¶óÕ@¯TÂ€HÁÏ÷û@¯TÂ€HÁ›f”A¯TÂ€HÁázA¯TÂ€HÁ¾AòA¯TÂ€HÁÏ÷ûA¯TÂ€HÁûzB¯TÂ€HÁûzB¯TÂ=,ÖÀÏ÷ûA¯TÂ=,ÖÀûzB¯TÂ€HÁÏ÷ûAûzÂ=,ÖÀûzB¯TÂ€HÁûzB¯TÂ=,ÖÀûzBûzÂ€HÁûzB¯TÂ€HÁ]þåÁ¯TÂ=,ÖÀûzÂ¯TÂ=,ÖÀ]þåÁ¯TÂ€HÁûzÂ¯TÂ€HÁ¡x‡Á¯TÂ=,ÖÀ	yÜÁ¯TÂ=,ÖÀ¡x‡Á¯TÂ€HÁ	yÜÁûzB€HÁûzÂ¯TB€HÁ]þåÁ¯TB€HÁûzÂûzB€HÁûzB¯TB€HÁ	yÜÁ¯TB€HÁ¡x‡Á¯TB€HÁâX‡Á¯TB€HÁ8ø{Á¯TB€HÁ
+h¤À¯TB€HÁÏ÷{À¯TB€HÁ¶óÕ@¯TB€HÁÏ÷û@¯TB€HÁ›f”A¯TB€HÁázA¯TB€HÁ¾AòA¯TB€HÁÏ÷ûA¯TB€HÁûzB¯TB€HÁ8ø{Á¯TB=,ÖÀ¡x‡Á¯TB=,ÖÀ8ø{Á¯TB€HÁ¡x‡Á¯TB€HÁâX‡Á¯TÂ€HÁ
+h¤À¯TÂ=,ÖÀ8ø{Á¯TÂ=,ÖÀ
+h¤À¯TÂ€HÁ8ø{Á¯TÂ€HÁ¶óÕ@¯TÂ=,ÖÀÏ÷{À¯TÂ=,ÖÀ¶óÕ@¯TÂ€HÁÏ÷{À¯TÂ€HÁ›f”A¯TÂ=,ÖÀý”A¯TÂ=,ÖÀ›f”A¯TÂ€HÁÏ÷û@¯TÂ=,ÖÀÏ÷û@ûzB€HÁûzBûzB=,ÖÀûzÂûzB=,ÖÀûzBûzB€HÁûzÂ¯TB=,ÖÀûzBûzB€HÁûzBûzB=,ÖÀûzB¯TB€HÁûzB¯TB=,ÖÀÏ÷{À¯TB=,ÖÀ_Ø@¯TB=,ÖÀ¶óÕ@¯TB€HÁûzÂ¯TB=,ÖÀ]þåÁ¯TB=,ÖÀûzÂ¯TB=,ÖÀ	yÜÁ¯TB=,ÖÀ
+h¤À¯TB=,ÖÀý”A¯TB€HÁ¡x‡Á¯TB€HÁ	yÜÁ¯TB€HÁ]þåÁ¯TB€HÁâX‡Á¯TB€HÁ8ø{Á¯TB€HÁ
+h¤À¯TB€HÁ¶óÕ@¯TB€HÁÏ÷{À¯TB=,ÖÀázA¯TB=,ÖÀ›f”A¯TB=,ÖÀ¾AòA¯TB=,ÖÀÏ÷ûA¯TB=,ÖÀûzB¯TB€HÁûzB¯TB€HÁÏ÷û@¯TB€HÁ›f”A¯TB€HÁÏ÷ûA¯TB€HÁázA¯TB€HÁ¾AòA¯TB=,ÖÀ6«õA¯TB=,ÖÀÏ÷û@¯TB=,ÖÀ{ƒ£À¯TB=,ÖÀ8ø{Á¯TB=,ÖÀ¡x‡Á¯TB=,ÖÀþÔåÁ¯TB=,ÖÀÏ÷{À¯TB=,ÖÀ
+h¤À¯TB=,ÖÀ{ƒ£À¯TB€HÁÏ÷{À¯TB€HÁ
+h¤À¯TB€HÁÏ÷û@¯TB=,ÖÀ_Ø@¯TB=,ÖÀÏ÷û@¯TB€HÁ¶óÕ@¯TB=,ÖÀ¶óÕ@¯TB€HÁázA¯TB=,ÖÀ›f”A¯TB=,ÖÀázA¯TB€HÁ›f”A¯TB=,ÖÀÏ÷ûA¯TB=,ÖÀ¾AòA¯TB=,ÖÀ6«õA¯TB€HÁÏ÷ûA¯TB€HÁ¾AòA¯TÂ=,ÖÀ{ƒ£À¯TB=,ÖÀ
+h¤À¯TÂ=,ÖÀ
+h¤À¯TB=,ÖÀ{ƒ£À¯TÂ=,ÖÀ_Ø@¯TB=,ÖÀ¶óÕ@¯TÂ=,ÖÀ¶óÕ@¯TB=,ÖÀ_Ø@¯TB=,ÖÀÏ÷û@¯TB=,Ö@_Ø@¯TB=,Ö@Ï÷û@¯TB=,ÖÀ_Ø@¯TB=,ÖÀázA¯TB=,Ö@ý”A¯TB=,Ö@ázA¯TB=,ÖÀ›f”A¯TB=,ÖÀý”A¯TÂ=,ÖÀ6«õA¯TB=,ÖÀ¾AòA¯TÂ=,ÖÀ¾AòA¯TB=,ÖÀ6«õA¯TB=,ÖÀÏ÷ûA¯TB=,Ö@6«õA¯TB=,Ö@Ï÷ûA¯TB=,ÖÀ6«õAûzB=,Ö@ûzÂ¯TB=,Ö@þÔåÁ¯TB=,Ö@ûzÂûzB=,Ö@ûzB¯TB=,Ö@	yÜÁ¯TB=,Ö@âX‡Á¯TB=,Ö@8ø{Á¯TB=,Ö@{ƒ£À¯TB=,Ö@Ï÷{À¯TB=,Ö@_Ø@¯TB=,Ö@Ï÷û@¯TB=,Ö@ý”A¯TB=,Ö@ázA¯TB=,Ö@6«õA¯TB=,Ö@Ï÷ûA¯TB=,Ö@ûzB¯TB=,Ö@Ï÷û@¯TB€HA_Ø@¯TB€HAÏ÷û@¯TB=,Ö@_Ø@¯TB=,Ö@ázA¯TB€HAý”A¯TB€HAázA¯TB=,Ö@ý”A¯TB=,Ö@Ï÷ûA¯TB€HA6«õA¯TB€HAÏ÷ûA¯TB=,Ö@6«õAûzB=,Ö@ûzBûzB€HAûzÂûzB€HAûzBûzB=,Ö@ûzÂ¯TB€HAûzBûzB=,Ö@ûzBûzB€HAûzB¯TB=,Ö@ûzB¯TB=,Ö@ûzB¯TB€HAûzB¯TB€HAÏ÷ûA¯TB€HAÏ÷{À¯TB€HAÏ÷û@¯TB€HA_Ø@¯TB€HAý”A¯TB€HAûzÂ¯TB€HA	yÜÁ¯TB€HAþÔåÁ¯TB€HAâX‡Á¯TB=,Ö@ûzÂ¯TB€HA8ø{Á¯TB€HA{ƒ£À¯TB€HAázA¯TB€HA6«õA¯TB=,Ö@þÔåÁ¯TB=,Ö@âX‡Á¯TB=,Ö@_Ø@¯TB=,Ö@	yÜÁ¯TB=,Ö@Ï÷{À¯TB=,Ö@8ø{Á¯TB=,Ö@{ƒ£À¯TB=,Ö@Ï÷û@¯TB=,Ö@Ï÷ûA¯TB=,Ö@ý”A¯TB=,Ö@ázA¯TB=,Ö@6«õA¯TB=,Ö@8ø{Á¯TB€HAâX‡Á¯TB€HA8ø{Á¯TB=,Ö@âX‡Á¯TB=,Ö@Ï÷{À¯TB€HA{ƒ£À¯TB€HAÏ÷{À¯TB=,Ö@{ƒ£À¯TB€HÁ¾AòA¯TÂ€HÁÏ÷ûA¯TÂ€HÁ¾AòA¯TB€HÁÏ÷ûA¯TÂ€HÁ¾AòA¯TB=,ÖÀ¾AòA¯TB€HÁ¾AòA¯TÂ=,ÖÀ¾AòA¯TÂ€HAÏ÷ûA¯TB=,Ö@Ï÷ûA¯TB€HAÏ÷ûA¯TB€HÁÏ÷ûA¯TB=,ÖÀÏ÷ûA¯TÂ€HÁÏ÷ûA¯TÂ=,Ö@Ï÷ûA¯TÂ=,ÖÀÏ÷ûA¯TÂ=,Ö@ûzB¯TÂ€HAÏ÷ûA¯TÂ€HAûzB¯TÂ=,Ö@Ï÷ûAûzÂ€HAûzB¯TÂ=,Ö@ûzB¯TÂ€HAûzBûzÂ=,Ö@ûzB¯TÂ=,Ö@þÔåÁûzÂ=,Ö@ûzÂ¯TÂ=,Ö@ûzÂûzÂ=,Ö@ûzB¯TÂ=,Ö@	yÜÁ¯TÂ=,Ö@âX‡Á¯TÂ=,Ö@8ø{Á¯TÂ=,Ö@zÇ£À¯TÂ=,Ö@{ƒ£À¯TÂ=,Ö@Ï÷{À¯TÂ=,Ö@_Ø@¯TÂ=,Ö@Ï÷û@¯TÂ=,Ö@ý”A¯TÂ=,Ö@ázA¯TÂ=,Ö@6«õA¯TÂ=,Ö@Ï÷ûA¯TÂ=,Ö@ûzB¯TÂ=,Ö@6«õA¯TÂ€HAázA¯TÂ€HA6«õA¯TÂ=,Ö@ázA¯TÂ=,ÖÀ6«õA¯TÂ=,Ö@Ï÷ûA¯TÂ=,Ö@6«õA¯TÂ=,ÖÀÏ÷ûA¯TÂ=,Ö@âX‡Á¯TÂ€HA	yÜÁ¯TÂ€HAâX‡Á¯TÂ=,Ö@	yÜÁ¯TÂ€HÁâX‡Á¯TÂ=,Ö@8ø{Á¯TÂ=,Ö@âX‡Á¯TÂ=,ÖÀ8ø{Á¯TÂ€HÁ8ø{Á¯TÂ=,Ö@{ƒ£À¯TÂ€HA8ø{Á¯TÂ€HA{ƒ£À¯TÂ=,Ö@8ø{Á¯TÂ=,Ö@zÇ£À¯TÂ=,ÖÀ{ƒ£À¯TÂ=,Ö@Ï÷{À¯TÂ=,Ö@{ƒ£À¯TÂ=,ÖÀÏ÷{À¯TÂ=,Ö@_Ø@¯TÂ€HAÏ÷{À¯TÂ€HA_Ø@¯TÂ=,Ö@Ï÷{À¯TÂ=,ÖÀ_Ø@¯TÂ=,Ö@Ï÷û@¯TÂ=,Ö@_Ø@¯TÂ=,ÖÀÏ÷û@¯TÂ=,Ö@ý”A¯TÂ€HAÏ÷û@¯TÂ€HAý”A¯TÂ=,Ö@Ï÷û@¯TÂ=,ÖÀý”A¯TÂ=,Ö@ázA¯TÂ=,Ö@ý”A¯TÂ=,ÖÀ›f”A¯TÂ=,ÖÀázA¯TÂ€HA	yÜÁ¯TB=,Ö@	yÜÁ¯TB€HA	yÜÁ¯TB€HÁ	yÜÁ¯TB=,ÖÀ	yÜÁ¯TÂ€HÁ	yÜÁ¯TÂ=,Ö@	yÜÁ¯TÂ=,ÖÀ	yÜÁ¯TB€HÁ]þåÁ¯TÂ€HÁ	yÜÁ¯TÂ€HÁ]þåÁ¯TB€HÁ	yÜÁ¯TB=,ÖÀ	yÜÁ¯TB=,Ö@þÔåÁ¯TB=,Ö@	yÜÁ¯TB=,ÖÀþÔåÁ¯TÂ€HÁ]þåÁ¯TB=,ÖÀ]þåÁ¯TB€HÁ]þåÁ¯TÂ=,ÖÀ]þåÁ¯TÂ=,ÖÀþÔåÁ¯TB=,Ö@þÔåÁ¯TB=,ÖÀþÔåÁ¯TB€HAþÔåÁ¯TÂ=,Ö@þÔåÁ¯TÂ€HAþÔåÁ¯TB=,ÖÀ	yÜÁ¯TB=,ÖÀ]þåÁ¯TB=,ÖÀþÔåÁ¯TB€HÁ	yÜÁ¯TB€HÁ]þåÁ¯TB€HÁ]þåÁ¯TB€HÁ	yÜÁ¯TB=,ÖÀ]þåÁ¯TB=,ÖÀ	yÜÁ¯TB=,ÖÀþÔåÁ¯TB=,ÖÀ]þåÁûzB=,ÖÀûzÂ¯TB=,ÖÀûzÂûzB=,ÖÀûzB¯TB=,ÖÀþÔåÁ¯TB=,ÖÀ	yÜÁ¯TB=,ÖÀ¡x‡Á¯TB=,ÖÀ8ø{Á¯TB=,ÖÀ
+h¤À¯TB=,ÖÀ{ƒ£À¯TB=,ÖÀÏ÷{À¯TB=,ÖÀ¶óÕ@¯TB=,ÖÀ_Ø@¯TB=,ÖÀÏ÷û@¯TB=,ÖÀý”A¯TB=,ÖÀ›f”A¯TB=,ÖÀázA¯TB=,ÖÀ¾AòA¯TB=,ÖÀ6«õA¯TB=,ÖÀÏ÷ûA¯TB=,ÖÀûzB¯TB=,ÖÀûzB¯TB=,ÖÀÏ÷ûAûzB=,ÖÀûzB¯TB=,ÖÀ6«õA¯TB=,ÖÀ¾AòA¯TB=,ÖÀázA¯TB=,ÖÀ›f”A¯TB=,ÖÀý”A¯TB=,ÖÀÏ÷û@¯TB=,ÖÀ_Ø@¯TB=,ÖÀ¶óÕ@¯TB=,ÖÀÏ÷{À¯TB=,ÖÀ{ƒ£À¯TB=,ÖÀ
+h¤À¯TB=,ÖÀ8ø{Á¯TB=,ÖÀ¡x‡Á¯TB=,ÖÀ	yÜÁ¯TB=,ÖÀþÔåÁ¯TB=,ÖÀ]þåÁûzB=,ÖÀûzÂ¯TB=,ÖÀûzÂ¯TB=,Ö@	yÜÁ¯TB€HAþÔåÁ¯TB€HA	yÜÁ¯TB=,Ö@þÔåÁ¯TB=,Ö@þÔåÁ¯TB=,Ö@	yÜÁ¯TB€HAþÔåÁ¯TB€HA	yÜÁ¯TÂ=,ÖÀþÔåÁ¯TÂ=,Ö@	yÜÁ¯TÂ=,Ö@þÔåÁ¯TÂ=,ÖÀ	yÜÁ¯TÂ=,ÖÀ	yÜÁ¯TÂ=,ÖÀþÔåÁ¯TÂ=,Ö@	yÜÁ¯TÂ=,Ö@þÔåÁ¯TB€HAâX‡Á¯TÂ€HA	yÜÁ¯TB€HA	yÜÁ¯TÂ€HAâX‡Á¯TÂ€HAâX‡Á¯TB€HAâX‡Á¯TÂ€HA	yÜÁ¯TB€HA	yÜÁ¯TÂ€HÁâX‡Á¯TB=,Ö@âX‡Á¯TB€HÁâX‡Á¯TB€HAâX‡Á¯TÂ€HAâX‡Á¯TÂ=,Ö@âX‡Á¯TB=,ÖÀ8ø{Á¯TB=,Ö@âX‡Á¯TB=,Ö@8ø{Á¯TB€HÁâX‡Á¯TB€HÁ8ø{Á¯TB€HÁ8ø{Á¯TÂ€HÁâX‡Á¯TB€HÁâX‡Á¯TÂ€HÁ8ø{Á¯TÂ€HA8ø{Á¯TB=,Ö@8ø{Á¯TB€HA8ø{Á¯TB€HÁ8ø{Á¯TB=,ÖÀ8ø{Á¯TÂ€HÁ8ø{Á¯TÂ=,Ö@8ø{Á¯TÂ=,ÖÀ8ø{Á¯TÂ€HÁ¡x‡Á¯TB=,ÖÀ¡x‡Á¯TB€HÁ¡x‡Á¯TÂ=,ÖÀ¡x‡Á¯TB€HA{ƒ£À¯TÂ€HA8ø{Á¯TB€HA8ø{Á¯TÂ€HA{ƒ£À¯TÂ€HA{ƒ£À¯TB€HA{ƒ£À¯TÂ€HA8ø{Á¯TB€HA8ø{Á¯TÂ€HÁázA¯TÂ=,ÖÀ›f”A¯TÂ=,ÖÀázA¯TÂ€HÁ›f”A¯TÂ€HÁ›f”A¯TÂ€HÁázA¯TÂ=,ÖÀ›f”A¯TÂ=,ÖÀázA¯TÂ€HÁÏ÷û@¯TÂ=,ÖÀ_Ø@¯TÂ=,ÖÀÏ÷û@¯TÂ€HÁ¶óÕ@¯TÂ=,ÖÀ¶óÕ@¯TÂ€HÁÏ÷û@¯TÂ=,ÖÀ_Ø@¯TÂ€HÁ¶óÕ@¯TÂ=,ÖÀ¶óÕ@¯TÂ=,ÖÀÏ÷û@¯TB€HÁ›f”A¯TÂ€HÁázA¯TÂ€HÁ›f”A¯TB€HÁázA¯TÂ€HAázA¯TB=,Ö@ázA¯TB€HAázA¯TB€HÁázA¯TB=,ÖÀázA¯TÂ€HÁázA¯TÂ=,Ö@ázA¯TÂ=,ÖÀázA¯TÂ€HÁ›f”A¯TB=,ÖÀ›f”A¯TB€HÁ›f”A¯TÂ=,ÖÀ›f”A¯TB€HA_Ø@¯TÂ€HAÏ÷{À¯TB€HAÏ÷{À¯TÂ€HA_Ø@¯TÂ€HA_Ø@¯TB€HA_Ø@¯TÂ€HAÏ÷{À¯TB€HAÏ÷{À¯TB€HÁ¶óÕ@¯TÂ€HÁÏ÷û@¯TÂ€HÁ¶óÕ@¯TB€HÁÏ÷û@¯TÂ€HAÏ÷û@¯TB=,Ö@Ï÷û@¯TB€HAÏ÷û@¯TB€HÁÏ÷û@¯TB=,ÖÀÏ÷û@¯TÂ€HÁÏ÷û@¯TÂ=,Ö@Ï÷û@¯TÂ=,ÖÀÏ÷û@¯TÂ€HÁ¶óÕ@¯TB=,ÖÀ¶óÕ@¯TB€HÁ¶óÕ@¯TÂ=,ÖÀ¶óÕ@¯TÂ=,ÖÀÏ÷ûA¯TÂ=,ÖÀ¾AòA¯TÂ=,ÖÀ6«õA¯TÂ€HÁÏ÷ûA¯TÂ€HÁ¾AòA¯TÂ€HÁ¾AòA¯TÂ€HÁÏ÷ûA¯TÂ=,ÖÀ¾AòA¯TÂ=,ÖÀÏ÷ûA¯TÂ=,ÖÀ6«õA¯TB€HÁ
+h¤À¯TÂ€HÁÏ÷{À¯TÂ€HÁ
+h¤À¯TB€HÁÏ÷{À¯TÂ€HAÏ÷{À¯TB=,Ö@Ï÷{À¯TB€HAÏ÷{À¯TB€HÁÏ÷{À¯TB=,ÖÀÏ÷{À¯TÂ€HÁÏ÷{À¯TÂ=,Ö@Ï÷{À¯TÂ=,ÖÀÏ÷{À¯TÂ€HÁ
+h¤À¯TB=,ÖÀ
+h¤À¯TB€HÁ
+h¤À¯TÂ=,ÖÀ
+h¤À¯TB=,ÖÀÏ÷{À¯TB=,Ö@{ƒ£À¯TB=,Ö@Ï÷{À¯TB=,ÖÀ{ƒ£À¯TÂ=,ÖÀ{ƒ£À¯TB=,Ö@{ƒ£À¯TB=,ÖÀ{ƒ£À¯TB€HA{ƒ£À¯TÂ€HA{ƒ£À¯TÂ=,Ö@{ƒ£À¯TÂ=,ÖÀÏ÷{À¯TÂ=,ÖÀ
+h¤À¯TÂ=,ÖÀ{ƒ£À¯TÂ€HÁÏ÷{À¯TÂ€HÁ
+h¤À¯TÂ€HÁ
+h¤À¯TÂ€HÁÏ÷{À¯TÂ=,ÖÀ
+h¤À¯TÂ=,ÖÀÏ÷{À¯TÂ=,ÖÀ{ƒ£À¯TÂ=,Ö@þÔåÁ¯TÂ€HAûzÂ¯TÂ€HAþÔåÁ¯TÂ=,Ö@ûzÂ¯TÂ=,Ö@ûzÂ¯TÂ=,Ö@þÔåÁ¯TÂ€HAûzÂ¯TÂ€HAþÔåÁ¯TÂ=,ÖÀ_Ø@¯TB=,Ö@_Ø@¯TB=,ÖÀ_Ø@¯TB€HA_Ø@¯TÂ=,Ö@_Ø@¯TÂ€HA_Ø@¯TB€HAý”A¯TÂ€HAÏ÷û@¯TB€HAÏ÷û@¯TÂ€HAý”A¯TÂ€HAý”A¯TB€HAý”A¯TÂ€HAÏ÷û@¯TB€HAÏ÷û@¯TÂ=,ÖÀ6«õA¯TB=,Ö@6«õA¯TB=,ÖÀ6«õA¯TB€HA6«õA¯TÂ€HA6«õA¯TÂ=,Ö@6«õA¯TÂ=,ÖÀý”A¯TB=,Ö@ý”A¯TB=,ÖÀý”A¯TB€HAý”A¯TÂ€HAý”A¯TÂ=,Ö@ý”A¯TB€HA6«õA¯TÂ€HAázA¯TB€HAázA¯TÂ€HA6«õA¯TÂ€HA6«õA¯TB€HA6«õA¯TÂ€HAázA¯TB€HAázA¯TÂ=,ÖÀûzÂûzÂ=,ÖÀûzÂûzÂ=,ÖÀûzB

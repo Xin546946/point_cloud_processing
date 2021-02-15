@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 146
+comment vertices
+property float x
+property float y
+property float z
+end_header
+Д‚MBПf»БW,VВД‚MВПf»AW,VВД‚MBПf»AW,VВД‚MВПf»БW,VВД‚MВПf»БW,VВД‚MВПf»A\`4ВД‚MВПf»AW,VВД‚MВХз›Б\`4ВД‚MВПf»Б\`4Вx\JВПf»A\`4ВД‚MВПf»AW,VВД‚MВПf»A\`4ВД‚MBПf»AW,VВа\JBПf»A\`4ВД‚MBПf»A\`4ВД‚MBПf»A\`4ВД‚MBПf»БW,VВД‚MBПf»AW,VВД‚MBХз›Б\`4ВД‚MBПf»Б\`4ВД‚MВПf»БW,VВД‚MBПf»Б\`4ВД‚MВПf»Б\`4ВД‚MBПf»БW,VВД‚MВПf»Б\`4Вx\JВХз›Б\`4ВД‚MВХз›Б\`4ВД‚MBПf»Б\`4ВД‚MBХз›Б\`4Ва\JBХз›Б\`4ВД‚MВХз›Б\`4Вx\JВПf»A\`4ВД‚MВПf»A\`4Вx\JВХз›A\`4Вx\JВХз›Б\`4Вx\JВХз›A\`4Ва\JBПf»A\`4Вx\JВПf»A\`4Ва\JBХз›A\`4Ва\JBПf»A\`4ВД‚MBПf»A\`4Ва\JBХз›A\`4В‘(BХз›Бp_oА}ђ(ВХз›БйH„@}ђ(ВХз›Бp_oА‘(BХз›БйH„@‘(BХз›Б€tBx\JВХз›Б\`4В}ђ(ВХз›БbбВx\JВХз›Б‚у5Bа\JBХз›Б\`4В‘(BХз›БbбВ}ђ(ВХз›Б€tBа\JBХз›Б‚у5Bx\JВХз›Б\`4Ва\JBХз›A\`4Вx\JВХз›A\`4Ва\JBХз›Б\`4Вx\JВХз›Б‚у5Bx\JВХз›A\`4Вx\JВХз›Б\`4Вx\JВХз›A‚у5Bx\JВХз›A‚у5Bа\JBХз›A\`4Вx\JВХз›A\`4Ва\JBХз›A‚у5Bа\JBХз›A‚у5Bа\JBХз›Б\`4Ва\JBХз›A\`4Ва\JBХз›Б‚у5BД‚MBПf»Б‚у5Bа\JBХз›Б‚у5BД‚MBХз›Б‚у5BД‚MВПf»Б‚у5BД‚MВХз›Б‚у5Bx\JВХз›Б‚у5Bx\JВХз›A‚у5BД‚MВПf»A‚у5Bx\JВПf»A‚у5Bа\JBПf»A‚у5Bа\JBХз›A‚у5BД‚MBПf»A‚у5BД‚MBПf»AW,VBД‚MBХз›Б‚у5BД‚MBПf»A‚у5BД‚MBПf»Б‚у5BД‚MBПf»БW,VBД‚MBПf»Б‚у5BД‚MВПf»БW,VBД‚MВПf»Б‚у5BД‚MBПf»БW,VBД‚MВПf»БW,VBД‚MВХз›Б‚у5BД‚MВПf»Б‚у5BД‚MВПf»A‚у5BД‚MВПf»AW,VBД‚MВПf»AW,VBx\JВПf»A‚у5BД‚MВПf»A‚у5BД‚MBПf»AW,VBа\JBПf»A‚у5BД‚MBПf»A‚у5BД‚MВПf»БW,VBД‚MBПf»AW,VBД‚MВПf»AW,VBД‚MBПf»БW,VB‘(B\ @AйH„@}ђ(В\ @A€tB}ђ(В\ @AйH„@‘(B\ @A€tB}ђ(В\ @AйH„@}ђ(ВХз›Б€tB}ђ(ВХз›БйH„@}ђ(В\ @A€tB}ђ(ВХз›БйH„@‘(B\ @AйH„@}ђ(В\ @AйH„@‘(BХз›БйH„@‘(BХз›БйH„@‘(B\ @A€tB‘(B\ @AйH„@‘(BХз›Б€tB‘(B\ @A€tB}ђ(ВХз›Б€tB}ђ(В\ @A€tB‘(BХз›Б€tB‘(BХз›Бp_oА‘(B\ @AbбВ‘(BХз›БbбВ‘(B\ @Ap_oА‘(B\ @Ap_oА}ђ(ВХз›Бp_oА}ђ(В\ @Ap_oА‘(BХз›Бp_oА‘(B\ @AbбВ}ђ(В\ @Ap_oА}ђ(В\ @AbбВ‘(B\ @Ap_oА}ђ(ВХз›БbбВ‘(B\ @AbбВ}ђ(В\ @AbбВ‘(BХз›БbбВ}ђ(В\ @Ap_oА}ђ(ВХз›БbбВ}ђ(В\ @AbбВ}ђ(ВХз›Бp_oА

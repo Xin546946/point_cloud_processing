@@ -1,0 +1,21 @@
+ply
+format binary_little_endian 1.0
+element vertex 115
+comment vertices
+property float x
+property float y
+property float z
+end_header
+øÓVCã%¼ÁÆm4¾üI‡Cã%¼Á’\Ù@üI‡Cã%¼ÁÆm4¾“˜^Cã%¼Á’\Ù@øÓVCã%¼Á…«
+B“˜^Cã%¼Á$—ÝAøÓVCã%¼Á’K^B“˜^Cã%¼Á…+zBTƒCã%¼Á’K^BøÓVCã%¼ÁÃÕ´BüI‡Cã%¼Á…+zB“˜^Cã%¼ÁÉå¦BøÓVCã%¼ÁÃµÐBTƒCã%¼Áé¦ÌBøÓVCã%¼Áé¦ÌBüI‡Cã%¼ÁÃµÐBüI‡Cã%¼ÁÉå¦BTƒCã%¼ÁÃÕ´BüI‡Cã%¼Á$—ÝATƒCã%¼Á…«
+BøÓVCò8ÂÃµÐBüI‡Cã%¼ÁÃµÐBøÓVCã%¼ÁÃµÐBüI‡Cò8ÂÃµÐBüI‡Cã%¼ÁÉå¦BüI‡Cò8ÂÃµÐBüI‡Cò8ÂÉå¦BüI‡Cã%¼ÁÃµÐBüI‡Cã%¼ÁÉå¦B“˜^Cò8ÂÉå¦B“˜^Cã%¼ÁÉå¦BüI‡Cò8ÂÉå¦B“˜^Cã%¼Á…+zB“˜^Cò8ÂÉå¦B“˜^Cò8Â…+zB“˜^Cã%¼ÁÉå¦B“˜^Cò8Â…+zBüI‡Cã%¼Á…+zB“˜^Cã%¼Á…+zBüI‡Cò8Â…+zBüI‡Cã%¼Á$—ÝAüI‡Cò8Â…+zBüI‡Cò8Â$—ÝAüI‡Cã%¼Á…+zBüI‡Cã%¼Á$—ÝA“˜^Cò8Â$—ÝA“˜^Cã%¼Á$—ÝAüI‡Cò8Â$—ÝA“˜^Cã%¼Á’\Ù@“˜^Cò8Â$—ÝA“˜^Cò8Â’\Ù@“˜^Cã%¼Á$—ÝAüI‡Cò8Â’\Ù@“˜^Cã%¼Á’\Ù@“˜^Cò8Â’\Ù@üI‡Cã%¼Á’\Ù@üI‡Cã%¼ÁÆm4¾üI‡Cò8Â’\Ù@üI‡Cò8ÂÆm4¾üI‡Cã%¼Á’\Ù@øÓVCã%¼ÁÆm4¾üI‡Cò8ÂÆm4¾øÓVCò8ÂÆm4¾üI‡Cã%¼ÁÆm4¾øÓVCã%¼Á…«
+BøÓVCò8ÂÆm4¾øÓVCò8Â…«
+BøÓVCã%¼ÁÆm4¾TƒCò8Â…«
+BøÓVCã%¼Á…«
+BøÓVCò8Â…«
+BTƒCã%¼Á…«
+BTƒCã%¼Á’K^BTƒCò8Â…«
+BTƒCò8Â’K^BTƒCã%¼Á…«
+BøÓVCã%¼Á’K^BTƒCò8Â’K^BøÓVCò8Â’K^BTƒCã%¼Á’K^BøÓVCã%¼ÁÃÕ´BøÓVCò8Â’K^BøÓVCò8ÂÃÕ´BøÓVCã%¼Á’K^BTƒCò8ÂÃÕ´BøÓVCã%¼ÁÃÕ´BøÓVCò8ÂÃÕ´BTƒCã%¼ÁÃÕ´BTƒCã%¼Áé¦ÌBTƒCò8ÂÃÕ´BTƒCò8Âé¦ÌBTƒCã%¼ÁÃÕ´BøÓVCò8Âé¦ÌBTƒCò8Âé¦ÌBøÓVCò8ÂÃµÐBüI‡Cò8ÂÉå¦BTƒCò8ÂÃÕ´B“˜^Cò8ÂÉå¦BüI‡Cò8ÂÃµÐBøÓVCò8ÂÃÕ´BTƒCò8Âé¦ÌBøÓVCò8Âé¦ÌBøÓVCò8ÂÃµÐBüI‡Cò8Â$—ÝATƒCò8Â…«
+B“˜^Cò8Â$—ÝAüI‡Cò8Â…+zBTƒCò8Â’K^BøÓVCò8Â’K^B“˜^Cò8Â…+zBüI‡Cò8Â’\Ù@øÓVCò8ÂÆm4¾üI‡Cò8ÂÆm4¾“˜^Cò8Â’\Ù@øÓVCò8Â…«
+B

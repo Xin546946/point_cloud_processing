@@ -1,0 +1,205 @@
+ply
+format binary_little_endian 1.0
+element vertex 683
+comment vertices
+property float x
+property float y
+property float z
+end_header
+ù°‚Á~HAx‹³Aù°‚Á±áÁØ¹Aù°‚Á±áÁx‹³Aù°‚Á~HAØ¹Aò°‚A~HAx‹³Aù°‚Á~HAØ¹Aù°‚Á~HAx‹³Aò°‚A~HAØ¹Aò°‚A±áÁØ¹Aò°‚A~HAx‹³Aò°‚A±áÁx‹³Aò°‚A~HAØ¹Aò°‚A±áÁØ\Aù°‚Á~HAØ\Aò°‚A~HAØ\Aù°‚Á±áÁØ\Aù°‚Á±áÁØ\Aò°‚A±áÁØ\Aù°‚Á~HAØ\Aò°‚A~HAØ\Aò°‚A±áÁØ\Aù°‚Á±áÁ	iAù°‚Á±áÁØ\Aò°‚A±áÁ	iAò°‚A±áÁ	iAò°‚A±áÁØ\Aù°‚Á±áÁ	iAù°‚Á±áÁØ\Aù°‚Á±áÁ	iAò°‚A~HA	iAù°‚Á~HA	iAò°‚A±áÁ	iAò°‚A±áÁ	iAù°‚Á±áÁ	iAò°‚A~HA	iAù°‚Á~HA	iAò°‚A±áÁÙ£@ù°‚Á±áÁá½@ù°‚Á±áÁÙ£@ò°‚A±áÁá½@ò°‚A±áÁá½@ò°‚A±áÁÙ£@ù°‚Á±áÁá½@ù°‚Á±áÁÙ£@ò°‚A±áÁÙ£@ù°‚Á~HAÙ£@ò°‚A~HAÙ£@ù°‚Á±áÁÙ£@ù°‚Á±áÁÙ£@ò°‚A±áÁÙ£@ù°‚Á~HAÙ£@ò°‚A~HAÙ£@êx‚Á±áÁåa—Áêx‚Á•
+Á†ÉÒÁêx‚Á±áÁ†ÉÒÁêx‚Á•
+Áåa—Áêx‚Á•
+Áåa—Áêx‚Á±áÁåa—Áêx‚Á•
+Á†ÉÒÁêx‚Á±áÁ†ÉÒÁV‚A±áÁ†ÉÒÁêx‚Á±áÁåa—Áêx‚Á±áÁ†ÉÒÁV‚A±áÁåa—ÁV‚A±áÁåa—ÁV‚A±áÁ†ÉÒÁêx‚Á±áÁåa—Áêx‚Á±áÁ†ÉÒÁ.V‚Á±áÁ=¾&Âù°‚Á±áÁ¥lÂù°‚Á±áÁ=¾&Âù°‚Á±áÁ£ÓÁù°‚Á±áÁü)—Á7c‚Á±áÁÄEÂ.V‚Á±áÁ
+šÂV‚A±áÁÄEÂV‚A±áÁ
+šÂ7c‚Á±áÁBOÓÁV‚A±áÁBOÓÁV‚A±áÁü)—ÁV‚A±áÁü)—Áù°‚Á±áÁü)—ÁV‚A±áÁBOÓÁ7c‚Á±áÁBOÓÁ7c‚Á±áÁÄEÂV‚A±áÁ
+šÂ.V‚Á±áÁ
+šÂV‚A±áÁÄEÂ.V‚Á±áÁ=¾&Âù°‚Á±áÁ£ÓÁù°‚Á±áÁ¥lÂù°‚Á±áÁ=¾&Âêx‚Á±áÁåa—ÁÕx‚A•
+Áåa—Áêx‚Á•
+Áåa—ÁÕx‚A±áÁåa—ÁV‚A±áÁåa—ÁV‚A±áÁåa—Áêx‚Á±áÁåa—ÁÕx‚A±áÁåa—ÁÕx‚A•
+Áåa—Áêx‚Á•
+Áåa—ÁÕx‚A±áÁ†ÉÒÁêx‚Á•
+Á†ÉÒÁÕx‚A•
+Á†ÉÒÁêx‚Á±áÁ†ÉÒÁV‚A±áÁ†ÉÒÁV‚A±áÁ†ÉÒÁÕx‚A±áÁ†ÉÒÁêx‚Á±áÁ†ÉÒÁêx‚Á•
+Á†ÉÒÁÕx‚A•
+Á†ÉÒÁÕx‚A±áÁ†ÉÒÁÕx‚A±áÁåa—ÁÕx‚A±áÁåa—ÁÕx‚A±áÁ†ÉÒÁò°‚A±áÁü)—Áù°‚Á•
+Áü)—Áò°‚A•
+Áü)—Áù°‚Á±áÁü)—ÁV‚A±áÁü)—ÁV‚A±áÁü)—Áò°‚A±áÁü)—Áù°‚Á±áÁü)—Áù°‚Á•
+Áü)—Áò°‚A•
+Áü)—Áò°‚A±áÁü)—ÁV‚A±áÁÛù–ÁÒ€‚A±áÁÛù–ÁÒ€‚A±áÁÙ=CÁÒ€‚A±áÁ7Áù°‚Á±áÁÙ=CÁù°‚Á±áÁ©¤6ÁV‚A±áÁ7Áò°‚A±áÁ©¤6Áò°‚A±áÁÙ=CÁò°‚A±áÁÙ=CÁò°‚A±áÁü)—Áò°‚A±áÁ©¤6ÁÒ€‚A±áÁ7ÁV‚A±áÁ7ÁV‚A±áÁÛù–Áù°‚Á±áÁ©¤6Áù°‚Á±áÁÙ=CÁÒ€‚A±áÁÙ=CÁÒ€‚A±áÁÛù–Áù°‚Á±áÁü)—Áù°‚Á•
+Á£ÓÁù°‚Á±áÁ£ÓÁù°‚Á•
+Áü)—Áù°‚Á•
+Áü)—Áù°‚Á±áÁü)—Áù°‚Á•
+Á£ÓÁù°‚Á±áÁ£ÓÁù°‚Á•
+Á¥lÂù°‚Á±áÁ¥lÂù°‚Á•
+Á¥lÂù°‚Á±áÁ¥lÂù°‚Á±áÁ=¾&Âù°‚Á•
+Á¢ë&Âù°‚Á±áÁ¢ë&Âù°‚Á±áÁ=¾&Âù°‚Á•
+Á¢ë&Âù°‚Á±áÁ¢ë&Âò°‚A±áÁ¢ë&Âù°‚Á±áÁ¢ë&ÂV‚A±áÁ=¾&Â c‚A±áÁÄEÂ c‚A±áÁBOÓÁò°‚A±áÁ¥lÂò°‚A±áÁ£ÓÁ c‚A±áÁBOÓÁò°‚A±áÁ£ÓÁò°‚A±áÁ¥lÂò°‚A±áÁ¢ë&Â c‚A±áÁÄEÂV‚A±áÁ=¾&Âù°‚Á±áÁ¢ë&Â.V‚Á±áÁ
+šÂ.V‚Á•
+Á=¾&Â.V‚Á±áÁ=¾&Â.V‚Á•
+Á
+šÂ.V‚Á•
+Á
+šÂ.V‚Á±áÁ
+šÂ.V‚Á•
+Á=¾&Â.V‚Á±áÁ=¾&Â.V‚Á±áÁ
+šÂV‚A•
+Á
+šÂ.V‚Á•
+Á
+šÂV‚A±áÁ
+šÂV‚A±áÁ
+šÂ.V‚Á±áÁ
+šÂV‚A•
+Á
+šÂ.V‚Á•
+Á
+šÂ c‚A±áÁÄEÂ7c‚Á•
+ÁÄEÂ c‚A•
+ÁÄEÂ7c‚Á±áÁÄEÂV‚A±áÁÄEÂV‚A±áÁÄEÂ c‚A±áÁÄEÂ7c‚Á±áÁÄEÂ7c‚Á•
+ÁÄEÂ c‚A•
+ÁÄEÂ7c‚Á±áÁBOÓÁ7c‚Á•
+ÁÄEÂ7c‚Á±áÁÄEÂ7c‚Á•
+ÁBOÓÁ7c‚Á•
+ÁBOÓÁ7c‚Á±áÁBOÓÁ7c‚Á•
+ÁÄEÂ7c‚Á±áÁÄEÂ7c‚Á±áÁBOÓÁ c‚A•
+ÁBOÓÁ7c‚Á•
+ÁBOÓÁ c‚A±áÁBOÓÁV‚A±áÁBOÓÁV‚A±áÁBOÓÁ7c‚Á±áÁBOÓÁ c‚A±áÁBOÓÁ c‚A•
+ÁBOÓÁ7c‚Á•
+ÁBOÓÁÕx‚A•
+Áåa—ÁÕx‚A±áÁ†ÉÒÁÕx‚A•
+Á†ÉÒÁÕx‚A±áÁåa—ÁÕx‚A±áÁåa—ÁÕx‚A•
+Áåa—ÁÕx‚A±áÁ†ÉÒÁÕx‚A•
+Á†ÉÒÁù°‚Á±áÁÙ=CÁù°‚Á•
+ÁÙ=CÁù°‚Á•
+ÁÙ=CÁù°‚Á±áÁÙ=CÁù°‚Á•
+Á£ÓÁêx‚Á•
+Á†ÉÒÁù°‚Á•
+Áü)—Áò°‚A•
+Á£ÓÁÕx‚A•
+Á†ÉÒÁÕx‚A•
+Áåa—Áêx‚Á•
+Áåa—Áò°‚A•
+Áü)—Áò°‚A•
+Á£ÓÁÕx‚A•
+Áåa—Áò°‚A•
+Áü)—Áêx‚Á•
+Áåa—Áêx‚Á•
+Á†ÉÒÁù°‚Á•
+Áü)—ÁÕx‚A•
+Á†ÉÒÁù°‚Á•
+Á£ÓÁü€‚Á•
+ÁÛù–Áù°‚Á•
+ÁÙ=CÁù°‚Á•
+Á©¤6ÁÒ€‚A•
+ÁÛù–ÁÒ€‚A•
+ÁÙ=CÁÒ€‚A•
+Á7Áü€‚Á•
+Á7Áò°‚A•
+Á©¤6Áü€‚Á•
+ÁÙ=CÁò°‚A•
+ÁÙ=CÁò°‚A•
+ÁÙ=CÁò°‚A•
+Á©¤6ÁÒ€‚A•
+Á7Áü€‚Á•
+Á7Áü€‚Á•
+ÁÙ=CÁü€‚Á•
+ÁÛù–Áù°‚Á•
+Á©¤6ÁÒ€‚A•
+ÁÙ=CÁÒ€‚A•
+ÁÛù–Áù°‚Á•
+ÁÙ=CÁò°‚A•
+Áü)—Áò°‚A±áÁ£ÓÁò°‚A•
+Á£ÓÁò°‚A±áÁü)—Áò°‚A±áÁü)—Áò°‚A•
+Áü)—Áò°‚A±áÁ£ÓÁò°‚A•
+Á£ÓÁò°‚A•
+ÁÙ=CÁò°‚A±áÁÙ=CÁò°‚A±áÁÙ=CÁò°‚A•
+ÁÙ=CÁü€‚Á±áÁ7ÁÒ€‚A•
+Á7Áü€‚Á•
+Á7ÁÒ€‚A±áÁ7ÁV‚A±áÁ7ÁV‚A±áÁ7Áü€‚Á±áÁ7ÁÒ€‚A±áÁ7ÁÒ€‚A•
+Á7Áü€‚Á•
+Á7ÁÒ€‚A•
+Á7ÁÒ€‚A±áÁÙ=CÁÒ€‚A•
+ÁÙ=CÁÒ€‚A±áÁ7ÁÒ€‚A±áÁ7ÁÒ€‚A•
+Á7ÁÒ€‚A±áÁÙ=CÁÒ€‚A•
+ÁÙ=CÁÒ€‚A±áÁÛù–ÁÒ€‚A•
+ÁÛù–ÁÒ€‚A±áÁÛù–ÁÒ€‚A•
+ÁÛù–ÁÒ€‚A±áÁÛù–Áü€‚Á•
+ÁÛù–ÁÒ€‚A•
+ÁÛù–Áü€‚Á±áÁÛù–ÁV‚A±áÁÛù–ÁV‚A±áÁÛù–ÁÒ€‚A±áÁÛù–Áü€‚Á±áÁÛù–Áü€‚Á•
+ÁÛù–ÁÒ€‚A•
+ÁÛù–Áò°‚A•
+Á©¤6Áò°‚A±áÁ©¤6Áò°‚A±áÁ©¤6Áò°‚A•
+Á©¤6Áù°‚Á±áÁ©¤6Áò°‚A•
+Á©¤6Áù°‚Á•
+Á©¤6Áò°‚A±áÁ©¤6Áò°‚A±áÁ©¤6Áù°‚Á±áÁ©¤6Áò°‚A•
+Á©¤6Áù°‚Á•
+Á©¤6Áù°‚Á±áÁ©¤6Áù°‚Á•
+Á©¤6Áù°‚Á•
+Á©¤6Áù°‚Á±áÁ©¤6Áù°‚Á~HA¢ë&Âù°‚Á~HAÙ=CÁù°‚Á~HAÙ=CÁù°‚Á~HA¢ë&Âù°‚Á•
+Á¥lÂ7c‚Á•
+ÁÄEÂò°‚A•
+Á¥lÂ c‚A•
+ÁÄEÂ c‚A•
+ÁBOÓÁ7c‚Á•
+ÁBOÓÁò°‚A•
+Á¥lÂ c‚A•
+ÁBOÓÁ7c‚Á•
+ÁBOÓÁ7c‚Á•
+ÁÄEÂ c‚A•
+ÁÄEÂù°‚Á•
+Á¥lÂù°‚Á•
+Á¢ë&Â.V‚Á•
+Á=¾&Âò°‚A•
+Á¢ë&ÂV‚A•
+Á=¾&ÂV‚A•
+Á
+šÂ.V‚Á•
+Á
+šÂò°‚A•
+Á¢ë&ÂV‚A•
+Á
+šÂ.V‚Á•
+Á
+šÂ.V‚Á•
+Á=¾&ÂV‚A•
+Á=¾&Âù°‚Á•
+Á¢ë&Âù°‚Á±áÁ¢ë&Âò°‚A•
+Á¢ë&Âù°‚Á•
+Á¢ë&Âò°‚A±áÁ¢ë&Âò°‚A±áÁ¢ë&Âù°‚Á±áÁ¢ë&Âò°‚A•
+Á¢ë&Âù°‚Á•
+Á¢ë&Â c‚A•
+ÁBOÓÁ c‚A±áÁÄEÂ c‚A•
+ÁÄEÂ c‚A±áÁBOÓÁ c‚A±áÁBOÓÁ c‚A•
+ÁBOÓÁ c‚A±áÁÄEÂ c‚A•
+ÁÄEÂV‚A•
+Á
+šÂV‚A±áÁ=¾&ÂV‚A•
+Á=¾&ÂV‚A±áÁ
+šÂV‚A±áÁ
+šÂV‚A•
+Á
+šÂV‚A±áÁ=¾&ÂV‚A•
+Á=¾&ÂV‚A±áÁ=¾&Â.V‚Á•
+Á=¾&ÂV‚A•
+Á=¾&Â.V‚Á±áÁ=¾&Â.V‚Á±áÁ=¾&ÂV‚A±áÁ=¾&Â.V‚Á•
+Á=¾&ÂV‚A•
+Á=¾&Âò°‚A•
+Á¥lÂò°‚A±áÁ¢ë&Âò°‚A•
+Á¢ë&Âò°‚A±áÁ¥lÂò°‚A±áÁ¥lÂò°‚A•
+Á¥lÂò°‚A±áÁ¢ë&Âò°‚A•
+Á¢ë&Âò°‚A~HAÙ=CÁò°‚A~HA¢ë&Âò°‚A~HAÙ=CÁò°‚A~HA¢ë&Âü€‚Á±áÁ7Áü€‚Á•
+ÁÙ=CÁü€‚Á±áÁÙ=CÁü€‚Á•
+Á7Áü€‚Á•
+Á7Áü€‚Á±áÁ7Áü€‚Á•
+ÁÙ=CÁü€‚Á±áÁÙ=CÁü€‚Á•
+ÁÛù–Áü€‚Á±áÁÛù–Áü€‚Á•
+ÁÛù–Áü€‚Á±áÁÛù–Áò°‚A~HAÙ=CÁù°‚Á~HA¢ë&Âù°‚Á~HAÙ=CÁò°‚A~HA¢ë&Âò°‚A~HA¢ë&Âò°‚A~HAÙ=CÁù°‚Á~HA¢ë&Âù°‚Á~HAÙ=CÁù°‚Á~HAØ¹Aù°‚Á±áÁÖøAù°‚Á±áÁØ¹Aù°‚Á~HAÖøAò°‚A~HAØ¹Aù°‚Á~HAÖøAù°‚Á~HAØ¹Aò°‚A~HAÖøAò°‚A±áÁÖøAò°‚A~HAØ¹Aò°‚A±áÁØ¹Aò°‚A~HAÖøAò°‚A±áÁŸ<0Àò°‚A~HAb¡bÀò°‚A±áÁb¡bÀò°‚A~HAŸ<0Àò°‚A±áÁÙ£@ò°‚A~HAÙ£@ò°‚A•
+Á©¤6Áò°‚A±áÁ©¤6Áò°‚A~HA©¤6Áò°‚A~HAŸ<0Àù°‚Á~HAÙ£@ù°‚Á~HAŸ<0Àò°‚A~HAÙ£@ò°‚A~HA©¤6Áù°‚Á~HAb¡bÀù°‚Á~HA©¤6Áò°‚A~HAb¡bÀù°‚Á~HAÙ£@ù°‚Á±áÁŸ<0Àù°‚Á~HAŸ<0Àù°‚Á±áÁÙ£@ù°‚Á~HAb¡bÀù°‚Á•
+Á©¤6Áù°‚Á~HA©¤6Áù°‚Á±áÁ©¤6Áù°‚Á±áÁb¡bÀù°‚Á±áÁœ"ÿAò°‚A~HAœ"ÿAù°‚Á~HAœ"ÿAò°‚A±áÁœ"ÿAò°‚A±áÁœ"ÿAò°‚A~HAœ"ÿAò°‚A±áÁÖøAò°‚A~HAÖøAò°‚A~HAÖøAò°‚A~HAœ"ÿAù°‚Á~HAÖøAù°‚Á~HAœ"ÿAù°‚Á~HAœ"ÿAù°‚Á±áÁœ"ÿAù°‚Á~HAÖøAù°‚Á±áÁÖøAù°‚Á±áÁŸ<0Àò°‚A±áÁŸ<0Àù°‚Á~HAŸ<0Àò°‚A~HAŸ<0Àù°‚Á~HAÙ£@ù°‚Á±áÁá½@ù°‚Á±áÁÙ£@ù°‚Á~HAá½@ò°‚A~HAÙ£@ù°‚Á~HAá½@ù°‚Á~HAÙ£@ò°‚A~HAá½@ò°‚A±áÁá½@ò°‚A~HAÙ£@ò°‚A±áÁÙ£@ò°‚A~HAá½@ò°‚A~HAÙ=CÁò°‚A~HA©¤6Áù°‚Á~HAÙ=CÁù°‚Á~HA©¤6Áò°‚A•
+Á©¤6Áò°‚A~HA©¤6Áò°‚A•
+ÁÙ=CÁò°‚A~HAÙ=CÁù°‚Á~HA©¤6Áù°‚Á•
+Á©¤6Áù°‚Á~HAÙ=CÁù°‚Á•
+ÁÙ=CÁò°‚A±áÁ	iAò°‚A~HAØ\Aò°‚A±áÁØ\Aò°‚A~HA	iAò°‚A~HAØ\Aù°‚Á~HA	iAù°‚Á~HAØ\Aò°‚A~HA	iAù°‚Á~HA	iAù°‚Á±áÁØ\Aù°‚Á~HAØ\Aù°‚Á±áÁ	iAò°‚A±áÁÖøAù°‚Á~HAÖøAò°‚A~HAÖøAù°‚Á±áÁÖøAù°‚Á±áÁÖøAò°‚A±áÁÖøAù°‚Á~HAÖøAò°‚A~HAÖøAò°‚A±áÁÖøAù°‚Á±áÁœ"ÿAù°‚Á±áÁÖøAò°‚A±áÁœ"ÿAò°‚A±áÁœ"ÿAò°‚A±áÁÖøAù°‚Á±áÁœ"ÿAù°‚Á±áÁÖøAò°‚A±áÁx‹³Aò°‚A~HA	iAò°‚A±áÁ	iAò°‚A~HAx‹³Aò°‚A~HA	iAù°‚Á~HAx‹³Aù°‚Á~HA	iAò°‚A~HAx‹³Aù°‚Á~HAx‹³Aù°‚Á±áÁ	iAù°‚Á~HA	iAù°‚Á±áÁx‹³Aù°‚Á±áÁá½@ò°‚A~HAá½@ù°‚Á~HAá½@ò°‚A±áÁá½@‰A±áÁ,*Â‰Á±áA,*Â‰A±áA,*Â‰Á±áÁ,*Â‰Á±áÁ,*Â‰A±áÁ,*Â‰Á±áA,*Â‰A±áA,*Â‰A±áA,*Â‰Á±áA,*B‰Á±áA,*Â‰A±áA,*B‰A±áA,*B‰A±áA,*Â‰Á±áA,*B‰Á±áA,*Âù°‚Á•
+Á©¤6Áò°‚A~HA©¤6Áù°‚Á~HA©¤6Áò°‚A•
+Á©¤6Áò°‚A±áÁx‹³Aù°‚Á±áÁØ¹Aù°‚Á±áÁx‹³Aò°‚A±áÁØ¹Aò°‚A±áÁØ¹Aò°‚A±áÁx‹³Aù°‚Á±áÁØ¹Aù°‚Á±áÁx‹³Aù°‚Á±áÁØ¹Aò°‚A~HAØ¹Aù°‚Á~HAØ¹Aò°‚A±áÁØ¹Aò°‚A±áÁØ¹Aù°‚Á±áÁØ¹Aò°‚A~HAØ¹Aù°‚Á~HAØ¹Aò°‚A±áÁŸë&Bù°‚Á±áÁŸë&Bò°‚A~HAŸë&Bù°‚Á~HAŸë&Bò°‚A±áÁŸë&Bò°‚A~HAŸë&Bò°‚A±áÁœ"ÿAò°‚A~HAœ"ÿAò°‚A~HAœ"ÿAò°‚A~HAŸë&Bù°‚Á~HAœ"ÿAù°‚Á~HAŸë&Bù°‚Á~HAŸë&Bù°‚Á±áÁŸë&Bù°‚Á~HAœ"ÿAù°‚Á±áÁœ"ÿAò°‚A~HAá½@ù°‚Á~HAØ\Aù°‚Á~HAá½@ò°‚A~HAØ\Aò°‚A±áÁØ\Aò°‚A~HAá½@ò°‚A±áÁá½@ò°‚A~HAØ\Aù°‚Á~HAá½@ù°‚Á±áÁØ\Aù°‚Á±áÁá½@ù°‚Á~HAØ\A‰A±áA,*B‰A±áÁ,*Â‰A±áA,*Â‰A±áÁ,*B‰Á±áÁ,*Âù°‚Á±áÁ¢ë&Â‰Á±áÁ,*B‰A±áÁ,*Âò°‚A±áÁ¢ë&Âò°‚A±áÁ¥lÂò°‚A±áÁ£ÓÁò°‚A±áÁü)—Áò°‚A±áÁÙ=CÁò°‚A±áÁ©¤6Áò°‚A±áÁb¡bÀò°‚A±áÁŸ<0Àò°‚A±áÁÙ£@ò°‚A±áÁá½@ò°‚A±áÁØ\Aò°‚A±áÁ	iAò°‚A±áÁx‹³Aò°‚A±áÁØ¹Aò°‚A±áÁÖøAò°‚A±áÁœ"ÿAò°‚A±áÁŸë&Bù°‚Á±áÁŸë&B‰A±áÁ,*Bù°‚Á±áÁ=¾&Âù°‚Á±áÁ¥lÂù°‚Á±áÁ£ÓÁù°‚Á±áÁü)—Áù°‚Á±áÁÙ=CÁù°‚Á±áÁ©¤6Áù°‚Á±áÁb¡bÀù°‚Á±áÁŸ<0Àù°‚Á±áÁÙ£@ù°‚Á±áÁá½@ù°‚Á±áÁØ\Aù°‚Á±áÁ	iAù°‚Á±áÁx‹³Aù°‚Á±áÁØ¹Aù°‚Á±áÁÖøAù°‚Á±áÁœ"ÿA‰Á±áÁ,*B‰A±áA,*B‰Á±áA,*B‰A±áÁ,*B‰Á±áÁ,*B‰Á±áA,*Â‰Á±áÁ,*Â‰Á±áA,*Bò°‚A±áÁb¡bÀù°‚Á±áÁŸ<0Àù°‚Á±áÁb¡bÀò°‚A±áÁŸ<0Àò°‚A±áÁŸ<0Àò°‚A±áÁb¡bÀù°‚Á±áÁŸ<0Àù°‚Á±áÁb¡bÀò°‚A±áÁb¡bÀù°‚Á±áÁb¡bÀò°‚A~HAb¡bÀù°‚Á~HAb¡bÀù°‚Á±áÁx‹³Aò°‚A±áÁx‹³Aù°‚Á~HAx‹³Aò°‚A~HAx‹³Aò°‚A~HAb¡bÀù°‚Á~HAŸ<0Àù°‚Á~HAb¡bÀò°‚A~HAŸ<0À

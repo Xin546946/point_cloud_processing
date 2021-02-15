@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 160
+comment vertices
+property float x
+property float y
+property float z
+end_header
+P{ÁÛù¼Àq»ÂP{AÛù¼@q»ÂP{AÛù¼Àq»ÂP{ÁÛù¼@q»ÂP{ÁÛù¼@q»BP{AÛù¼@q»ÂP{ÁÛù¼@q»ÂP{AÛù¼@q»BP{AÛù¼Àq»BP{AÛù¼@q»ÂP{AÛù¼@q»BP{AÛù¼Àq»ÂP{AÛù¼Àq»Â×£hAÛù¼Àä÷ûÁP{ÁÛù¼Àq»ÂP{AÛù¼Àq»B×£hAÛù¼À»Á×£hAÛù¼Àæn‡Á×£hAÛù¼Àà-—À×£hAÛù¼Àýö{À×£hAÛù¼À´HA×£hAÛù¼ÀåáA×£hAÛù¼À,ªA×£hAÛù¼ÀÅ`°A×£hAÛù¼Àÿ	Bð§hÁÛù¼Àÿ	Bð§hÁÛù¼Àä÷ûÁP{ÁÛù¼Àq»Bð§hÁÛù¼À»Áð§hÁÛù¼Àæn‡Áð§hÁÛù¼Àà-—Àð§hÁÛù¼Àýö{Àð§hÁÛù¼À´HAð§hÁÛù¼ÀåáAð§hÁÛù¼À,ªAð§hÁÛù¼ÀÅ`°AP{ÁÛù¼Àq»ÂP{ÁÛù¼@q»BP{ÁÛù¼@q»ÂP{ÁÛù¼Àq»BP{ÁÛù¼@q»BP{AÛù¼Àq»BP{AÛù¼@q»BP{ÁÛù¼Àq»B×£hAÛù¼Àæn‡Áð§hÁÛù¼À»Á×£hAÛù¼À»Áð§hÁÛù¼Àæn‡Áð§hÁI.—@æn‡Á×£hAÛù¼Àæn‡Á×£hAI.—@æn‡Áð§hÁÛù¼Àæn‡Áð§hÁÛù¼À»Á×£hAI.—@»Á×£hAÛù¼À»Áð§hÁI.—@»Á×£hAÛù¼Àæn‡Á×£hAI.—@à-—À×£hAI.—@æn‡Á×£hAÛù¼Àà-—À×£hAI.—@à-—Àð§hÁI.—@æn‡Á×£hAI.—@æn‡Áð§hÁI.—@à-—Àð§hÁÛù¼Àà-—Àð§hÁI.—@æn‡Áð§hÁI.—@à-—Àð§hÁÛù¼Àæn‡Áð§hÁÛù¼À»Áð§hÁI.—@ä÷ûÁð§hÁI.—@»Áð§hÁÛù¼Àä÷ûÁ×£hAI.—@»Áð§hÁI.—@ä÷ûÁ×£hAI.—@ä÷ûÁð§hÁI.—@»Á×£hAÛù¼Àä÷ûÁ×£hAI.—@»Á×£hAI.—@ä÷ûÁ×£hAÛù¼À»Áð§hÁÛù¼Àà-—À×£hAI.—@à-—À×£hAÛù¼Àà-—Àð§hÁI.—@à-—Àð§hÁI.—@ä÷ûÁ×£hAÛù¼Àä÷ûÁ×£hAI.—@ä÷ûÁð§hÁÛù¼Àä÷ûÁ×£hAÛù¼Àýö{Àð§hÁÛù¼Àà-—À×£hAÛù¼Àà-—Àð§hÁÛù¼Àýö{Àð§hÁI.—@ýö{À×£hAÛù¼Àýö{À×£hAI.—@ýö{Àð§hÁÛù¼Àýö{À×£hAÛù¼Àýö{À×£hAI.—@´HA×£hAI.—@ýö{À×£hAÛù¼À´HA×£hAI.—@´HAð§hÁI.—@ýö{À×£hAI.—@ýö{Àð§hÁI.—@´HAð§hÁÛù¼À´HAð§hÁI.—@ýö{Àð§hÁI.—@´HAð§hÁÛù¼Àýö{Àð§hÁÛù¼À´HA×£hAI.—@´HA×£hAÛù¼À´HAð§hÁI.—@´HA×£hAÛù¼ÀåáAð§hÁÛù¼À´HA×£hAÛù¼À´HAð§hÁÛù¼ÀåáAð§hÁI.—@åáA×£hAÛù¼ÀåáA×£hAI.—@åáAð§hÁÛù¼ÀåáA×£hAÛù¼ÀåáA×£hAI.—@,ªA×£hAI.—@åáA×£hAÛù¼À,ªA×£hAI.—@,ªAð§hÁI.—@åáA×£hAI.—@åáAð§hÁI.—@,ªAð§hÁÛù¼À,ªAð§hÁI.—@åáAð§hÁI.—@,ªAð§hÁÛù¼ÀåáAð§hÁÛù¼À,ªA×£hAI.—@,ªA×£hAÛù¼À,ªAð§hÁI.—@,ªA×£hAÛù¼ÀÅ`°Að§hÁÛù¼À,ªA×£hAÛù¼À,ªAð§hÁÛù¼ÀÅ`°Að§hÁI.—@Å`°A×£hAÛù¼ÀÅ`°A×£hAI.—@Å`°Að§hÁÛù¼ÀÅ`°A×£hAÛù¼ÀÅ`°A×£hAI.—@ÿ	B×£hAI.—@Å`°A×£hAÛù¼Àÿ	B×£hAI.—@ÿ	Bð§hÁI.—@Å`°A×£hAI.—@Å`°Að§hÁI.—@ÿ	Bð§hÁÛù¼Àÿ	Bð§hÁI.—@Å`°Að§hÁI.—@ÿ	Bð§hÁÛù¼ÀÅ`°Að§hÁÛù¼Àÿ	B×£hAI.—@ÿ	B×£hAÛù¼Àÿ	Bð§hÁI.—@ÿ	B

@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 216
+comment vertices
+property float x
+property float y
+property float z
+end_header
+ÿ!QÁdL¦@ÍLNAÿ!QAPB¡@ÍLNAÿ!QAdL¦@ÍLNAÿ!QÁPB¡@ÍLNAÿ!QÁPB¡@¹|VÁÿ!QÁdL¦@ÍLNAÿ!QÁdL¦@¹|VÁÿ!QÁPB¡@ÍLNAÿ!QAPB¡@ÍLNAÿ!QÁPB¡@¹|VÁÿ!QAPB¡@¹|VÁÿ!QÁPB¡@ÍLNAÿ!QAPB¡@ÍLNAÿ!QAdL¦@¹|VÁÿ!QAdL¦@ÍLNAÿ!QAPB¡@¹|VÁÿ!QÁdL¦@ÍLNAÿ!QAdL¦@¹|VÁÿ!QÁdL¦@¹|VÁÿ!QAdL¦@ÍLNAÿ!QÁPB¡@¹|VÁÿ!QAdL¦@¹|VÁÿ!QAPB¡@¹|VÁÿ!QÁdL¦@¹|VÁÿ!QÁdL¦@:£YAÿ!QA^ËÅÀ:£YAÿ!QAdL¦@:£YAÿ!QÁ^ËÅÀ:£YAÿ!QÁ^ËÅÀÍLNAÿ!QÁdL¦@:£YAÿ!QÁdL¦@ÍLNAÿ!QÁ^ËÅÀ:£YAÿ!QA^ËÅÀ:£YAÿ!QÁ^ËÅÀÍLNAÿ!QA^ËÅÀÍLNAÿ!QÁ^ËÅÀ:£YAÿ!QA^ËÅÀ:£YAÿ!QAdL¦@ÍLNAÿ!QAdL¦@:£YAÿ!QA^ËÅÀÍLNAÿ!QÁdL¦@:£YAÿ!QAdL¦@ÍLNAÿ!QÁdL¦@ÍLNAÿ!QAdL¦@:£YAÿ!QÁ^ËÅÀÍLNAÿ!QAdL¦@ÍLNAÿ!QA^ËÅÀÍLNAÿ!QÁdL¦@ÍLNAÕx\AdL¦@ÓaAÕx\ÁdL¦@:£YAÕx\AdL¦@:£YAÕx\ÁdL¦@ÓaAÕx\ÁdL¦@:£YAÕx\A^ËÅ@:£YAÕx\AdL¦@:£YAÕx\Á^ËÅ@:£YAÕx\AdL¦@ÓaAÕx\A^ËÅ@:£YAÕx\A^ËÅ@ÓaAÕx\AdL¦@:£YAÕx\Á^ËÅ@ÓaAÕx\AdL¦@ÓaAÕx\A^ËÅ@ÓaAÕx\ÁdL¦@ÓaAÕx\ÁdL¦@:£YAÕx\Á^ËÅ@ÓaAÕx\Á^ËÅ@:£YAÕx\ÁdL¦@ÓaAÕx\Á^ËÅ@ÓaAÕx\A^ËÅ@:£YAÕx\Á^ËÅ@:£YAÕx\A^ËÅ@ÓaAÿ!QA^ËÅÀÓaÁÿ!QAdL¦@:£YAÿ!QAdL¦@ÓaÁÿ!QA^ËÅÀ:£YAÿ!QA^ËÅÀÓaÁÕx\AdL¦@ÓaÁÕx\A^ËÅÀÓaÁÿ!QAdL¦@ÓaÁÕx\A^ËÅÀ:£YAÿ!QA^ËÅÀÓaÁÕx\A^ËÅÀÓaÁÿ!QA^ËÅÀ:£YAÿ!QAdL¦@:£YAÕx\A^ËÅÀ:£YAÕx\AdL¦@:£YAÿ!QA^ËÅÀ:£YAÿ!QAdL¦@:£YAÕx\AdL¦@ÓaÁÿ!QAdL¦@ÓaÁÕx\AdL¦@:£YAÕx\A^ËÅÀ:£YAÕx\AdL¦@ÓaÁÕx\AdL¦@:£YAÕx\A^ËÅÀÓaÁëãq>PB¡@	ù ¼ÿ!QA¨FÃÀ	ù ¼ÿ!QAPB¡@	ù ¼ëãq>¨FÃÀ	ù ¼ÿ!QA¨FÃÀ	ù ¼ÿ!QAPB¡@úíû¾ÿ!QAPB¡@	ù ¼ÿ!QA¨FÃÀúíû¾ëãq>PB¡@	ù ¼ÿ!QAPB¡@úíû¾ëãq>PB¡@úíû¾ÿ!QAPB¡@	ù ¼ëãq>¨FÃÀúíû¾ëãq>PB¡@	ù ¼ëãq>PB¡@úíû¾ëãq>¨FÃÀ	ù ¼ÿ!QA¨FÃÀ	ù ¼ëãq>¨FÃÀúíû¾ÿ!QA¨FÃÀúíû¾ëãq>¨FÃÀ	ù ¼ëãq>¨FÃÀúíû¾ÿ!QAPB¡@úíû¾ÿ!QA¨FÃÀúíû¾ëãq>PB¡@úíû¾Õx\Á^ËÅÀÓaÁÕx\ÁdL¦@:£YAÕx\ÁdL¦@ÓaÁÕx\Á^ËÅÀ:£YAÕx\Á^ËÅÀÓaÁÿ!QÁdL¦@ÓaÁÿ!QÁ^ËÅÀÓaÁÕx\ÁdL¦@ÓaÁÿ!QÁ^ËÅÀ:£YAÕx\Á^ËÅÀÓaÁÿ!QÁ^ËÅÀÓaÁÕx\Á^ËÅÀ:£YAÕx\ÁdL¦@:£YAÿ!QÁ^ËÅÀ:£YAÿ!QÁdL¦@:£YAÕx\Á^ËÅÀ:£YAÕx\ÁdL¦@:£YAÿ!QÁdL¦@ÓaÁÕx\ÁdL¦@ÓaÁÿ!QÁdL¦@:£YAÿ!QÁ^ËÅÀ:£YAÿ!QÁdL¦@ÓaÁÿ!QÁdL¦@:£YAÿ!QÁ^ËÅÀÓaÁÿ!QÁPB¡@	ù ¼ëãq¾¨FÃÀ	ù ¼ëãq¾PB¡@	ù ¼ÿ!QÁ¨FÃÀ	ù ¼ëãq¾¨FÃÀ	ù ¼ëãq¾PB¡@úíû¾ëãq¾PB¡@	ù ¼ëãq¾¨FÃÀúíû¾ÿ!QÁPB¡@	ù ¼ëãq¾PB¡@úíû¾ÿ!QÁPB¡@úíû¾ëãq¾PB¡@	ù ¼ÿ!QÁ¨FÃÀúíû¾ÿ!QÁPB¡@	ù ¼ÿ!QÁPB¡@úíû¾ÿ!QÁ¨FÃÀ	ù ¼ëãq¾¨FÃÀ	ù ¼ÿ!QÁ¨FÃÀúíû¾ëãq¾¨FÃÀúíû¾ÿ!QÁ¨FÃÀ	ù ¼ÿ!QÁ¨FÃÀúíû¾ëãq¾PB¡@úíû¾ëãq¾¨FÃÀúíû¾ÿ!QÁPB¡@úíû¾eãq¾¨FÃÀ¹|VÁeãq¾PB¡@ÍLNAeãq¾PB¡@¹|VÁeãq¾¨FÃÀÍLNAeãq¾¨FÃÀ¹|VÁëãq>PB¡@¹|VÁëãq>¨FÃÀ¹|VÁeãq¾PB¡@¹|VÁëãq>¨FÃÀÍLNAeãq¾¨FÃÀ¹|VÁëãq>¨FÃÀ¹|VÁeãq¾¨FÃÀÍLNAeãq¾PB¡@ÍLNAëãq>¨FÃÀÍLNAëãq>PB¡@ÍLNAeãq¾¨FÃÀÍLNAeãq¾PB¡@ÍLNAëãq>PB¡@¹|VÁeãq¾PB¡@¹|VÁëãq>PB¡@ÍLNAëãq>¨FÃÀÍLNAëãq>PB¡@¹|VÁëãq>PB¡@ÍLNAëãq>¨FÃÀ¹|VÁÿ!QÁdL¦@¹|VÁÿ!QA^ËÅÀ¹|VÁÿ!QAdL¦@¹|VÁÿ!QÁ^ËÅÀ¹|VÁÿ!QÁ^ËÅÀÓaÁÿ!QÁdL¦@¹|VÁÿ!QÁdL¦@ÓaÁÿ!QÁ^ËÅÀ¹|VÁÿ!QA^ËÅÀ¹|VÁÿ!QÁ^ËÅÀÓaÁÿ!QA^ËÅÀÓaÁÿ!QÁ^ËÅÀ¹|VÁÿ!QA^ËÅÀ¹|VÁÿ!QAdL¦@ÓaÁÿ!QAdL¦@¹|VÁÿ!QA^ËÅÀÓaÁÿ!QÁdL¦@¹|VÁÿ!QAdL¦@ÓaÁÿ!QÁdL¦@ÓaÁÿ!QAdL¦@¹|VÁÿ!QÁ^ËÅÀÓaÁÿ!QAdL¦@ÓaÁÿ!QA^ËÅÀÓaÁÿ!QÁdL¦@ÓaÁ

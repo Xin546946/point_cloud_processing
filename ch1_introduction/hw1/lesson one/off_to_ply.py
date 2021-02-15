@@ -119,7 +119,7 @@ def main():
     # ply目标文件产生路径
     ply_data_dir = '/home/kit/point_cloud_processing/ch1_introduction/hw1/ply_data'
     # off文件所在路径
-    off_data_dir = '/home/kit/Documents/shenlanxuayuan/point_cloud/ModelNet40/airplane'
+    off_data_dir = '/home/kit/Documents/shenlanxuayuan/point_cloud/off_data'
     write_ply_points_only_from_off(ply_data_dir, off_data_dir)
 
 if __name__ == '__main__':

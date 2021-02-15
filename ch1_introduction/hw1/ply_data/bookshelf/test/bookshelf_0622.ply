@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 278
+comment vertices
+property float x
+property float y
+property float z
+end_header
+üzÁÛù¼Àk«uÁûzAÛù¼ÀN"ÁûzAÛù¼Àk«uÁüzÁÛù¼ÀN"ÁüzÁÛù¼ÀN"ÁüzÁÛù¼Àk«uÁûzAÛù¼ÀN"ÁûzAÛù¼Àk«uÁüzÁÛù¼Àk«uÁüzÁÛù¼@N"ÁüzÁÛù¼ÀN"ÁüzÁÛù¼@k«uÁüzÁÛù¼@k«uÁüzÁÛù¼Àk«uÁüzÁÛù¼@N"ÁüzÁÛù¼ÀN"ÁüzÁÛù¼@N"ÁûzAÛù¼ÀN"ÁüzÁÛù¼ÀN"ÁûzAÛù¼@N"ÁûzAÛù¼@N"ÁüzÁÛù¼@N"ÁûzAÛù¼ÀN"ÁüzÁÛù¼ÀN"ÁûzAÛù¼Àk«uÁûzAÛù¼@N"ÁûzAÛù¼ÀN"ÁûzAÛù¼@k«uÁûzAÛù¼@k«uÁûzAÛù¼Àk«uÁûzAÛù¼@N"ÁûzAÛù¼ÀN"ÁûzAÛù¼ÀÑøA”Ç£AÛù¼ÀÑøÁ”Ç£AÛù¼ÀÑøAûzAÛù¼ÀÑøÁûzAÛù¼À…òAûzAÛù¼ÀÑøÁûzAÛù¼À…òAûzAÛù¼ÀÑøA”Ç£AÛù¼ÀÑøÁ”Ç£AÛù¼ÀÑøAûzAÛù¼@k«uÁüzÁÛù¼Àk«uÁûzAÛù¼Àk«uÁüzÁÛù¼@k«uÁüzÁÛù¼@k«uÁûzAÛù¼@k«uÁüzÁÛù¼Àk«uÁûzAÛù¼Àk«uÁüzÁÛù¼@N"ÁûzAÛù¼@k«uÁûzAÛù¼@N"ÁüzÁÛù¼@k«uÁüzÁÛù¼@k«uÁüzÁÛù¼@N"ÁûzAÛù¼@k«uÁûzAÛù¼@N"ÁûzAÛù¼@ÑøÁûzAÛù¼ÀÑøÁûzAÛù¼@ÑøÁûzAÛù¼ÀÑøÁûzAÛù¼À…òAûzAÛù¼@…òAûzAÛù¼@…òAûzAÛù¼À…òAûzAÛù¼@ÑøÁ”Ç£AÛù¼@ÑøA”Ç£AÛù¼@ÑøÁûzAÛù¼@ÑøAûzAÛù¼@…òAûzAÛù¼@…òAûzAÛù¼@ÑøAûzAÛù¼@ÑøÁ”Ç£AÛù¼@ÑøA”Ç£AÛù¼@ÑøÁûzAÛù¼@ÑøÁ”Ç£AÛù¼ÀÑøÁûzAÛù¼ÀÑøÁ”Ç£AÛù¼@ÑøÁ”Ç£AÛù¼@ÑøÁûzAÛù¼@ÑøÁ”Ç£AÛù¼ÀÑøÁûzAÛù¼ÀÑøÁ”Ç£AÛù¼@ÑøA”Ç£AÛù¼ÀÑøÁ”Ç£AÛù¼@ÑøÁ”Ç£AÛù¼ÀÑøA”Ç£AÛù¼ÀÑøA”Ç£AÛù¼@ÑøA”Ç£AÛù¼ÀÑøÁ”Ç£AÛù¼@ÑøÁ”Ç£AÛù¼@ÑøAûzAÛù¼ÀÑøA”Ç£AÛù¼ÀÑøAûzAÛù¼@ÑøAûzAÛù¼@ÑøA”Ç£AÛù¼@ÑøAûzAÛù¼ÀÑøA”Ç£AÛù¼ÀÑøAüzÁÛù¼ÀÑøAüzÁÛù¼À…òAüzÁÛù¼À…òAüzÁÛù¼ÀÑøAûzAÛù¼ÀÑøAûzAÛù¼@ÑøAûzAÛù¼@ÑøAûzAÛù¼ÀÑøAüzÁÛù¼@…òAûzAÛù¼À…òAüzÁÛù¼À…òAûzAÛù¼@…òAûzAÛù¼@…òAüzÁÛù¼@…òAûzAÛù¼À…òAüzÁÛù¼À…òAüzÁÛù¼@…òAüzÁÛù¼@ÑøAüzÁÛù¼@ÑøAüzÁÛù¼@…òAûzAÛù¼@ÑøAüzÁÛù¼ÀÑøAûzAÛù¼ÀÑøAüzÁÛù¼@ÑøAüzÁÛù¼@ÑøAûzAÛù¼@ÑøAüzÁÛù¼ÀÑøAûzAÛù¼ÀÑøAüzÁÛù¼@ÑøAüzÁÛù¼À…òAüzÁÛù¼@…òAüzÁÛù¼ÀÑøAüzÁÛù¼ÀÑøAüzÁÛù¼@ÑøAüzÁÛù¼À…òAüzÁÛù¼@…òA”Ç£ÁÛù¼ÀÑøAüzÁÛù¼Àk«uAüzÁÛù¼À:iAüzÁÛù¼Àš™É>üzÁÛù¼À~ŒÉ¾üzÁÛù¼ÀÑøÁ”Ç£ÁÛù¼ÀÑøÁ”Ç£ÁÛù¼ÀÑøÁ”Ç£ÁÛù¼ÀÑøAüzÁÛù¼ÀÑøÁüzÁÛù¼À~ŒÉ¾üzÁÛù¼Àš™É>üzÁÛù¼À:iAüzÁÛù¼Àk«uAüzÁÛù¼Àk«uAüzÁÛù¼@k«uAüzÁÛù¼Àk«uAüzÁÛù¼@k«uA”Ç£ÁÛù¼@ÑøÁüzÁÛù¼@~ŒÉ¾üzÁÛù¼@ÑøÁüzÁÛù¼@š™É>üzÁÛù¼@:iAüzÁÛù¼@k«uA”Ç£ÁÛù¼@ÑøA”Ç£ÁÛù¼@ÑøA”Ç£ÁÛù¼@ÑøÁüzÁÛù¼@k«uAüzÁÛù¼@:iAüzÁÛù¼@š™É>üzÁÛù¼@~ŒÉ¾üzÁÛù¼@ÑøÁüzÁÛù¼@ÑøA”Ç£ÁÛù¼ÀÑøAüzÁÛù¼ÀÑøA”Ç£ÁÛù¼@ÑøA”Ç£ÁÛù¼@ÑøAüzÁÛù¼@ÑøA”Ç£ÁÛù¼ÀÑøAüzÁÛù¼ÀÑøAüzÁÛù¼@~ŒÉ¾üzÁÛù¼ÀÑøÁüzÁÛù¼@ÑøÁüzÁÛù¼À~ŒÉ¾üzÁÛù¼À~ŒÉ¾üzÁÛù¼@~ŒÉ¾üzÁÛù¼ÀÑøÁüzÁÛù¼@ÑøÁûzAÛù¼À~ŒÉ¾ûzAÛù¼Àš™É>ûzAÛù¼À~ŒÉ¾ûzAÛù¼Àš™É>üzÁÛù¼@š™É>üzÁÛù¼Àš™É>üzÁÛù¼Àš™É>üzÁÛù¼@š™É>üzÁÛù¼@:iAüzÁÛù¼À:iAüzÁÛù¼À:iAüzÁÛù¼@:iAûzAÛù¼À:iAûzAÛù¼Àk«uAûzAÛù¼À:iAûzAÛù¼Àk«uA”Ç£ÁÛù¼ÀÑøA”Ç£ÁÛù¼@ÑøÁ”Ç£ÁÛù¼ÀÑøÁ”Ç£ÁÛù¼@ÑøA”Ç£ÁÛù¼@ÑøA”Ç£ÁÛù¼ÀÑøA”Ç£ÁÛù¼@ÑøÁ”Ç£ÁÛù¼ÀÑøÁûzAÛù¼@k«uAüzÁÛù¼Àk«uAûzAÛù¼Àk«uAüzÁÛù¼@k«uAüzÁÛù¼@k«uAûzAÛù¼@k«uAüzÁÛù¼Àk«uAûzAÛù¼Àk«uAûzAÛù¼@k«uAûzAÛù¼@:iAûzAÛù¼@k«uAûzAÛù¼@:iAûzAÛù¼@š™É>ûzAÛù¼@~ŒÉ¾ûzAÛù¼@š™É>ûzAÛù¼@~ŒÉ¾üzÁÛù¼@~ŒÉ¾ûzAÛù¼À~ŒÉ¾üzÁÛù¼À~ŒÉ¾ûzAÛù¼@~ŒÉ¾ûzAÛù¼@~ŒÉ¾üzÁÛù¼@~ŒÉ¾ûzAÛù¼À~ŒÉ¾üzÁÛù¼À~ŒÉ¾ûzAÛù¼@š™É>ûzAÛù¼À~ŒÉ¾ûzAÛù¼@~ŒÉ¾ûzAÛù¼Àš™É>ûzAÛù¼Àš™É>ûzAÛù¼@š™É>ûzAÛù¼À~ŒÉ¾ûzAÛù¼@~ŒÉ¾ûzAÛù¼@š™É>üzÁÛù¼Àš™É>ûzAÛù¼Àš™É>üzÁÛù¼@š™É>üzÁÛù¼@š™É>ûzAÛù¼@š™É>üzÁÛù¼Àš™É>ûzAÛù¼Àš™É>üzÁÛù¼@:iAûzAÛù¼À:iAüzÁÛù¼À:iAûzAÛù¼@:iAûzAÛù¼@:iAüzÁÛù¼@:iAûzAÛù¼À:iAüzÁÛù¼À:iAûzAÛù¼@k«uAûzAÛù¼À:iAûzAÛù¼@:iAûzAÛù¼Àk«uAûzAÛù¼Àk«uAûzAÛù¼@k«uAûzAÛù¼À:iAûzAÛù¼@:iAûzAÛù¼À~ŒÉ¾ûzAÛù¼Àk«uÁûzAÛù¼À:iAûzAÛù¼Àš™É>ûzAÛù¼À…òAûzAÛù¼Àk«uAüzÁÛù¼ÀN"ÁüzÁÛù¼ÀÑøÁüzÁÛù¼À~ŒÉ¾üzÁÛù¼Àk«uÁüzÁÛù¼À:iAüzÁÛù¼Àš™É>üzÁÛù¼À…òAüzÁÛù¼Àk«uA

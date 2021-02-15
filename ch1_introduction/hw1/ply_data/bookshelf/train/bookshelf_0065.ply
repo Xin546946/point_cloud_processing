@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 174
+comment vertices
+property float x
+property float y
+property float z
+end_header
+q»BHÁÿ	ÂHBHÁ5ÿÁq»ÂHÁÿ	Âq»BHÁÿ	BHBHÁ¨FCÁHBHÁ­zÁHÂHÁ¨FCÁHBHÁ{AHBHÁ¨FCAHÂHÁ{AHBHÁ5ÿAHÂHÁ5ÿAHÂHÁ5ÿÁq»ÂHÁÿ	BHÂHÁ­zÁHÂHÁ¨FCAq»ÂHÁÿ	Âq»Bœ^ï@ÿ	Âq»BHÁÿ	Â·Q¸œ^ï@ÿ	Âq»Âœ^ï@ÿ	Âq»BHÁÿ	Bq»Bœ^ï@ÿ	Âq»Bœ^ï@ÿ	Bq»BHÁÿ	Â·Q¸œ^ï@ÿ	Bq»BHÁÿ	Bq»Bœ^ï@ÿ	Bq»ÂHÁÿ	Bq»Âœ^ï@ÿ	Bq»ÂHÁÿ	Âq»Âœ^ï@ÿ	Bq»Âœ^ï@ÿ	Âq»ÂHÁÿ	B·Q¸œ^ï@5ÿÁ·Q¸œ^ï@ÿ	ÂHÂœ^ï@5ÿÁq»Âœ^ï@ÿ	Âq»Âœ^ï@ÿ	BHÂœ^ï@¨FCÁHÂœ^ï@­zÁ·Q¸œ^ï@¨FCÁHÂœ^ï@{AHÂœ^ï@¨FCA·Q¸œ^ï@{AHÂœ^ï@5ÿA·Q¸œ^ï@5ÿA·Q¸œ^ï@ÿ	B·Q¸œ^ï@¨FCA·Q¸œ^ï@­zÁ·Q¸œ^ï@5ÿÁHBHÁ5ÿÁHBœ^ï@5ÿÁHÂHÁ5ÿÁHÂœ^ï@5ÿÁHÂHÁ5ÿAHBœ^ï@5ÿAHBHÁ5ÿA·Q¸œ^ï@5ÿAHÂœ^ï@5ÿA·Q¸œ^ï@¨FCAHBHÁ¨FCAHBœ^ï@¨FCAHÂHÁ¨FCAHÂœ^ï@¨FCAHÂHÁ{AHBœ^ï@{AHBHÁ{A·Q¸œ^ï@{AHÂœ^ï@{A·Q¸œ^ï@­zÁHBHÁ­zÁHBœ^ï@­zÁHÂHÁ­zÁHÂœ^ï@­zÁHÂHÁ¨FCÁHBœ^ï@¨FCÁHBHÁ¨FCÁ·Q¸œ^ï@¨FCÁHÂœ^ï@¨FCÁHÂHÁ¨FCÁHÂœ^ï@5ÿÁHÂœ^ï@¨FCÁHÂHÁ5ÿÁHBHÁ5ÿÁHBœ^ï@¨FCÁHBœ^ï@5ÿÁHBHÁ¨FCÁHBHÁ¨FCAHBœ^ï@5ÿAHBœ^ï@¨FCAHBHÁ5ÿAHBHÁ­zÁHBœ^ï@{AHBœ^ï@­zÁHBHÁ{A·Q¸œ^ï@ÿ	BHBœ^ï@5ÿA·Q¸œ^ï@5ÿA·Q¸œ^ï@5ÿÁq»Bœ^ï@ÿ	Â·Q¸œ^ï@ÿ	ÂHBœ^ï@5ÿÁq»Bœ^ï@ÿ	BHBœ^ï@¨FCÁHBœ^ï@­zÁ·Q¸œ^ï@¨FCÁ·Q¸œ^ï@­zÁHBœ^ï@{AHBœ^ï@¨FCA·Q¸œ^ï@{A·Q¸œ^ï@¨FCA·Q¸œ^ï@ÿ	BHBœ^ï@5ÿAq»Bœ^ï@ÿ	BHBœ^ï@¨FCA·Q¸œ^ï@¨FCA·Q¸œ^ï@{AHBœ^ï@{AHBœ^ï@­zÁ·Q¸œ^ï@­zÁ·Q¸œ^ï@¨FCÁHBœ^ï@¨FCÁHBœ^ï@5ÿÁq»Bœ^ï@ÿ	Â·Q¸œ^ï@5ÿÁ·Q¸œ^ï@ÿ	Â·Q¸œ^ï@5ÿAHÂHÁ5ÿAHÂœ^ï@¨FCAHÂœ^ï@5ÿAHÂHÁ¨FCAHÂHÁ{AHÂœ^ï@­zÁHÂœ^ï@{AHÂHÁ­zÁHBœ^ï@¨FCÁ·Q¸œ^ï@¨FCÁHBœ^ï@5ÿÁ·Q¸œ^ï@5ÿÁ·Q¸œ^ï@5ÿÁ·Q¸œ^ï@¨FCÁ·Q¸œ^ï@ÿ	Â·Q¸œ^ï@­zÁ·Q¸œ^ï@{A·Q¸œ^ï@¨FCA·Q¸œ^ï@5ÿA·Q¸œ^ï@ÿ	B·Q¸HAÿ	Â·Q¸HAÿ	BHBœ^ï@5ÿA·Q¸œ^ï@5ÿAHBœ^ï@¨FCA·Q¸œ^ï@¨FCAHBœ^ï@{A·Q¸œ^ï@{AHBœ^ï@­zÁ·Q¸œ^ï@­zÁ·Q¸œ^ï@ÿ	Âq»BHAÿ	Âq»Bœ^ï@ÿ	Â·Q¸HAÿ	Â·Q¸HAÿ	Bq»BHAÿ	Â·Q¸HAÿ	Âq»BHAÿ	B·Q¸HAÿ	Bq»Bœ^ï@ÿ	Bq»BHAÿ	B·Q¸œ^ï@ÿ	Bq»Bœ^ï@ÿ	Bq»BHAÿ	Âq»BHAÿ	Bq»Bœ^ï@ÿ	Â

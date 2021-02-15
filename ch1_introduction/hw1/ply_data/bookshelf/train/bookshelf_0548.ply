@@ -1,0 +1,9 @@
+ply
+format binary_little_endian 1.0
+element vertex 148
+comment vertices
+property float x
+property float y
+property float z
+end_header
+‰A®GÁûzÂ‰Á®GAûzÂ‰A®GAûzÂ‰Á®GÁûzÂ‰Á®GÁûzÂ‰A®GÁûzÂ‰Á®GAûzÂ‰A®GAûzÂ‰Á®GÁûzB‰A®GAûzB‰Á®GAûzB‰A®GÁûzB‰A®GAûzB‰A®GÁûzÂ‰A®GAûzÂ‰A®GÁûzB‰A®GAûzB‰Á®GAûzÂ‰Á®GAûzB‰A®GAûzÂ‰Á®GÁûzB‰Á®GAûzÂ‰Á®GÁûzÂ‰Á®GAûzB-²‚Á®GÁt$½Ad;‚Á®GÁF·AR¸‚A®GÁt$½Ad;‚Á®GÁÞA/ƒA®GÁF·AR¸‚A®GÁÝäB33‚Á®GÁSù@/ƒA®GÁÞA33‚Á®GÁÅÑÀL7ƒA®GÁSù@+‚Á®GÁO¯îÀL7ƒA®GÁÅÑÀ+‚Á®GÁQ®Á}?ƒA®GÁO¯îÀÑ"‚Á®GÁÎªµÁ}?ƒA®GÁQ®ÁÑ"‚Á®GÁ(Â®GƒA®GÁÎªµÁ‰Á®GÁûzÂ‰Á®GÁûzB‰A®GÁûzÂ®GƒA®GÁ(Â-²‚Á®GÁÝäB‰A®GÁûzBR¸‚AB`ï@t$½A-²‚ÁB`ï@ÝäB-²‚ÁB`ï@t$½AR¸‚AB`ï@ÝäBR¸‚A®GÁÝäBR¸‚AB`ï@t$½AR¸‚A®GÁt$½AR¸‚AB`ï@ÝäBR¸‚A®GÁÝäB-²‚ÁB`ï@ÝäBR¸‚AB`ï@ÝäB-²‚Á®GÁÝäB-²‚ÁB`ï@ÝäB-²‚Á®GÁt$½A-²‚ÁB`ï@t$½A-²‚Á®GÁÝäB-²‚Á®GÁt$½AR¸‚AB`ï@t$½A-²‚ÁB`ï@t$½AR¸‚A®GÁt$½A/ƒAB`ï@ÞAd;‚ÁB`ï@F·Ad;‚ÁB`ï@ÞA/ƒAB`ï@F·A/ƒA®GÁF·A/ƒAB`ï@ÞA/ƒA®GÁÞA/ƒAB`ï@F·A/ƒA®GÁF·Ad;‚ÁB`ï@F·A/ƒAB`ï@F·Ad;‚Á®GÁF·Ad;‚ÁB`ï@F·Ad;‚Á®GÁÞAd;‚ÁB`ï@ÞAd;‚Á®GÁF·Ad;‚Á®GÁÞA/ƒAB`ï@ÞAd;‚ÁB`ï@ÞA/ƒA®GÁÞAL7ƒAB`ï@ÅÑÀ33‚ÁB`ï@Sù@33‚ÁB`ï@ÅÑÀL7ƒAB`ï@Sù@L7ƒA®GÁSù@L7ƒAB`ï@ÅÑÀL7ƒA®GÁÅÑÀL7ƒAB`ï@Sù@L7ƒA®GÁSù@33‚ÁB`ï@Sù@L7ƒAB`ï@Sù@33‚Á®GÁSù@33‚ÁB`ï@Sù@33‚Á®GÁÅÑÀ33‚ÁB`ï@ÅÑÀ33‚Á®GÁSù@33‚Á®GÁÅÑÀL7ƒAB`ï@ÅÑÀ33‚ÁB`ï@ÅÑÀL7ƒA®GÁÅÑÀ}?ƒAB`ï@Q®Á+‚ÁB`ï@O¯îÀ+‚ÁB`ï@Q®Á}?ƒAB`ï@O¯îÀ}?ƒA®GÁO¯îÀ}?ƒAB`ï@Q®Á}?ƒA®GÁQ®Á}?ƒAB`ï@O¯îÀ}?ƒA®GÁO¯îÀ+‚ÁB`ï@O¯îÀ}?ƒAB`ï@O¯îÀ+‚Á®GÁO¯îÀ+‚ÁB`ï@O¯îÀ+‚Á®GÁQ®Á+‚ÁB`ï@Q®Á+‚Á®GÁO¯îÀ+‚Á®GÁQ®Á}?ƒAB`ï@Q®Á+‚ÁB`ï@Q®Á}?ƒA®GÁQ®Á®GƒAB`ï@(ÂÑ"‚ÁB`ï@ÎªµÁÑ"‚ÁB`ï@(Â®GƒAB`ï@ÎªµÁ®GƒA®GÁÎªµÁ®GƒAB`ï@(Â®GƒA®GÁ(Â®GƒAB`ï@ÎªµÁ®GƒA®GÁÎªµÁÑ"‚ÁB`ï@ÎªµÁ®GƒAB`ï@ÎªµÁÑ"‚Á®GÁÎªµÁÑ"‚ÁB`ï@ÎªµÁÑ"‚Á®GÁ(ÂÑ"‚ÁB`ï@(ÂÑ"‚Á®GÁÎªµÁÑ"‚Á®GÁ(Â®GƒAB`ï@(ÂÑ"‚ÁB`ï@(Â®GƒA®GÁ(Â
