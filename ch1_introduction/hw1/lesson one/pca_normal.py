@@ -4,6 +4,7 @@ import open3d as o3d
 import os
 import numpy as np
 from pyntcloud import PyntCloud
+import matplotlib.pyplot as plt
 
 # 功能：计算PCA的函数
 # 输入：
@@ -18,18 +19,18 @@ def PCA(data, correlation=False, sort=True):
     # 屏蔽开始
     if correlation:
         corr_data = np.corrcoef(data.T)
-        eigenvectors,eigenvalues,eigenvectors_T = np.linalg.svd(corr_data)        
+        eigenvectors, eigenvalues, _ = np.linalg.svd(corr_data)        
         print("using correlation")
-        print(eigenvalues)
-        print(eigenvectors)
+        
     else:
         cov_data = np.cov(data.T)
-        eigenvectors,eigenvalues,eigenvectors_T = np.linalg.svd(cov_data)
+        eigenvectors, eigenvalues, _ = np.linalg.svd(cov_data)
         print("using cov")
-        print(eigenvalues)
-        print(eigenvectors)
+        
 
     eigenvalues = np.sqrt(eigenvalues)
+    print("eigenvalues", eigenvalues)
+    print(eigenvectors)
     # 屏蔽结束
 
     if sort:
@@ -48,7 +49,7 @@ def main():
     # filename = os.path.join(root_dir, cat[cat_index],'train', cat[cat_index]+'_0001.ply') # 默认使用第一个点云
 
     # 加载原始点云
-    point_cloud_pynt = PyntCloud.from_file("./ply_data/airplane/test/1.ply")
+    point_cloud_pynt = PyntCloud.from_file("/home/kit/point_cloud_processing/ch1_introduction/hw1/ply_data/bathtub/test/1.ply")
     point_cloud_o3d = point_cloud_pynt.to_instance("open3d", mesh=False)
     # o3d.visualization.draw_geometries([point_cloud_o3d]) # 显示原始点云
 
@@ -57,22 +58,29 @@ def main():
     print('total points number is:', points.shape[0])
     print('The size of points is: ',points.shape)
     # 用PCA分析点云主方向
-    w, v = PCA(points,False)
+    w, v = PCA(points,True)
+    w_,v_ = PCA(points, False)
     point_cloud_vector = v[:, 0] #点云主方向对应的向量
-    print('the main orientation of this pointcloud is: ', point_cloud_vector)
+    # print('the main orientation of this pointcloud is: ', point_cloud_vector)
     # TODO: 此处只显示了点云，还没有显示PCA
     # draw line set 
     point_center = np.mean(points,axis = 0)
-    points = [point_center,(point_center +v[:,0] * w[0] * 100 )  ,( point_center + v[:,1]  * w[1] * 100 )  ]
-    lines = [[0,1],[0,2]]
-    colors = [[1,0,0],[0,1,0]]
+    points_ = [point_center,(point_center +v[:,0] * w[0] * 100 )  ,( point_center + v[:,1]  * w[1] * 100)]
+    lines_ = [[0,1],[0,2]]
+    colors_ = [[1,0,0],[0,1,0]]
+    
+    
     line_set = o3d.geometry.LineSet()
-    line_set.lines = o3d.utility.Vector2iVector(lines)
-    line_set.colors = o3d.utility.Vector3dVector(colors)
-    line_set.points = o3d.utility.Vector3dVector(points)
-    o3d.visualization.draw_geometries([point_cloud_o3d, line_set])
+    line_set.lines = o3d.utility.Vector2iVector(lines_)
+    line_set.colors = o3d.utility.Vector3dVector(colors_)
+    line_set.points = o3d.utility.Vector3dVector(points_)
+    # o3d.visualization.draw_geometries([point_cloud_o3d, line_set])
     
-    
+    #
+    dim_reduction = v[:,:2]
+    pcl_2d = np.dot(np.array(points), dim_reduction)
+    plt.scatter(pcl_2d[:,0], pcl_2d[:,1])
+    plt.show()
     # 循环计算每个点的法向量
     pcd_tree = o3d.geometry.KDTreeFlann(point_cloud_o3d)
     normals = []
