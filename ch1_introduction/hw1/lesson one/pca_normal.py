@@ -17,17 +17,17 @@ def PCA(data, correlation=False, sort=True):
     # 作业1
     # 屏蔽开始
     if correlation:
-        corr_data = np.corrcoef(data.T )
-        print("The correlation of points: ")
-        print(corr_data)
-        eigenvectors,eigenvalues,eigenvectors_T = np.linalg.svd(corr_data)
+        corr_data = np.corrcoef(data.T)
+        eigenvectors,eigenvalues,eigenvectors_T = np.linalg.svd(corr_data)        
+        print("using correlation")
         print(eigenvalues)
-        
-        
+        print(eigenvectors)
     else:
         cov_data = np.cov(data.T)
         eigenvectors,eigenvalues,eigenvectors_T = np.linalg.svd(cov_data)
-        
+        print("using cov")
+        print(eigenvalues)
+        print(eigenvectors)
 
     eigenvalues = np.sqrt(eigenvalues)
     # 屏蔽结束
@@ -48,7 +48,7 @@ def main():
     # filename = os.path.join(root_dir, cat[cat_index],'train', cat[cat_index]+'_0001.ply') # 默认使用第一个点云
 
     # 加载原始点云
-    point_cloud_pynt = PyntCloud.from_file("/home/kit/point_cloud_processing/ch1_introduction/hw1/ply_data/airplane/test/1.ply")
+    point_cloud_pynt = PyntCloud.from_file("./ply_data/airplane/test/1.ply")
     point_cloud_o3d = point_cloud_pynt.to_instance("open3d", mesh=False)
     # o3d.visualization.draw_geometries([point_cloud_o3d]) # 显示原始点云
 
@@ -63,7 +63,7 @@ def main():
     # TODO: 此处只显示了点云，还没有显示PCA
     # draw line set 
     point_center = np.mean(points,axis = 0)
-    points = [point_center,(point_center +v[:,0] * w[0] )  ,( point_center + v[:,1]  * w[1] )  ]
+    points = [point_center,(point_center +v[:,0] * w[0] * 100 )  ,( point_center + v[:,1]  * w[1] * 100 )  ]
     lines = [[0,1],[0,2]]
     colors = [[1,0,0],[0,1,0]]
     line_set = o3d.geometry.LineSet()
