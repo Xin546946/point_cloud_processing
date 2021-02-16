@@ -30,7 +30,7 @@ def main():
     # point_cloud_pynt = PyntCloud.from_file(file_name)
 
     # 加载自己的点云文件
-    file_name = "/Users/renqian/Downloads/program/cloud_data/11.ply"
+    file_name = "/home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/hw1/ply_data/airplane/test/1.ply"
     point_cloud_pynt = PyntCloud.from_file(file_name)
 
     # 转成open3d能识别的格式

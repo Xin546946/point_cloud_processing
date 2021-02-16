@@ -25,19 +25,31 @@
 
         return eigenvalues, eigenvectors
 
-* 若使用cov，可视化后的点云如图
+* using covariance，the visualization is shown below
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
 
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="./figures/figure1.png">
+    src="./figures/figure1.png";class ="half">
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig1 点云的pca，红色线为主方向，绿色线为次方向</div>
+    padding: 2px;">Fig1. pca of point cloud, red line indicates the main direction and green the second</div>
 </center>
+<br>
 
 * 若使用correcoef
   $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="./figures/2.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig2 点云的pca，红色线为主方向，绿色线为次方向</div>
+</center>
