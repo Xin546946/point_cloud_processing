@@ -32,9 +32,10 @@ def PCA(data, correlation=False, sort=True):
 
 # generate data of normal distribution N(0,1) 
 center = [0.0, 0.0]
-data = np.random.multivariate_normal(center,np.array([[100.0,0.0],[0.0,20.0]]),10000)
+data = np.random.multivariate_normal(center,np.array([[100.0,100.0],[0.0,20.0]]),10000)
 print(np.cov(data.T))
 data - np.mean(data, axis = 0)
+
 # draw data
 fig = plt.figure()
 plt.scatter(data[:,0], data[:,1],color = [0,1,0])

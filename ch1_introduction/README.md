@@ -25,19 +25,49 @@
 
         return eigenvalues, eigenvectors
 
+
+
 * 若使用cov，可视化后的点云如图
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="./figures/figure1.png">
-    <br>
+ <center>
+    <img src="./figures/figure1.png" width="500"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig1 点云的pca，红色线为主方向，绿色线为次方向</div>
+    padding: 2px;">Fig1 使用协方差计算的pca，红色线为主方向，绿色线为次方向</div>
 </center>
+<br>
+<br>
+<br>
 
 * 若使用correcoef
   $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
+ <center>
+    <img src="./figures/figure2.png" width="500"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig2 使用相关系数计算的pca，红色线为主方向，绿色线为次方向</div>
+</center>
+
+<br>
+
+* 可见， 使用协方差矩阵计算出来的主方向和次方向看上去是正确的，但是用相关系数计算出来的主方向看上去不对。这里感觉很奇怪，因为相关系数和协方差只是差了在每个轴去均值化以后除以标准差来“标准化”，也就是re-scale，方向不应该变化。
+  
+* 但是，用协方差和相关系数得到的主方向和次方向来做降维，得到的结果类似，所以可能是数值问题导致的差异。
+  ~~~ python
+  dim_reduction = v[:,:2]
+  pcl_2d = np.dot(np.array(points), dim_reduction)
+  plt.scatter(pcl_2d[:,0], pcl_2d[:,1])
+  plt.show()
+<br>
+<br>
+ <center class="half">
+    <img src="./figures/figure3.png" width="350"/><img src="./figures/figure4.png" width="350"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig3 使用pca的主，次轴降采样。
+    左：协方差， 右：相关系数</div>
+</center>
