@@ -41,3 +41,6 @@
 
 * 若使用correcoef
   $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
+
+  <br>
+  doing some changes
