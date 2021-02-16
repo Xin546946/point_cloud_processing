@@ -26,7 +26,7 @@
         return eigenvalues, eigenvectors
 
 * 若使用cov，可视化后的点云如图
-  $$cov(X) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(X_i-\overline{X})^T}{N -1}$$
+  $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -40,4 +40,4 @@
 </center>
 
 * 若使用correcoef
-  $$\rho(X) = \frac{cov(X)}{\sigma_X^2}$$
+  $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$

@@ -19,6 +19,7 @@ def PCA(data, correlation=False, sort=True):
     # 屏蔽开始
     if correlation:
         corr_data = np.corrcoef(data.T)
+        print(corr_data)
         eigenvectors, eigenvalues, _ = np.linalg.svd(corr_data)        
         print("using correlation")
         
