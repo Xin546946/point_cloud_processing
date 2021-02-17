@@ -26,7 +26,6 @@
         return eigenvalues, eigenvectors
 
 
-
 * 若使用cov，可视化后的点云如图
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
 
@@ -35,7 +34,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig1 使用协方差计算的pca，红色线为主方向，绿色线为次方向</div>
+    padding: 2px;">Fig.1 使用协方差计算的pca，红色线为主方向，绿色线为次方向</div>
 </center>
 <br>
 <br>
@@ -48,7 +47,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig2 使用相关系数计算的pca，红色线为主方向，绿色线为次方向</div>
+    padding: 2px;">Fig.2 使用相关系数计算的pca，红色线为主方向，绿色线为次方向</div>
 </center>
 
 <br>
@@ -68,6 +67,43 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig3 使用pca的主，次轴降采样。
+    padding: 2px;">Fig.3 使用pca的主，次轴降采样。
     左：协方差， 右：相关系数</div>
 </center>
+<br>
+<br>
+
+2. Normal Estimation
+   
+   ~~~ python
+   # 循环计算每个点的法向量
+    pcd_tree = o3d.geometry.KDTreeFlann(point_cloud_o3d)
+    normals = []
+    # 作业2
+    # 屏蔽开始
+    for i in range(points.shape[0]):
+        [_, idx, _] = pcd_tree.search_knn_vector_3d(point_cloud_o3d.points[i], 20)
+        knn_points = np.asarray(point_cloud_o3d.points)[idx, :]
+        _, v_knn_points = PCA(knn_points)
+        normals.append(v_knn_points[:,-1])
+
+    # 由于最近邻搜索是第二章的内容，所以此处允许直接调用open3d中的函数
+
+    # 屏蔽结束
+    normals = np.array(normals, dtype=np.float64)
+    # TODO: 此处把法向量存放在了normals中
+    point_cloud_o3d.normals = o3d.utility.Vector3dVector(normals)
+    window_name = 'normal vector of pcl'
+    o3d.visualization.draw_geometries([point_cloud_o3d],"Open3D normal estimation")
+
+<br>
+<br>
+ <center>
+    <img src="./figures/figure5.png" width="500"/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.4 点云的法向量估计示例图</div>
+</center>
+
