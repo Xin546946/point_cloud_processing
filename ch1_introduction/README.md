@@ -107,3 +107,83 @@
     padding: 2px;">Fig.4 点云的法向量估计示例图</div>
 </center>
 
+<br>
+<br>
+
+3. Voxel Grid Downsampling
+   ~~~ python 
+   def voxel_filter(point_cloud, leaf_size):
+    point_cloud = np.asarray(point_cloud)
+    print("Number of point clouds is", len(point_cloud))
+    filtered_points = []
+    # 作业3
+    # 屏蔽开始
+    # compute the min or max of the point set {p1,p2,p3,...}
+    x_max, y_max, z_max = np.max(point_cloud,axis = 0)
+    x_min, y_min, z_min = np.min(point_cloud,axis = 0)
+
+    # compute the dim of the voxel grid    
+    Dx = (x_max - x_min) // leaf_size
+    Dy = (y_max - y_min) // leaf_size
+    Dz = (z_max - z_min) // leaf_size
+         
+    # compute voxel idx for each point
+    h = list()
+    
+    for i in range(len(point_cloud)):
+        x,y,z = point_cloud[i]
+        hx = np.floor((x - x_min) / leaf_size)
+        hy = np.floor((y - y_min) / leaf_size)
+        hz = np.floor((z - z_min) / leaf_size) 
+        h.append(int(hx + hy * Dx + hz * Dx * Dy))
+    
+    h_sorted = sorted(h) # 点在第几个voxel
+    h_sorted_idx = np.argsort(h)
+    current_voxel = list()
+    
+    for i in range(point_cloud.shape[0] -1):
+        if h_sorted[i] == h_sorted[i + 1]:
+            current_voxel.append(point_cloud[h_sorted_idx[i]])
+        else:
+            # point_idx = h_sorted_idx[begin: i + 1]
+            current_voxel.append(point_cloud[h_sorted_idx[i]])
+            filtered_points.append(np.mean(np.array(current_voxel), axis = 0))
+            current_voxel.clear()
+    # 屏蔽结束
+
+    # 把点云格式改成array，并对外返回
+    filtered_points = np.array(filtered_points, dtype=np.float64)
+    print("Number of filtered points", len(filtered_points))
+    return filtered_points
+
+<br>
+<br>
+ <center>
+    <img src="./figures/figure6.png" width="500"/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.6 Voxel Grid下采样</div>
+</center>
+<br>
+
+  * leaf_size = 0.001, 下采样的结果如下图，因为分辨率很高，所以很好的还原了原来点云的样子，其中下采样结果的点的个数为4420，总点数为11634
+   <center>
+    <img src="./figures/figure7.png" width="500"/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.7 Voxel Grid下采样 leaf_size = 0.001</div>
+</center>
+<br>
+* leaf_size = 0.1, 下采样的结果如下图，也很好的还原了原来点云的样子，其中下采样结果的点的个数为4414，总点数为11634，与leaf_size = 0.01的结果类似，可能的原因是原点云本身存在一些点距离非常近，无法轻易分开。
+<center>
+    <img src="./figures/figure8.png" width="500"/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.8 Voxel Grid下采样 leaf_size = 0.1</div>
+</center>
