@@ -3,6 +3,7 @@
 import open3d as o3d 
 import os
 import numpy as np
+import math
 from pyntcloud import PyntCloud
 
 # 功能：对点云进行voxel滤波
@@ -10,15 +11,45 @@ from pyntcloud import PyntCloud
 #     point_cloud：输入点云
 #     leaf_size: voxel尺寸
 def voxel_filter(point_cloud, leaf_size):
+
     filtered_points = []
     # 作业3
     # 屏蔽开始
+    point_cloud = np.asarray(point_cloud)
+    print("total points : ", len(point_cloud))
+    x_max, y_max, z_max = np.max(point_cloud,axis = 0)
+    x_min, y_min, z_min = np.min(point_cloud,axis = 0)
 
- 
+    Dx = (x_max - x_min) // leaf_size
+    Dy = (y_max - y_min) // leaf_size
+    Dz = (z_max - z_min) // leaf_size
+
+    h = list() 
+    for i in range (point_cloud.shape[0]):
+        x, y, z = point_cloud[i]
+        hx = np.floor((x - x_min) / leaf_size)
+        hy = np.floor((y - y_min) / leaf_size)
+        hz = np.floor((z - z_min) / leaf_size)
+        h.append([hx + hy * Dx + hz * Dx * Dy, i])#storing pair
+    h = sorted(h,key=lambda x:x[0])
+    ##putting points with same h in cur and pick centroid
+    filtered_points = list()
+    cur_voxel = list()
+    for i in range (point_cloud.shape[0] - 1):
+        if (h[i][0] == h[i+1][0]):
+            #put point
+            cur_voxel.append(point_cloud[h[i][1]])
+        else:
+            #pick centroid
+            cur_voxel.append(point_cloud[h[i][1]])
+            [x_c, y_c, z_c]= np.mean(np.asarray(cur_voxel),axis = 0)
+            filtered_points.append([x_c,y_c,z_c])
+            cur_voxel.clear()
     # 屏蔽结束
 
     # 把点云格式改成array，并对外返回
     filtered_points = np.array(filtered_points, dtype=np.float64)
+    print(len(filtered_points))
     return filtered_points
 
 def main():

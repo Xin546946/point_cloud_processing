@@ -19,19 +19,19 @@ def PCA(data, correlation=False, sort=True):
     # 屏蔽开始
     if correlation:
         corr_data = np.corrcoef(data.T)
-        print(corr_data)
+        ##print(corr_data)
         eigenvectors, eigenvalues, _ = np.linalg.svd(corr_data)        
-        print("using correlation")
+        ##print("using correlation")
         
     else:
         cov_data = np.cov(data.T)
         eigenvectors, eigenvalues, _ = np.linalg.svd(cov_data)
-        print("using cov")
+        ##print("using cov")
         
 
     eigenvalues = np.sqrt(eigenvalues)
-    print("eigenvalues", eigenvalues)
-    print(eigenvectors)
+    ##print("eigenvalues", eigenvalues)
+    ##print(eigenvectors)
     # 屏蔽结束
 
     if sort:
@@ -77,10 +77,10 @@ def main():
     #o3d.visualization.draw_geometries([point_cloud_o3d, line_set])
     
     #
-    dim_reduction = v[:,:2]
+    '''dim_reduction = v[:,:2]
     pcl_2d = np.dot(np.array(points), dim_reduction)
     plt.scatter(pcl_2d[:,0], pcl_2d[:,1])
-    plt.show()
+    plt.show()'''
 
 
     # 循环计算每个点的法向量
@@ -88,9 +88,13 @@ def main():
     normals = []
     # 作业2
     # 屏蔽开始
+    for i in range(points.shape[0]):
+        [_, idx, _] = pcd_tree.search_knn_vector_3d(point_cloud_o3d.points[i], 20)
+        knn_points = np.asarray(point_cloud_o3d.points)[idx, :]
+        _, v_knn_points = PCA(knn_points)
+        normals.append(v_knn_points[:,-1])
 
     # 由于最近邻搜索是第二章的内容，所以此处允许直接调用open3d中的函数
-
     # 屏蔽结束
     normals = np.array(normals, dtype=np.float64)
     # TODO: 此处把法向量存放在了normals中
