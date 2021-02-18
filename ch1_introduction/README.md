@@ -187,3 +187,21 @@
     color: #999;
     padding: 2px;">Fig.8 Voxel Grid下采样 leaf_size = 0.1</div>
 </center>
+
+<br>
+<br>
+
+* 如何理解hash table的冲突问题，举个例子:
+    <br>
+根据ppt公式，假如一组点的参数如下所示：
+  <br>
+$$x_{max} = 5.0, y_{max} = 5.0, z_{max} = 4.0$$
+$$x_{min} = 0.0, y_{min} = 0.0, z_{min} = 0.0$$
+所以：
+<br>
+$$D_x = 5, D_y = 5, D_z = 4$$ 
+$$container\_size = 5 * 5 * 4 = 100$$
+对于点 [0.9,0.8.0,7], [1.1,4.3,3.9] 和 [0.1,0.1,4.9], 
+<br>均有
+$$h\%100 = 0$$
+所以天南海北的点汇集到同一个0th container，出现hash table的冲突。
