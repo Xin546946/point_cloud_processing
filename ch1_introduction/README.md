@@ -81,71 +81,103 @@
 
 3. **Voxel Downsampling**
     ~~~python
-    def voxel_filter(point_cloud, leaf_size):
+    def hash_conflict(a,b):
+        if(a[1] != b[1] or a[2] != b[2] or a[3] != b[3]):
+            return True
+        return False
 
-    filtered_points = []
-    # 作业3
-    # 屏蔽开始
-    point_cloud = np.asarray(point_cloud)
-    print("total points : ", len(point_cloud))
-    x_max, y_max, z_max = np.max(point_cloud,axis = 0)
-    x_min, y_min, z_min = np.min(point_cloud,axis = 0)
 
-    Dx = (x_max - x_min) // leaf_size
-    Dy = (y_max - y_min) // leaf_size
-    Dz = (z_max - z_min) // leaf_size
+    def voxel_filter(point_cloud, leaf_size, random_sampling = False):
 
-    h = list() 
-    for i in range (point_cloud.shape[0]):
-        x, y, z = point_cloud[i]
-        hx = np.floor((x - x_min) / leaf_size)
-        hy = np.floor((y - y_min) / leaf_size)
-        hz = np.floor((z - z_min) / leaf_size)
-        h.append([hx + hy * Dx + hz * Dx * Dy, i])#storing pair
-    h = sorted(h,key=lambda x:x[0])
-    ##putting points with same h in cur and pick centroid
-    filtered_points = list()
-    cur_voxel = list()
-    for i in range (point_cloud.shape[0] - 1):
-        if (h[i][0] == h[i+1][0]):
-            #put point
-            cur_voxel.append(point_cloud[h[i][1]])
-        else:
-            #pick centroid
-            cur_voxel.append(point_cloud[h[i][1]])
-            [x_c, y_c, z_c]= np.mean(np.asarray(cur_voxel),axis = 0)
-            filtered_points.append([x_c,y_c,z_c])
-            cur_voxel.clear()
-    # 屏蔽结束
+        filtered_points = []
+        # 作业3
+        # 屏蔽开始
+        point_cloud = np.asarray(point_cloud)
+        print("total points : ", len(point_cloud))
+        x_max, y_max, z_max = np.max(point_cloud,axis = 0)
+        x_min, y_min, z_min = np.min(point_cloud,axis = 0)
 
-    # 把点云格式改成array，并对外返回
-    filtered_points = np.array(filtered_points, dtype=np.float64)
-    print("filtered_points ",len(filtered_points))
-    return filtered_points
+        Dx = (x_max - x_min) // leaf_size
+        Dy = (y_max - y_min) // leaf_size
+        Dz = (z_max - z_min) // leaf_size
+        container_size = Dx * Dy * Dz 
 
-* setting leaf_size to 100.0 results in 64 points, roughly represents the object
+        h = list() 
+        for i in range (point_cloud.shape[0]):
+            x, y, z = point_cloud[i]
+            hx = np.floor((x - x_min) / leaf_size)
+            hy = np.floor((y - y_min) / leaf_size)
+            hz = np.floor((z - z_min) / leaf_size)
+            h.append([(hx + hy * Dx + hz * Dx * Dy) % container_size, hx, hy, hz, i])#storing pair
+        h = np.asarray(h)
+        h_index = np.lexsort((h[:,0], h[:,1], h[:,2], h[:,3]))
+        H = list()
+        for i in range(len(h_index)):
+            H.append(h[h_index[i]])
+        #now H stores all points, they are all sorted according to different dimensions(h,hx,hy,hz)
+    
+        filtered_points = list()
+        cur_voxel = list()
+        cur_voxel.append(point_cloud[int(H[0][4])])#first point can't be conflicted by definition. also avoiding empty cur_voxel
+
+        for i in range(1 , len(h)):
+            if (H[i][0] == H[i-1][0] and not hash_conflict(H[i],H[i-1])):
+                #put point if it is not conflicted and have same voxel index.
+                cur_voxel.append(point_cloud[int(H[i][4])])
+            else:
+                #otherwise pick sample point from currect voxel then clear it and add this point into it 
+                if(random_sampling == False):
+                    [x_c, y_c, z_c] = np.mean(np.asarray(cur_voxel),axis = 0)
+                else:
+                    index = np.random.choice(np.asarray(cur_voxel).shape[0], 1)
+                    [x_c, y_c, z_c] = cur_voxel[index[0]]
+                filtered_points.append([x_c,y_c,z_c])
+                cur_voxel.clear()
+                cur_voxel.append(point_cloud[int(H[i][4])])
+        # 屏蔽结束
+
+
+
+        # 把点云格式改成array，并对外返回
+        filtered_points = np.array(filtered_points, dtype=np.float64)
+        print("sample points : ",len(filtered_points))
+        return filtered_points
+
+
+
+* setting leaf_size to 100.0 results in 66 points, roughly represents the object
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="./figures/64.png">
+    src="./figures/66.png">
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig4. Point cloud after voxel down sampling, 64 points in total</div>
+    padding: 2px;">Fig4. Point cloud after voxel down sampling, picking by centroid, 66 points in total</div>
+</center>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="./figures/66_random.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig5. Point cloud after voxel down sampling, picking by random, 66 points in total</div>
 </center>
 <br>
 
-* setting leaf_size to 10.0 results in 1920 points, almost reconstructs whole point cloud
+* setting leaf_size to 10.0 results in 1922 points, almost reconstructs whole point cloud
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="./figures/1920.png">
+    src="./figures/1922.png">
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig5. Point cloud after voxel down sampling, 1920 points in total</div>
+    padding: 2px;">Fig6. Point cloud after voxel down sampling, 1922 points in total</div>
 </center>
 <br>
 
@@ -160,8 +192,12 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig6. Point cloud after voxel down sampling, 4414 points in total</div>
+    padding: 2px;">Fig7. Point cloud after voxel down sampling, 4414 points in total</div>
 </center>
 
 <br>
+
+* How to  solve hash conflict:
+    Sort points not only according to voxel index, but also according to hx,hy,hz. This way among the points whose voxel index are the same, hash conflicted points are segmented, thus every segment can be treated as points with a new voxel index(which is the same as the one of those not conflicted points but since they are already cleared so it's "new").
+<br>  
 authored by : Guanzhi Feng
