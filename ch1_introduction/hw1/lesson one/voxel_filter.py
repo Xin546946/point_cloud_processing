@@ -44,34 +44,27 @@ def voxel_filter(point_cloud, leaf_size, random_downsampling = False):
         hz = np.floor((z - z_min) / leaf_size)
         hash_table = int(hx + hy * Dx + hz * Dx * Dy) % container_size
         h.append(np.asarray([hx, hy, hz, hash_table]))
-        # h.append(hash_table)
-    # h_sorted = np.asarray(sorted(h, key = cmp_to_key(lambda lhs, rhs : lhs[3] - rhs[3]))) # 点在第几个voxel
+    # h_sorted = np.asarray(sorted(h, key = cmp_to_key(lambda lhs, rhs : lhs[3] - rhs[3]))) # not solve hash conflict
     
     h = np.asarray(h)
-    # current_h_sorted_idx = np.lexsort((current_h[:,0], current_h[:,1]))
-    h_sorted_idx =np.lexsort((h[:,-1], h[:,0], h[:,1])) # 按照h的最后一列排序,再按照第一列排序，再按照第二列排序
-    h_sorted = h[h_sorted_idx]
-    # h_sorted_idx = np.argsort(h)
+    h_sorted_idx =np.lexsort((h[:,-1], h[:,0], h[:,1])) # sort h according to h, hx, and hy
+    h_sorted = h[h_sorted_idx] # sort h according to new idx
+    
     current_voxel = list()
     current_h = list()
-
-    for i in range(point_cloud.shape[0] -1):
-        if h_sorted[i, -1] == h_sorted[i + 1, -1] and not hash_table_conflict(h_sorted[i,0:3], h_sorted[i+1, 0:3]):
-            current_voxel.append(point_cloud[h_sorted_idx[i]])
-            # current_h.append(h_sorted[i, 0:3])
+    current_voxel.append(point_cloud[0])
+    for i in range(1, point_cloud.shape[0]):
+        # if no hash conflict
+        if h_sorted[i -1, -1] == h_sorted[i, -1] and not hash_table_conflict(h_sorted[i -1,0:3], h_sorted[i, 0:3]):
+            current_voxel.append(point_cloud[h_sorted_idx[i]]) # put points in the current_voxel
         else:
-            current_voxel.append(point_cloud[h_sorted_idx[i]])
-            # current_h.append(h_sorted[i, 0:3])
-            
             if(random_downsampling == False):
                 filtered_points.append(np.mean(np.array(current_voxel), axis = 0))
             else:
-                # random_idx = np.random.choice(range(len(current_voxel)), 1)
                 random_idx = np.random.randint(len(current_voxel), size = 1)
                 filtered_points.append(current_voxel[int(random_idx)])
-            current_voxel.clear()
-            # current_h.clear()
-
+            current_voxel.clear() # clear current_voxel for next filtered_point
+            current_voxel.append(point_cloud[i])
     # 屏蔽结束
 
     # 把点云格式改成array，并对外返回
@@ -97,7 +90,7 @@ def main():
 
     # 调用voxel滤波函数，实现滤波
 
-    filtered_cloud = voxel_filter(point_cloud_pynt.points, 100.0, True)
+    filtered_cloud = voxel_filter(point_cloud_pynt.points,100.0, True)
     point_cloud_o3d.points = o3d.utility.Vector3dVector(filtered_cloud)
     # 显示滤波后的点云
     o3d.visualization.draw_geometries([point_cloud_o3d],"Voxel grid downsampling")
