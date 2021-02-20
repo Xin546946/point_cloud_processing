@@ -1,27 +1,36 @@
 #include "bilateral_filter.h"
 #include <iostream>
 
-cv::Mat pca(cv::Mat img, int dim) {
-  cv::resize(img, img, cv::Size(80, 80));
-  cv::imshow("img", img);
-  cv::waitKey(0);
+cv::Mat apply_bilateral_filter(cv::Mat img, int win_width, int win_height,
+                               double sigma_position, double sigma_pixel) {
+  assert(win_width % 2 == 1 && win_height % 2 == 1);
+  if (img.type() != CV_64FC1) {
+    img.convertTo(img, CV_64FC1);
+  }
 
-  assert(img.channels() == 1);
-  img.convertTo(img, CV_64FC1);
+  cv::Mat result(cv::Mat::zeros(img.size(), img.type()));
 
-  double img_aver = cv::sum(img)[0] / (img.rows * img.cols);
-  cv::Mat zero_mean_img = img - img_aver;
-  cv::Mat img_covar, img_mean;
-  cv::calcCovarMatrix(zero_mean_img, img_covar, img_mean, CV_COVAR_ROWS);
-  cv::Mat e_values, e_vectors;
-  cv::eigen(img_covar, e_values, e_vectors);
+  int win_half_width = (win_width - 1) / 2;
+  int win_half_height = (win_height - 1) / 2;
 
-  cv::Mat e_vectors_main_components = e_vectors.colRange(cv::Range(0, dim));
-
-  cv::Mat result;
-  result = zero_mean_img * e_vectors_main_components *
-               e_vectors_main_components.t() +
-           img_aver;
-
+  for (int r = 0; r < img.rows; r++) {
+    for (int c = 0; c < img.cols; c++) {
+      for (int r_win = r - win_half_height; r_win < r + win_half_height;
+           r_win++) {
+        for (int c_win = c - win_half_width; c_win < c + win_half_width;
+             c_win++) {
+          r_win = std::min(std::max(0, r_win), img.rows - 1);
+          c_win = std::min(std::max(0, c_win), img.cols - 1);
+          double square_dist = std::pow(r_win - r, 2) + std::pow(c_win - c, 2);
+          result.at<double>(r, c) +=
+              compute_gaussian_pdf(img.at<double>(r, c), sigma_pixel,
+                                   img.at<double>(r_win, c_win)) *
+              compute_gaussian_pdf(0, sigma_position, square_dist) *
+              img.at<double>(r_win, c_win);
+        }
+      }
+    }
+  }
+  cv::normalize(result, result, 0, 1, cv::NORM_MINMAX);
   return result;
 }

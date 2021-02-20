@@ -3,5 +3,6 @@
 
 test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o
  ../src/bilateral_filter.h
+ ../utils/display.h
  ../utils/opencv_utils.h
  /home/kit/point_cloud_processing/ch1_introduction/upsampling/test/test_bilateral_filter.cpp
