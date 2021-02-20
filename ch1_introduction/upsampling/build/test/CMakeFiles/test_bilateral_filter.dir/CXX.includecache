@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/bilateral_filter.h
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+
+../utils/opencv_utils.h
+iostream
+-
+opencv2/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+
+/home/kit/point_cloud_processing/ch1_introduction/upsampling/test/test_bilateral_filter.cpp
+bilateral_filter.h
+/home/kit/point_cloud_processing/ch1_introduction/upsampling/test/bilateral_filter.h
+opencv_utils.h
+/home/kit/point_cloud_processing/ch1_introduction/upsampling/test/opencv_utils.h
+iostream
+-
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+
