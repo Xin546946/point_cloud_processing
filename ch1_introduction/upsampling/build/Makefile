@@ -137,6 +137,19 @@ test_bilateral_filter/fast:
 .PHONY : test_bilateral_filter/fast
 
 #=============================================================================
+# Target rules for targets named test_upsampling
+
+# Build rule for target.
+test_upsampling: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_upsampling
+.PHONY : test_upsampling
+
+# fast build rule for target.
+test_upsampling/fast:
+	$(MAKE) -f test/CMakeFiles/test_upsampling.dir/build.make test/CMakeFiles/test_upsampling.dir/build
+.PHONY : test_upsampling/fast
+
+#=============================================================================
 # Target rules for targets named utils
 
 # Build rule for target.
@@ -159,6 +172,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... bilateral_filter"
 	@echo "... test_bilateral_filter"
+	@echo "... test_upsampling"
 	@echo "... utils"
 .PHONY : help
 

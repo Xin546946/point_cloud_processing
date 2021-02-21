@@ -10,3 +10,7 @@ inline double compute_gaussian_pdf(double mean, double var, double sample) {
 
 cv::Mat apply_bilateral_filter(cv::Mat img, int size, double sigma_position,
                                double sigma_pixel);
+
+cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img, int size,
+                                              double sigma_position,
+                                              double sigma_pixel);

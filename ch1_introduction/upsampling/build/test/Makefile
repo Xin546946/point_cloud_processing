@@ -125,6 +125,21 @@ test_bilateral_filter/fast:
 	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_bilateral_filter.dir/build.make test/CMakeFiles/test_bilateral_filter.dir/build
 .PHONY : test_bilateral_filter/fast
 
+# Convenience name for target.
+test/CMakeFiles/test_upsampling.dir/rule:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_upsampling.dir/rule
+.PHONY : test/CMakeFiles/test_upsampling.dir/rule
+
+# Convenience name for target.
+test_upsampling: test/CMakeFiles/test_upsampling.dir/rule
+
+.PHONY : test_upsampling
+
+# fast build rule for target.
+test_upsampling/fast:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsampling.dir/build.make test/CMakeFiles/test_upsampling.dir/build
+.PHONY : test_upsampling/fast
+
 test_bilateral_filter.o: test_bilateral_filter.cpp.o
 
 .PHONY : test_bilateral_filter.o
@@ -152,6 +167,33 @@ test_bilateral_filter.cpp.s:
 	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_bilateral_filter.dir/build.make test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.s
 .PHONY : test_bilateral_filter.cpp.s
 
+test_upsampling.o: test_upsampling.cpp.o
+
+.PHONY : test_upsampling.o
+
+# target to build an object file
+test_upsampling.cpp.o:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsampling.dir/build.make test/CMakeFiles/test_upsampling.dir/test_upsampling.cpp.o
+.PHONY : test_upsampling.cpp.o
+
+test_upsampling.i: test_upsampling.cpp.i
+
+.PHONY : test_upsampling.i
+
+# target to preprocess a source file
+test_upsampling.cpp.i:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsampling.dir/build.make test/CMakeFiles/test_upsampling.dir/test_upsampling.cpp.i
+.PHONY : test_upsampling.cpp.i
+
+test_upsampling.s: test_upsampling.cpp.s
+
+.PHONY : test_upsampling.s
+
+# target to generate assembly for a file
+test_upsampling.cpp.s:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsampling.dir/build.make test/CMakeFiles/test_upsampling.dir/test_upsampling.cpp.s
+.PHONY : test_upsampling.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -161,9 +203,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test_bilateral_filter"
 	@echo "... edit_cache"
+	@echo "... test_upsampling"
 	@echo "... test_bilateral_filter.o"
 	@echo "... test_bilateral_filter.i"
 	@echo "... test_bilateral_filter.s"
+	@echo "... test_upsampling.o"
+	@echo "... test_upsampling.i"
+	@echo "... test_upsampling.s"
 .PHONY : help
 
 
