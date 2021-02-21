@@ -13,16 +13,17 @@
         else:
             cov_data = np.cov(data.T)
             eigenvectors, eigenvalues, _ = np.linalg.svd(cov_data)
+   ~~~
 
 
         eigenvalues = np.sqrt(eigenvalues)
         # 屏蔽结束
-
+    
         if sort:
             sort = eigenvalues.argsort()[::-1]
             eigenvalues = eigenvalues[sort]
             eigenvectors = eigenvectors[:, sort]
-
+    
         return eigenvalues, eigenvectors
 
 
@@ -62,6 +63,7 @@
   plt.show()
 <br>
 <br>
+  ~~~
  <center class="half">
     <img src="./figures/figure3.png" width="350"/><img src="./figures/figure4.png" width="350"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
@@ -95,6 +97,7 @@
     point_cloud_o3d.normals = o3d.utility.Vector3dVector(normals)
     window_name = 'normal vector of pcl'
     o3d.visualization.draw_geometries([point_cloud_o3d],"Open3D normal estimation")
+   ~~~
 
 <br>
 <br>
@@ -155,6 +158,7 @@
     filtered_points = np.array(filtered_points, dtype=np.float64)
     print("Number of filtered points", len(filtered_points))
     return filtered_points
+   ~~~
 
 <br>
 <br>
@@ -164,7 +168,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Fig.6 Voxel Grid下采样</div>
+    padding: 2px;">Fig.6 Voxel Grid下采样， leaf_size = 30.0, filtered_pts = 212</div>
 </center>
 <br>
 
@@ -186,4 +190,86 @@
     display: inline-block;
     color: #999;
     padding: 2px;">Fig.8 Voxel Grid下采样 leaf_size = 0.1</div>
+</center>
+
+<br>
+<br>
+
+* 如何理解**hash table的冲突问题**，举个例子:
+    <br>
+根据ppt公式，假如一组点的参数如下所示：
+  <br>
+$$x_{max} = 5.0, y_{max} = 5.0, z_{max} = 4.0$$
+$$x_{min} = 0.0, y_{min} = 0.0, z_{min} = 0.0$$
+所以：
+<br>
+$$leaf_{size} = 1$$
+$$D_x = 5, D_y = 5, D_z = 4$$ 
+$$container\_size = 5 * 5 * 4 = 100$$
+对于点 [0.9,0.8.0,7], [5.0,4.3,3.9] 和 [0.1,0.1,4.0], 
+<br>均有
+$$h\%100 = 0$$
+所以天南海北的点汇集到同一个0th container，出现hash table的冲突。
+
+* 如何解决冲突的思路： 其实和之前的思路非常类似，若不解决哈希冲突，只是按照h的大小进行一次排序，并判断是否相邻点具有相同的h，若想解决哈希冲突，需要按照$h_x$,$h_y$再进行排序，判断时候加上哈希冲突的条件，就完成了解决哈希冲突的逻辑。
+  ~~~ python
+  def voxel_filter(point_cloud, leaf_size, random_downsampling = False):
+    point_cloud = np.asarray(point_cloud)
+    print("Number of point clouds is", len(point_cloud))
+    filtered_points = []
+    # 作业3
+    # 屏蔽开始
+    # compute the min or max of the point set {p1,p2,p3,...}
+    x_max, y_max, z_max = np.max(point_cloud,axis = 0)
+    x_min, y_min, z_min = np.min(point_cloud,axis = 0)
+
+    # compute the dim of the voxel grid    
+    Dx = (x_max - x_min) // leaf_size
+    Dy = (y_max - y_min) // leaf_size
+    Dz = (z_max - z_min) // leaf_size
+    container_size = Dx * Dy * Dz
+    # compute voxel idx for each point
+    h = list()
+    
+    for i in range(len(point_cloud)):
+        x,y,z = point_cloud[i]
+        hx = np.floor((x - x_min) / leaf_size)
+        hy = np.floor((y - y_min) / leaf_size)
+        hz = np.floor((z - z_min) / leaf_size)
+        hash_table = int(hx + hy * Dx + hz * Dx * Dy) % container_size
+        h.append(np.asarray([hx, hy, hz, hash_table]))
+        # h.append(hash_table)
+    # h_sorted = np.asarray(sorted(h, key = cmp_to_key(lambda lhs, rhs : lhs[3] - rhs[3]))) # 点在第几个voxel
+    
+    h = np.asarray(h)
+    # current_h_sorted_idx = np.lexsort((current_h[:,0], current_h[:,1]))
+    h_sorted_idx =np.lexsort((h[:,-1], h[:,0], h[:,1])) # 按照h的最后一列排序,再按照第一列排序，再按照第二列排序
+    h_sorted = h[h_sorted_idx]
+    # h_sorted_idx = np.argsort(h)
+    current_voxel = list()
+    current_h = list()
+
+    for i in range(point_cloud.shape[0] -1):
+        if h_sorted[i, -1] == h_sorted[i + 1, -1] and not hash_table_conflict(h_sorted[i,0:3], h_sorted[i+1, 0:3]):
+            current_voxel.append(point_cloud[h_sorted_idx[i]])
+        else:
+            current_voxel.append(point_cloud[h_sorted_idx[i]])
+            if(random_downsampling == False):
+                filtered_points.append(np.mean(np.array(current_voxel), axis = 0))
+            else:
+
+                random_idx = np.random.randint(len(current_voxel), size = 1)
+                filtered_points.append(current_voxel[int(random_idx)])
+            current_voxel.clear()
+    # 屏蔽结束
+
+<br>
+* 下面对比一下是否解决哈希冲突的差异，在leaf_size = 30.0的情况下，解决哈希冲突降采样的点为525，未解决哈希冲突降采样的点为212，可见，是否解决哈希冲突对结果影响还是很显著的。
+ <center class="half">
+    <img src="./figures/figure6.png" width="370"/><img src="./figures/figure8.png" width="350"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.8 当leaf_size = 30.0时 
+    <br> 左图：未解决哈希冲突，filtered_pts = 212, 右图：解决哈希冲突， filtered_pts = 525</div>
 </center>
