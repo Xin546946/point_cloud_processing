@@ -89,7 +89,7 @@ def main():
     # o3d.visualization.draw_geometries([point_cloud_o3d]) # 显示原始点云
 
     # 调用voxel滤波函数，实现滤波
-    filtered_cloud = voxel_filter(point_cloud_pynt.points, 100, False)
+    filtered_cloud = voxel_filter(point_cloud_pynt.points, 100.0, False)
     point_cloud_o3d.points = o3d.utility.Vector3dVector(filtered_cloud)
     # 显示滤波后的点云
     o3d.visualization.draw_geometries([point_cloud_o3d])

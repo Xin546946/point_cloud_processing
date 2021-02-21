@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpca.a  CMakeFiles/pca.dir/pca.cpp.o
-/usr/bin/ranlib libpca.a

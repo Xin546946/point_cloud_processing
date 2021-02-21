@@ -145,7 +145,7 @@
 
 
 
-* setting leaf_size to 100.0 results in 66 points, roughly represents the object
+* setting leaf_size to 100.0 results in 66 points(60 points if hash conflict not solved), roughly represents the object
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
