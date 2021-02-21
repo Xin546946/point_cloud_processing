@@ -4,5 +4,6 @@
 test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o: ../src/bilateral_filter.h
 test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o: ../utils/display.h
 test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o: ../utils/opencv_utils.h
+test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o: ../utils/tictoc.h
 test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.o: ../test/test_bilateral_filter.cpp
 
