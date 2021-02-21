@@ -104,9 +104,9 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
   }
   for (int r = 0; r < img.rows; r++) {
     for (int c = 0; c < img.cols; c++) {
-      // if (img.at<uchar>(r, c) == 0) {
-      //   continue;
-      // }
+      if (img.at<uchar>(r, c) == 0) {
+        continue;
+      }
       double weight = 0.0;
 
       for (int r_win = -win_half_size; r_win < win_half_size + 1; r_win++) {
