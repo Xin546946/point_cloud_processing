@@ -19,22 +19,24 @@ cv::Mat apply_bilateral_filter(cv::Mat img, int size, double sigma_position,
       double weight = 0.0;
       double local_weight = 0.0;
       for (int r_win = -win_half_size; r_win < win_half_size + 1; r_win++) {
-        // r_win = std::min(std::max(0, r_win), img.rows - 1);
 
         for (int c_win = -win_half_size; c_win < win_half_size + 1; c_win++) {
-          // c_win = std::min(std::max(0, c_win), img.cols - 1);
+          if (r + r_win < 0 && c + c_win < 0 && r + r_win > img.rows - 1 &&
+              c + c_win > img.cols - 1) {
+            continue;
+          }
+
           double square_dist = std::pow(r_win, 2) + std::pow(c_win, 2);
-          // r_win = std::min(std::max(0, r + r_win), img.rows - 1);
-          // c_win = std::min(std::max(0, c + c_win), img.cols - 1);
-          // if (r + r_win < 0 || c + c_win < 0) {
-          //   continue;
-          // }
+
+          int r_local = std::min(std::max(0, r + r_win), img.rows - 1);
+          int c_local = std::min(std::max(0, c + c_win), img.cols - 1);
+
           local_weight = compute_gaussian_pdf(0, sigma_pixel,
-                                              img.at<double>(r_win, c_win) -
+                                              img.at<double>(r_local, c_local) -
                                                   img.at<double>(r, c)) *
                          compute_gaussian_pdf(0, sigma_position, square_dist);
           result.at<double>(r, c) +=
-              (local_weight * img.at<double>(r_win, c_win));
+              (local_weight * img.at<double>(r_local, c_local));
           weight += local_weight;
         }
         // std::cout << '\n';

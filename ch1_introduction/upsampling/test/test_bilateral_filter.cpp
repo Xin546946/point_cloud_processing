@@ -21,25 +21,24 @@ int main(int argc, char **argv) {
   cv::Mat img = read_img(argv[1], cv::IMREAD_GRAYSCALE);
   img.convertTo(img, CV_64FC1);
   // cv::resize(img, img, cv::Size(100, 30));
-  cv::Mat cartoon_img = apply_bilateral_filter(img, 5, 21.0, 21.0);
+  cv::Mat cartoon_img = apply_bilateral_filter(img, 11, 21.0, 21.0);
 
-  cv::Mat vis;
+  cv::Mat vis_tmp;
   cv::Mat vis_cartoon = get_float_mat_vis_img(cartoon_img);
   cv::Mat vis_img = get_float_mat_vis_img(img);
-  cv::vconcat(vis_img, vis_cartoon, vis);
-
-  cv::imshow("bilateral filter image", vis);
-  cv::waitKey(0);
+  cv::vconcat(vis_img, vis_cartoon, vis_tmp);
 
   cv::Mat opencv_bilateral_image;
 
   img.convertTo(img, CV_32FC1);
-  cv::bilateralFilter(img, opencv_bilateral_image, 5, 21.0, 21.0);
+  cv::bilateralFilter(img, opencv_bilateral_image, 11, 21.0, 21.0);
   cv::Mat vis_opencv = get_float_mat_vis_img(opencv_bilateral_image);
-  vis_opencv.convertTo(vis_opencv, CV_32FC1);
-  vis_img.convertTo(vis_img, CV_32FC1);
-  cv::vconcat(vis_img, vis_opencv, vis);
-  cv::imshow("bilateral filter image OPENCV", vis);
+  vis_opencv.convertTo(vis_opencv, CV_64FC1);
+  cv::Mat vis;
+  cv::vconcat(vis_tmp, vis_opencv, vis);
+  cv::imshow("top: original image; middle: applied bilateral filter; down: "
+             "opencv function",
+             vis);
   cv::waitKey(0);
   return 0;
 }
