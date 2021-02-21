@@ -12,6 +12,7 @@ cv::Mat apply_bilateral_filter(cv::Mat img, int size, double sigma_position,
   if (img.type() != CV_8UC1) {
     img.convertTo(img, CV_8UC1);
   }
+
   cv::Mat dist_map = get_gaussian_kernel(size, sigma_position);
   cv::Mat img_64f;
   img.convertTo(img_64f, CV_64FC1);
@@ -25,12 +26,9 @@ cv::Mat apply_bilateral_filter(cv::Mat img, int size, double sigma_position,
   double gaussian_pixel_lut[256];
   for (int pixel_val = 0; pixel_val < 256; pixel_val++) {
     double pixel_val_double = static_cast<double>(pixel_val);
-    // std::cout << pixel_val << '\n';
     gaussian_pixel_lut[pixel_val] =
         std::exp(pixel_val_double * pixel_val_double * pixel_coeff);
-    // std::cout << pixel_val << '\n';
   }
-  // std::cout << pixel_coeff << '\n';
   for (int r = 0; r < img.rows; r++) {
     for (int c = 0; c < img.cols; c++) {
 
@@ -43,11 +41,10 @@ cv::Mat apply_bilateral_filter(cv::Mat img, int size, double sigma_position,
               c + c_win > img.cols - 1) {
             continue;
           }
-
-          // double square_dist = std::pow(r_win, 2) + std::pow(c_win, 2);
-
-          int r_local = std::min(std::max(0, r + r_win), img.rows - 1);
-          int c_local = std::min(std::max(0, c + c_win), img.cols - 1);
+          int r_local = r + r_win;
+          int c_local = c + c_win;
+          // int r_local = std::min(std::max(0, r + r_win), img.rows - 1);
+          // int c_local = std::min(std::max(0, c + c_win), img.cols - 1);
 
           if (img.at<uchar>(r_local, c_local) >= img.at<uchar>(r, c)) {
             local_weight =

@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
   img.convertTo(img, CV_64FC1);
   // cv::resize(img, img, cv::Size(100, 30));
   tictoc::tic();
-  cv::Mat cartoon_img = apply_bilateral_filter(img, 11, 21.0, 21.0);
+  cv::Mat cartoon_img = apply_bilateral_filter(img, 21, 21.0, 21.0);
   std::cout << "Apply bilateral filter costs: " << tictoc::toc() / 1e6 << " s"
             << '\n';
   cv::Mat vis_tmp;
@@ -35,13 +35,14 @@ int main(int argc, char **argv) {
 
   img.convertTo(img, CV_32FC1);
   tictoc::tic();
-  cv::bilateralFilter(img, opencv_bilateral_image, 11, 21.0, 21.0);
+  cv::bilateralFilter(img, opencv_bilateral_image, 21, 21.0, 21.0);
   std::cout << "Bilateral Filter using opencv function costs: "
             << tictoc::toc() / 1e6 << " s" << '\n';
   cv::Mat vis_opencv = get_float_mat_vis_img(opencv_bilateral_image);
   vis_opencv.convertTo(vis_opencv, CV_64FC1);
   cv::Mat vis;
   cv::vconcat(vis_tmp, vis_opencv, vis);
+  // vis = apply_jetmap(vis);
   cv::imshow("top: original image; middle: applied bilateral filter; down: "
              "opencv function",
              vis);
