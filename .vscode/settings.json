@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/home/gfeng/anaconda3/envs/detectron2/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
