@@ -84,14 +84,35 @@ def postorder(root):
         postorder(root.right)
         print(root)
 
-def insert(root, index, value):
+
+def onenn_search_(node, query_data, min_dist, min_dist_node):
+    # print("Min distance is {}, Min distance node is {}".format(min_dist, min_dist_node))
+
+    if node is not None:
+        if query_data > node.value:
+            if min_dist > query_data - node.value:
+                min_dist = query_data - node.value
+                min_dist_node = node
+            min_dist_node = onenn_search_(node.right, query_data, min_dist, min_dist_node)
+        elif query_data < node.value:
+            if min_dist > node.value - query_data:
+                min_dist = node.value - query_data
+                min_dist_node = node
+            min_dist_node = onenn_search_(node.left, query_data, min_dist, min_dist_node)
+        else: 
+            return min_dist_node
+    
+    return min_dist_node
+
+# do one nn search 
+def onenn_search(root, query_data):
     if root is None:
-        root = BSTNode(index, value)
-    else:
-        if value < root.value:
-            root.left = insert(root.left, index, value)
-        elif value > root.value:
-            root.right = insert(root.right, index, value)
-        else:  # don't insert if key already exist in the tree
-            pass
-    return root
+        print("There is no binary search tree.")
+        return root
+
+    min_dist = float('inf')
+    min_dist_node = root
+    result = onenn_search_(root, query_data, min_dist, min_dist_node)
+    
+    return result
+

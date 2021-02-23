@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/home/kit/anaconda3/envs/cloud_lesson/bin/python",
+    "python.linting.flake8CategorySeverity.E": "Hint",
+    "python.linting.flake8CategorySeverity.F": "Hint",
+    "python.linting.flake8CategorySeverity.W": "Hint",
+    "scss.lint.fontFaceProperties": "ignore",
+    "css.lint.fontFaceProperties": "ignore"
+}
