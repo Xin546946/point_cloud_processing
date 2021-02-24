@@ -204,3 +204,23 @@ def knn_search_lecture(root: BSTNode, value,  result_set: KNNResultSet):
         elif abs(root.value - value) < result_set.worstDist():
             return knn_search_lecture(root.left, value, result_set)
         return False
+
+def radius_search_lecture(root: BSTNode, value,  result_set: KNNResultSet):
+    if root is None:
+        return False
+
+    result_set.add_point(abs(root.value - value), root.index)
+
+    if root.value >= value:
+        if radius_search_lecture(root.left, value, result_set):
+            return True
+        elif abs(root.value - value) < result_set.worstDist():
+            return radius_search_lecture(root.right, value, result_set)
+        return False
+    
+    else:
+        if radius_search_lecture(root.right, value, result_set):
+            return True
+        elif abs(root.value - value) < result_set.worstDist():
+            return radius_search_lecture(root.left, value, result_set)
+        return False
