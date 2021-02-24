@@ -55,7 +55,7 @@ def simple_test_data():
 
 print("------ Start to build a tree ------")
 start_time = datetime.datetime.now()
-test_data = np.random.permutation(1000)
+test_data = np.random.permutation(1000000)
 bst_root = construct_bst(test_data, 'recursive')
 end_time = datetime.datetime.now()
 print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
@@ -63,15 +63,15 @@ print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_
 
 
 start_time = datetime.datetime.now()
-result_set = knn_search(bst_root, 5, 500)
+result_set = radiusnn_search(bst_root, 5, 500)
 end_time = datetime.datetime.now()
 print("KNN SEARCH: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
 
 print(result_set)
 print("-----------------")
 start_time = datetime.datetime.now()
-result_set = KNNResultSet(5)
-knn_search_lecture(bst_root, 5, result_set)
+result_set = RadiusNNResultSet(5)
+radius_search_lecture(bst_root, 5, result_set)
 end_time = datetime.datetime.now()
 print("KNN SEARCH FROM LECTURE: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
 print(result_set)
