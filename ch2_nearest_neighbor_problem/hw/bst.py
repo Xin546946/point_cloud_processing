@@ -1,4 +1,5 @@
 import numpy as np
+import result_set as rs
 
 class Node:
     def __init__(self, val, index):
@@ -102,3 +103,45 @@ def one_nn_search(root, quary):
     min_dist = float('inf')
     min_node = o_search(root, min_dist, None, quary)
     return min_node
+
+def KNNsearch_step(cur, quary, res_set):
+
+    if cur is not None:
+        res_set.add_point(abs(quary - cur.val), cur.index)
+        if quary >= cur.val:
+            res_set = KNNsearch_step(cur.right, quary, res_set)
+            if quary - cur.val <= res_set.worstDist():
+                res_set = KNNsearch_step(cur.left, quary, res_set)
+        elif quary < cur.val:
+            res_set = KNNsearch_step(cur.left, quary, res_set)
+            if cur.val - quary <= res_set.worstDist():
+                res_set = KNNsearch_step(cur.right, quary, res_set)
+    return res_set
+
+def KNNsearch(root, quary, cap):
+    if root is None:
+        return root
+    res = rs.KNNResultSet(cap)
+    res = KNNsearch_step(root, quary, res)
+    return res
+
+def RadiusNNsearch_step(cur, quary, res_set):
+
+    if cur is not None:
+        res_set.add_point(abs(quary - cur.val), cur.index)
+        if quary >= cur.val:
+            res_set = KNNsearch_step(cur.right, quary, res_set)
+            if quary - cur.val <= res_set.worstDist():
+                res_set = KNNsearch_step(cur.left, quary, res_set)
+        elif quary < cur.val:
+            res_set = KNNsearch_step(cur.left, quary, res_set)
+            if cur.val - quary <= res_set.worstDist():
+                res_set = KNNsearch_step(cur.right, quary, res_set)
+    return res_set
+
+def RadiusNNsearch(root, quary, r):
+    if root is None:
+        return root
+    res = rs.RadiusNNResultSet(r)
+    res = RadiusNNsearch_step(root, quary, res)
+    return res
