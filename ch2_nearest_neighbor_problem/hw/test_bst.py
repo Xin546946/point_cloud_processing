@@ -8,7 +8,7 @@ from bst import onenn_search
 
 from brut_force import brute_force_onenn_search
 
-from bst import knn_search, radiusnn_search
+from bst import knn_search, radiusnn_search, knn_search_lecture
 from result_set import KNNResultSet, RadiusNNResultSet
 
 def test_onenn_vs_brute_force(data_size, test = None):
@@ -53,12 +53,28 @@ def test_onenn_vs_brute_force(data_size, test = None):
 def simple_test_data():
     return np.array([1, 4, 7, 6, 3, 13, 14, 10, 8])
 
+print("------ Start to build a tree ------")
+start_time = datetime.datetime.now()
+test_data = np.random.permutation(1000000)
+bst_root = construct_bst(test_data, 'recursive')
+end_time = datetime.datetime.now()
+print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
 
 
-test_data = simple_test_data()
-bst_root = construct_bst(test_data, 'iterative')
 
-result_set = radiusnn_search(bst_root, 3, 13)
+start_time = datetime.datetime.now()
+result_set = knn_search(bst_root, 5, 5)
+end_time = datetime.datetime.now()
+print("KNN SEARCH: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+
+print(result_set)
+print("-----------------")
+start_time = datetime.datetime.now()
+result_set = KNNResultSet(5)
+knn_search_lecture(bst_root, 5, result_set)
+end_time = datetime.datetime.now()
+print("KNN SEARCH FROM LECTURE: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+print(result_set)
 
 for i in result_set.dist_index_list:
     print(test_data[i.index])
