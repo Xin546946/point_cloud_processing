@@ -8,8 +8,8 @@ from bst import onenn_search
 
 from brut_force import brute_force_onenn_search
 
-from bst import knn_search
-# from result_set import KNNResultSet, RadiusNNResultSet
+from bst import knn_search, radiusnn_search
+from result_set import KNNResultSet, RadiusNNResultSet
 
 def test_onenn_vs_brute_force(data_size, test = None):
     # generate test data 
@@ -53,9 +53,12 @@ def test_onenn_vs_brute_force(data_size, test = None):
 def simple_test_data():
     return np.array([1, 4, 7, 6, 3, 13, 14, 10, 8])
 
+
+
 test_data = simple_test_data()
 bst_root = construct_bst(test_data, 'iterative')
-result_set = knn_search(bst_root,2,100)
+
+result_set = radiusnn_search(bst_root, 3, 13)
 
 for i in result_set.dist_index_list:
     print(test_data[i.index])

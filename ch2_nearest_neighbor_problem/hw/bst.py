@@ -141,8 +141,6 @@ def knn_search_(node, query_data, result_set):
     return result_set
 
 
-
-
 def knn_search(root, capacity, query_data):
     if root is None:
         print("There is no binary search tree.")
@@ -151,5 +149,36 @@ def knn_search(root, capacity, query_data):
     result_set = KNNResultSet(capacity = capacity)
 
     result_set = knn_search_(root, query_data, result_set)
+    print(result_set)
+    return result_set
+
+def radiusnn_search_(node, query_data, result_set):
+
+    if node is not None:
+        if query_data < node.value:
+            result_set = radiusnn_search_(node.left, query_data, result_set)
+            if abs(node.value - query_data) <= result_set.radius:
+                result_set = radiusnn_search_(node.right, query_data, result_set)
+                result_set.add_point(abs(node.value - query_data), node.index)
+        elif query_data > node.value:
+            result_set = radiusnn_search_(node.right, query_data, result_set)
+            if abs(node.value - query_data) <= result_set.radius:
+                result_set = radiusnn_search_(node.left, query_data, result_set)
+                result_set.add_point(abs(node.value - query_data), node.index)
+        else:
+            result_set.add_point(abs(node.value - query_data), node.index)
+            result_set = radiusnn_search_(node.left, query_data, result_set)
+            result_set = radiusnn_search_(node.right, query_data, result_set)
+    return result_set
+
+
+def radiusnn_search(root, min_radius_dist, query_data):
+    if root is None:
+        print("There is no binary search tree.")
+        return root
+    
+    result_set = RadiusNNResultSet(min_radius_dist)
+
+    result_set = radiusnn_search_(root, query_data, result_set)
     print(result_set)
     return result_set
