@@ -14,8 +14,8 @@ class DistIndex:
 
 class KNNResultSet:
     def __init__(self, capacity):
-        self.capacity = capacity
-        self.count = 0
+        self.capacity = capacity # k of knn
+        self.count = 0 
         self.worst_dist = 1e10
         self.dist_index_list = []
         for i in range(capacity):
@@ -55,7 +55,7 @@ class KNNResultSet:
     def __str__(self):
         output = ''
         for i, dist_index in enumerate(self.dist_index_list):
-            output += '%d - %.2f\n' % (dist_index.index, dist_index.distance)
+            output += 'index: %d - distance: %.2f\n' % (dist_index.index, dist_index.distance)
         output += 'In total %d comparison operations.' % self.comparison_counter
         return output
 

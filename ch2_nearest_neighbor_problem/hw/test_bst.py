@@ -7,51 +7,55 @@ from bst import preorder, inorder, postorder
 from bst import onenn_search
 
 from brut_force import brute_force_onenn_search
-# generate test data 
-data_size = 1000000
-# randomly permute a sequence, or return a permuted range
-print("-------Generate 1000000 datas--------")
-data = np.random.permutation(data_size).tolist()
-print("-------Generate 1000000 datas finished--------") 
-# data = np.array([1, 1, 1, 2, 3, 5, 3, 6, 4, 5, 6, 7, 8])
-# data = np.array([1, 4, 7, 6, 3, 13, 14, 10, 8])
-# print(data)
 
-# visualize datas
-# plt.figure(figsize = (15,15))
-# plt.xlim((-3,12))
-# plt.title('visualization of data set')
+from bst import knn_search
+# from result_set import KNNResultSet, RadiusNNResultSet
 
-# for i,d in enumerate(data):
-#     plt.scatter(i, d, c = 'red', s = 30, marker = 'x', alpha = 0.7)
+def test_onenn_vs_brute_force(data_size, test = None):
+    # generate test data 
+    
+    # randomly permute a sequence, or return a permuted range
+    print("-------Generate {} datas--------".format(data_size))
+    data = np.random.permutation(data_size).tolist()
+    print("-------Generate {} datas finished--------\n".format(data_size)) 
+    
+    if test == 'preorder':
+        preorder(bst_root)
+    elif test == 'inorder':
+        inorder(bst_root)
+    elif test == 'postorder':
+        postorder(bst_root)
+    else:
+        pass
 
-# plt.show()
+    bst_node = None
+    print("------ Start to build a tree ------")
+    start_time = datetime.datetime.now()
+    bst_root = construct_bst(data, 'recursive')
+    end_time = datetime.datetime.now()
+    print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+    query_data = np.random.choice(data_size)
 
-# apply BST
+    print("\n------Search via one nn search----------")
+    start_time = datetime.datetime.now()
+    onenn_node = onenn_search(bst_root, query_data)
+    end_time = datetime.datetime.now()
+    print("Search {} from {} datas costs: {} milliseconds".format(query_data, data_size, (end_time - start_time).microseconds / 1e3 ))
 
-bst_node = None
-print("------ Start to build a tree ------")
-start_time = datetime.datetime.now()
-bst_root = construct_bst(data, 'recursive')
-end_time = datetime.datetime.now()
-print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
-# preorder(bst_root)
-# print("---------")
-# inorder(bst_root)
-# print("---------")
-# postorder(bst_root)
+    print("\n------Search via brute force search--------")
+    start_time = datetime.datetime.now()
+    min_dist_data = brute_force_onenn_search(data, query_data)
+    end_time = datetime.datetime.now()
+    print("Search {} from {} datas costs: {} milliseconds".format(query_data, data_size, (end_time - start_time).microseconds / 1e3))
 
-query_data = np.random.choice(1000000)
 
-print("------Search via one nn search----------")
-start_time = datetime.datetime.now()
-onenn_node = onenn_search(bst_root, query_data)
-end_time = datetime.datetime.now()
-print("Search {} from 1000000 datas costs: {} milliseconds".format(query_data, (end_time - start_time).microseconds / 1e3 ))
+# test_onenn_vs_brute_force(100000, None)
+def simple_test_data():
+    return np.array([1, 4, 7, 6, 3, 13, 14, 10, 8])
 
-print("------Search via brute force search--------")
-start_time = datetime.datetime.now()
-min_dist_data = brute_force_onenn_search(data, query_data)
-end_time = datetime.datetime.now()
-print("Search {} from 1000000 datas costs: {} milliseconds".format(query_data, (end_time - start_time).microseconds / 1e3))
+test_data = simple_test_data()
+bst_root = construct_bst(test_data, 'iterative')
+result_set = knn_search(bst_root,2,100)
 
+for i in result_set.dist_index_list:
+    print(test_data[i.index])
