@@ -4,6 +4,8 @@ import random
 import math
 import numpy as np
 
+import datetime
+
 from result_set import KNNResultSet, RadiusNNResultSet
 
 # Node类，Node是tree的基本组成元素
@@ -39,13 +41,13 @@ class Node:
 # 输出：
 #     key_sorted：排序后的键
 #     value_sorted：排序后的值
-def sort_key_by_vale(key, value):
-    assert key.shape == value.shape
-    assert len(key.shape) == 1
-    sorted_idx = np.argsort(value)
-    key_sorted = key[sorted_idx]
+def sort_value_by_index(value, index):
+    assert value.shape == index.shape
+    assert len(value.shape) == 1
+    sorted_idx = np.argsort(index)
     value_sorted = value[sorted_idx]
-    return key_sorted, value_sorted
+    index_sorted = index[sorted_idx]
+    return value_sorted, index_sorted
 
 
 def axis_round_robin(axis, dim):
@@ -70,12 +72,36 @@ def kdtree_recursive_build(root, db, point_indices, axis, leaf_size):
     # determine whether to split into left and right
     if len(point_indices) > leaf_size:
         # --- get the split position ---
-        point_indices_sorted, _ = sort_key_by_vale(point_indices, db[point_indices, axis])  # M
+        point_indices_sorted, _ = sort_value_by_index(point_indices, db[point_indices, axis])  # M
         
         # 作业1
         # 屏蔽开始
+        middle_left_idx = math.ceil(point_indices_sorted.shape[0] / 2) - 1
+        middle_left_point_idx = point_indices_sorted[middle_left_idx]
+        middle_left_point_value = db[middle_left_point_idx, axis]
 
-        # 屏蔽结束
+        middle_right_idx = middle_left_idx + 1
+        middle_right_point_idx = point_indices_sorted[middle_right_idx]
+        middle_right_point_value = db[middle_right_point_idx, axis]
+
+        root.value = (middle_left_point_value + middle_right_point_value) * 0.5
+
+        root.left = kdtree_recursive_build(root.left,
+                                           db,
+                                           point_indices_sorted[0:middle_right_idx],
+                                           axis_round_robin(axis, dim=db.shape[1]),
+                                           leaf_size)
+
+        root.right = kdtree_recursive_build(root.right,
+                                            db,
+                                            point_indices_sorted[middle_right_idx:],
+                                            axis_round_robin(axis, dim=db.shape[1]),
+                                            leaf_size)
+        
+    return root
+        
+
+    # 屏蔽结束
     return root
 
 
@@ -90,7 +116,8 @@ def traverse_kdtree(root: Node, depth, max_depth):
         max_depth[0] = depth[0]
 
     if root.is_leaf():
-        print(root)
+        # print(root)
+        pass
     else:
         traverse_kdtree(root.left, depth, max_depth)
         traverse_kdtree(root.right, depth, max_depth)
@@ -139,6 +166,14 @@ def kdtree_knn_search(root: Node, db: np.ndarray, result_set: KNNResultSet, quer
     # 作业2
     # 提示：仍通过递归的方式实现搜索
     # 屏蔽开始
+    if query[root.axis] <= root.value:
+        kdtree_knn_search(root.left, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value) < result_set.worstDist():
+            kdtree_knn_search(root.right, db, result_set, query)
+    else:
+        kdtree_knn_search(root.right, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value) < result_set.worstDist():
+            kdtree_knn_search(root.left, db, result_set, query)
 
     # 屏蔽结束
 
@@ -167,7 +202,14 @@ def kdtree_radius_search(root: Node, db: np.ndarray, result_set: RadiusNNResultS
     # 作业3
     # 提示：通过递归的方式实现搜索
     # 屏蔽开始
-
+    if query[root.axis] <= root.value:
+        kdtree_radius_search(root.left, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value) < result_set.worstDist():
+            kdtree_radius_search(root.right, db, result_set, query)
+    else:
+        kdtree_radius_search(root.right, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value) < result_set.worstDist():
+            kdtree_radius_search(root.left, db, result_set, query)
     # 屏蔽结束
 
     return False
@@ -176,37 +218,50 @@ def kdtree_radius_search(root: Node, db: np.ndarray, result_set: RadiusNNResultS
 
 def main():
     # configuration
-    db_size = 64
+    db_size = 1000000
     dim = 3
-    leaf_size = 4
-    k = 1
+    leaf_size = 1
+    k = 8
 
     db_np = np.random.rand(db_size, dim)
-
+    print("-------Start construct kd tree-------")
+    start_time = datetime.datetime.now()
     root = kdtree_construction(db_np, leaf_size=leaf_size)
-
+    end_time = datetime.datetime.now()
+    print("Construct a kd-tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+    
     depth = [0]
     max_depth = [0]
     traverse_kdtree(root, depth, max_depth)
     print("tree max depth: %d" % max_depth[0])
 
-    # query = np.asarray([0, 0, 0])
-    # result_set = KNNResultSet(capacity=k)
-    # knn_search(root, db_np, result_set, query)
-    #
-    # print(result_set)
-    #
-    # diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
-    # nn_idx = np.argsort(diff)
-    # nn_dist = diff[nn_idx]
-    # print(nn_idx[0:k])
-    # print(nn_dist[0:k])
-    #
-    #
-    # print("Radius search:")
-    # query = np.asarray([0, 0, 0])
-    # result_set = RadiusNNResultSet(radius = 0.5)
-    # radius_search(root, db_np, result_set, query)
+    print("------KNN Search-------")
+    query = np.asarray([0, 0, 0])
+    start_time = datetime.datetime.now()
+    result_set = KNNResultSet(capacity=k)
+    kdtree_knn_search(root, db_np, result_set, query)
+    end_time = datetime.datetime.now()
+    print("KNN Search costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+    
+    print(result_set)
+    
+    print("------Brute force search------")
+    start_time = datetime.datetime.now()
+    diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
+    nn_idx = np.argsort(diff)
+    nn_dist = diff[nn_idx]
+    print(nn_idx[0:k])
+    print(nn_dist[0:k])
+    end_time = datetime.datetime.now()
+    print("Brute Force KNN Search costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
+    
+    print("------Radius search-------")
+    query = np.asarray([0, 0, 0])
+    start_time = datetime.datetime.now()
+    result_set = RadiusNNResultSet(radius = 0.5)
+    kdtree_radius_search(root, db_np, result_set, query)
+    end_time = datetime.datetime.now()
+    print("RNN Search costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")
     # print(result_set)
 
 

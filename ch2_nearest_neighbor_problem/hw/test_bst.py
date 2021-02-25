@@ -55,7 +55,7 @@ def simple_test_data():
 
 print("------ Start to build a tree ------")
 start_time = datetime.datetime.now()
-test_data = np.random.permutation(1000000)
+test_data = np.random.permutation(10000000)
 bst_root = construct_bst(test_data, 'recursive')
 end_time = datetime.datetime.now()
 print("Construct a tree costs: ", ((end_time - start_time).seconds * 1e6 + (end_time - start_time).microseconds) / 1e6, " seconds")

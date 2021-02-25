@@ -152,6 +152,7 @@ def knn_search(root, capacity, query_data):
     
     return result_set
 
+
 def radiusnn_search_(node, query_data, result_set):
 
     if node is not None:
@@ -183,6 +184,7 @@ def radiusnn_search(root, min_radius_dist, query_data):
     print(result_set)
     return result_set
 
+
 def knn_search_lecture(root: BSTNode, value,  result_set: KNNResultSet):
     if root is None:
         return False
@@ -204,6 +206,7 @@ def knn_search_lecture(root: BSTNode, value,  result_set: KNNResultSet):
         elif abs(root.value - value) < result_set.worstDist():
             return knn_search_lecture(root.left, value, result_set)
         return False
+
 
 def radius_search_lecture(root: BSTNode, value,  result_set: KNNResultSet):
     if root is None:

@@ -20,3 +20,6 @@ else: # query_data == current_node.value
      knn search in left_direction
      knn search in right_direction
     
+  
+**very useful kdtree c++ code**
+https://github.com/jlblancoc/nanoflann
