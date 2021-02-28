@@ -1,8 +1,11 @@
 import numpy as np
+import open3d as o3d
 
-alist = [21,23,35,17,31,57,31,15]
-n = len(alist)
-for i in range(n-1, 0, -1):
-    count = 0
-    for j in range(i):
-        print(j)
+pc_list = []
+path = '/home/kit/point_cloud_processing/ch2_nearest_neighbor_problem/data'
+with open(path, 'rb') as f:
+    content = f.read()
+    pc_iter = struct.iter_unpack('ffff', content)
+    for idx, point in enumerate(pc_iter):
+        pc_list.append([point[0], point[1], point[2]])
+points = np.asarray(pc_list, dtype=np.float32)
