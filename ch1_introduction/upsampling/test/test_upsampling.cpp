@@ -17,19 +17,26 @@ int main(int argc, char **argv) {
   //   sparse_depth.convertTo(sparse_depth, CV_64FC1);
 
   cv::Mat upsapl_img =
-      apply_bilateral_filter_for_upsampling(sparse_depth, 51, 31.0, 31.0);
+      apply_bilateral_filter_for_upsampling(sparse_depth, 7, 5.0, 5.0);
+  // upsapl_img = apply_bilateral_filter_for_upsampling(upsapl_img, 5,
+  // 5.0, 5.0);
   //   cv::Mat vis_upsamp = apply_jetmap(upsapl_img);
   //   cv::Mat vis_depth = apply_jetmap(sparse_depth);
-  cv::Mat vis_tmp;
+  img.convertTo(img, CV_8UC1);
+  cv::cvtColor(img, img, cv::COLOR_GRAY2BGR);
+  assert(img.type() == CV_8UC3);
+  cv::Mat jet_map_sparse_depth = apply_jetmap(sparse_depth);
+
+  std::cout << img.type() << " " << jet_map_sparse_depth.type() << " " << '\n';
+  cv::Mat vis_temp;
+  cv::vconcat(img, jet_map_sparse_depth, vis_temp);
+  cv::Mat jet_map_depth = apply_jetmap(upsapl_img);
+  //<< jet_map_depth.type() << '\n';
   cv::Mat vis;
-  cv::Mat img_color;
-  img.convertTo(img_color, CV_8UC3);
-  std::cout << img.type() << " " << sparse_depth.type() << " "
-            << upsapl_img.type() << '\n';
-  cv::Mat vis_img = get_float_mat_vis_img(img);
-  cv::vconcat(vis_img, sparse_depth, vis_tmp);
-  cv::vconcat(vis_tmp, upsapl_img, vis);
-  cv::imshow("upsampling of depth image", vis);
+  cv::vconcat(vis_temp, jet_map_depth, vis);
+  cv::imshow("top: original image; middle: sparse depth map from pcl; bottom: "
+             "upsampling",
+             vis);
   cv::waitKey(0);
   return 0;
 }

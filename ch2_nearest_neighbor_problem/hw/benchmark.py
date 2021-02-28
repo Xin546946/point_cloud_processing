@@ -34,7 +34,7 @@ def vis_point_cloud(points):
 
 def main():
     # configuration
-    leaf_size = 10
+    leaf_size = 32
     min_extent = 0.0001
     k = 8
     radius = 1
@@ -78,7 +78,7 @@ def main():
     #                                                                  radius_time_sum*1000/iteration_num,
     #                                                                  brute_time_sum*1000/iteration_num))
 
-    print("kdtree --------------")
+    print("kdtree -------leaf_size{}-------".format(leaf_size))
     construction_time_sum = 0
     knn_time_sum = 0
     radius_time_sum = 0
@@ -86,7 +86,7 @@ def main():
     for i in range(iteration_num):
         filename = os.path.join(root_dir, cat[i])
         db_np = read_velodyne_bin(filename)
-        vis_point_cloud(db_np)
+        # vis_point_cloud(db_np)
         begin_t = time.time()
         root = kdtree.kdtree_construction(db_np, leaf_size)
         construction_time_sum += time.time() - begin_t

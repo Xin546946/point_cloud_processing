@@ -102,9 +102,10 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
     gaussian_pixel_lut[pixel_val] =
         std::exp(pixel_val_double * pixel_val_double * pixel_coeff);
   }
+
   for (int r = 0; r < img.rows; r++) {
     for (int c = 0; c < img.cols; c++) {
-      if (img.at<uchar>(r, c) == 0) {
+      if (img.at<uchar>(r, c) != 0) {
         continue;
       }
       double weight = 0.0;
@@ -114,6 +115,10 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
 
           if (r + r_win < 0 || c + c_win < 0 || r + r_win > img.rows - 1 ||
               c + c_win > img.cols - 1) {
+            continue;
+          }
+
+          if (img.at<uchar>(r + r_win, c + c_win) == 0) {
             continue;
           }
           int r_local = r + r_win;
@@ -146,6 +151,6 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
     }
     // std::cout << "finished 1 round" << '\n';
   }
-  result.convertTo(result, CV_64FC1);
+  // result.convertTo(result, CV_64FC1);
   return result;
 }

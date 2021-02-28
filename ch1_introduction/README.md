@@ -13,18 +13,18 @@
         else:
             cov_data = np.cov(data.T)
             eigenvectors, eigenvalues, _ = np.linalg.svd(cov_data)
-   ~~~
-
-
-        eigenvalues = np.sqrt(eigenvalues)
-        # 屏蔽结束
-    
+            eigenvalues = np.sqrt(eigenvalues)
+       # 屏蔽结束
+   
         if sort:
             sort = eigenvalues.argsort()[::-1]
             eigenvalues = eigenvalues[sort]
             eigenvectors = eigenvectors[:, sort]
-    
+   
         return eigenvalues, eigenvectors
+   ~~~
+
+
 
 
 * 若使用cov，可视化后的点云如图
@@ -65,13 +65,14 @@
 <br>
   ~~~
  <center class="half">
-    <img src="./figures/figure3.png" width="350"/><img src="./figures/figure4.png" width="350"/>
+    <img src="./figures/figure3.png" width="280"/><img src="./figures/figure4.png" width="280"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
     padding: 2px;">Fig.3 使用pca的主，次轴降采样。
     左：协方差， 右：相关系数</div>
 </center>
+
 <br>
 <br>
 
@@ -262,11 +263,12 @@ $$h\%100 = 0$$
                 filtered_points.append(current_voxel[int(random_idx)])
             current_voxel.clear()
     # 屏蔽结束
+  ~~~
 
 <br>
 * 下面对比一下是否解决哈希冲突的差异，在leaf_size = 30.0的情况下，解决哈希冲突降采样的点为525，未解决哈希冲突降采样的点为212，可见，是否解决哈希冲突对结果影响还是很显著的。
  <center class="half">
-    <img src="./figures/figure6.png" width="370"/><img src="./figures/figure8.png" width="350"/>
+    <img src="./figures/figure6.png" width="300"/><img src="./figures/figure8.png" width="290"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
