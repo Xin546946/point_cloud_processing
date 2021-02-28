@@ -76,7 +76,7 @@
 <br>
 <br>
 
-2. Normal Estimation
+2. **Normal Estimation**
    
    ~~~ python
    # 循环计算每个点的法向量
@@ -114,7 +114,7 @@
 <br>
 <br>
 
-3. Voxel Grid Downsampling
+3. **Voxel Grid Downsampling**
    ~~~ python 
    def voxel_filter(point_cloud, leaf_size):
     point_cloud = np.asarray(point_cloud)
@@ -275,3 +275,96 @@ $$h\%100 = 0$$
     padding: 2px;">Fig.8 当leaf_size = 30.0时 
     <br> 左图：未解决哈希冲突，filtered_pts = 212, 右图：解决哈希冲突， filtered_pts = 525</div>
 </center>
+
+4. **Upsampling**
+   ~~~ c++
+   cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
+                                                 double sigma_position,
+                                                 double sigma_pixel) {
+     cv::Mat img = img_.clone();
+   
+     assert(size % 2 == 1);
+   
+     if (img.type() != CV_8UC1) {
+       img.convertTo(img, CV_8UC1);
+     }
+   
+     cv::Mat dist_map = get_gaussian_kernel(size, sigma_position);
+     cv::Mat img_64f;
+     img.convertTo(img_64f, CV_64FC1);
+     cv::Mat result(cv::Mat::zeros(img.size(), CV_64FC1));
+   
+     int win_half_size = (size - 1) / 2;
+     double local_weight = 0.0;
+   
+     double pixel_coeff = -0.5 / (sigma_pixel * sigma_pixel);
+   
+     double gaussian_pixel_lut[256];
+     for (int pixel_val = 0; pixel_val < 256; pixel_val++) {
+       double pixel_val_double = static_cast<double>(pixel_val);
+       gaussian_pixel_lut[pixel_val] =
+           std::exp(pixel_val_double * pixel_val_double * pixel_coeff);
+     }
+   
+     for (int r = 0; r < img.rows; r++) {
+       for (int c = 0; c < img.cols; c++) {
+           // 只计算黑色点的深度
+         if (img.at<uchar>(r, c) != 0) {
+           continue;
+         }
+         double weight = 0.0;
+   
+         for (int r_win = -win_half_size; r_win < win_half_size + 1; r_win++) {
+           for (int c_win = -win_half_size; c_win < win_half_size + 1; c_win++) {
+   
+             if (r + r_win < 0 || c + c_win < 0 || r + r_win > img.rows - 1 ||
+                 c + c_win > img.cols - 1) {
+               continue;
+             }
+   			//如果当前点的深度为0，则忽略其对权重的贡献
+             if (img.at<uchar>(r + r_win, c + c_win) == 0) {
+               continue;
+             }
+             int r_local = r + r_win;
+             int c_local = c + c_win;
+   
+             if (img.at<uchar>(r_local, c_local) >= img.at<uchar>(r, c)) {
+               local_weight =
+                   gaussian_pixel_lut[std::abs(img.at<uchar>(r_local, c_local) -
+                                               img.at<uchar>(r, c))] *
+                   dist_map.at<double>(r_win + win_half_size,
+                                       c_win + win_half_size);
+             } else {
+               local_weight =
+                   gaussian_pixel_lut[std::abs(img.at<uchar>(r, c) -
+                                               img.at<uchar>(r_local, c_local))] *
+                   dist_map.at<double>(r_win + win_half_size,
+                                       c_win + win_half_size);
+             }
+   
+             //  compute_gaussian_pdf(0, sigma_position, square_dist);
+             result.at<double>(r, c) +=
+                 (local_weight * img_64f.at<double>(r_local, c_local));
+             weight += local_weight;
+           }
+           // std::cout << '\n';
+         }
+         result.at<double>(r, c) /= weight;
+       }
+     }
+   
+     return result;
+   }
+   ~~~
+
+
+<center>
+    <img src="./figures/figure9.png" width="500"/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.9 bilateral filter上采样结果</div>
+</center>
+
+* 稍微可以看出层次感，但是效果蛮差的，尝试过多做几次bilateral filter，但是效果还不如只做一次，感觉还是深度学习更香。

@@ -43,8 +43,6 @@ cv::Mat apply_bilateral_filter(cv::Mat img_, int size, double sigma_position,
           }
           int r_local = r + r_win;
           int c_local = c + c_win;
-          // int r_local = std::min(std::max(0, r + r_win), img.rows - 1);
-          // int c_local = std::min(std::max(0, c + c_win), img.cols - 1);
 
           if (img.at<uchar>(r_local, c_local) >= img.at<uchar>(r, c)) {
             local_weight =
@@ -123,8 +121,6 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
           }
           int r_local = r + r_win;
           int c_local = c + c_win;
-          // int r_local = std::min(std::max(0, r + r_win), img.rows - 1);
-          // int c_local = std::min(std::max(0, c + c_win), img.cols - 1);
 
           if (img.at<uchar>(r_local, c_local) >= img.at<uchar>(r, c)) {
             local_weight =
@@ -149,8 +145,7 @@ cv::Mat apply_bilateral_filter_for_upsampling(cv::Mat img_, int size,
       }
       result.at<double>(r, c) /= weight;
     }
-    // std::cout << "finished 1 round" << '\n';
   }
-  // result.convertTo(result, CV_64FC1);
+
   return result;
 }
