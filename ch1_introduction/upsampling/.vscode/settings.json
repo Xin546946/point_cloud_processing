@@ -61,5 +61,6 @@
         "random": "cpp",
         "set": "cpp",
         "string": "cpp"
-    }
+    },
+    "git.ignoreLimitWarning": true
 }
