@@ -124,6 +124,19 @@ bilateral_filter/fast:
 .PHONY : bilateral_filter/fast
 
 #=============================================================================
+# Target rules for targets named test_upsamp_all_imgs
+
+# Build rule for target.
+test_upsamp_all_imgs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_upsamp_all_imgs
+.PHONY : test_upsamp_all_imgs
+
+# fast build rule for target.
+test_upsamp_all_imgs/fast:
+	$(MAKE) -f test/CMakeFiles/test_upsamp_all_imgs.dir/build.make test/CMakeFiles/test_upsamp_all_imgs.dir/build
+.PHONY : test_upsamp_all_imgs/fast
+
+#=============================================================================
 # Target rules for targets named test_bilateral_filter
 
 # Build rule for target.
@@ -171,6 +184,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... bilateral_filter"
+	@echo "... test_upsamp_all_imgs"
 	@echo "... test_bilateral_filter"
 	@echo "... test_upsampling"
 	@echo "... utils"

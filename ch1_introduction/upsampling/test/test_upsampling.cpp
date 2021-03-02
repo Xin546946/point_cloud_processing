@@ -6,9 +6,6 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-// todo bilateral filter for upsampling: for depth(r,c) if the value is zero
-// ((r,c) need to do upsamp), the value near 0 in the neighborhood has big
-// weight???
 int main(int argc, char **argv) {
   cv::Mat img = read_img(argv[1], cv::IMREAD_GRAYSCALE);
 

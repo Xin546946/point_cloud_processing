@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+test/CMakeFiles/test_upsamp_all_imgs.dir/rule:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_upsamp_all_imgs.dir/rule
+.PHONY : test/CMakeFiles/test_upsamp_all_imgs.dir/rule
+
+# Convenience name for target.
+test_upsamp_all_imgs: test/CMakeFiles/test_upsamp_all_imgs.dir/rule
+
+.PHONY : test_upsamp_all_imgs
+
+# fast build rule for target.
+test_upsamp_all_imgs/fast:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsamp_all_imgs.dir/build.make test/CMakeFiles/test_upsamp_all_imgs.dir/build
+.PHONY : test_upsamp_all_imgs/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_bilateral_filter.dir/rule:
 	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_bilateral_filter.dir/rule
 .PHONY : test/CMakeFiles/test_bilateral_filter.dir/rule
@@ -167,6 +182,33 @@ test_bilateral_filter.cpp.s:
 	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_bilateral_filter.dir/build.make test/CMakeFiles/test_bilateral_filter.dir/test_bilateral_filter.cpp.s
 .PHONY : test_bilateral_filter.cpp.s
 
+test_upsamp_all_imgs.o: test_upsamp_all_imgs.cpp.o
+
+.PHONY : test_upsamp_all_imgs.o
+
+# target to build an object file
+test_upsamp_all_imgs.cpp.o:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsamp_all_imgs.dir/build.make test/CMakeFiles/test_upsamp_all_imgs.dir/test_upsamp_all_imgs.cpp.o
+.PHONY : test_upsamp_all_imgs.cpp.o
+
+test_upsamp_all_imgs.i: test_upsamp_all_imgs.cpp.i
+
+.PHONY : test_upsamp_all_imgs.i
+
+# target to preprocess a source file
+test_upsamp_all_imgs.cpp.i:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsamp_all_imgs.dir/build.make test/CMakeFiles/test_upsamp_all_imgs.dir/test_upsamp_all_imgs.cpp.i
+.PHONY : test_upsamp_all_imgs.cpp.i
+
+test_upsamp_all_imgs.s: test_upsamp_all_imgs.cpp.s
+
+.PHONY : test_upsamp_all_imgs.s
+
+# target to generate assembly for a file
+test_upsamp_all_imgs.cpp.s:
+	cd /home/kit/point_cloud_processing/ch1_introduction/upsampling/build && $(MAKE) -f test/CMakeFiles/test_upsamp_all_imgs.dir/build.make test/CMakeFiles/test_upsamp_all_imgs.dir/test_upsamp_all_imgs.cpp.s
+.PHONY : test_upsamp_all_imgs.cpp.s
+
 test_upsampling.o: test_upsampling.cpp.o
 
 .PHONY : test_upsampling.o
@@ -201,12 +243,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... test_upsamp_all_imgs"
 	@echo "... test_bilateral_filter"
 	@echo "... edit_cache"
 	@echo "... test_upsampling"
 	@echo "... test_bilateral_filter.o"
 	@echo "... test_bilateral_filter.i"
 	@echo "... test_bilateral_filter.s"
+	@echo "... test_upsamp_all_imgs.o"
+	@echo "... test_upsamp_all_imgs.i"
+	@echo "... test_upsamp_all_imgs.s"
 	@echo "... test_upsampling.o"
 	@echo "... test_upsampling.i"
 	@echo "... test_upsampling.s"

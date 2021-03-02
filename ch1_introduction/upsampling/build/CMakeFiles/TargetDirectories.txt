@@ -4,6 +4,7 @@
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/src/CMakeFiles/bilateral_filter.dir
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/src/CMakeFiles/edit_cache.dir
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/test/CMakeFiles/rebuild_cache.dir
+/home/kit/point_cloud_processing/ch1_introduction/upsampling/build/test/CMakeFiles/test_upsamp_all_imgs.dir
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/test/CMakeFiles/test_bilateral_filter.dir
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/test/CMakeFiles/edit_cache.dir
 /home/kit/point_cloud_processing/ch1_introduction/upsampling/build/test/CMakeFiles/test_upsampling.dir
