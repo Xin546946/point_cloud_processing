@@ -9,6 +9,7 @@ up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.o
  /usr/local/include/opencv4/opencv2/core/base.hpp
  /usr/local/include/opencv4/opencv2/core/bufferpool.hpp
  /usr/local/include/opencv4/opencv2/core/check.hpp
+ /usr/local/include/opencv4/opencv2/core/core.hpp
  /usr/local/include/opencv4/opencv2/core/core_c.h
  /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h
  /usr/local/include/opencv4/opencv2/core/cv_cpu_helper.h

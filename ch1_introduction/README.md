@@ -27,6 +27,7 @@
 
 * using covariance，the visualization is shown below:
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
+  $$y = ax^b + c$$
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -55,7 +56,7 @@
 </center>
 <br>
 
-2. **Points' Normals**
+1. **Points' Normals**
    ~~~python
     # 作业2
     # 屏蔽开始

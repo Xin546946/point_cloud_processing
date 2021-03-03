@@ -3,6 +3,7 @@
 import random
 import math
 import numpy as np
+import open3d as o3d 
 
 from result_set import KNNResultSet, RadiusNNResultSet
 
@@ -74,7 +75,25 @@ def kdtree_recursive_build(root, db, point_indices, axis, leaf_size):
         
         # 作业1
         # 屏蔽开始
+        middle_left_index = math.ceil(point_indices_sorted.shape[0] / 2) - 1
+        middle_left_point_index = point_indices_sorted[middle_left_index]
+        middle_left_point_value = db[middle_left_point_index]
 
+        middle_right_index = middle_left_index + 1
+        middle_right_point_index = point_indices_sorted[middle_right_index]
+        middle_right_point_value = db[middle_right_point_index]
+
+        root.value = (middle_right_point_value + middle_left_point_value) / 2
+        root.left = kdtree_recursive_build(root.left,
+                                           db,
+                                           point_indices_sorted[0:middle_right_index],
+                                           axis_round_robin(axis, dim = db.shape[1]),
+                                           leaf_size)
+        root.right = kdtree_recursive_build(root.right,
+                                            db,
+                                            point_indices_sorted[middle_right_index:],
+                                            axis_round_robin(axis, dim = db.shape[1]),
+                                            leaf_size)
         # 屏蔽结束
     return root
 
@@ -139,7 +158,14 @@ def kdtree_knn_search(root: Node, db: np.ndarray, result_set: KNNResultSet, quer
     # 作业2
     # 提示：仍通过递归的方式实现搜索
     # 屏蔽开始
-
+    if query[root.axis] >= root.value[root.axis]:
+        kdtree_knn_search(root.right, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value[root.axis]) < result_set.worstDist():
+            kdtree_knn_search(root.left, db, result_set, query)
+    else:    
+        kdtree_knn_search(root.left, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value[root.axis]) < result_set.worstDist():
+            kdtree_knn_search(root.right, db, result_set, query)
     # 屏蔽结束
 
     return False
@@ -167,7 +193,14 @@ def kdtree_radius_search(root: Node, db: np.ndarray, result_set: RadiusNNResultS
     # 作业3
     # 提示：通过递归的方式实现搜索
     # 屏蔽开始
-
+    if query[root.axis] >= root.value[root.axis]:
+        kdtree_radius_search(root.right, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value[root.axis]) < result_set.worstDist():
+            kdtree_radius_search(root.left, db, result_set, query)
+    else:    
+        kdtree_radius_search(root.left, db, result_set, query)
+        if math.fabs(query[root.axis] - root.value[root.axis]) < result_set.worstDist():
+            kdtree_radius_search(root.right, db, result_set, query)
     # 屏蔽结束
 
     return False
@@ -190,11 +223,12 @@ def main():
     traverse_kdtree(root, depth, max_depth)
     print("tree max depth: %d" % max_depth[0])
 
-    # query = np.asarray([0, 0, 0])
-    # result_set = KNNResultSet(capacity=k)
-    # knn_search(root, db_np, result_set, query)
+    query = np.asarray([0, 0, 0])
+    result_set = KNNResultSet(capacity=k)
+    kdtree_knn_search(root, db_np, result_set, query)
     #
-    # print(result_set)
+    print(result_set)
+    o3d.visualization.draw_geometries([db_np])
     #
     # diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
     # nn_idx = np.argsort(diff)

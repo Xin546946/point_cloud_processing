@@ -25,12 +25,12 @@ void apply_filter(const cv::Mat& image, cv::Mat des, int halfFilterSize, int sig
                 for(int c_win = -halfFilterSize; c_win <= halfFilterSize; c_win++){
                     if(r + r_win < 0 || c + c_win < 0 || r + r_win >= height || c + c_win >= width || image.at<float>(r+r_win, c+c_win) == 0.0) continue;
                     int posDistSquared = pow(r_win, 2) + pow(c_win, 2);
-                    int depthDistSquared = pow(image.at<double>(r,c) - image.at<double>(r + r_win, c + c_win), 2);
-                    sum1 += computeGaussian(sigma1, posDistSquared) * computeGaussian(sigma2, depthDistSquared) * image.at<double>(r + r_win , c + c_win);
+                    int depthDistSquared = pow(image.at<float>(r,c) - image.at<float>(r + r_win, c + c_win), 2);
+                    sum1 += computeGaussian(sigma1, posDistSquared) * computeGaussian(sigma2, depthDistSquared) * image.at<float>(r + r_win , c + c_win);
                     sum2 += computeGaussian(sigma1, posDistSquared) * computeGaussian(sigma2, depthDistSquared);
                 }
             }
-            des.at<double>(r,c) = sum1 / sum2;
+            des.at<float>(r,c) = sum1 / sum2;
         }
     }
     std::cout<<missing_points;

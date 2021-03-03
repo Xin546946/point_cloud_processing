@@ -6,8 +6,9 @@ import numpy as np
 import time
 import os
 import struct
+import open3d as o3d
 
-import octree as octree
+#import octree as octree
 import kdtree as kdtree
 from result_set import KNNResultSet, RadiusNNResultSet
 
@@ -22,7 +23,7 @@ def read_velodyne_bin(path):
         pc_iter = struct.iter_unpack('ffff', content)
         for idx, point in enumerate(pc_iter):
             pc_list.append([point[0], point[1], point[2]])
-    return np.asarray(pc_list, dtype=np.float32).T
+    return np.asarray(pc_list, dtype=np.float32)
 
 def main():
     # configuration
@@ -31,11 +32,11 @@ def main():
     k = 8
     radius = 1
 
-    root_dir = '/Users/renqian/cloud_lesson/kitti' # 数据集路径
+    root_dir = '/home/gfeng/gfeng_ws/point_cloud_processing/ch2_nearest_neighbor_problem/data' # 数据集路径
     cat = os.listdir(root_dir)
     iteration_num = len(cat)
 
-    print("octree --------------")
+    '''print("octree --------------")
     construction_time_sum = 0
     knn_time_sum = 0
     radius_time_sum = 0
@@ -68,7 +69,7 @@ def main():
     print("Octree: build %.3f, knn %.3f, radius %.3f, brute %.3f" % (construction_time_sum*1000/iteration_num,
                                                                      knn_time_sum*1000/iteration_num,
                                                                      radius_time_sum*1000/iteration_num,
-                                                                     brute_time_sum*1000/iteration_num))
+                                                                     brute_time_sum*1000/iteration_num))'''
 
     print("kdtree --------------")
     construction_time_sum = 0
@@ -78,6 +79,14 @@ def main():
     for i in range(iteration_num):
         filename = os.path.join(root_dir, cat[i])
         db_np = read_velodyne_bin(filename)
+        
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(db_np)
+        #o3d.io.write_point_cloud("/ch2_nearest_neighbor_problem/data/pc.ply", pcd)
+
+        # Load saved point cloud and visualize it
+        ##pcd_load = o3d.io.read_point_cloud("/ch2_nearest_neighbor_problem/data/pc.ply")
+        o3d.visualization.draw_geometries([pcd])
 
         begin_t = time.time()
         root = kdtree.kdtree_construction(db_np, leaf_size)
