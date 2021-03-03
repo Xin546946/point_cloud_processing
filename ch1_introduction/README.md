@@ -14,7 +14,6 @@
             cov_data = np.cov(data.T)
             eigenvectors, eigenvalues, _ = np.linalg.svd(cov_data)
 
-
         eigenvalues = np.sqrt(eigenvalues)
         # 屏蔽结束
 
@@ -56,7 +55,7 @@
 </center>
 <br>
 
-2. **Points' Normals**
+1. **Points' Normals**
    ~~~python
     # 作业2
     # 屏蔽开始
