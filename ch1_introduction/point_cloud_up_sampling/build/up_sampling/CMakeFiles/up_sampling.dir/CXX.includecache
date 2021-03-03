@@ -23,6 +23,8 @@ bilateral_filter.h
 /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/bilateral_filter.h
 iostream
 -
+string
+-
 opencv2/core/core_c.h
 -
 opencv2/core/core.hpp

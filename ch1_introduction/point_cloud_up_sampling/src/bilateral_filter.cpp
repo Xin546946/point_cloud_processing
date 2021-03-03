@@ -10,15 +10,17 @@ double computeGaussian(int sigma_squared, int x_squared){
 
 
 
-void apply_filter(const cv::Mat& image, cv::Mat des, int halfFilterSize, int sigma1, int sigma2){//give double img
-    int missing_points = 0;
+void apply_filter(const cv::Mat& image, cv::Mat des, int halfFilterSize, int sigma1, int sigma2){//give float img
+    if(image.type() != CV_32F){
+        std::cout<<"please pass float images as input!";
+        return;
+    }
     int width = image.cols;
     int height = image.rows;
     for(int r = 0; r < height; r++){
         for(int c = 0; c < width; c++){
             if(image.at<float>(r, c) != 0.0) continue;
             //apply double gaussian
-            missing_points++;
             double sum1 = 0;
             double sum2 = 0;
             for(int r_win = -halfFilterSize; r_win <= halfFilterSize; r_win++){
@@ -33,5 +35,4 @@ void apply_filter(const cv::Mat& image, cv::Mat des, int halfFilterSize, int sig
             des.at<float>(r,c) = sum1 / sum2;
         }
     }
-    std::cout<<missing_points;
 }
