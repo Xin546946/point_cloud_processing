@@ -56,7 +56,7 @@
 </center>
 <br>
 
-1. **Points' Normals**
+2. **Points' Normals**
    ~~~python
     # 作业2
     # 屏蔽开始
@@ -201,4 +201,78 @@
 * How to  solve hash conflict:
     Sort points not only according to voxel index, but also according to hx,hy,hz. This way among the points whose voxel index are the same, hash conflicted points are segmented, thus every segment can be treated as points with a new voxel index(which is the same as the one of those not conflicted points but since they are already cleared so it's "new").
 <br>  
+
+
+4. **Upsampling**
+    ~~~c++
+    double computeGaussian(int sigma_squared, int x_squared){
+        double res = (1 / sqrt(2 * M_PI * sigma_squared)) * exp(-x_squared / (2 * sigma_squared));
+        return res;
+    }
+
+    void apply_filter(const cv::Mat& image, cv::Mat des, int halfFilterSize, int sigma1, int sigma2){//give float img
+        if(image.type() != CV_32F){
+            std::cout<<"please pass float images as input!";
+            return;
+        }
+        int width = image.cols;
+        int height = image.rows;
+        for(int r = 0; r < height; r++){
+            for(int c = 0; c < width; c++){
+                if(image.at<float>(r, c) != 0.0) continue;
+                 //apply double gaussian
+                double sum1 = 0;
+                double sum2 = 0;
+                for(int r_win = -halfFilterSize; r_win <= halfFilterSize; r_win++){
+                    for(int c_win = -halfFilterSize; c_win <= halfFilterSize; c_win++){
+                        if(r + r_win < 0 || c + c_win < 0 || r + r_win >= height || c + c_win >= width || image.at<float>(r+r_win, c+c_win) == 0.0) continue;
+                        int posDistSquared = pow(r_win, 2) + pow(c_win, 2);
+                        int depthDistSquared = pow(image.at<float>(r,c) - image.at<float>(r + r_win, c + c_win), 2);
+                        sum1 += computeGaussian(sigma1, posDistSquared) * computeGaussian(sigma2, depthDistSquared) * image.at<float>(r + r_win , c + c_win);
+                        sum2 += computeGaussian(sigma1, posDistSquared) * computeGaussian(sigma2, depthDistSquared);
+                    }
+                }
+                des.at<float>(r,c) = sum1 / sum2;
+            }
+        }
+    }
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="./figures/jet.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig8. Depth image up sampled(above) and groud truth(bottom)</div>
+</center>
+mean mae: 1.401772 <br>
+min  mae: 0.910021 <br>
+max  mae: 2.224899 <br>
+mean rmse: 3.263513 <br>
+min  rmse: 1.000000 <br>
+max  rmse: 5.648661 <br>
+mean inverse mae: 0.007154 <br>
+min  inverse mae: 0.005191 <br>
+max  inverse mae: 0.011504 <br>
+mean inverse rmse: 0.011411 <br>
+min  inverse rmse: 0.007827 <br>
+max  inverse rmse: 0.019368 <br>
+mean log mae: 0.082108 <br>
+min  log mae: 0.063105 <br>
+max  log mae: 0.108946 <br>
+mean log rmse: 0.135744 <br>
+min  log rmse: 0.086491 <br>
+max  log rmse: 0.234225 <br>
+mean scale invariant log: 0.108467 <br>
+min  scale invariant log: 0.057052 <br>
+max  scale invariant log: 0.210251 <br>
+mean abs relative: 0.075002 <br>
+min  abs relative: 0.059773 <br>
+max  abs relative: 0.091497 <br>
+mean squared relative: 0.014147 <br>
+min  squared relative: 0.006137 <br>
+max  squared relative: 0.032267<br>
+
+<br>
 authored by : Guanzhi Feng
