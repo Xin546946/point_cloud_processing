@@ -23,6 +23,7 @@
             eigenvectors = eigenvectors[:, sort]
 
         return eigenvalues, eigenvectors
+    ~~~
 
 * using covariance，the visualization is shown below:
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
@@ -56,7 +57,7 @@
 <br>
 
 1. **Points' Normals**
-   ~~~python
+    ~~~python
     # 作业2
     # 屏蔽开始
     for i in range(points.shape[0]):
@@ -67,6 +68,7 @@
 
     # 由于最近邻搜索是第二章的内容，所以此处允许直接调用open3d中的函数
     # 屏蔽结束
+    ~~~
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -142,7 +144,7 @@
         filtered_points = np.array(filtered_points, dtype=np.float64)
         print("sample points : ",len(filtered_points))
         return filtered_points
-
+    ~~~
 
 
 * setting leaf_size to 100.0 results in 66 points(60 points if hash conflict not solved), roughly represents the object
@@ -235,6 +237,7 @@
             }
         }
     }
+    ~~~
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
