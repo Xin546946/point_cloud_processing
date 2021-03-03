@@ -369,6 +369,7 @@ $$h\%100 = 0$$
 
 * 可以看出层次感，但是效果一般，尝试过多做几次bilateral filter，但是效果还不如只做一次，感觉还是深度学习更香。
 * 用depth_selection/val_selection_cropped数据集中前100个图跑了下evaluation，结果如下：
+  log 的结果一直是nan感觉很怪，没找到原因。
 ~~~ 
 mean mae: 1.139972 
 min  mae: 0.752594 
@@ -397,4 +398,3 @@ max  abs relative: 0.077311
 mean squared relative: 0.009025 
 min  squared relative: 0.004449 
 max  squared relative: 0.021669 
-  
