@@ -367,4 +367,34 @@ $$h\%100 = 0$$
     padding: 2px;">Fig.9 bilateral filter上采样结果</div>
 </center>
 
-* 稍微可以看出层次感，但是效果蛮差的，尝试过多做几次bilateral filter，但是效果还不如只做一次，感觉还是深度学习更香。
+* 可以看出层次感，但是效果一般，尝试过多做几次bilateral filter，但是效果还不如只做一次，感觉还是深度学习更香。
+* 用depth_selection/val_selection_cropped数据集中前100个图跑了下evaluation，结果如下：
+~~~ 
+mean mae: 1.139972 
+min  mae: 0.752594 
+max  mae: 1.836417 
+mean rmse: 2.754302 
+min  rmse: 1.000000 
+max  rmse: 5.465010 
+mean inverse mae: 0.006397 
+min  inverse mae: 0.004387 
+max  inverse mae: 0.010852 
+mean inverse rmse: 0.010376 
+min  inverse rmse: 0.007380 
+max  inverse rmse: 0.018656 
+mean log mae: nan 
+min  log mae: 0.054742 
+max  log mae: 0.093017 
+mean log rmse: nan 
+min  log rmse: 0.072112 
+max  log rmse: 0.218868 
+mean scale invariant log: nan 
+min  scale invariant log: 0.045422 
+max  scale invariant log: 0.200372 
+mean abs relative: 0.063876 
+min  abs relative: 0.052401 
+max  abs relative: 0.077311 
+mean squared relative: 0.009025 
+min  squared relative: 0.004449 
+max  squared relative: 0.021669 
+  
