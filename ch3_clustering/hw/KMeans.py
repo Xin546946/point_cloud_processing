@@ -1,6 +1,10 @@
 # 文件功能： 实现 K-Means 算法
 
 import numpy as np
+import random
+from KMeans_components import init_center, update_label, update_center, Sample, compute_distance
+
+
 
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
@@ -8,21 +12,29 @@ class K_Means(object):
         self.k_ = n_clusters
         self.tolerance_ = tolerance
         self.max_iter_ = max_iter
-
-    def fit(self, data):
+        self.centers = None
+        self.samples = None
+    def fit(self, datas):
         # 作业1
         # 屏蔽开始
-        centers = init_centers(self,data)
-        while(tolerance > self.tolerance_ and num_iter < max_iter):
-            labels = update_labels()
-            centers = update_centers()
+        self.samples = [(Sample(data)) for data in datas]
+        self.centers = init_center(datas, self.k_)
+        tolerance = 1e10
+        iteration = 0
+        while(tolerance > self.tolerance_ and iteration < self.max_iter_):
+            iteration += 1
+            self.samples = update_label(self.samples, self.centers)
+            last_centers,centers = update_center(self.centers,self.samples,self.k_)
+            tolerance = compute_distance(last_centers, centers)
+        
         # 屏蔽结束
 
     def predict(self, p_datas):
-        result = []
+        # result = []
         # 作业2
         # 屏蔽开始
-
+        p_samples = [(Sample(p_data)) for p_data in p_datas]
+        result = update_label(p_samples, self.centers)
         # 屏蔽结束
         return result
 
@@ -30,7 +42,8 @@ if __name__ == '__main__':
     x = np.array([[1, 2], [1.5, 1.8], [5, 8], [8, 8], [1, 0.6], [9, 11]])
     k_means = K_Means(n_clusters=2)
     k_means.fit(x)
-
+    print("Fit finished")
     cat = k_means.predict(x)
-    print(cat)
+    for c in cat:
+        print(c.data, c.label)
 
