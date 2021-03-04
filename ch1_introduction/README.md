@@ -23,11 +23,10 @@
             eigenvectors = eigenvectors[:, sort]
 
         return eigenvalues, eigenvectors
-    ~~~
+   ~~~
 
-* using covariance，the visualization is shown below:
+* using covariance，the visualization is shown below
   $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
-  $$y = ax^b + c$$
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -41,7 +40,7 @@
 </center>
 <br>
 
-* if using correlation coefficients:
+* if using correlation coefficients
   $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
 
 <center>
@@ -56,7 +55,7 @@
 </center>
 <br>
 
-1. **Points' Normals**
+2. **Points' Normals**
     ~~~python
     # 作业2
     # 屏蔽开始
@@ -88,9 +87,7 @@
             return True
         return False
 
-
     def voxel_filter(point_cloud, leaf_size, random_sampling = False):
-
         filtered_points = []
         # 作业3
         # 屏蔽开始
@@ -98,12 +95,12 @@
         print("total points : ", len(point_cloud))
         x_max, y_max, z_max = np.max(point_cloud,axis = 0)
         x_min, y_min, z_min = np.min(point_cloud,axis = 0)
-
+    
         Dx = (x_max - x_min) // leaf_size
         Dy = (y_max - y_min) // leaf_size
         Dz = (z_max - z_min) // leaf_size
         container_size = Dx * Dy * Dz 
-
+    
         h = list() 
         for i in range (point_cloud.shape[0]):
             x, y, z = point_cloud[i]
@@ -121,7 +118,7 @@
         filtered_points = list()
         cur_voxel = list()
         cur_voxel.append(point_cloud[int(H[0][4])])#first point can't be conflicted by definition. also avoiding empty cur_voxel
-
+    
         for i in range(1 , len(h)):
             if (H[i][0] == H[i-1][0] and not hash_conflict(H[i],H[i-1])):
                 #put point if it is not conflicted and have same voxel index.
@@ -137,14 +134,10 @@
                 cur_voxel.clear()
                 cur_voxel.append(point_cloud[int(H[i][4])])
         # 屏蔽结束
-
-
-
         # 把点云格式改成array，并对外返回
         filtered_points = np.array(filtered_points, dtype=np.float64)
         print("sample points : ",len(filtered_points))
         return filtered_points
-    ~~~
 
 
 * setting leaf_size to 100.0 results in 66 points(60 points if hash conflict not solved), roughly represents the object
