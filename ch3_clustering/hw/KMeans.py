@@ -14,6 +14,7 @@ class K_Means(object):
         self.max_iter_ = max_iter
         self.centers = None
         self.samples = None
+
     def fit(self, datas):
         # 作业1
         # 屏蔽开始
@@ -24,6 +25,7 @@ class K_Means(object):
         while(tolerance > self.tolerance_ and iteration < self.max_iter_):
             iteration += 1
             self.samples = update_label(self.samples, self.centers)
+            
             last_centers,centers = update_center(self.centers,self.samples,self.k_)
             tolerance = compute_distance(last_centers, centers)
         
@@ -34,16 +36,23 @@ class K_Means(object):
         # 作业2
         # 屏蔽开始
         p_samples = [(Sample(p_data)) for p_data in p_datas]
+
         result = update_label(p_samples, self.centers)
+        # import pdb; pdb.set_trace()
+        result_labels = []
+        for sample in result:
+            result_labels.append(sample.label)
         # 屏蔽结束
-        return result
+        return result_labels
 
 if __name__ == '__main__':
     x = np.array([[1, 2], [1.5, 1.8], [5, 8], [8, 8], [1, 0.6], [9, 11]])
+    y = np.array([[0.9,2.1], [8.8,10.1]])
     k_means = K_Means(n_clusters=2)
     k_means.fit(x)
     print("Fit finished")
-    cat = k_means.predict(x)
-    for c in cat:
-        print(c.data, c.label)
+    cat = k_means.predict(y)
+    # for c in cat:
+    #     print(c.data, c.label)
+    print(cat)
 

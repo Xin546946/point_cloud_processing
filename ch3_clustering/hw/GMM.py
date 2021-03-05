@@ -33,13 +33,13 @@ class GMM(object):
     def fit(self, data):
         # 作业3
         # 屏蔽开始
-
+        pass
 
         # 屏蔽结束
     
     def predict(self, data):
         # 屏蔽开始
-
+        pass
         # 屏蔽结束
 
 # 生成仿真数据

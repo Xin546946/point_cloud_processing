@@ -33,6 +33,7 @@ def update_center(centers,samples, k):
     for i in range(k):
         features_per_center_np = np.array(features_per_center[i])
         centers[i].data = np.mean(features_per_center_np, axis = 0)
+        # import pdb; pdb.set_trace()
     return last_centers, centers
 
 def compute_distance(last_centers, centers):
