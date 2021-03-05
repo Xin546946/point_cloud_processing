@@ -41,6 +41,7 @@ class GMM(object):
         # 屏蔽开始
 
         # 屏蔽结束
+        return
 
 # 生成仿真数据
 def generate_X(true_Mu, true_Var):
