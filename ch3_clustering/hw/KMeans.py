@@ -8,7 +8,7 @@ from KMeans_components import init_center, update_label, update_center, Sample, 
 
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
-    def __init__(self, n_clusters=2, tolerance=0.0001, max_iter=300):
+    def __init__(self, n_clusters=2, tolerance=0.00001, max_iter=300):
         self.k_ = n_clusters
         self.tolerance_ = tolerance
         self.max_iter_ = max_iter
@@ -23,14 +23,15 @@ class K_Means(object):
         tolerance = 1e10
         iteration = 0
         while(tolerance > self.tolerance_ and iteration < self.max_iter_):
-            print("Now is iteration {}".format(iteration))
+            
             iteration += 1
             self.samples = update_label(self.samples, self.centers)
             
             last_centers,centers = update_center(self.centers,self.samples,self.k_)
             tolerance = compute_distance(last_centers, centers)
+            print("Iteration : {}, Tolerance : {}".format(iteration, tolerance))
             
-        return self.samples
+        return self.samples, self.centers
         # 屏蔽结束
 
     def predict(self, p_datas):
