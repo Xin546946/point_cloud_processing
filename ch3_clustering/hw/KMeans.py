@@ -1,6 +1,39 @@
 # 文件功能： 实现 K-Means 算法
 
 import numpy as np
+import random
+
+class point():
+    def __init__(self, data, label):
+        self.data = data
+        self.label = label
+
+    def __str__(self):
+        output = ''
+        output += str(self.data) + ' ' + str(self.label)
+        return output
+
+def printdata(points):
+    for d in points:
+        print(d)
+
+def pick_centers(data, k):
+    centers = [[] for i in range(k)]
+    if data[0].label is -1:
+        #random
+        centers = random.sample(data,k)
+        for i in range(k):
+            centers[i] = centers[i].data 
+    else:
+        for po in data:
+            centers[po.label].append(po.data)
+
+        for i in range(k):
+            centers[i] = np.mean(centers[i], axis=0)
+
+    return centers
+
+
 
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
@@ -12,10 +45,27 @@ class K_Means(object):
     def fit(self, data):
         # 作业1
         # 屏蔽开始
-        centers = init_centers(self,data)
-        while(tolerance > self.tolerance_ and num_iter < max_iter):
-            labels = update_labels()
-            centers = update_centers()
+        iteration = 0
+        myData = []
+        prev_centers = np.asarray([[1e10,1e10],[1e10,1e10]])
+        J = 1e10
+        for p in data:
+            myData.append(point(p,-1))
+
+        while J > self.tolerance_ and iteration < self.max_iter_:
+            centers = pick_centers(myData, self.k_)
+            J = sum(np.linalg.norm(prev_centers - np.asarray(centers),axis = 1))
+            prev_centers = centers
+            for samp in myData:
+                dist = []
+                for c in centers:
+                    d = np.linalg.norm(samp.data - c.data)
+                    dist.append(d)
+                samp.label = np.argmin(dist)
+
+            iteration += 1
+
+        return myData
         # 屏蔽结束
 
     def predict(self, p_datas):
@@ -23,13 +73,15 @@ class K_Means(object):
         # 作业2
         # 屏蔽开始
 
+
         # 屏蔽结束
         return result
 
 if __name__ == '__main__':
     x = np.array([[1, 2], [1.5, 1.8], [5, 8], [8, 8], [1, 0.6], [9, 11]])
     k_means = K_Means(n_clusters=2)
-    k_means.fit(x)
+    ans = k_means.fit(x)
+    printdata(ans)
 
     cat = k_means.predict(x)
     print(cat)

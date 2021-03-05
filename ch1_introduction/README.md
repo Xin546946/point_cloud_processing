@@ -26,8 +26,10 @@
    ~~~
 
 * using covariance，the visualization is shown below
-  $$cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}$$
-
+  $$
+  cov(X,Y) = \sum_{i=1}^{N} \frac{(X_i-\overline{X})(Y_i-\overline{Y})^T}{N -1}
+  $$
+<br>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -41,7 +43,10 @@
 <br>
 
 * if using correlation coefficients
-  $$\rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
+  $$
+  \rho(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}
+  $$
+<br>
 
 <center>
     <img style="border-radius: 0.3125em;
