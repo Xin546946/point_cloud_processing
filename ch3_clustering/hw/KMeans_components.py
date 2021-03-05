@@ -25,7 +25,10 @@ def update_label(samples, centers):
     return samples
 
 def update_center(centers,samples, k):
-    last_centers = centers
+    last_centers = []
+    for center in centers:
+        last_centers.append(Sample(center.data, center.label))
+        
     features_per_center = [[] for i in range(k)]
     for sample in samples:
         features_per_center[sample.label].append(sample.data)

@@ -23,12 +23,14 @@ class K_Means(object):
         tolerance = 1e10
         iteration = 0
         while(tolerance > self.tolerance_ and iteration < self.max_iter_):
+            print("Now is iteration {}".format(iteration))
             iteration += 1
             self.samples = update_label(self.samples, self.centers)
             
             last_centers,centers = update_center(self.centers,self.samples,self.k_)
             tolerance = compute_distance(last_centers, centers)
-        
+            
+        return self.samples
         # 屏蔽结束
 
     def predict(self, p_datas):
