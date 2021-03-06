@@ -20,7 +20,6 @@ class Sample(object):
 
 * 根据伪代码逻辑，代码框架如下：
   ~~~ python
-    #  
     self.samples = [(Sample(data)) for data in datas]
     self.centers = init_center(datas, self.k_)
     tolerance = 1e10
@@ -31,12 +30,12 @@ class Sample(object):
         self.samples = update_label(self.samples, self.centers)
         
         last_centers,centers = update_center(self.centers,self.samples,self.k_)
-
-        tolerance = compute_distance(last_centers, centers)
+  
+      tolerance = compute_distance(last_centers, centers)
         
         print("Iteration : {}, Tolerance : {}".format(iteration, tolerance))
   ~~~
-
+  
 * 每一个函数的实现细节可以参考KMeans_components.py文件。
 
 * 跑benchmark之前，先用自己的测试函数可视化一下，一些bug也是在这个小的测试数据上跑的时候找到的
@@ -49,3 +48,4 @@ class Sample(object):
     padding: 2px;">Fig.3 K Means的结果</div>
 </center>
 * 由于初始化完全随机，所以无法保证聚类质量。
+* 后面在这个网站上看到了kmeansplusplus算法，可以改善初始化点比较随机的缺点，https://www.cnblogs.com/yixuan-xu/p/6272208.html，实现之后发现对于上图中cluster比较明显的点集，可以轻松分对，并且收敛比较快，当然初始化会比之前更加费时。

@@ -1,8 +1,9 @@
 # kdtree的具体实现，包括构建和查找
-
+from scipy.spatial import KDTree
 import random
 import math
 import numpy as np
+import time
 
 import datetime
 
@@ -215,3 +216,30 @@ def kdtree_radius_search(root: Node, db: np.ndarray, result_set: RadiusNNResultS
     return False
 
 
+def main():
+    db_size = 64000
+    dim = 3
+    k = 8
+    # generate point clouds
+    db_np = np.random.rand(db_size, dim)
+
+    # generate query point
+    query = np.array([0,0,0])
+    # use scipylearn to test knn k = 8
+
+    tree = KDTree(db_np, leafsize = 10)
+
+    begin_t = time.time()
+    knn_result = tree.query(query, k = k)
+    print("KNN Search using scipy takes %.3fms\n" % ((time.time() - begin_t)*1000))
+
+    print(db_np[knn_result[1]])
+
+    kdtree_root = kdtree_construction(db_np, leaf_size=10)
+    result_set = KNNResultSet(capacity=k)
+    begin_t = time.time()
+    kdtree_knn_search(kdtree_root, db_np, result_set, query)
+    print("KNN Search using my KDTree takes %.3fms\n " % ((time.time() - begin_t) * 1000))
+
+if __name__ == '__main__':
+    main()
