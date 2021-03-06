@@ -2,24 +2,25 @@
 
 import numpy as np
 import random
-from KMeans_components import init_center, update_label, update_center, Sample, compute_distance
+from KMeans_components import init_centers, update_label, update_center, Sample, compute_distance
 
 
 
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
-    def __init__(self, n_clusters=2, tolerance=0.00001, max_iter=300):
+    def __init__(self, method = 'kmeans', n_clusters=2, tolerance=0.00001, max_iter=300):
         self.k_ = n_clusters
         self.tolerance_ = tolerance
         self.max_iter_ = max_iter
         self.centers = None
         self.samples = None
+        self.method = method
 
     def fit(self, datas):
         # 作业1
         # 屏蔽开始
         self.samples = [(Sample(data)) for data in datas]
-        self.centers = init_center(datas, self.k_)
+        self.centers = init_centers(datas, self.k_, self.method)
         tolerance = 1e10
         iteration = 0
         while(tolerance > self.tolerance_ and iteration < self.max_iter_):

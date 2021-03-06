@@ -20,7 +20,7 @@ for i in range(4):
     dictionary[i] = color_map[i]
 
 
-k_means = K_Means(n_clusters = 4)
+k_means = K_Means(n_clusters = 4, method = 'kmeansplusplus')
 samples, centers = k_means.fit(X)
 
 for sample in samples:
