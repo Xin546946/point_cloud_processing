@@ -66,7 +66,32 @@ def octree_recursive_build(root, db, center, extent, point_indices, leaf_size, m
     else:
         # 作业4
         # 屏蔽开始
-        
+        root.is_leaf = False
+        children_point_indices = [[] for i in range(8)]
+        for point_idx in point_indices:
+            point_db = db[point_idx]
+            morton_code = 0
+            if point_db[0] > center[0]:
+                morton_code = morton_code | 1
+            if point_db[1] > center[1]:
+                morton_code = morton_code | 2
+            if point_db[2] > center[2]:
+                morton_code = morton_code | 4
+            children_point_indices[morton_code].append(point_idx)
+        factor = [-0.5, 0.5]
+        for i in range(8):
+            child_center_x = center[0] + factor[(i & 1) > 0] * extent
+            child_center_y = center[1] + factor[(i & 2) > 0] * extent
+            child_center_z = center[2] + factor[(i & 4) > 0] * extent
+            child_extent = 0.5 * extent
+            child_center = np.asarray([child_center_x, child_center_y, child_center_z])
+            root.children[i] = octree_recursive_build(root.children[i],
+                                                      db,
+                                                      child_center,
+                                                      child_extent,
+                                                      children_point_indices[i],
+                                                      leaf_size,
+                                                      min_extent)
         # 屏蔽结束
     return root
 
@@ -77,7 +102,7 @@ def octree_recursive_build(root, db, center, extent, point_indices, leaf_size, m
 #     octant：octree
 # 输出：
 #     判断结果，即True/False
-def inside(query: np.ndarray, radius: float, octant:Octant):
+def inside(query: np.ndarray, radius: float, octant: Octant):
     """
     Determines if the query ball is inside the octant
     :param query:
@@ -215,8 +240,24 @@ def octree_knn_search(root: Octant, db: np.ndarray, result_set: KNNResultSet, qu
 
     # 作业7
     # 屏蔽开始
+    morton_code = 0
+    if query[0] > root.center[0]:
+        morton_code = morton_code | 1
+    if query[1] > root.center[1]:
+        morton_code = morton_code | 2
+    if query[2] > root.center[2]:
+        morton_code = morton_code | 4
     
+    if octree_knn_search(root.children[morton_code], db, result_set, query):
+        return True
     # 屏蔽结束
+    for c, child in enumerate(root.children):
+        if c == morton_code or child is None:
+            continue
+        if False == overlaps(query, result_set.worstDist(), child):
+            continue
+        if octree_knn_search(child, db, result_set, query):
+            return True    
 
     # final check of if we can stop search
     return inside(query, result_set.worstDist(), root)
@@ -251,15 +292,18 @@ def main():
 
     root = octree_construction(db_np, leaf_size, min_extent)
 
-    # depth = [0]
-    # max_depth = [0]
-    # traverse_octree(root, depth, max_depth)
-    # print("tree max depth: %d" % max_depth[0])
+    depth = [0]
+    max_depth = [0]
+    traverse_octree(root, depth, max_depth)
+    print("tree max depth: %d" % max_depth[0])
 
-    # query = np.asarray([0, 0, 0])
-    # result_set = KNNResultSet(capacity=k)
-    # octree_knn_search(root, db_np, result_set, query)
-    # print(result_set)
+    begin_t = time.time()
+    query = np.asarray([0, 0, 0])
+    result_set = KNNResultSet(capacity=k)
+    octree_knn_search(root, db_np, result_set, query)
+    #print(result_set)
+    print("KNN search:")
+    print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))
     #
     # diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
     # nn_idx = np.argsort(diff)

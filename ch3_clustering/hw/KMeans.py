@@ -97,4 +97,3 @@ if __name__ == '__main__':
 
     cat = k_means.predict([[1,1.9]])
     print(cat)
-
