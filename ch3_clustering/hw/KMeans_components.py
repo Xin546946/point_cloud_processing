@@ -34,16 +34,16 @@ def init_centers(datas, k, method):
 def init_center_plusplus(datas, k):
     center = random.choice(datas)
     
-    np.random.seed(0)
+    # np.random.seed(0)
     init_centers_datas = []
     init_centers_datas.append(center)
     
-    flag = k-1
+    flag = k-1 
     
     while(flag):
         
         distances = compute_min_dist_through_datas_and_centers(init_centers_datas, datas)
-        print(distances)
+        # print(distances)
         center = np.random.choice(distances, p = distances.ravel())
         index = np.argwhere(distances == center)[0][0]
         init_centers_datas.append(datas[index])
@@ -56,7 +56,7 @@ def init_center_plusplus(datas, k):
 
     return init_centers
 
-def init_center_kmeans(datas, k):
+def init_centers_kmeans(datas, k):
     init_centers_data = random.sample(list(datas), k)
     init_centers = [[] for i in range(k)]
     for i in range(k):

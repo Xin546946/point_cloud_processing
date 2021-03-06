@@ -8,7 +8,7 @@ from KMeans_components import init_centers, update_label, update_center, Sample,
 
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
-    def __init__(self, method = 'kmeans', n_clusters=2, tolerance=0.00001, max_iter=300):
+    def __init__(self, method = 'kmeansplusplus', n_clusters=2, tolerance=0.00001, max_iter=300):
         self.k_ = n_clusters
         self.tolerance_ = tolerance
         self.max_iter_ = max_iter

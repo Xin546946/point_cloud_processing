@@ -35,8 +35,3 @@ plt.ylabel("y")
 plt.show()
 
 
-
-# for sample in samples:
-
-
-plt.show()
