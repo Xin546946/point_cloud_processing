@@ -232,6 +232,7 @@ def octree_radius_search(root: Octant, db: np.ndarray, result_set: RadiusNNResul
     if root.is_leaf and len(root.point_indices) > 0:
         # compare the contents of a leaf
         leaf_points = db[root.point_indices, :]
+        # dim of query (3,), if expand_dims--> (3,1)
         diff = np.linalg.norm(np.expand_dims(query, 0) - leaf_points, axis=1)
         for i in range(diff.shape[0]):
             result_set.add_point(diff[i], root.point_indices[i])

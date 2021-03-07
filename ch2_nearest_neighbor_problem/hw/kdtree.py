@@ -73,6 +73,7 @@ def kdtree_recursive_build(root, db, point_indices, axis, leaf_size):
     # determine whether to split into left and right
     if len(point_indices) > leaf_size:
         # --- get the split position ---
+        
         point_indices_sorted, _ = sort_value_by_index(point_indices, db[point_indices, axis])  # M
         
         # 作业1
@@ -99,8 +100,7 @@ def kdtree_recursive_build(root, db, point_indices, axis, leaf_size):
                                             axis_round_robin(axis, dim=db.shape[1]),
                                             leaf_size)
         
-    return root
-        
+    # return root
 
     # 屏蔽结束
     return root

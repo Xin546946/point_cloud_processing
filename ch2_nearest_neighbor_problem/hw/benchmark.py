@@ -46,7 +46,7 @@ def main():
     cat = os.listdir(root_dir)
     iteration_num = len(cat)
 
-    print("octree --------------")
+    print("My octree --------------")
     construction_time_sum = 0
     knn_time_sum = 0
     radius_time_sum = 0
@@ -81,7 +81,7 @@ def main():
                                                                      radius_time_sum*1000/iteration_num,
                                                                      brute_time_sum*1000/iteration_num))
 
-    print("kdtree -------leaf_size{}-------".format(leaf_size))
+    print("My kdtree -------leaf_size{}-------".format(leaf_size))
     construction_time_sum = 0
     knn_time_sum = 0
     radius_time_sum = 0
@@ -115,24 +115,10 @@ def main():
         nn_dist = diff[nn_idx]
         brute_time_sum += time.time() - begin_t
 
-
-        begin_t = time.time()
-        tree = KDTree(db_np, leafsize = 10)
-        sklearn_construction_time_sum += time.time() - begin_t
-
-        begin_t = time.time()
-        knn_result = tree.query(query, k = k)
-        sklearn_knn_time_sum += time.time() - begin_t
-
-         
-
-
-    print("Kdtree: build %.3fms, knn %.3fms, radius %.3fms, brute %.3fms, sklearn build %.3fms, sklearn knn %.3fms" % (construction_time_sum * 1000 / iteration_num,
+    print("Kdtree: build %.3fms, knn %.3fms, radius %.3fms, brute %.3fms" % (construction_time_sum * 1000 / iteration_num,
                                                                      knn_time_sum * 1000 / iteration_num,
                                                                      radius_time_sum * 1000 / iteration_num,
-                                                                     brute_time_sum * 1000 / iteration_num,
-                                                                     sklearn_construction_time_sum * 1000 / iteration_num,
-                                                                     sklearn_knn_time_sum * 1000 / iteration_num))
+                                                                     brute_time_sum * 1000 / iteration_num))
     print("")
     print("open3d kdtree ----------")
     for i in range(iteration_num):
@@ -163,6 +149,39 @@ def main():
     print("Kdtree: build %.3fms, knn %.3fms, radius %.3fms" % (open3d_build_time * 1000 ,
                                                                      open3d_knn_time * 1000,
                                                                      open3d_rnn_time * 1000))
+
+    sklearn_rnn_time_sum = 0
+
+    print("")
+    print("scipy.spatial kdtree ----------")
+    for i in range(iteration_num):
+        filename = os.path.join(root_dir, cat[i])
+        db_np = read_velodyne_bin(filename)
+        # vis_point_cloud(db_np)
+
+        query = db_np[0,:]
+
+        begin_t = time.time()
+        pcd_tree = o3d.geometry.KDTreeFlann(point_cloud_o3d)
+        open3d_build_time = time.time() - begin_t
+
+        points = point_cloud_pynt.points
+
+        begin_t = time.time()
+        tree = KDTree(db_np, leafsize = leaf_size)
+        sklearn_construction_time_sum += time.time() - begin_t
+
+        begin_t = time.time()
+        knn_result = tree.query(query, k = k)
+        sklearn_knn_time_sum += time.time() - begin_t
+        
+        begin_t = time.time()
+        knn_result = tree.query_ball_point(query, r = radius)
+        sklearn_rnn_time_sum += time.time() - begin_t
+
+    print("Kdtree: build %.3fms, knn %.3fms, radius %.3fms" % ( sklearn_construction_time_sum * 1000 / iteration_num,
+                                                                     sklearn_knn_time_sum * 1000 / iteration_num,
+                                                                     sklearn_rnn_time_sum * 1000 / iteration_num))
 
     # print("")
     # print("open3d octree--------")
