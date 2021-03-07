@@ -183,14 +183,34 @@ def octree_radius_search_fast(root: Octant, db: np.ndarray, result_set: RadiusNN
     if root is None:
         return False
 
-    # 作业5
-    # 提示：尽量利用上面的inside、overlaps、contains等函数
-    # 屏蔽开始
-    
-    # 屏蔽结束
+    if contains(query, result_set.worstDist(), root):
+        # compare the contents of the octant
+        leaf_points = db[root.point_indices, :]
+        diff = np.linalg.norm(np.expand_dims(query, 0) - leaf_points, axis=1)
+        for i in range(diff.shape[0]):
+            result_set.add_point(diff[i], root.point_indices[i])
+        # don't need to check any child
+        return False
+
+    if root.is_leaf and len(root.point_indices) > 0:
+        # compare the contents of a leaf
+        leaf_points = db[root.point_indices, :]
+        diff = np.linalg.norm(np.expand_dims(query, 0) - leaf_points, axis=1)
+        for i in range(diff.shape[0]):
+            result_set.add_point(diff[i], root.point_indices[i])
+        # check whether we can stop search now
+        return inside(query, result_set.worstDist(), root)
+
+    # no need to go to most relevant child first, because anyway we will go through all children
+    for c, child in enumerate(root.children):
+        if child is None:
+            continue
+        if False == overlaps(query, result_set.worstDist(), child):
+            continue
+        if octree_radius_search_fast(child, db, result_set, query):
+            return True
 
     return inside(query, result_set.worstDist(), root)
-
 
 # 功能：在octree中查找radius范围内的近邻
 # 输入：
@@ -211,14 +231,29 @@ def octree_radius_search(root: Octant, db: np.ndarray, result_set: RadiusNNResul
         # check whether we can stop search now
         return inside(query, result_set.worstDist(), root)
 
-    # 作业6
-    # 屏蔽开始
-    
-    # 屏蔽结束
+    # go to the relevant child first
+    morton_code = 0
+    if query[0] > root.center[0]:
+        morton_code = morton_code | 1
+    if query[1] > root.center[1]:
+        morton_code = morton_code | 2
+    if query[2] > root.center[2]:
+        morton_code = morton_code | 4
+
+    if octree_radius_search(root.children[morton_code], db, result_set, query):
+        return True
+
+    # check other children
+    for c, child in enumerate(root.children):
+        if c == morton_code or child is None:
+            continue
+        if False == overlaps(query, result_set.worstDist(), child):
+            continue
+        if octree_radius_search(child, db, result_set, query):
+            return True
 
     # final check of if we can stop search
     return inside(query, result_set.worstDist(), root)
-
 # 功能：在octree中查找最近的k个近邻
 # 输入：
 #     root: octree
@@ -292,7 +327,7 @@ def main():
 
     root = octree_construction(db_np, leaf_size, min_extent)
 
-    depth = [0]
+    '''depth = [0]
     max_depth = [0]
     traverse_octree(root, depth, max_depth)
     print("tree max depth: %d" % max_depth[0])
@@ -301,15 +336,18 @@ def main():
     query = np.asarray([0, 0, 0])
     result_set = KNNResultSet(capacity=k)
     octree_knn_search(root, db_np, result_set, query)
-    #print(result_set)
+    print(result_set)
     print("KNN search:")
     print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))
     #
-    # diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
-    # nn_idx = np.argsort(diff)
-    # nn_dist = diff[nn_idx]
-    # print(nn_idx[0:k])
-    # print(nn_dist[0:k])
+    begin_t = time.time()
+    diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
+    nn_idx = np.argsort(diff)
+    nn_dist = diff[nn_idx]
+    ##print(nn_idx[0:k])
+    ##print(nn_dist[0:k])
+    print("brute force:")
+    print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))'''
 
     begin_t = time.time()
     print("Radius search normal:")

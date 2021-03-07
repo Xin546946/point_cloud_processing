@@ -8,7 +8,7 @@ import os
 import struct
 import open3d as o3d
 
-#import octree as octree
+import octree as octree
 import kdtree as kdtree
 from result_set import KNNResultSet, RadiusNNResultSet
 
@@ -36,7 +36,7 @@ def main():
     cat = os.listdir(root_dir)
     iteration_num = len(cat)
 
-    '''print("octree --------------")
+    print("octree --------------")
     construction_time_sum = 0
     knn_time_sum = 0
     radius_time_sum = 0
@@ -69,7 +69,7 @@ def main():
     print("Octree: build %.3f, knn %.3f, radius %.3f, brute %.3f" % (construction_time_sum*1000/iteration_num,
                                                                      knn_time_sum*1000/iteration_num,
                                                                      radius_time_sum*1000/iteration_num,
-                                                                     brute_time_sum*1000/iteration_num))'''
+                                                                     brute_time_sum*1000/iteration_num))
 
     print("kdtree --------------")
     construction_time_sum = 0
@@ -80,13 +80,13 @@ def main():
         filename = os.path.join(root_dir, cat[i])
         db_np = read_velodyne_bin(filename)
         
-        pcd = o3d.geometry.PointCloud()
-        pcd.points = o3d.utility.Vector3dVector(db_np)
+        #pcd = o3d.geometry.PointCloud()
+        #pcd.points = o3d.utility.Vector3dVector(db_np)
         #o3d.io.write_point_cloud("/ch2_nearest_neighbor_problem/data/pc.ply", pcd)
 
         # Load saved point cloud and visualize it
         ##pcd_load = o3d.io.read_point_cloud("/ch2_nearest_neighbor_problem/data/pc.ply")
-        o3d.visualization.draw_geometries([pcd])
+        #o3d.visualization.draw_geometries([pcd])
 
         begin_t = time.time()
         root = kdtree.kdtree_construction(db_np, leaf_size)
@@ -113,7 +113,6 @@ def main():
                                                                      knn_time_sum * 1000 / iteration_num,
                                                                      radius_time_sum * 1000 / iteration_num,
                                                                      brute_time_sum * 1000 / iteration_num))
-
 
 
 if __name__ == '__main__':
