@@ -73,9 +73,10 @@ def kdtree_recursive_build(root, db, point_indices, axis, leaf_size):
     # determine whether to split into left and right
     if len(point_indices) > leaf_size:
         # --- get the split position ---
-        
-        point_indices_sorted, _ = sort_value_by_index(point_indices, db[point_indices, axis])  # M
-        
+        # length_sub_points =  int(len(point_indices) * 0.1)
+        # sub_points = random.sample(list(point_indices), length_sub_points)
+        # point_indices_sorted, _ = sort_value_by_index(np.asarray(sub_points), db[sub_points, axis])  # M
+        point_indices_sorted, _ = sort_value_by_index(np.asarray(point_indices), db[point_indices, axis])
         # 作业1
         # 屏蔽开始
         middle_left_idx = math.ceil(point_indices_sorted.shape[0] / 2) - 1
@@ -117,7 +118,7 @@ def traverse_kdtree(root: Node, depth, max_depth):
         max_depth[0] = depth[0]
 
     if root.is_leaf():
-        # print(root)
+        print(root)
         pass
     else:
         traverse_kdtree(root.left, depth, max_depth)
@@ -217,7 +218,7 @@ def kdtree_radius_search(root: Node, db: np.ndarray, result_set: RadiusNNResultS
 
 
 def main():
-    db_size = 64000
+    db_size = 100
     dim = 3
     k = 8
     # generate point clouds
@@ -228,18 +229,19 @@ def main():
     # use scipylearn to test knn k = 8
 
     tree = KDTree(db_np, leafsize = 10)
+   
+    # begin_t = time.time()
+    # knn_result = tree.query(query, k = k)
+    # print("KNN Search using scipy takes %.3fms\n" % ((time.time() - begin_t)*1000))
 
-    begin_t = time.time()
-    knn_result = tree.query(query, k = k)
-    print("KNN Search using scipy takes %.3fms\n" % ((time.time() - begin_t)*1000))
-
-    print(db_np[knn_result[1]])
+    # print(db_np[knn_result[1]])
 
     kdtree_root = kdtree_construction(db_np, leaf_size=10)
-    result_set = KNNResultSet(capacity=k)
-    begin_t = time.time()
-    kdtree_knn_search(kdtree_root, db_np, result_set, query)
-    print("KNN Search using my KDTree takes %.3fms\n " % ((time.time() - begin_t) * 1000))
+    traverse_kdtree(kdtree_root,[0], [0])
+    # result_set = KNNResultSet(capacity=k)
+    # begin_t = time.time()
+    # kdtree_knn_search(kdtree_root, db_np, result_set, query)
+    # print("KNN Search using my KDTree takes %.3fms\n " % ((time.time() - begin_t) * 1000))
 
 if __name__ == '__main__':
     main()
