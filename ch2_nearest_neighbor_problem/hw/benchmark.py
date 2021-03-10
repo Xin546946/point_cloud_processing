@@ -45,7 +45,13 @@ def main():
     root_dir = '/home/kit/point_cloud_processing/ch2_nearest_neighbor_problem/data' # 数据集路径
     cat = os.listdir(root_dir)
     iteration_num = len(cat)
-
+    filename = os.path.join(root_dir, cat[0])
+    db_np = read_velodyne_bin(filename)
+    print("Let us see all points")
+    for i in range(db_np.shape[0]):
+        print(db_np[i])
+    
+    
     print("My octree --------------")
     construction_time_sum = 0
     knn_time_sum = 0

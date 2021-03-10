@@ -22,8 +22,7 @@ endif()
 find_package(OpenCV 3.2.0 REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Pangolin  REQUIRED)
-find_package(PCL 1.3 REQUIRED COMPONENTS common io)
-
+find_package(PCL 1.11 REQUIRED)
 
 MESSAGE ( STATUS "OpenCV library status:" )
 MESSAGE ( STATUS "version ${OpenCV_VERSION}" )
