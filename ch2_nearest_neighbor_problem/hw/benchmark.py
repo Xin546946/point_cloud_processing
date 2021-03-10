@@ -11,6 +11,7 @@ import open3d as o3d
 import octree as octree
 import kdtree as kdtree
 from result_set import KNNResultSet, RadiusNNResultSet
+from scipy import spatial
 
 def read_velodyne_bin(path):
     '''
@@ -113,6 +114,74 @@ def main():
                                                                      knn_time_sum * 1000 / iteration_num,
                                                                      radius_time_sum * 1000 / iteration_num,
                                                                      brute_time_sum * 1000 / iteration_num))
+
+    print("scipy --------------")
+    construction_time_sum = 0
+    knn_time_sum = 0
+    radius_time_sum = 0
+    brute_time_sum = 0
+    for i in range(iteration_num):
+        filename = os.path.join(root_dir, cat[i])
+        db_np = read_velodyne_bin(filename)
+
+        begin_t = time.time()
+        tree = spatial.KDTree(db_np)
+        construction_time_sum += time.time() - begin_t
+
+        query = db_np[0,:]
+
+        begin_t = time.time()
+        result = tree.query(query, k = 8)
+        knn_time_sum += time.time() - begin_t
+
+        '''begin_t = time.time()
+        result_set = RadiusNNResultSet(radius=radius)
+        octree.octree_radius_search_fast(root, db_np, result_set, query)
+        radius_time_sum += time.time() - begin_t'''
+
+        begin_t = time.time()
+        diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
+        nn_idx = np.argsort(diff)
+        nn_dist = diff[nn_idx]
+        brute_time_sum += time.time() - begin_t
+    print("Scipy: build %.3f, knn %.3f, brute %.3f" % (construction_time_sum*1000/iteration_num,
+                                                                     knn_time_sum*1000/iteration_num,
+                                                                     brute_time_sum*1000/iteration_num))
+    print("open3d --------------")
+    construction_time_sum = 0
+    knn_time_sum = 0
+    radius_time_sum = 0
+    brute_time_sum = 0
+    for i in range(iteration_num):
+        filename = os.path.join(root_dir, cat[i])
+        db_np = read_velodyne_bin(filename)
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(db_np)
+
+        begin_t = time.time()
+        o3d_tree = o3d.geometry.KDTreeFlann(pcd)
+        construction_time_sum += time.time() - begin_t
+
+        query = db_np[0,:]
+
+        begin_t = time.time()
+        [x1, idx, _] = o3d_tree.search_knn_vector_3d(query, k)
+        knn_time_sum += time.time() - begin_t
+
+        begin_t = time.time()
+        [x2, idx, _] = o3d_tree.search_radius_vector_3d(query, radius)
+        radius_time_sum += time.time() - begin_t
+
+        begin_t = time.time()
+        diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
+        nn_idx = np.argsort(diff)
+        nn_dist = diff[nn_idx]
+        brute_time_sum += time.time() - begin_t
+    print("Open3d: build %.3f, knn %.3f, radius %.3f, brute %.3f" % (construction_time_sum*1000/iteration_num,
+                                                                    knn_time_sum*1000/iteration_num,
+                                                                    radius_time_sum * 1000 / iteration_num,
+                                                                    brute_time_sum*1000/iteration_num))
+                                                                                                                                    
 
 
 if __name__ == '__main__':
