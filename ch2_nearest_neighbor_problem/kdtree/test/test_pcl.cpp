@@ -23,19 +23,19 @@ int main(int argc, char **argv) {
   std::string path = "/home/kit/point_cloud_processing/"
                      "ch2_nearest_neighbor_problem/kdtree/data/000000.bin";
 
-  pcl::PointCloud<pcl::PointXYZI>::Ptr points_cloud(
+  pcl::PointCloud<pcl::PointXYZI>::Ptr point_cloud_ptr(
       new pcl::PointCloud<pcl::PointXYZI>);
 
-  read_point_cloud(path, points_cloud);
+  read_point_cloud(path, point_cloud_ptr);
 
   pcl::visualization::CloudViewer viewer("Cloud viewer");
 
   while (!viewer.wasStopped()) {
-    viewer.showCloud(points_cloud);
+    viewer.showCloud(point_cloud_ptr);
   }
-  pcl::PointCloud<pcl::PointXYZI> cloud = *points_cloud;
-  pcl::io::savePCDFileASCII("../data/test_pcd.pcd", cloud);
-  std::cerr << "Saved " << cloud.size() << " data points to test_pcd.pcd."
+  pcl::PointCloud<pcl::PointXYZI> point_cloud = *point_cloud_ptr;
+  pcl::io::savePCDFileASCII("../data/test_pcd.pcd", point_cloud);
+  std::cerr << "Saved " << point_cloud.size() << " data points to test_pcd.pcd."
             << std::endl;
 
   // for (const auto &point : cloud)
