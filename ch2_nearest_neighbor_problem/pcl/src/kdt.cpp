@@ -1,29 +1,45 @@
 #include <iostream>
+#include <fstream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
+#include <pcl/visualization/cloud_viewer.h>
 
+void readbinfile(const std::string &path, pcl::PointCloud<pcl::PointXYZI>::Ptr point_cloud){
+    std::fstream inputFile_(path, std::ios::in | std::ios::binary);
+    while(inputFile_){
+        pcl::PointXYZI point;
+        inputFile_.read((char *) &point.x, 3*sizeof(float));
+        //inputFile_.read((char *) &point.y, sizeof(float));
+        //inputFile_.read((char *) &point.z, sizeof(float));
+        inputFile_.read((char *) &point.intensity, sizeof(float));
+        point_cloud->push_back(point);
+    }
+    inputFile_.close();
+    return;      
+}
 
-int main(){
-    std::cout<<"hello pcl";
-    pcl::PointCloud<pcl::PointXYZ> cloud;
+int main(int argc, char **argv){
+    std::string path = argv[1];//"/home/gfeng/gfeng_ws/point_cloud_processing/ch2_nearest_neighbor_problem/data/000000.bin";
+    std::string outputFile_ = "/home/gfeng/gfeng_ws/point_cloud_processing/ch2_nearest_neighbor_problem/data/0.pcd";
+    pcl::PointCloud<pcl::PointXYZI>::Ptr point_cloud(new pcl::PointCloud<pcl::PointXYZI>);
+    readbinfile(path, point_cloud);
+ 
+    /*pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
+    while(!viewer.wasStopped()){
+        viewer.showCloud(point_cloud);
+    }*/
 
-    // Fill in the cloud data
-    cloud.width    = 5;
-    cloud.height   = 1;
-    cloud.is_dense = false;
-    cloud.resize (cloud.width * cloud.height);
-
-    for (auto& point: cloud)
-    {
-        point.x = 1024 * rand () / (RAND_MAX + 1.0f);
-        point.y = 1024 * rand () / (RAND_MAX + 1.0f);
-        point.z = 1024 * rand () / (RAND_MAX + 1.0f);
+    pcl::io::savePCDFileBinary(outputFile_, *point_cloud);
+    if(pcl::io::loadPCDFile<pcl::PointXYZI>("/home/gfeng/gfeng_ws/point_cloud_processing/ch2_nearest_neighbor_problem/data/0.pcd", *point_cloud) == -1){
+        PCL_ERROR ("Couldn't read file\n");
+        return (-1);
     }
 
-    pcl::io::savePCDFileASCII ("test_pcd.pcd", cloud);
-    std::cerr << "Saved " << cloud.size () << " data points to test_pcd.pcd." << std::endl;
-
-    for (const auto& point: cloud)
-        std::cerr << "    " << point.x << " " << point.y << " " << point.z << std::endl;
+    //visualization
+    pcl::visualization::CloudViewer viewer("Simple Cloud Viewer");
+    viewer.showCloud(point_cloud);
+    while (!viewer.wasStopped())
+    {
+    }
     return 0;
 }
