@@ -125,6 +125,8 @@ std::vector<T*> GKdTree<T>::rnn_search(T* data, typename T::DistType radius) con
     ::rnn_search<T>(root_, data, result_set, radius);
     return result_set;
 }
+
+
 template <typename T>
 GKdTree<T>::~GKdTree() {
     std::vector<PtrNode> ptr_nodes;

@@ -1,8 +1,8 @@
+
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/visualization/cloud_viewer.h>
-
 void read_point_cloud(const std::string &path,
                       pcl::PointCloud<pcl::PointXYZI>::Ptr points) {
 
@@ -38,8 +38,8 @@ int main(int argc, char **argv) {
   std::cerr << "Saved " << point_cloud.size() << " data points to test_pcd.pcd."
             << std::endl;
 
-  // for (const auto &point : cloud)
-  //   std::cerr << "    " << point.x << " " << point.y << " " << point.z
-  //             << std::endl;
+  for (const auto &point : point_cloud)
+    std::cerr << "    " << point.x << " " << point.y << " " << point.z << " "
+              << point.intensity << std::endl;
   return (0);
 }
