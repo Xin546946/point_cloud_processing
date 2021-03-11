@@ -56,6 +56,7 @@ def main():
         result_set = KNNResultSet(capacity=k)
         octree.octree_knn_search(root, db_np, result_set, query)
         knn_time_sum += time.time() - begin_t
+        print(result_set)
 
         begin_t = time.time()
         result_set = RadiusNNResultSet(radius=radius)

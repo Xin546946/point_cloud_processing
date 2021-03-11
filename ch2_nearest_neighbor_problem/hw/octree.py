@@ -327,7 +327,7 @@ def main():
 
     root = octree_construction(db_np, leaf_size, min_extent)
 
-    '''depth = [0]
+    depth = [0]
     max_depth = [0]
     traverse_octree(root, depth, max_depth)
     print("tree max depth: %d" % max_depth[0])
@@ -347,7 +347,7 @@ def main():
     ##print(nn_idx[0:k])
     ##print(nn_dist[0:k])
     print("brute force:")
-    print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))'''
+    print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))
 
     begin_t = time.time()
     print("Radius search normal:")
@@ -355,7 +355,7 @@ def main():
         query = np.random.rand(3)
         result_set = RadiusNNResultSet(radius=0.5)
         octree_radius_search(root, db_np, result_set, query)
-    # print(result_set)
+    #print(result_set)
     print("Search takes %.3fms\n" % ((time.time() - begin_t) * 1000))
 
     begin_t = time.time()
