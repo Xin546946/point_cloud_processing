@@ -47,9 +47,9 @@ def main():
     iteration_num = len(cat)
     filename = os.path.join(root_dir, cat[0])
     db_np = read_velodyne_bin(filename)
-    print("Let us see all points")
-    for i in range(db_np.shape[0]):
-        print(db_np[i])
+    # print("Let us see all points")
+    # for i in range(db_np.shape[0]):
+    #     print(db_np[i])
     
     
     print("My octree --------------")
