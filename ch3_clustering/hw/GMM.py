@@ -14,16 +14,21 @@ class GMM(object):
     def __init__(self, n_clusters, max_iter=50):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
+        self.GMs = [[1/n_clusters, 1, 1] for i in range(n_clusters)]#init gms with [weight, mu, variance]
+        self.pi = [[1/n_clusters] for i in range(n_clusters)]
+        ##TODO:better way to initialize
     
     # 屏蔽开始
-    # 更新W
-    
-
     # 更新pi
+    def update_gamma(data,gammas):
+        for i in range(len(data)):
+            gamma = gammas[i]#p1,p2,p3...pn
+            N = [1] * self.n_clusters 
+            
  
+    # 更新W
         
     # 更新Mu
-
 
     # 更新Var
 
@@ -33,13 +38,29 @@ class GMM(object):
     def fit(self, data):
         # 作业3
         # 屏蔽开始
-
-
+        #every data has n_cluster possiblities
+        gamma = [1/self.n_clusters] * self.n_clusters
+        gammas = []#stores the clustering of input datas
+        for i in range(len(data)):
+            gammas.append(gamma)
+        update_gamma(data, gammas)#e-step
+        #m-step
+        update_mu
+        update_covar
+        update_weight
+        #calculate convergence
+        #while not converge
+            #e-step
+            #update pi
+            #m-step
+            #update mu/covar/weight
+            #calculate convergence
         # 屏蔽结束
+        return
     
     def predict(self, data):
         # 屏蔽开始
-
+        #return 3 gamma?
         # 屏蔽结束
         return
 
