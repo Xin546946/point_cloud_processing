@@ -5,36 +5,80 @@ from numpy import *
 import pylab
 import random,math
 
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 from scipy.stats import multivariate_normal
 plt.style.use('seaborn')
 
+def gaussian_log_density(samples: np.ndarray, mean: np.ndarray, covariance: np.ndarray):
+    dim = mean.shape[0]
+    chol_covariance = np.linalg.cholesky(covariance)
+    # Efficient and stable way to compute the log determinant and squared term efficiently using the cholesky
+    logdet = 2 * np.sum(np.log(np.diagonal(chol_covariance) + 1e-25))
+    # (Actually, you would use scipy.linalg.solve_triangular but I wanted to spare you the hustle of setting
+    #  up scipy)
+    chol_inv = np.linalg.inv(chol_covariance)
+    exp_term = np.sum(np.square((samples - mean) @ chol_inv.T), axis=-1)
+    return -0.5 * (dim * np.log(2 * np.pi) + logdet + exp_term)
+
+
+
+# def gaussian_pdf(data : ndarray, mean : ndarray, var: ndarray):
+#     import pdb; pdb.set_trace()
+#     data = np.expand_dims(data,0)
+#     assert data.shape[0] == mean.shape[0] and data.shape[0] == var.shape[0] and data.shape[1] == 1
+#     coeff_inv = np.power(2 * (math.pi), dim / 2.0) * np.power(np.linalg.det(var) + 1e-8, 0.5)
+#     result = (1 / coeff_inv) * np.exp(-0.5 * (data - mean).T * np.linalg.inv(var + 1e-8) * (data - mean))
+#     assert result.shape[0] == 1 and result.shape[1] == 1
+#     return result
 class GMM(object):
     def __init__(self, n_clusters, max_iter=50):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
+        self.means = None
+        self.convs = None
+        self.weights = None
     
     # 屏蔽开始
-    # 更新W
-    
+    # estep computes p(z|x) using old model from previoud iteration
+    def e_step(self,samples: ndarray): # 
+        # compute p(x|z)
+        densities = []
+        for i in range(len(self.weights)):
+            densities.append(np.exp(gaussian_log_density(samples, self.mean[i], self.convs[i])))
+        densities = np.stack(densities, -1)
 
-    # 更新pi
- 
-        
-    # 更新Mu
+        # compute p(x,z) = p(x|z)p(z)
+        joint_densities = densities * self.weights[None,...]
 
+        # compute p(z|x) = p(x,z) / p(x) = p(x,z) / sum_z p(x,z)
+        responsibilities = joint_densities / np.sum(joint_densities, -1, keepdims = True)
 
-    # 更新Var
+        return responsibilities
+
+    def m_step(samples, responsibilities):
+
 
 
     # 屏蔽结束
     
-    def fit(self, data):
+    def init_gmm(self, samples):
+        init_idx = np.random.choice(len(samples), self.n_clusters, replace=False)
+        self.means = samples[init_idx]
+        self.convs = np.tile(np.eye(samples.shape[-1])[None, ...], [self.n_clusters, 1, 1])
+        self.weights = np.ones(self.n_clusters) / self.n_clusters
+        
+
+    def fit(self, samples):
         # 作业3
         # 屏蔽开始
-        pass
+        init_gmm(samples)
 
+        for i in range(self.max_iter):
+            responsibilities = e_step(samples) # given: p(x|z), solve: p(z|x) = p(x|z) * p(z) / sum_z (p(x,z))
+            m_step(samples, responsibilities) # given p(z)
+        
         # 屏蔽结束
     
     def predict(self, data):
@@ -68,11 +112,11 @@ if __name__ == '__main__':
     # 生成数据
     true_Mu = [[0.5, 0.5], [5.5, 2.5], [1, 7]]
     true_Var = [[1, 3], [2, 2], [6, 2]]
-    X = generate_X(true_Mu, true_Var)
-
+    samples = generate_X(true_Mu, true_Var)
+    import pdb; pdb.set_trace()
     gmm = GMM(n_clusters=3)
-    gmm.fit(X)
-    cat = gmm.predict(X)
+    gmm.fit(samples)
+    cat = gmm.predict(samples)
     print(cat)
     # 初始化
 
