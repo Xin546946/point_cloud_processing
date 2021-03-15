@@ -11,6 +11,34 @@ from matplotlib.patches import Ellipse
 from scipy.stats import multivariate_normal
 plt.style.use('seaborn')
 
+def vis_2d_gmm(samples, weights, means, covs, title):
+    """Visualizes the model and the samples"""
+    plt.figure(figsize=[7,7])
+    plt.title(title)
+    plt.scatter(samples[:, 0], samples[:, 1], label="Samples", c=next(plt.gca()._get_lines.prop_cycler)['color'])
+
+    for i in range(means.shape[0]):
+        c = next(plt.gca()._get_lines.prop_cycler)['color']
+
+        (largest_eigval, smallest_eigval), eigvec = np.linalg.eig(covs[i])
+        phi = -np.arctan2(eigvec[0, 1], eigvec[0, 0])
+
+        plt.scatter(means[i, 0:1], means[i, 1:2], marker="x", c=c)
+
+        a = 2.0 * np.sqrt(largest_eigval)
+        b = 2.0 * np.sqrt(smallest_eigval)
+
+        ellipse_x_r = a * np.cos(np.linspace(0, 2 * np.pi, num=200))
+        ellipse_y_r = b * np.sin(np.linspace(0, 2 * np.pi, num=200))
+
+        R = np.array([[np.cos(phi), np.sin(phi)], [-np.sin(phi), np.cos(phi)]])
+        r_ellipse = np.array([ellipse_x_r, ellipse_y_r]).T @ R
+        plt.plot(means[i, 0] + r_ellipse[:, 0], means[i, 1] + r_ellipse[:, 1], c=c,
+                 label="Component {:02d}, Weight: {:0.4f}".format(i, weights[i]))
+    plt.legend()
+    plt.draw()
+
+
 def gaussian_log_density(samples: np.ndarray, mean: np.ndarray, covariance: np.ndarray):
     dim = mean.shape[0]
     chol_covariance = np.linalg.cholesky(covariance)
@@ -37,7 +65,7 @@ class GMM(object):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.means = None
-        self.convs = None
+        self.covs = None
         self.weights = None
     
     # 屏蔽开始
@@ -46,8 +74,8 @@ class GMM(object):
         # compute p(x|z)
         densities = []
         for i in range(len(self.weights)):
-            densities.append(np.exp(gaussian_log_density(samples, self.mean[i], self.convs[i])))
-        densities = np.stack(densities, -1)
+            densities.append(np.exp(gaussian_log_density(samples, self.means[i], self.covs[i])))
+        densities = np.stack(densities, -1) # list to array (2000,3)
 
         # compute p(x,z) = p(x|z)p(z)
         joint_densities = densities * self.weights[None,...]
@@ -57,33 +85,51 @@ class GMM(object):
 
         return responsibilities
 
-    def m_step(samples, responsibilities):
 
+    def m_step(self, samples, responsibilities):
+        # update weights p(z) = 1/ N sum_x p(z|x)
+        unnormalized_weights =np.sum(responsibilities, axis = 0)
+        self.weights = unnormalized_weights / len(samples)
 
+        # Compute update using weighted maximum likelihood
+        sample_weights = responsibilities / unnormalized_weights[None, :]
 
+        weighted_samples = sample_weights[...,None] * samples[:,None,:]
+        self.means = np.sum(weighted_samples, axis = 0) # shape: [n_clustes, dim]
+
+        # Compute update using weighted maximum likelihood.
+        diffferences = samples[:, None] - self.means[None] # shape [N, n_clusters]
+        outer_products = diffferences[:,:,None] * diffferences[...,None]
+        weighted_outer_products = sample_weights[..., None, None] * outer_products   # shape: [N, num_components, dim, dim]
+        self.covs = np.sum(weighted_outer_products, axis=0)   # shape: [num_components, dim, dim]
     # 屏蔽结束
     
+
     def init_gmm(self, samples):
         init_idx = np.random.choice(len(samples), self.n_clusters, replace=False)
         self.means = samples[init_idx]
-        self.convs = np.tile(np.eye(samples.shape[-1])[None, ...], [self.n_clusters, 1, 1])
+        self.covs = np.tile(np.eye(samples.shape[-1])[None, ...], [self.n_clusters, 1, 1])
         self.weights = np.ones(self.n_clusters) / self.n_clusters
         
 
-    def fit(self, samples):
+    def fit(self, samples: ndarray, vis_interval: int = 5):
         # 作业3
         # 屏蔽开始
-        init_gmm(samples)
+        self.init_gmm(samples)
 
         for i in range(self.max_iter):
-            responsibilities = e_step(samples) # given: p(x|z), solve: p(z|x) = p(x|z) * p(z) / sum_z (p(x,z))
-            m_step(samples, responsibilities) # given p(z)
+            responsibilities = self.e_step(samples) # given: p(x|z), solve: p(z|x) = p(x|z) * p(z) / sum_z (p(x,z))
+            self.m_step(samples, responsibilities) # given p(z)
+            if i % vis_interval == 0:
+                vis_2d_gmm(samples, self.weights, self.means, self.covs, title ="After Itaration {:02d}".format(i))
         
         # 屏蔽结束
     
     def predict(self, data):
         # 屏蔽开始
-        pass
+        import pdb; pdb.set_trace()
+        responsibilities = self.e_step(samples)
+        return responsibilities
         # 屏蔽结束
 
 # 生成仿真数据
@@ -105,7 +151,7 @@ def generate_X(true_Mu, true_Var):
     plt.scatter(X1[:, 0], X1[:, 1], s=5)
     plt.scatter(X2[:, 0], X2[:, 1], s=5)
     plt.scatter(X3[:, 0], X3[:, 1], s=5)
-    plt.show()
+    # plt.show()
     return X
 
 if __name__ == '__main__':
@@ -113,9 +159,9 @@ if __name__ == '__main__':
     true_Mu = [[0.5, 0.5], [5.5, 2.5], [1, 7]]
     true_Var = [[1, 3], [2, 2], [6, 2]]
     samples = generate_X(true_Mu, true_Var)
-    import pdb; pdb.set_trace()
     gmm = GMM(n_clusters=3)
-    gmm.fit(samples)
+    gmm.fit(samples, 30)
+    plt.show()
     cat = gmm.predict(samples)
     print(cat)
     # 初始化
