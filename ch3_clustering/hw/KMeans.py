@@ -30,7 +30,7 @@ class K_Means(object):
             
             last_centers,centers = update_center(self.centers,self.samples,self.k_)
             tolerance = compute_distance(last_centers, centers)
-            print("Iteration : {}, Tolerance : {}".format(iteration, tolerance))
+            # print("Iteration : {}, Tolerance : {}".format(iteration, tolerance))
             
         return self.samples, self.centers
         # 屏蔽结束

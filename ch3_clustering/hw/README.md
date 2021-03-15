@@ -1,7 +1,6 @@
 # 第三章作业 聚类算法
 
-1. **K Means**
-    <br>
+## 1. K Means
 * K Means 的基本思想如下，假设需要聚K类：
 ~~~ pseudocode
   1. 在所给定的数据中随机选取K个点作为中心点
@@ -149,3 +148,35 @@ def init_center_plusplus(datas, k):
         \sigma_k &= \frac{\sum_i q_{ik} (x_i - \mu_k)(x_i - m\mu_k)^T}{\sum_i q_{ik}} \\
         \end{aligned}
         $$
+  * GMM的逻辑如下：
+  ~~~python
+  def fit(self, samples: ndarray):
+        # 作业3
+        # 屏蔽开始
+        self.init_gmm(samples)
+
+        for i in range(self.max_iter):
+            responsibilities = self.e_step(samples) # given: p(x|z), solve: p(z|x) = p(x|z) * p(z) / sum_z (p(x,z))
+            self.m_step(samples, responsibilities) # given p(z)
+
+            if i != 0 and np.linalg.norm(np.asarray(self.prev_means) - np.asarray(self.means)) < 0.01:
+                break
+        # 屏蔽结束
+  ~~~    
+  * GMM 测试数据的结果，可视化了一下中间步骤，因为用了kmeans++的初始化方式，所以一开始找的中心点就比较分散。
+  <center class="half">
+    <img src="./figure/fig4.png" width="180"/><img src="./figure/fig5.png" width="180"/><img src="./figure/fig6.png" width="180"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.3 GMM的结果</div>
+</center><br>
+
+## 3. Benchmark 结果：
+  <center class="half">
+    <img src="./figure/fig3.png" width="500"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.4 Benchmark的结果</div>
+</center><br>

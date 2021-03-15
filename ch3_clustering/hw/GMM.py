@@ -4,7 +4,7 @@ import numpy as np
 from numpy import *
 import pylab
 import random,math
-
+from KMeans_components import compute_min_dist_through_datas_and_centers
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
@@ -51,22 +51,38 @@ def gaussian_log_density(samples: np.ndarray, mean: np.ndarray, covariance: np.n
     return -0.5 * (dim * np.log(2 * np.pi) + logdet + exp_term)
 
 
+def init_centers(datas, k):
+    center = random.choice(datas)
+    index = np.argwhere(datas == center)[0][0]
+    init_centers_idx = []
+    init_centers_idx.append(index)
+    # np.random.seed(0)
+    init_centers_datas = []
+    init_centers_datas.append(center)
+    
+    flag = k-1 
+    
+    while(flag):
+        
+        distances = compute_min_dist_through_datas_and_centers(init_centers_datas, datas)
+        # print(distances)
+        center = np.random.choice(distances, p = distances.ravel())
+        index = np.argwhere(distances == center)[0][0]
+        init_centers_datas.append(datas[index])
+        init_centers_idx.append(index)
+        flag -= 1
 
-# def gaussian_pdf(data : ndarray, mean : ndarray, var: ndarray):
-#     import pdb; pdb.set_trace()
-#     data = np.expand_dims(data,0)
-#     assert data.shape[0] == mean.shape[0] and data.shape[0] == var.shape[0] and data.shape[1] == 1
-#     coeff_inv = np.power(2 * (math.pi), dim / 2.0) * np.power(np.linalg.det(var) + 1e-8, 0.5)
-#     result = (1 / coeff_inv) * np.exp(-0.5 * (data - mean).T * np.linalg.inv(var + 1e-8) * (data - mean))
-#     assert result.shape[0] == 1 and result.shape[1] == 1
-#     return result
+    return init_centers_idx
+
 class GMM(object):
-    def __init__(self, n_clusters, max_iter=50):
+    def __init__(self, n_clusters, max_iter=100):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.means = None
         self.covs = None
         self.weights = None
+        self.prev_means = None
+        self.center_trajectory = []
     
     # 屏蔽开始
     # estep computes p(z|x) using old model from previoud iteration
@@ -87,16 +103,19 @@ class GMM(object):
 
 
     def m_step(self, samples, responsibilities):
+
+        self.prev_means = self.means
+
         # update weights p(z) = 1/ N sum_x p(z|x)
         unnormalized_weights =np.sum(responsibilities, axis = 0)
         self.weights = unnormalized_weights / len(samples)
 
         # Compute update using weighted maximum likelihood
-        sample_weights = responsibilities / unnormalized_weights[None, :]
+        sample_weights = responsibilities / unnormalized_weights[None, :]  # = np.sum(responsibilities, axis=0)
 
-        weighted_samples = sample_weights[...,None] * samples[:,None,:]
+        weighted_samples = sample_weights[...,None] * samples[:,None,:] # shape: [N, num_components, dim]
         self.means = np.sum(weighted_samples, axis = 0) # shape: [n_clustes, dim]
-
+        
         # Compute update using weighted maximum likelihood.
         diffferences = samples[:, None] - self.means[None] # shape [N, n_clusters]
         outer_products = diffferences[:,:,None] * diffferences[...,None]
@@ -106,13 +125,14 @@ class GMM(object):
     
 
     def init_gmm(self, samples):
-        init_idx = np.random.choice(len(samples), self.n_clusters, replace=False)
+        # init_idx = np.random.choice(len(samples), self.n_clusters, replace=False)
+        init_idx = init_centers(samples, self.n_clusters)
         self.means = samples[init_idx]
         self.covs = np.tile(np.eye(samples.shape[-1])[None, ...], [self.n_clusters, 1, 1])
         self.weights = np.ones(self.n_clusters) / self.n_clusters
         
 
-    def fit(self, samples: ndarray, vis_interval: int = 5):
+    def fit(self, samples: ndarray, vis = None):
         # 作业3
         # 屏蔽开始
         self.init_gmm(samples)
@@ -120,16 +140,16 @@ class GMM(object):
         for i in range(self.max_iter):
             responsibilities = self.e_step(samples) # given: p(x|z), solve: p(z|x) = p(x|z) * p(z) / sum_z (p(x,z))
             self.m_step(samples, responsibilities) # given p(z)
-            if i % vis_interval == 0:
+            if i % 5 == 0 and vis != None:
                 vis_2d_gmm(samples, self.weights, self.means, self.covs, title ="After Itaration {:02d}".format(i))
-        
+            if i != 0 and np.linalg.norm(np.asarray(self.prev_means) - np.asarray(self.means)) < 0.01:
+                break
         # 屏蔽结束
     
-    def predict(self, data):
+    def predict(self, samples):
         # 屏蔽开始
-        import pdb; pdb.set_trace()
         responsibilities = self.e_step(samples)
-        return responsibilities
+        return np.argmax(responsibilities,axis=1)
         # 屏蔽结束
 
 # 生成仿真数据
@@ -160,11 +180,13 @@ if __name__ == '__main__':
     true_Var = [[1, 3], [2, 2], [6, 2]]
     samples = generate_X(true_Mu, true_Var)
     gmm = GMM(n_clusters=3)
-    gmm.fit(samples, 30)
-    plt.show()
+    gmm.fit(samples, vis = True)
+    # plt.show()
+    
     cat = gmm.predict(samples)
     print(cat)
-    # 初始化
-
+    i = 0
+    plt.scatter(samples[:,0], samples[:,1], cat)
+    plt.show()
     
 
