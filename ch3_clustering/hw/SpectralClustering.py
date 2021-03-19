@@ -10,7 +10,6 @@ from sklearn import cluster, datasets
 import matplotlib.pyplot as plt
 from scipy.spatial import KDTree
 
-#step1
 def buildGraph(data):
     n = len(data)
     adjacencyMatrix = np.zeros((n,n))
@@ -21,7 +20,7 @@ def buildGraph(data):
         adjacencyMatrix[i,neighbors] = diff
 
     return adjacencyMatrix
-#step2
+
 def computeFeatures(adjacencyMatrix, k):
     Dvec = np.sum(adjacencyMatrix, axis = 1)
     D = np.diag(Dvec)

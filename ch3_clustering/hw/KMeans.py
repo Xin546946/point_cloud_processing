@@ -32,9 +32,7 @@ def pick_centers(data, k):
             centers[i] = np.mean(centers[i], axis=0)
 
     return centers
-
-
-
+    
 class K_Means(object):
     # k是分组数；tolerance‘中心点误差’；max_iter是迭代次数
     def __init__(self, n_clusters=2, tolerance=0.0001, max_iter=300):
@@ -95,5 +93,6 @@ if __name__ == '__main__':
     k_means.fit(x)
     printdata(k_means.point_with_labels)
 
-    cat = k_means.predict([[1,1.9]])
-    print(cat)
+    test_point = [1,1.9] 
+    cat = k_means.predict([test_point])
+    print("clustering point",test_point, ",it belongs to cluster ", cat[0])
