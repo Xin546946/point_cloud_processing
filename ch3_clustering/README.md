@@ -280,11 +280,25 @@ class GMM(object):
         kmeans = cluster.KMeans(n_clusters=2)
         kmeans.fit(ys)
         color =  ['b','r']
+        '''for i in range(ys.shape[0]):
+            plt.scatter(ys[i][0], ys[i][1])
+        plt.show()'''
+
         for i in range(X.shape[0]):
             plt.scatter(X[i][0], X[i][1], c = color[kmeans.labels_[i]], s=2)
 
         plt.show()
 ~~~
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="./figure/features.png";class ="half">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig3. spectral clustering on 2-cluster ring data, points' features' 2D visualization </div>
+</center>
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -296,3 +310,4 @@ class GMM(object):
     color: #999;
     padding: 2px;">Fig3. spectral clustering on 2-cluster ring data </div>
 </center>
+

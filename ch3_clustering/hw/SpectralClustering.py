@@ -46,10 +46,14 @@ if __name__ == '__main__':
     kmeans = cluster.KMeans(n_clusters=2)
     kmeans.fit(ys)
     color =  ['b','r']
-    for i in range(X.shape[0]):
+    for i in range(ys.shape[0]):
+        plt.scatter(ys[i][0], ys[i][1])
+    plt.show()
+
+    '''for i in range(X.shape[0]):
         plt.scatter(X[i][0], X[i][1], c = color[kmeans.labels_[i]], s=2)
 
-    plt.show()
+    plt.show()'''
     print("done")
 
 
