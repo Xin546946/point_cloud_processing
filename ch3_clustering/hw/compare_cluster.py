@@ -104,6 +104,7 @@ for i_dataset, (dataset, algo_params) in enumerate(datasets):
     # ============
     # 自编的K-Means、GMM算法
     my_kmeans = K_Means(n_clusters=params['n_clusters'])
+    import pdb; pdb.set_trace()
     my_gmm = GMM(n_clusters=params['n_clusters'])
     # sklearn中自带的算法
     ms = cluster.MeanShift(bandwidth=bandwidth, bin_seeding=True)

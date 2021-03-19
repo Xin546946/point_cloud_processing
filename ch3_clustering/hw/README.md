@@ -148,6 +148,12 @@ def init_center_plusplus(datas, k):
         \sigma_k &= \frac{\sum_i q_{ik} (x_i - \mu_k)(x_i - m\mu_k)^T}{\sum_i q_{ik}} \\
         \end{aligned}
         $$
+  * 总结一下，个人觉得GMM最重要的是弄清楚四个概率的意思：
+    * $P(x)$: 表示某点x在整个GMM模型下的概率，即$P(x)=\sum_k\pi_k \mathcal{N} (\mu_k,\sigma_k)$
+    * $P(z)$: z为EM算法的latent variable，表示第k的高斯模型，$P(z_k) = \pi_k$
+    * $P(z_k=1|x)$:点属于$z_k=1$该高斯模型的概率，也就是GMM比较关心的量，可以通过贝叶斯求取
+    * $P(x|z_k=1)$:该概率为高斯分布，即此高斯模型下，发生点x的概率。
+  <br> <br>
   * GMM的逻辑如下：
   ~~~python
   def fit(self, samples: ndarray):
@@ -180,3 +186,37 @@ def init_center_plusplus(datas, k):
     color: #999;
     padding: 2px;">Fig.4 Benchmark的结果</div>
 </center><br>
+
+## 4.Specral Clustering:
+* 其实谱聚类背后的数学思想还不太清楚，就是照着pipline实现了一遍，个人感觉类似于kpca+kmeans，就是将点经过非线性变换投影到另一个空间，再用kmeans将其分开。
+~~~ python
+def spectral_clustering(datas, n_clusters = 2):
+    # import pdb; pdb.set_trace()
+    weighted_matrix = compute_weighted_matrix(X, radius=0.2)
+    degree_matrix = compute_degree_matrix(weighted_matrix)
+    laplacian_matrix = degree_matrix - weighted_matrix
+    eigenvalues, eigenvectors = np.linalg.eig(laplacian_matrix)
+    kth_eigenvector = eigenvectors[:,np.argsort(eigenvalues)[:n_clusters]]
+    plt.scatter(kth_eigenvector[:,0],kth_eigenvector[:, 1],s=2)
+    plt.show()
+    k_means = cluster.KMeans(n_clusters=n_clusters)
+    k_means.fit(kth_eigenvector)
+    return k_means.labels_
+~~~
+
+* 将点映射y的空间之后，可分性非常强，如图8所示
+    <center class="half">
+    <img src="./figure/fig8.png" width="500"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.5 谱聚类$y_i$点的可视化</div>
+</center>
+* 用sklearn生成了环形数据集，谱聚类的结果如下。
+      <center class="half">
+    <img src="./figure/fig7.png" width="500"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.6 谱聚类的结果</div>
+</center>
