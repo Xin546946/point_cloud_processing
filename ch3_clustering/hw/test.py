@@ -9,12 +9,12 @@ rv = multivariate_normal(mean,cov)
 pos = np.array([1,1])
 p = rv.pdf(pos)
 print(p)'''
-x = np.array([1,2,3])
-ex = np.exp(x)
 
-p = np.array([[1,2,3],[2,7,4],[3,10,5],[5,9,7]])
-sumq = np.sum(p, axis = 0)
-what = sumq[None,:]
+
+
+p = np.array([1,5,4,3,8])
+s = np.argsort(p)[:2]
+what = p[s]
 
 x1 = p[:,:,None]
 x2 = p[...,None]

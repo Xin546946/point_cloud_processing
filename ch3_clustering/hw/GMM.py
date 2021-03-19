@@ -110,15 +110,15 @@ class GMM(object):
         self.covs = np.sum(weighted_outer_products, axis=0)
         # 屏蔽结束
     
-    def fit(self, data, vis = True):
+    def fit(self, data, vis = False):
         # 作业3
         # 屏蔽开始
         self.init(data)
         for i in range(self.max_iter):
             responsibilities = self.e_step(data)
             self.m_step(data, responsibilities)
-            if i % 5 == 0 and vis != None:
-                vis_2d_gmm(data, self.weights, self.means, self.covs, title ="After Itaration {:02d}".format(i))
+            '''if i % 5 == 0 and vis != None:
+                vis_2d_gmm(data, self.weights, self.means, self.covs, title ="After Itaration {:02d}".format(i))'''
             if i != 0 and np.linalg.norm(np.asarray(self.prev_means) - np.asarray(self.means)) < 0.01:
                 break
             # 屏蔽结束
