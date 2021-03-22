@@ -28,11 +28,11 @@ def read_velodyne_bin(path, vis = False):
     :return: homography matrix of the point cloud, N*3
     '''
     pc_list = []
-    with open(path, 'rb') as f:c
+    with open(path, 'rb') as f:
         content = f.read()
         pc_iter = struct.iter_unpack('ffff', content)
         for _, point in enumerate(pc_iter):
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             pc_list.append([point[0], point[1], point[2]])
     points = np.asarray(pc_list, dtype=np.float32)
     if vis:
@@ -92,7 +92,9 @@ def main():
         filename = os.path.join(root_dir, cat[i])
         print('clustering pointcloud file:', filename)
 
-        origin_points = read_velodyne_bin(filename,vis=True)
+        origin_points = read_velodyne_bin(filename,vis=False)
+        
+        import pdb; pdb.set_trace()
         segmented_points = ground_segmentation(data=origin_points)
         cluster_index = clustering(segmented_points)
 
