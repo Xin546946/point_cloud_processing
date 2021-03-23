@@ -6,7 +6,10 @@
 import numpy as np
 import os
 import struct
+import math
+import random
 from sklearn import cluster, datasets, mixture
+from sklearn.preprocessing import normalize
 from itertools import cycle, islice
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -39,15 +42,49 @@ def read_velodyne_bin(path, vis = False):
         vis_point_cloud(points)
     return points
 
+def preprocessing(data):
+    z_threshold = (max(data[:,2]) - min(data[:,2])) * 0.3 + min(data[:,2])
+    ground_candidate = data[data[:,2] < z_threshold] 
+    return ground_candidate
+
+# def fit_plane(p1,p2,p3):
+#     normal_vector = np.cross(p3-p1, p2-p1)
+#     d = -np.sum(p1*normal_vector)
+#     a,b,c = normal_vector
+#     import pdb; pdb.set_trace()
+#     return a,b,c,d
 # 功能：从点云文件中滤除地面点
 # 输入：
 #     data: 一帧完整点云
 # 输出：
 #     segmengted_cloud: 删除地面点之后的点云
-def ground_segmentation(data):
+def ground_segmentation(data, mode= 'RANSAC', threshold  =0.3):
     # 作业1
     # 屏蔽开始
+    if mode == 'RANSAC':
+        data_list = list(data)
+        max_counter = 0
+        p = 0.999
+        s = 3.0
+        max_iter = int(np.log(1 - p) / np.log(1 - pow(0.9,s)))
+        for _ in range(max_iter):
+            counter = 0
+            p1, p2, p3 = random.sample(data_list, k=3)
+            while np.linalg.det(np.array([p1,p2,p3])) == 0:
+                p1, p2, p3 = random.sample(data_list, k=3)
+            # fit the plane w.r.t p1, p2, p3 with normal vector method
+            normal_vector= np.cross(p3-p1, p2-p1)
+            normal_vector /= np.linalg.norm(normal_vector)
+            d = -np.sum(p1*normal_vector)
 
+            distance_list = []
+            for d in data:
+                distance = np.dot(d - p1, normal_vector)
+                if distance < threshold:
+                    counter += 1
+            if max_counter < counter:
+                a_, b_, c_, d_ = normal_vector, d
+        return a_, b_, c_, d_
 
     # 屏蔽结束
 
@@ -84,21 +121,24 @@ def plot_clusters(data, cluster_index):
     plt.show()
 
 def main():
-    root_dir = '/home/kit/point_cloud_processing/ch4_model_fitting/datas' # 数据集路径
-    cat = os.listdir(root_dir)
-    # cat = cat[1:]
-    iteration_num = len(cat)
-    for i in range(iteration_num):
-        filename = os.path.join(root_dir, cat[i])
-        print('clustering pointcloud file:', filename)
+    filename = 'datas/000000.bin'
+    origin_points = read_velodyne_bin(filename, vis=False)
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(origin_points)
+    pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
+    pcd_filtered.paint_uniform_color([0,1,0])
+    # import pdb;pdb.set_trace()
+    possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
+    # pcd_ground = o3d.geometry.PointCloud()
+    # pcd_ground.points = o3d.utility.Vector3dVector(possible_ground_points)
+    # pcd_ground.paint_uniform_color([0,0,1])
+    # o3d.visualization.draw_geometries([pcd_filtered, pcd_ground])
+    
 
-        origin_points = read_velodyne_bin(filename,vis=False)
-        
-        import pdb; pdb.set_trace()
-        segmented_points = ground_segmentation(data=origin_points)
-        cluster_index = clustering(segmented_points)
 
-        plot_clusters(segmented_points, cluster_index)
+    segmented_points = ground_segmentation(data=possible_ground_points)
+    cluster_index = clustering(segmented_points)
+    plot_clusters(segmented_points, cluster_index)
 
 if __name__ == '__main__':
     main()
