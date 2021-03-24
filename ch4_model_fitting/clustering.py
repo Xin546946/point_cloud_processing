@@ -43,51 +43,68 @@ def read_velodyne_bin(path, vis = False):
     return points
 
 def preprocessing(data):
-    z_threshold = (max(data[:,2]) - min(data[:,2])) * 0.3 + min(data[:,2])
+    z_threshold = (max(data[:,2]) - min(data[:,2])) * 0.5 + min(data[:,2])
     ground_candidate = data[data[:,2] < z_threshold] 
     return ground_candidate
 
-# def fit_plane(p1,p2,p3):
-#     normal_vector = np.cross(p3-p1, p2-p1)
-#     d = -np.sum(p1*normal_vector)
-#     a,b,c = normal_vector
-#     import pdb; pdb.set_trace()
-#     return a,b,c,d
+def ransac(data_list, threshold):
+    max_counter = 0
+    p = 0.999
+    s = 3.0
+    max_iter = int(np.log(1 - p) / np.log(1 - pow(0.70, s)))
+    print("Max Iteration is ", max_iter)
+    for _ in range(max_iter):
+        counter = 0
+        p1, p2, p3 = random.sample(data_list, k=3)
+        while np.linalg.det(np.array([p1,p2,p3])) == 0:
+            p1, p2, p3 = random.sample(data_list, k=3)
+        # fit the plane w.r.t p1, p2, p3 with normal vector method
+        normal_vector= np.cross(p3 - p1, p2 - p1)
+        normal_vector /= np.linalg.norm(normal_vector)
+        d_ = -np.sum(p1 * normal_vector)
+        distance_list = []
+        for d in data_list:
+            distance = math.fabs(np.dot(d , normal_vector) + d_)
+            if distance <= threshold:
+                counter += 1
+        if max_counter < counter:
+            max_counter = counter
+            print("max_counter: ", max_counter)
+            a_, b_, c_, d_ = normal_vector[0], normal_vector[1], normal_vector[2], d_
+            print("Current plane is ", a_, b_, c_, d_)
+    return a_, b_, c_, d_
+        
 # 功能：从点云文件中滤除地面点
 # 输入：
 #     data: 一帧完整点云
 # 输出：
 #     segmengted_cloud: 删除地面点之后的点云
-def ground_segmentation(data, mode= 'RANSAC', threshold  =0.3):
+def ground_segmentation(data, threshold = 0.28):
     # 作业1
     # 屏蔽开始
-    if mode == 'RANSAC':
-        data_list = list(data)
-        max_counter = 0
-        p = 0.999
-        s = 3.0
-        max_iter = int(np.log(1 - p) / np.log(1 - pow(0.9,s)))
-        for _ in range(max_iter):
-            counter = 0
-            p1, p2, p3 = random.sample(data_list, k=3)
-            while np.linalg.det(np.array([p1,p2,p3])) == 0:
-                p1, p2, p3 = random.sample(data_list, k=3)
-            # fit the plane w.r.t p1, p2, p3 with normal vector method
-            normal_vector= np.cross(p3-p1, p2-p1)
-            normal_vector /= np.linalg.norm(normal_vector)
-            d = -np.sum(p1*normal_vector)
-
-            distance_list = []
-            for d in data:
-                distance = np.dot(d - p1, normal_vector)
-                if distance < threshold:
-                    counter += 1
-            if max_counter < counter:
-                a_, b_, c_, d_ = normal_vector, d
-        return a_, b_, c_, d_
-
+    
+    data_list = list(data)
+    a_, b_, c_, d_ = ransac(data_list, threshold)
+    normal_vector = np.array([a_, b_, c_], dtype=np.float64)
+    print(len(data_list))
+    # ground_points_index_list = []
+    segmengted_cloud = []
+    # import pdb; pdb.set_trace()
+    for d in data_list:
+        # print("Distance between {} and plane is ".format(data[i]), np.dot(data_list[i], normal_vector) + d_)
+        distance = math.fabs(np.dot(d, normal_vector) + d_)
+        if distance >= threshold:
+            segmengted_cloud.append(d)
+            # ground_points_index_list.append(i)
+    
+    # import pdb; pdb.set_trace()
+    # point_cloud = o3d.geometry.PointCloud()
+    # point_cloud.points = o3d.utility.Vector3dVector(np.asarray(ground_points))
+    # o3d.visualization.draw_geometries([point_cloud])
+    # segmengted_cloud = np.delete(data, np.asarray(ground_points_index_list), axis =0)
+       
     # 屏蔽结束
-
+    segmengted_cloud = np.asarray(segmengted_cloud)
     print('origin data points num:', data.shape[0])
     print('segmented data points num:', segmengted_cloud.shape[0])
     return segmengted_cloud
@@ -123,22 +140,25 @@ def plot_clusters(data, cluster_index):
 def main():
     filename = 'datas/000000.bin'
     origin_points = read_velodyne_bin(filename, vis=False)
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(origin_points)
-    pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
-    pcd_filtered.paint_uniform_color([0,1,0])
+    # pcd = o3d.geometry.PointCloud()
+    # pcd.points = o3d.utility.Vector3dVector(origin_points)
+    # pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
+    # pcd_filtered.paint_uniform_color([0,1,0])
     # import pdb;pdb.set_trace()
-    possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
-    # pcd_ground = o3d.geometry.PointCloud()
-    # pcd_ground.points = o3d.utility.Vector3dVector(possible_ground_points)
-    # pcd_ground.paint_uniform_color([0,0,1])
-    # o3d.visualization.draw_geometries([pcd_filtered, pcd_ground])
+    # possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
     
+    segmented_points = ground_segmentation(data=origin_points)
 
 
-    segmented_points = ground_segmentation(data=possible_ground_points)
-    cluster_index = clustering(segmented_points)
-    plot_clusters(segmented_points, cluster_index)
+
+    pcd_segmented_points = o3d.geometry.PointCloud()
+    pcd_segmented_points.points = o3d.utility.Vector3dVector(segmented_points)
+    # pcd_segmented_points.paint_uniform_color([0,1,0])
+    o3d.visualization.draw_geometries([pcd_segmented_points])
+
+
+    # cluster_index = clustering(segmented_points)
+    # plot_clusters(segmented_points, cluster_index)
 
 if __name__ == '__main__':
     main()
