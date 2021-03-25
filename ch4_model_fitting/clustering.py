@@ -7,6 +7,7 @@ import numpy as np
 import os
 import struct
 import math
+import copy
 import random
 from sklearn import cluster, datasets, mixture
 from sklearn.preprocessing import normalize
@@ -15,10 +16,19 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import open3d as o3d
 
-def vis_point_cloud(points):
-    point_cloud = o3d.geometry.PointCloud()
-    point_cloud.points = o3d.utility.Vector3dVector(points)
-    o3d.visualization.draw_geometries([point_cloud])
+def vis_ground(data, ground_cloud):
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(data)
+    pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
+    pcd_filtered.paint_uniform_color([1,0,0])
+    # import pdb;pdb.set_trace()
+    possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
+    
+    pcd_segmented_points = o3d.geometry.PointCloud()
+    pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
+    pcd_segmented_points.paint_uniform_color([0,0,0.5])
+    
+    o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
 # 功能：从kitti的.bin格式点云文件中读取点云
 # 输入：
@@ -43,7 +53,7 @@ def read_velodyne_bin(path, vis = False):
     return points
 
 def preprocessing(data):
-    z_threshold = (max(data[:,2]) - min(data[:,2])) * 0.5 + min(data[:,2])
+    z_threshold = (max(data[:,2]) - min(data[:,2])) * 0.4 + min(data[:,2])
     ground_candidate = data[data[:,2] < z_threshold] 
     return ground_candidate
 
@@ -51,9 +61,11 @@ def ransac(data_list, threshold):
     max_counter = 0
     p = 0.999
     s = 3.0
-    max_iter = int(np.log(1 - p) / np.log(1 - pow(0.70, s)))
+    max_iter = int(np.log(1 - p) / np.log(1 - pow(0.60, s)))
     print("Max Iteration is ", max_iter)
+    
     for _ in range(max_iter):
+        
         counter = 0
         p1, p2, p3 = random.sample(data_list, k=3)
         while np.linalg.det(np.array([p1,p2,p3])) == 0:
@@ -67,47 +79,81 @@ def ransac(data_list, threshold):
             distance = math.fabs(np.dot(d , normal_vector) + d_)
             if distance <= threshold:
                 counter += 1
+                
         if max_counter < counter:
+            
             max_counter = counter
             print("max_counter: ", max_counter)
-            a_, b_, c_, d_ = normal_vector[0], normal_vector[1], normal_vector[2], d_
-            print("Current plane is ", a_, b_, c_, d_)
-    return a_, b_, c_, d_
-        
+            a_param, b_param, c_param, d_param = normal_vector[0], normal_vector[1], normal_vector[2], d_
+            print("Current plane is ", a_param, b_param, c_param, d_param)
+    return a_param, b_param, c_param, d_param
+    
+def split_points(data_list, plane_param, threshold):
+    a_, b_, c_, d_ = plane_param
+    normal_vector = np.array([a_, b_, c_], dtype=np.float64)
+    segmented_cloud = []
+    ground_cloud =  [] 
+    for d in data_list:
+        # print("Distance between {} and plane is ".format(data[i]), np.dot(data_list[i], normal_vector) + d_)
+        distance = math.fabs(np.dot(d, normal_vector) + d_)
+        if distance > threshold:
+            # import pdb; pdb.set_trace()
+            segmented_cloud.append(d)
+        else:
+            ground_cloud.append(d)
+
+    segmented_cloud = np.asarray(segmented_cloud)   
+    ground_cloud = np.asarray(ground_cloud)     
+    print("Segmented points num: ", segmented_cloud.shape[0])
+    print("Ground cloud num: ", ground_cloud.shape[0])
+    
+    return segmented_cloud, ground_cloud
+
+def least_square(ground_cloud, plane_param, max_iter, learning_rate, eps_param):
+    A = np.c_[ground_cloud, np.ones((ground_cloud.shape[0],1))]
+    ATA = A.T @ A 
+    # U, S, VT = np.linalg.svd(A, full_matrices = True)
+    param = np.array([plane_param]).reshape((4,1))
+    for current_iter in range(max_iter):
+        last_param = copy.deepcopy(param)
+        param -= (ATA @ param / 1 + np.linalg.norm(A @ param))* learning_rate
+        param_dist = np.linalg.norm(param - last_param)
+        # print("@@@ param_distance: ", param_dist)
+        # print("@@@ gradient: ", np.linalg.norm(A.T @ A @ param))
+        if param_dist < eps_param and np.linalg.norm(A.T @ A @ param) < 0.1:
+            break
+    print("Algorithm stops at iteration: ", current_iter)
+    return param
 # 功能：从点云文件中滤除地面点
 # 输入：
 #     data: 一帧完整点云
 # 输出：
 #     segmengted_cloud: 删除地面点之后的点云
-def ground_segmentation(data, threshold = 0.28):
+def ground_segmentation(data, threshold = 0.1, mode = 'ransac_lsq'):
     # 作业1
     # 屏蔽开始
     
     data_list = list(data)
-    a_, b_, c_, d_ = ransac(data_list, threshold)
-    normal_vector = np.array([a_, b_, c_], dtype=np.float64)
-    print(len(data_list))
-    # ground_points_index_list = []
-    segmengted_cloud = []
-    # import pdb; pdb.set_trace()
-    for d in data_list:
-        # print("Distance between {} and plane is ".format(data[i]), np.dot(data_list[i], normal_vector) + d_)
-        distance = math.fabs(np.dot(d, normal_vector) + d_)
-        if distance >= threshold:
-            segmengted_cloud.append(d)
-            # ground_points_index_list.append(i)
+    plane_param = ransac(data_list, threshold)
+    print("Plane parameter after ransac: ", plane_param)
     
+    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
+    print('segmented data points after ransac num:', segmented_cloud.shape[0])
+    print('ground points after ransac num:', data.shape[0] - segmented_cloud.shape[0])
+    vis_ground(data, ground_cloud)
+    
+    if mode == 'ransac_lsq':
+        plane_param = least_square(ground_cloud, plane_param, max_iter = 2000, learning_rate = 1e-7, eps_param = 0.0001)
+        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.25)
+    
+    vis_ground(data, ground_cloud)
+    
+    print("Plane parameter after least square: ", plane_param)
     # import pdb; pdb.set_trace()
-    # point_cloud = o3d.geometry.PointCloud()
-    # point_cloud.points = o3d.utility.Vector3dVector(np.asarray(ground_points))
-    # o3d.visualization.draw_geometries([point_cloud])
-    # segmengted_cloud = np.delete(data, np.asarray(ground_points_index_list), axis =0)
-       
-    # 屏蔽结束
-    segmengted_cloud = np.asarray(segmengted_cloud)
     print('origin data points num:', data.shape[0])
-    print('segmented data points num:', segmengted_cloud.shape[0])
-    return segmengted_cloud
+    print('segmented data points after lsq num:', segmented_cloud.shape[0])
+    print('ground points after lsq num:', data.shape[0] - segmented_cloud.shape[0])
+    return segmented_cloud, ground_cloud
 
 # 功能：从点云中提取聚类
 # 输入：
@@ -140,22 +186,24 @@ def plot_clusters(data, cluster_index):
 def main():
     filename = 'datas/000000.bin'
     origin_points = read_velodyne_bin(filename, vis=False)
-    # pcd = o3d.geometry.PointCloud()
-    # pcd.points = o3d.utility.Vector3dVector(origin_points)
-    # pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
-    # pcd_filtered.paint_uniform_color([0,1,0])
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(origin_points)
+    pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
+    pcd_filtered.paint_uniform_color([1,0,0])
     # import pdb;pdb.set_trace()
-    # possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
+    possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
     
-    segmented_points = ground_segmentation(data=origin_points)
+    segmented_points, ground_cloud = ground_segmentation(data=possible_ground_points)
 
 
 
     pcd_segmented_points = o3d.geometry.PointCloud()
-    pcd_segmented_points.points = o3d.utility.Vector3dVector(segmented_points)
-    # pcd_segmented_points.paint_uniform_color([0,1,0])
-    o3d.visualization.draw_geometries([pcd_segmented_points])
+    pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
+    pcd_segmented_points.paint_uniform_color([0,0,0.5])
+    
+    o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
+    
 
     # cluster_index = clustering(segmented_points)
     # plot_clusters(segmented_points, cluster_index)
