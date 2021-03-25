@@ -51,12 +51,12 @@ def main():
         construction_time_sum += time.time() - begin_t
 
         query = db_np[0,:]
-
+        #import pdb;pdb.set_trace()
         begin_t = time.time()
         result_set = KNNResultSet(capacity=k)
         octree.octree_knn_search(root, db_np, result_set, query)
         knn_time_sum += time.time() - begin_t
-        print(result_set)
+        #print(result_set)
 
         begin_t = time.time()
         result_set = RadiusNNResultSet(radius=radius)
@@ -64,9 +64,10 @@ def main():
         radius_time_sum += time.time() - begin_t
 
         begin_t = time.time()
-        diff = np.linalg.norm(np.expand_dims(query, 0) - db_np, axis=1)
+        diff = np.linalg.norm(query - db_np, axis=1)
         nn_idx = np.argsort(diff)
         nn_dist = diff[nn_idx]
+        print(nn_idx[0:7])
         brute_time_sum += time.time() - begin_t
     print("Octree: build %.3f, knn %.3f, radius %.3f, brute %.3f" % (construction_time_sum*1000/iteration_num,
                                                                      knn_time_sum*1000/iteration_num,
