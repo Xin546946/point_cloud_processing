@@ -85,7 +85,7 @@ def ransac(data_list, threshold):
             max_counter = counter
             print("max_counter: ", max_counter)
             a_param, b_param, c_param, d_param = normal_vector[0], normal_vector[1], normal_vector[2], d_
-            print("Current plane is: ", a_param, b_param, c_param, d_param)
+            print("Current plane is : ", a_param, b_param, c_param, d_param)
     return a_param, b_param, c_param, d_param
     
 def split_points(data_list, plane_param, threshold):
