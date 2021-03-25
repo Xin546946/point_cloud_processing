@@ -20,13 +20,13 @@ def vis_ground(data, ground_cloud):
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(data)
     pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
-    pcd_filtered.paint_uniform_color([1,0,0])
+    # pcd_filtered.paint_uniform_color([1,0,0])
     # import pdb;pdb.set_trace()
     possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
     
     pcd_segmented_points = o3d.geometry.PointCloud()
     pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
-    pcd_segmented_points.paint_uniform_color([0,0,0.5])
+    pcd_segmented_points.paint_uniform_color([176./255.,224./255.,230./255.])
     
     o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
@@ -35,7 +35,7 @@ def vis_ground(data, ground_cloud):
 #     path: 文件路径
 # 输出：
 #     点云数组
-def read_velodyne_bin(path, vis = False):
+def read_velodyne_bin(path):
     '''
     :param path:
     :return: homography matrix of the point cloud, N*3
@@ -45,11 +45,9 @@ def read_velodyne_bin(path, vis = False):
         content = f.read()
         pc_iter = struct.iter_unpack('ffff', content)
         for _, point in enumerate(pc_iter):
-            # import pdb; pdb.set_trace()
             pc_list.append([point[0], point[1], point[2]])
     points = np.asarray(pc_list, dtype=np.float32)
-    if vis:
-        vis_point_cloud(points)
+
     return points
 
 def preprocessing(data):
@@ -57,11 +55,11 @@ def preprocessing(data):
     ground_candidate = data[data[:,2] < z_threshold] 
     return ground_candidate
 
-def ransac(data_list, threshold):
+def ransac(data_list, threshold = 0.1):
     max_counter = 0
-    p = 0.999
+    p = 0.9999
     s = 3.0
-    max_iter = int(np.log(1 - p) / np.log(1 - pow(0.60, s)))
+    max_iter = int(np.log(1 - p) / np.log(1 - pow(0.50, s)))
     print("Max Iteration is ", max_iter)
     
     for _ in range(max_iter):
@@ -104,8 +102,8 @@ def split_points(data_list, plane_param, threshold):
 
     segmented_cloud = np.asarray(segmented_cloud)   
     ground_cloud = np.asarray(ground_cloud)     
-    print("Segmented points num: ", segmented_cloud.shape[0])
-    print("Ground cloud num: ", ground_cloud.shape[0])
+    # print("Segmented points num: ", segmented_cloud.shape[0])
+    # print("Ground cloud num: ", ground_cloud.shape[0])
     
     return segmented_cloud, ground_cloud
 
@@ -129,7 +127,7 @@ def least_square(ground_cloud, plane_param, max_iter, learning_rate, eps_param):
 #     data: 一帧完整点云
 # 输出：
 #     segmengted_cloud: 删除地面点之后的点云
-def ground_segmentation(data, threshold = 0.1, mode = 'ransac_lsq'):
+def ground_segmentation(data, threshold = 0.05, mode = 'ransac_lsq'):
     # 作业1
     # 屏蔽开始
     
@@ -140,15 +138,15 @@ def ground_segmentation(data, threshold = 0.1, mode = 'ransac_lsq'):
     segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
     print('segmented data points after ransac num:', segmented_cloud.shape[0])
     print('ground points after ransac num:', data.shape[0] - segmented_cloud.shape[0])
-    vis_ground(data, ground_cloud)
+    # vis_ground(data, ground_cloud)
     
     if mode == 'ransac_lsq':
-        plane_param = least_square(ground_cloud, plane_param, max_iter = 2000, learning_rate = 1e-7, eps_param = 0.0001)
-        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.25)
+        plane_param = least_square(ground_cloud, plane_param, max_iter = 3000, learning_rate = 2.5e-7, eps_param = 0.0001)
+        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
     
-    vis_ground(data, ground_cloud)
+    # vis_ground(data, ground_cloud)
     
-    print("Plane parameter after least square: ", plane_param)
+    print("Plane parameter after least square: ", plane_param[0], plane_param[1], plane_param[2], plane_param[3],)
     # import pdb; pdb.set_trace()
     print('origin data points num:', data.shape[0])
     print('segmented data points after lsq num:', segmented_cloud.shape[0])
@@ -184,23 +182,23 @@ def plot_clusters(data, cluster_index):
     plt.show()
 
 def main():
-    filename = 'datas/000000.bin'
-    origin_points = read_velodyne_bin(filename, vis=False)
+    filename = 'datas/000002.bin'
+    origin_points = read_velodyne_bin(filename)
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(origin_points)
     pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
-    pcd_filtered.paint_uniform_color([1,0,0])
+    # pcd_filtered.paint_uniform_color([1,0,0])
     # import pdb;pdb.set_trace()
     possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
     
-    segmented_points, ground_cloud = ground_segmentation(data=possible_ground_points)
+    segmented_points, ground_cloud = ground_segmentation(data=origin_points)
 
 
 
     pcd_segmented_points = o3d.geometry.PointCloud()
     pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
-    pcd_segmented_points.paint_uniform_color([0,0,0.5])
-    
+    # pcd_segmented_points.paint_uniform_color([1.,1.,1.])
+    pcd_segmented_points.paint_uniform_color([0.,0.,0.5])
     o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
     
