@@ -90,7 +90,7 @@ def ground_segmentation(data):
     # 屏蔽结束
     #delete ground points
     to_be_deleted = []
-    threshold_delete = 0.35
+    threshold_delete = 0.4
     for i in range(len(data_filtered)):
         #calulate distance to the ground
         d = math.fabs(np.sum(data_list[i]*plane_param[0]) + plane_param[1])
@@ -113,6 +113,23 @@ def clustering(data):
     # 作业2
     # 屏蔽开始
     ##DBSCAN
+    pcd_seg = o3d.geometry.PointCloud()
+    pcd_seg.points = o3d.utility.Vector3dVector(data)   
+    with o3d.utility.VerbosityContextManager(
+            o3d.utility.VerbosityLevel.Debug) as cm:
+        clusters_index = np.array(
+            pcd_seg.cluster_dbscan(eps=0.5, min_points=10, print_progress=True))
+
+    max_label = clusters_index.max()
+    print(f"point cloud has {max_label + 1} clusters")
+    colors = plt.get_cmap("tab20")(clusters_index / (max_label if max_label > 0 else 1))
+    colors[clusters_index < 0] = 0
+    pcd_seg.colors = o3d.utility.Vector3dVector(colors[:, :3])
+        
+    return pcd_seg
+
+def clustering_homemade(data):
+
     cur_cloud = o3d.geometry.PointCloud()
     cur_cloud.points = o3d.utility.Vector3dVector(data)
     radius = 10
@@ -130,13 +147,8 @@ def clustering(data):
         if x > min_samples:
             visit[i] = 1
             clusters[i] = cnum
-
-
-
-
     # 屏蔽结束
-
-    #return clusters_index'''
+    return pcd_seg
 
 # 功能：显示聚类点云，每个聚类一种颜色
 # 输入：
@@ -152,6 +164,25 @@ def plot_clusters(data, cluster_index):
     ax.scatter(data[:, 0], data[:, 1], data[:, 2], s=2, color=colors[cluster_index])
     plt.show()
 
+	
+
+def custom_draw_geometry_with_key_callback(pcd):
+
+    def change_background_to_black(vis):
+        opt = vis.get_render_option()
+        opt.background_color = np.asarray([0, 0, 0])
+        return False
+    def change_background_to_white(vis):
+        opt = vis.get_render_option()
+        opt.background_color = np.asarray([1, 1, 1])
+        return False
+    
+    key_to_callback = {}
+    key_to_callback[ord("B")] = change_background_to_black
+    key_to_callback[ord("W")] = change_background_to_white
+    o3d.visualization.draw_geometries_with_key_callbacks([pcd], key_to_callback)
+
+
 def main():
     root_dir = '/home/gfeng/gfeng_ws/point_cloud_processing/ch4_model_fitting/data' # 数据集路径
     cat = os.listdir(root_dir)
@@ -164,12 +195,11 @@ def main():
 
         origin_points = read_velodyne_bin(filename)
         segmented_points = ground_segmentation(data = origin_points)
-        #cluster_index = clustering(segmented_points)
+        pcd_seg = clustering(segmented_points)
+        custom_draw_geometry_with_key_callback(pcd_seg)
 
-        #plot_clusters(segmented_points, cluster_index)
-        pcd_ground = o3d.geometry.PointCloud()
-        pcd_ground.points = o3d.utility.Vector3dVector(segmented_points)       
-        o3d.visualization.draw_geometries([pcd_ground])
+        #plot_clusters(segmented_points, cluster_index)  
+        #o3d.visualization.draw_geometries([pcd_seg])
 
 if __name__ == '__main__':
     main()
