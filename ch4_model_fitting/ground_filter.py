@@ -21,7 +21,7 @@ def vis_ground(data, ground_cloud):
     
     pcd_segmented_points = o3d.geometry.PointCloud()
     pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
-    pcd_segmented_points.paint_uniform_color([0./255.,224./255.,230./255.])
+    pcd_segmented_points.paint_uniform_color([1.,1.,1.])
     
     o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
@@ -125,14 +125,14 @@ def ground_segmentation(data, threshold = 0.09, mode = 'ransac_lsq'):
     plane_param = ransac(data_list, threshold)
     print("Plane parameter after ransac: ", plane_param)
     
-    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
+    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.25)
     print('segmented data points after ransac num:', segmented_cloud.shape[0])
     print('ground points after ransac num:', data.shape[0] - segmented_cloud.shape[0])
     # vis_ground(data, ground_cloud)
     
     if mode == 'ransac_lsq':
-        plane_param = least_square(ground_cloud, plane_param, max_iter = 1000, learning_rate = 1e-6, eps_param = 0.0001)
-        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.38)
+        plane_param = least_square(ground_cloud, plane_param, max_iter = 2000, learning_rate = 1e-5, eps_param = 0.0001)
+        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
     
     # vis_ground(data, ground_cloud)
     
