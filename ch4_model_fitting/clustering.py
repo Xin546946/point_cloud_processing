@@ -5,6 +5,7 @@ import math
 import copy
 import random
 from sklearn import cluster, datasets, mixture
+from sklean.neighbors import KDTree
 from sklearn.preprocessing import normalize
 from itertools import cycle, islice
 import matplotlib.pyplot as plt
@@ -12,29 +13,68 @@ from mpl_toolkits.mplot3d import Axes3D
 import open3d as o3d
 from test import read_velodyne_bin
 
-def dbscan(data, distance = 0.3, min_samples = 15):
-    points = list(copy.deepcopy(data))
-    clusters = np.zeros(len(points)).reshape(len(points),1)
-    current_cluster = 0
-    visited = list(np.zeros(len(points)))
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    pcd_tree = o3d.geometry.KDTreeFlann(pcd)
-    import pdb; pdb.set_trace()
-    for i in range(len(points)):
-        if visited[i] == 0:
-            build_current_cluster = True
-            while build_current_cluster:
-            num, indices, _ = pcd_tree.search_radius_vector_3d(points[i], radius = distance)
-            if num >= min_samples:
-                visited[i] = 1
-                
-                num, indices, _ = pcd_tree.search_radius_vector_3d(points[i], radius = distance)
-                
-                
+class Sample(object):
+    def __init__(self,data):
+        self.data = data
+        self.visited = False
+        self.label = -1
+        self.mode = None # ['core', 'noise', 'border']
+
+class DBSCAN(object):
+    def __init__(self, min_samples, radius):
+        self.min_samples = min_samples
+        self.radius = radius
+        self.leaf_size = leaf_size
+        self.samples = []
+        self.cluster_counter = 0
+        self.tree = None
+        self.data = data
+
+    def build_samples(self, data):
+        for d in data:
+            self.samples.append(Sample(d))
+
+    def build_kdtree(self, data):
+        self.kdtree = KDTree(data, leaf_size=self.leaf_size)
+
+    def find_neighbors(self, sample):
+        if sample.mode == 'core':
+            sample.label = self.cluster_counter
+            core_point_neighbour_indices = self.tree.query_radius(self.data[i], r = self.radius)
+            for i in core_point_neighbour_indices:
+                self.find_neighbours(self.samples[i])
 
 
+    def fit(self, data):
+        self.data = data
+        self.build_samples(data)
+        # while(not self.all_points_are_visited):
+        for sample in self.samples:
+            if sample.visited == True:
+                continue
+            sample.visited = True
+            indices = self.tree.query_radius(sample.data, r=self.radius)
+            if len(indices) <= self.min_samples:
+                sample.mode = 'noise'
+                continue
+            else:
+                # sample.mode = 'core'
+                sample.label = self.cluster_counter
+                for i in indices:
+                    if self.samples[i].visited == False:
+                        continue
+                    core_point_neighbour_indices = self.tree.query_radius(self.samples[i].data, r=self.radius)
+                    if len(core_point_neighbour_indices) < self.min_samples:
+                        self.samples[i].mode = 'border'
+                        continue
+                    self.samples[i].mode = 'core'
+                    self.samples[i].label = self.cluster_counter
+                    for id_ in core_point_neighbour_indices:
+                        if self.samples[i].visited == False:
 
+
+                    # self.samples[i].label = self.cluster_counter
+                    
 
 
 # 功能：从点云中提取聚类
@@ -52,9 +92,21 @@ def clustering(data):
     return clusters_index
 
 def main():
-    filename = 'datas/000001.bin'
-    origin_points = read_velodyne_bin(filename)
-    dbscan(origin_points)
+    n_samples = 1500
+    noisy_circles = datasets.make_circles(n_samples=n_samples, factor=0.5, noise=0.05)
+    datas, labels = noisy_circles
+    
+    dbscan = DBSCAN(min_samples, radius)
+    dbscan.fit(datas)
+    print(dbscan.labels)
+
+    # colors = ['b','r']
+    # plt.figure(figsize=(7,7))
+    # # import pdb; pdb.set_trace()
+    # for i in range(datas.shape[0]):
+    #     plt.scatter(datas[i][0], datas[i][1], c = colors[labels[i]], s=2)
+
+    # plt.show()
 
 if __name__ == '__main__':
     main()

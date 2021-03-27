@@ -117,7 +117,7 @@ def least_square(ground_cloud, plane_param, max_iter, learning_rate, eps_param):
 #     data: 一帧完整点云
 # 输出：
 #     segmengted_cloud: 删除地面点之后的点云
-def ground_segmentation(data, threshold = 0.09, mode = 'ransac_lsq'):
+def ground_segmentation(data, threshold = 0.15):
     # 作业1
     # 屏蔽开始
     
