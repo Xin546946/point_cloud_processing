@@ -33,10 +33,6 @@ def read_velodyne_bin(path):
     return np.asarray(pc_list, dtype=np.float32)
 
 
-
-
-
-
 # 功能：从点云文件中滤除地面点
 # 输入：
 #     data: 一帧完整点云
@@ -128,28 +124,6 @@ def clustering(data):
         
     return pcd_seg
 
-def clustering_homemade(data):
-
-    cur_cloud = o3d.geometry.PointCloud()
-    cur_cloud.points = o3d.utility.Vector3dVector(data)
-    radius = 10
-    min_samples = 200
-    visit = np.zeros(len(data))
-    clusters = np.zeros(len(data))
-    cnum = 1
-    pcd_tree = o3d.geometry.KDTreeFlann(cur_cloud)
-    for i in range(len(data)):
-        if visit[i] is 0
-        #find its neighbors' indices within r 
-        query = data[i,:]
-        [x, idx, _] = pcd_tree.search_radius_vector_3d(query, radius)
-        #
-        if x > min_samples:
-            visit[i] = 1
-            clusters[i] = cnum
-    # 屏蔽结束
-    return pcd_seg
-
 # 功能：显示聚类点云，每个聚类一种颜色
 # 输入：
 #      data：点云数据（滤除地面后的点云）
@@ -164,7 +138,6 @@ def plot_clusters(data, cluster_index):
     ax.scatter(data[:, 0], data[:, 1], data[:, 2], s=2, color=colors[cluster_index])
     plt.show()
 
-	
 
 def custom_draw_geometry_with_key_callback(pcd):
 
