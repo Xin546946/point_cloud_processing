@@ -15,13 +15,13 @@ def vis_ground(data, ground_cloud):
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(data)
     pcd_filtered, _ = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.7)
-    # pcd_filtered.paint_uniform_color([1,0,0])
+    pcd_filtered.paint_uniform_color([1,0,0])
     # import pdb;pdb.set_trace()
     possible_ground_points = preprocessing(np.asarray(pcd_filtered.points))
     
     pcd_segmented_points = o3d.geometry.PointCloud()
     pcd_segmented_points.points = o3d.utility.Vector3dVector(ground_cloud)
-    pcd_segmented_points.paint_uniform_color([1.,1.,1.])
+    pcd_segmented_points.paint_uniform_color([0.,0.1,0.8])
     
     o3d.visualization.draw_geometries([pcd_filtered, pcd_segmented_points])
 
@@ -125,14 +125,13 @@ def ground_segmentation(data, threshold = 0.15):
     plane_param = ransac(data_list, threshold)
     print("Plane parameter after ransac: ", plane_param)
     
-    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.25)
+    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.15)
     print('segmented data points after ransac num:', segmented_cloud.shape[0])
     print('ground points after ransac num:', data.shape[0] - segmented_cloud.shape[0])
     # vis_ground(data, ground_cloud)
     
-    if mode == 'ransac_lsq':
-        plane_param = least_square(ground_cloud, plane_param, max_iter = 2000, learning_rate = 1e-5, eps_param = 0.0001)
-        segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.3)
+    plane_param = least_square(ground_cloud, plane_param, max_iter = 2000, learning_rate = 1e-5, eps_param = 0.0001)
+    segmented_cloud, ground_cloud = split_points(data_list, plane_param, 0.15)
     
     # vis_ground(data, ground_cloud)
     
@@ -142,3 +141,7 @@ def ground_segmentation(data, threshold = 0.15):
     print('segmented data points after lsq num:', segmented_cloud.shape[0])
     print('ground points after lsq num:', data.shape[0] - segmented_cloud.shape[0])
     return segmented_cloud, ground_cloud
+
+
+if __name__ == '__main__':
+    main()

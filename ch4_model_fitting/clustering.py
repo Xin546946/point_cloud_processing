@@ -52,14 +52,17 @@ class DBSCAN(object):
         for sample in self.samples:
             if sample.visited == True:
                 continue
+            
             sample.visited = True
             indices = self.tree.query_radius(sample.data, r=self.radius)
             if len(indices) <= self.min_samples:
                 sample.mode = 'noise'
                 continue
-            else:
-                # sample.mode = 'core'
-                sample.label = self.cluster_counter
+        
+            # sample.mode = 'core'
+            sample.label = self.cluster_counter
+            while True:
+                neighbour_ids_update =set()
                 for i in indices:
                     if self.samples[i].visited == False:
                         continue
@@ -70,11 +73,14 @@ class DBSCAN(object):
                     self.samples[i].mode = 'core'
                     self.samples[i].label = self.cluster_counter
                     for id_ in core_point_neighbour_indices:
-                        if self.samples[i].visited == False:
-
-
+                        if self.samples[id_].visited == False:
                     # self.samples[i].label = self.cluster_counter
-                    
+                            neighbour_ids_update.add(id_)
+                neighbour_ids = np.array([i for i in neighbour_ids_update if self.samples[i].visited == False])
+                if len(neighbour_ids) == 0:
+                    break
+                neighbour_points
+
 
 
 # 功能：从点云中提取聚类
