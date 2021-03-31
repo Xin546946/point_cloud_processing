@@ -35,7 +35,7 @@ class ModelNetDataset(data.Dataset):
                 for i in range(3):
                     point.append(np.float32(line.strip().split(',')[i]))
                 point_cloud.append(point)
-        point_cloud = np.asarray(point_cloud)
+        point_cloud = np.expand_dims(np.asarray(point_cloud), axis = 2)
         point_set = torch.from_numpy(point_cloud.astype(np.float32))
         cata = torch.from_numpy(np.array([cata]).astype(np.int64))
         return point_set, cata
@@ -44,8 +44,3 @@ class ModelNetDataset(data.Dataset):
         return len(self.fns)
 
 if __name__ == '__main__':
-    path = "/home/gfeng/gfeng_ws/modelnet40_dataset"
-    mydata = ModelNetDataset(path, split='test')
-    ##print(mydata.fns)
-    point_cloud, cls = mydata[0]
-    print('files loaded')

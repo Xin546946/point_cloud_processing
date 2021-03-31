@@ -15,17 +15,3 @@ def getModel():
     return model, opt
 
 if __name__ == '__main__':
-    loss_fn = nn.BCELoss()   
-    model, opt = getModel()
-    batch_size = 10
-
-    train_dataset = ModelNetDataset(path = "/home/gfeng/gfeng_ws/modelnet40_dataset", split = 'train')
-    test_dataset = ModelNetDataset(path = "/home/gfeng/gfeng_ws/modelnet40_dataset", split = 'test')
-    train_data_loader = torch.utils.data.DataLoader(train_dataset, 
-                                                    batch_size=batch_size,
-                                                    shuffle = True,
-                                                    num_workers=int(opt.workers))
-    test_data_loader = torch.utils.data.DataLoader(test_dataset,
-                                                   batch_size=batch_size,
-                                                   shuffle=False
-                                                   num_workers=int(opt.workers))
