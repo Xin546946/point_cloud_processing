@@ -34,6 +34,10 @@ class Pointnet(nn.Module):
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
         return x
+def accuracy(y_pred, y_true):
+    y_pred = torch.argmax(y_pred, dim=1)
+    acc = (y_pred == y_true).float().mean()
+    return acc
 
 if __name__ == '__main__':
     sim_data = Variable(torch.rand(32,3,2500))
