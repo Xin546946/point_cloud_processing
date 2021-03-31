@@ -5,14 +5,11 @@ import torch
 
 
 class ModelNetDataset(data.Dataset):
-    def __init__(self, path, data_agumentation=True):
+    def __init__(self, path, data_agumentation=True, split = 'train'):
         self.root = path
         self.data_agumentation = data_agumentation
+        self.split = split
         self.fns = []
-        with open(os.path.join(self.root, '{}.txt'.format('filelist')), 'r') as f:
-            for line in f:
-                self.fns.append(line.strip())
-        
         self.cat = {}##use hashtable to store catagories and their indices
         with open(os.path.join(self.root, '{}.txt'.format('modelnet40_shape_names')), 'r') as f:
             i = 0
@@ -20,14 +17,19 @@ class ModelNetDataset(data.Dataset):
                 ls = line.strip()
                 self.cat[ls] = int(i)
                 i += 1
+
+        with open(os.path.join(self.root, 'modelnet40_{}.txt'.format(split)), 'r') as f:
+            for line in f:
+                self.fns.append('{}.txt'.format(line.strip()))
         #print(self.cat)
         self.classes = list(self.cat.keys())
 
     def __getitem__(self, index):
         fn = self.fns[index]
-        cata = self.cat[fn.split('/')[0]]
+        cat_name = fn.split('_')[0]
+        cata = self.cat[cat_name]
         point_cloud = []
-        with open(os.path.join(self.root, fn), 'r') as f:
+        with open(os.path.join(self.root, cat_name, fn), 'r') as f:
             for line in f:
                 point = []
                 for i in range(3):
@@ -39,11 +41,11 @@ class ModelNetDataset(data.Dataset):
         return point_set, cata
 
     def __len__(self):
-        return len(self.root)
+        return len(self.fns)
 
 if __name__ == '__main__':
     path = "/home/gfeng/gfeng_ws/modelnet40_dataset"
-    mydata = ModelNetDataset(path)
+    mydata = ModelNetDataset(path, split='test')
     ##print(mydata.fns)
     point_cloud, cls = mydata[0]
     print('files loaded')

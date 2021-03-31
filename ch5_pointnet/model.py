@@ -2,6 +2,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 import numpy as np
+from dataloader import ModelNetDataset
 
 class Pointnet(nn.Module):
     def __init__(self):
@@ -23,9 +24,12 @@ class Pointnet(nn.Module):
         return x
     
 if __name__ == '__main__':
-    a = np.array([[[1,2,3]],[[2,3,4]]])
-    a = torch.from_numpy(a)
-    print(a)
-    net = Pointnet()
-    y = net.forward(a)
+    path = "/home/gfeng/gfeng_ws/modelnet40_dataset"
+    mydata = ModelNetDataset(path, split='test')
+    ##print(mydata.fns)
+    point_cloud, cls = mydata[0]
+    print('files loaded')
+
+    mynet = Pointnet()
+    y = mynet.forward(point_cloud)
     print(y)
