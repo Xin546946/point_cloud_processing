@@ -14,7 +14,7 @@ class Pointnet(nn.Module):
 
         self.fc1 = nn.Linear(1024, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 9)
+        self.fc3 = nn.Linear(256, 9)##change this to num of classes
 
         self.bn1 = nn.BatchNorm1d(64)
         self.bn2 = nn.BatchNorm1d(64)
@@ -33,26 +33,12 @@ class Pointnet(nn.Module):
         x = F.relu(self.bn4(self.fc1(x)))
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
-
-        iden = Variable(torch.from_numpy(np.array([1,0,0,0,1,0,0,0,1]).astype(np.float32))).view(1,9).repeat(batchsize,1)
-        if x.is_cuda:
-            iden = iden.cuda()
-        x = x + iden
-        x = x.view(-1, 3, 3)
         return x
 
-def feature_transform_regularizer(trans):
-    d = trans.size()[1]
-    batchsize = trans.size()[0]
-    I = torch.eye(d)[None, :, :]
-    if trans.is_cuda:
-        I = I.cuda()
-    loss = torch.mean(torch.norm(torch.bmm(trans, trans.transpose(2,1)) - I, dim=(1,2)))
-    return loss
-    
 if __name__ == '__main__':
     sim_data = Variable(torch.rand(32,3,2500))
-    trans = Pointnet()
-    out = trans(sim_data)
-    print('stn', out.size())
-    print('loss', feature_transform_regularizer(out))
+    model = Pointnet()
+    loss_fn = nn.CrossEntropyLoss() 
+    pred = model(sim_data)
+    print('prediction', pred)
+    print('loss')
