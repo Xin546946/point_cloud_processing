@@ -14,7 +14,7 @@ class Pointnet(nn.Module):
 
         self.fc1 = nn.Linear(1024, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 9)##change this to num of classes
+        self.fc3 = nn.Linear(256, 40)##change this to num of classes
 
         self.bn1 = nn.BatchNorm1d(64)
         self.bn2 = nn.BatchNorm1d(64)
@@ -33,17 +33,19 @@ class Pointnet(nn.Module):
         x = F.relu(self.bn4(self.fc1(x)))
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
-        return x
-def accuracy(y_pred, y_true):
+        return F.log_softmax(x, dim=1)
+
+'''def accuracy(y_pred, y_true):
     y_pred = torch.argmax(y_pred, dim=1)
     acc = (y_pred == y_true).float().mean()
-    return acc
+    return acc'''
 
 if __name__ == '__main__':
+
     sim_data = Variable(torch.rand(32,3,2500))
     model = Pointnet()
-    loss_fn = nn.CrossEntropyLoss() 
+    #loss_fn = nn.CrossEntropyLoss() 
     pred = model(sim_data)
     preindex = torch.argmax(pred, dim=1)
-    print('prediction', pred)
-    print('loss')
+    print('prediction', preindex)
+
