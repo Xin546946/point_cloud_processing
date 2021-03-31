@@ -25,7 +25,7 @@ def train(numOfEpochs):
 
     model = Pointnet()
     optimizer = torch.optim.Adam(model.parameters(), lr = 0.001, weight_decay=1e-5)
-    loss_fn = torch.nn.CrossEntropyLoss()
+    #loss_fn = torch.nn.CrossEntropyLoss()
     print("Model loaded, meta parameters set")
     if torch.cuda.is_available():
         model = model.cuda()
@@ -37,18 +37,20 @@ def train(numOfEpochs):
     for epoch in range(numOfEpochs):
         for i,data in enumerate(training_dataset,0):
             points, target = data
-            target = target[:, 0]
+            target = target[:, 0]##16
+
             points = points.transpose(2, 1)
             points, target = points.cuda(), target.cuda()
             optimizer.zero_grad()
-            pred = model.forward(points)
-            loss = loss_fn(pred, target)
+            pred = model.forward(points)##16,40
+
+            loss = F.nll_loss(pred, target)
             loss.backward()
             optimizer.step()
 
             pred_choice = pred.data.max(1)[1]
             correct = pred_choice.eq(target.data).cpu().sum()
-        print("epoch ",epoch, "current loss is ", loss.item())
+        print("epoch ",epoch, ", current loss is ", loss.item())
 
 if __name__ == '__main__':
     train(numOfEpochs=5)

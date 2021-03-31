@@ -1,6 +1,5 @@
 import numpy as np
 
-a = 'first'
-b = 'second'
-c = a + '_' + b
-print(c)
+a = np.array([10])
+b = a[:,0]
+print(b)
