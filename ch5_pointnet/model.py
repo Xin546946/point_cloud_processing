@@ -40,5 +40,6 @@ if __name__ == '__main__':
     model = Pointnet()
     loss_fn = nn.CrossEntropyLoss() 
     pred = model(sim_data)
+    preindex = torch.argmax(pred, dim=1)
     print('prediction', pred)
     print('loss')
