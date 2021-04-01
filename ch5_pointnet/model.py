@@ -9,15 +9,15 @@ class Pointnet(nn.Module):
     def __init__(self):
         super(Pointnet, self).__init__()
         self.conv1 = nn.Conv1d(3,64,1)
-        self.conv2 = nn.Conv1d(64,64,1)
-        self.conv3 = nn.Conv1d(64,1024,1)
+        self.conv2 = nn.Conv1d(64,128,1)
+        self.conv3 = nn.Conv1d(128,1024,1)
 
         self.fc1 = nn.Linear(1024, 512)
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 40)##change this to num of classes
 
         self.bn1 = nn.BatchNorm1d(64)
-        self.bn2 = nn.BatchNorm1d(64)
+        self.bn2 = nn.BatchNorm1d(128)
         self.bn3 = nn.BatchNorm1d(1024)
         self.bn4 = nn.BatchNorm1d(512)
         self.bn5 = nn.BatchNorm1d(256)
