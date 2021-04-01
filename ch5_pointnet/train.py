@@ -50,7 +50,7 @@ def train(numOfEpochs):
 
             pred_choice = pred.data.max(1)[1]
             correct = pred_choice.eq(target.data).cpu().sum()
-        print("epoch ",epoch, ", current loss is ", loss.item())
+        print("epoch",epoch, ", current loss is :", loss.item(), " accuracy is :", correct/16)
 
 if __name__ == '__main__':
     train(numOfEpochs=5)
