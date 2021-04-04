@@ -71,29 +71,13 @@ class ModelNetDataset(torch.utils.data.Dataset):
             num_clouds = len(clouds)
             
             for id_, cloud in enumerate(tqdm.tqdm(clouds)):
-                if self.data_mode_ == 'train':
-                    if id_ < 0.5 * num_clouds:
-                        current_cloud_path = os.path.join(current_cloud_folder, cloud)
-                        points = read_cloud_from_txt(current_cloud_path)
-                        self.clouds_labels_.append([points, num_label])
-                elif self.data_mode_ == 'validation':
-                    if 0.5 * num_clouds <= id_ < 0.8 * num_clouds:   
-                        current_cloud_path = os.path.join(current_cloud_folder, cloud)
-                        points = read_cloud_from_txt(current_cloud_path)
-                        self.clouds_labels_.append([points, num_label])
-                else:
-                    if id_ >= 0.8 * num_clouds:    
-                        current_cloud_path = os.path.join(current_cloud_folder, cloud)
-                        points = read_cloud_from_txt(current_cloud_path)
-                        self.clouds_labels_.append([points, num_label])
+                current_cloud_path = os.path.join(current_cloud_folder, cloud)
+                points = read_cloud_from_txt(current_cloud_path)
+                self.clouds_labels_.append([points, num_label, current_cloud_path])
                     
     def __getitem__(self, index):
         
-        # if self.train_or_val_ == 'train':
-        #     cloud_label = self.clouds_labels_train_[index] 
-        # elif self.train_or_val_ == 'validation':
-        #     cloud_label = self.clouds_labels_validation_[index] 
-        # else:
+
         cloud_label = self.clouds_labels_[index] 
         
         cloud = cloud_label[0] 
@@ -105,16 +89,11 @@ class ModelNetDataset(torch.utils.data.Dataset):
             cloud[:,[0,2]] = cloud[:,[0,2]].dot(rotation_matrix) # random rotation
             cloud += np.random.normal(0, 0.02, size=cloud.shape) # random jitter
         
-        return cloud, cloud_label[1]   
+        return cloud, cloud_label[1], cloud_label[2]
     
     def __len__(self):
         return len(self.clouds_labels_)
-        # if self.train_or_val_ == 'train':
-        #     return len(self.clouds_labels_train_)
-        # elif self.train_or_val_ == 'validation':
-        #     return len(self.clouds_labels_validation_)
-        # else:
-        #     return len(self.clouds_labels_test_)
+
     
 
 if __name__ == '__main__':

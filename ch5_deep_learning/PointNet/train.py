@@ -29,7 +29,7 @@ def run_epoch(data_loader, model, mode, learning_rate=0.0001, weight_decay=1e-5)
     accuracy_list = []
      
     for i, data in enumerate(tqdm.tqdm(data_loader, 0)):
-        point, label = data
+        point, label, _ = data
         #label = torch.unsqueeze(label, 1)
         batch_size = point.shape[0]
         

@@ -12,8 +12,8 @@ def create_experiment_dir(path):
     os.makedirs(path + '/eval', exist_ok=True)
     
     # train_path = os.path.join(path,'train')
-    # eval_path = os.path.join(path,'eval')
-    # os.system('touch {}/train_loss.json'.format(train_path))
+    eval_path = os.path.join(path,'eval')
+    os.system('touch {}/classification_report.txt'.format(eval_path))
     # os.system('touch {}/validation_loss.json'.format(train_path))
     # os.system('touch {}/config.json'.format(train_path))
     # os.system('touch {}/feature_label.json'.format(eval_path))
