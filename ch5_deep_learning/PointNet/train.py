@@ -105,7 +105,7 @@ def train(args):
         
         
         # save and rewrite the train & validation loss for each 10 epoch, save and plot it for each 50 epochs   
-        plt.subplot() 
+        plt.subplots() 
         plt.plot(counter,train_loss_history, label = 'train loss')
         plt.plot(counter,validation_loss_history, label = 'validation loss')
         plt.legend()
@@ -116,7 +116,7 @@ def train(args):
         save_path = os.path.join(args.exp_dir + '/train/', fig_file_name)
         plt.savefig(args.exp_dir + '/train/' + fig_file_name)  
         
-        plt.subplot() 
+        plt.subplots() 
         plt.plot(counter,train_accuracy_history, label = 'train accuracy')
         plt.plot(counter,val_accuracy_history, label = 'validation accuracy')
         plt.legend()
