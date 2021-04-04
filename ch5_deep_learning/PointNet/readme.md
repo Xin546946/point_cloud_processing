@@ -6,12 +6,13 @@ The constraints of point cloud:
   * Point clouds are unordered. Algorithms has to be invariant to permutations of the input set.
   * If we rotates a chair, it is still a chair. Network must be invatiant to rigid transformation.
   * Network should capture interactions among points.
-  
+
   PointNet introduces a neural network that takes all these properties into account. In this part, the implementation of PointNet as well as the structure of network pipline will be introduced.
 
 ### 1.2. Project Pipline
 This main components of deep learning in pytorch are **dataloader, model, train pipline and evaluation pipline and some utils**. Model, dataloader, argparser and util script are under utils. Besides, train and eval are directly under current workspace. Because train and eval script will be explicitely used for train and test the networks.
-* ***Dataloader***: The work flow of loading data is to define dataset and dataloader. Dataset indicates a dataset object to load data from PyTorch. User can define own $__getitem__$ and some constructors. For efficiency, we'd better read data from file at the constructor. $__getitem__$ just "get the item at the index". Dataloader represnets a Python iterable over a dataset.
+* ***Dataloader***: The work flow of loading data is to define dataset and dataloader. Dataset indicates a dataset object to load data from PyTorch. User can define own getitem and some constructors. For efficiency, we'd better read data from file at the constructor. getitem just "get the item at the index". Dataloader represnets a Python iterable over a dataset.
+* Testing dataloader is very necessary and helpful for debugging the whole project. Because model and loss are queit intuitive and simple, but dataloader is somehow implicitly represents the dataset. So visualization of it might help you to get more confident for you code.
   ~~~python
   class ModelNetDataset(torch.utils.data.Dataset):
     
@@ -138,7 +139,7 @@ This main components of deep learning in pytorch are **dataloader, model, train 
   * Split data into train and validation data, in order to monitor the quality of the learning process at each epoch.
   * Save the best model, if validation_loss is currently the best (smallest).
   * Save two plots, one is train & val loss, the other is train & val accuracy.
-   
+  
   ~~~python
   def train(args):
     
@@ -218,9 +219,53 @@ This main components of deep learning in pytorch are **dataloader, model, train 
 * ***Evaluation pipline***:
   * The classification quality on test dataset will be evaluated. In addition, the wrong classified objectes are written onto the classification report.txt, so that we can know which object at specific path are wrongly classified after evaluation.
   ~~~python
+def evaluate(args):
+      test_loader = load_data(cloud_folder_path=args.data_dir, data_mode='test',batch_size=args.batch_size, num_class=args.num_class)
 
-  ~~~ 
-
+      cur_time = round(time.time())
+      report_path = '{}/eval/classification_report_{}.txt'.format(args.exp_dir, cur_time)
+  
+      os.system('touch {}/eval/classification_report_{}.txt'.format(args.exp_dir, cur_time))
+  
+      print("@@@@@Load model...")
+      model = PointNet(num_class=args.num_class)
+  
+      if torch.cuda.is_available():
+          model = model.cuda()
+  
+      print("Start to evaluate the networks...")
+      model_path = os.path.join(args.exp_dir ,'train/best_model.pth')
+      model.load_state_dict(torch.load(model_path))
+      model.eval()
+      criterion = torch.nn.CrossEntropyLoss()
+  
+      accuracy_list = []
+      for i, data in enumerate(tqdm.tqdm(test_loader, 0)):
+          points, target, data_path = data
+          batch_size = points.shape[0]
+          if torch.cuda.is_available():
+              points, target = points.cuda(), target.cuda()
+          
+          pred = model(points)
+          loss = criterion(pred, target)
+  
+          pred_choice = pred.data.max(1)[1]
+          correct = pred_choice.eq(target.data).cpu().sum()
+          acc = correct / batch_size
+          accuracy_list.append(acc)
+          f = open(report_path, 'a')
+          #import pdb; pdb.set_trace()
+          if correct == 0:
+              f.write(data_path[0])
+              f.write(" ")
+              f.write(str(pred_choice.item()))
+              f.write("\n")
+              f.close()
+              
+      print("Done classification on", i, " point clouds")
+      print('Average accuracy of the model is : ', np.mean(np.asarray(accuracy_list), axis = 0))
+  ~~~
+  
  * ***Result***:
 
   <center>
