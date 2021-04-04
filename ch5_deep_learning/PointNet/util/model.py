@@ -30,12 +30,15 @@ class PointNet(torch.nn.Module):
         #import pdb; pdb.set_trace()
         batch_size = x.shape[0]
         x = F.relu(self.bn1(self.conv1(x)))
+        x = F.relu(self.bn1(self.conv2(x)))
+        x = F.relu(self.bn1(self.conv2(x)))
+
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
         
         x = torch.max(x, 2, keepdim=True)[0]
-        #TODO bug! at last batch!
         x = x.view(-1, 1024)
+    
         
         x = F.relu(self.bn4(self.dropout(self.fc1(x))))
         x = F.relu(self.bn5(self.dropout(self.fc2(x))))
