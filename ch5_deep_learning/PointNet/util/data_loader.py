@@ -7,6 +7,7 @@ import tqdm
 import copy
 import math
 import matplotlib.pyplot as plt
+from util.utils import read_cloud_from_txt, vis_point_cloud
 
 def read_off(filename):
     points = []
@@ -31,18 +32,6 @@ def read_off(filename):
 
 
          
-def read_cloud_from_txt(cloud_path):
-    points_list = [] 
-    with open(cloud_path, 'r') as f:
-        while True:
-            lines = f.readline()
-            
-            if not lines:
-                break
-            point = [math.fabs(float(i)) for i in lines.split(',')[0:3]]
-            points_list.append(point)
-    return np.asarray(points_list, dtype = np.float32).T
-
 class ModelNetDataset(torch.utils.data.Dataset):
     
     def __init__(self, cloud_folder, data_mode = 'train', data_augmentation = True, num_class_to_use : int=10):
@@ -129,16 +118,27 @@ class ModelNetDataset(torch.utils.data.Dataset):
     
 
 if __name__ == '__main__':
-    cloud_folder_path = '/mvtec/home/jinx/privat/modelnet40_normal_resampled'
+    #cloud_folder_path = '/mvtec/home/jinx/privat/modelnet40_normal_resampled'
+    cloud_folder_path = '/home/gfeng/gfeng_ws/modelnet40_dataset'
     # cloud_folder = torchvision.datasets.ImageFolder(cloud_folder_path)
     
-    cloud_dataset_test = ModelNetDataset(cloud_folder=cloud_folder_path, data_mode = 'test', num_class_to_use=2)
-    cloud_dataset_train = ModelNetDataset(cloud_folder=cloud_folder_path, data_mode = 'train', num_class_to_use=2)
-    cloud_dataset_val = ModelNetDataset(cloud_folder=cloud_folder_path, data_mode = 'validation', num_class_to_use=2)
-    cloud_loader = torch.utils.data.DataLoader(cloud_dataset_train, batch_size = 32, shuffle = True, num_workers = 8)
-    # import pdb; pdb.set_trace()
-    print("The length of train: {}, validation: {}, test: {}".format(len(cloud_dataset_train), len(cloud_dataset_val), len(cloud_dataset_test)))
+    cloud_dataset_test = ModelNetDataset(cloud_folder=cloud_folder_path, data_augmentation=False ,data_mode = 'test', num_class_to_use=10)
+    #cloud_dataset_train = ModelNetDataset(cloud_folder=cloud_folder_path, data_mode = 'train', num_class_to_use=10)
+    #cloud_dataset_val = ModelNetDataset(cloud_folder=cloud_folder_path, data_mode = 'validation', num_class_to_use=3)
+    cloud_loader = torch.utils.data.DataLoader(cloud_dataset_test, batch_size = 32, shuffle = True, num_workers = 8)
+
+    #print("The length of train: {}, validation: {}, test: {}".format(len(cloud_dataset_train), len(cloud_dataset_val), len(cloud_dataset_test)))
+    n = 0
     for point, label in cloud_loader:
-        pass
+        #import pdb; pdb.set_trace()
+        n += 1
+        cur_poind_cloud = point.transpose(2,1)[0].numpy()
+        print(cloud_dataset_test.labels[label[0]])
+        vis_point_cloud(cur_poind_cloud)
+        if n > 10:
+            break
+        
+
+
         
     

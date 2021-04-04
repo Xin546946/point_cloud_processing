@@ -24,13 +24,14 @@ def run_epoch(data_loader, model, mode, learning_rate=0.0001, weight_decay=1e-5)
         
     optimizer = torch.optim.Adam(model.parameters(),lr = learning_rate,  weight_decay=weight_decay)
     criterion = torch.nn.CrossEntropyLoss()
-    
-    loss_list = [] 
+
+    loss_list = []
     accuracy_list = []
      
     for i, data in enumerate(tqdm.tqdm(data_loader, 0)):
         point, label = data
-        batch_size = point.shape[0] 
+        #label = torch.unsqueeze(label, 1)
+        batch_size = point.shape[0]
         
         if torch.cuda.is_available():
             point, label = point.cuda(), label.cuda()
@@ -48,14 +49,14 @@ def run_epoch(data_loader, model, mode, learning_rate=0.0001, weight_decay=1e-5)
 
         pred_choice = predict.data.max(1)[1]
         correct = pred_choice.eq(label.data).cpu().sum()
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         loss_list.append(loss_.item())
-        accuracy_list.append(correct)
+        accuracy_list.append(correct / batch_size)
         
     loss_return = np.mean(np.asarray(loss_list))
     accuracy_return = np.mean(np.asarray(accuracy_list))
     
-    return loss_return, accuracy_return / batch_size
+    return loss_return, accuracy_return
 
 def print_info(curr_epoch, train_loss_per_epoch, train_accuracy_per_epoch, validation_loss_per_epoch, val_accuracy_per_epoch):
     print(
@@ -85,7 +86,8 @@ def train(args):
     train_accuracy_history = [] 
     val_accuracy_history = [] 
     counter = [] 
-    
+    best_validation_loss = float('inf')
+
     for curr_epoch in range(args.num_epochs):
         counter.append(curr_epoch)
         train_loss_per_epoch, train_accuracy_per_epoch = run_epoch(data_loader = train_loader, model = model, mode='train', learning_rate=args.learning_rate, weight_decay=args.weight_decay)
@@ -99,13 +101,12 @@ def train(args):
         
         print_info(curr_epoch, train_loss_per_epoch, train_accuracy_per_epoch, validation_loss_per_epoch, val_accuracy_per_epoch)
         
-        
-        save_model_path = args.exp_dir + '/train/current_model.pth'
-        torch.save(model.state_dict(), save_model_path)
-        
-        
+        if validation_loss_per_epoch < best_validation_loss:
+            save_model_path = args.exp_dir + '/train/best_model.pth'
+            torch.save(model.state_dict(), save_model_path)
+            
         # save and rewrite the train & validation loss for each 10 epoch, save and plot it for each 50 epochs   
-        plt.subplot() 
+        plt.subplots() 
         plt.plot(counter,train_loss_history, label = 'train loss')
         plt.plot(counter,validation_loss_history, label = 'validation loss')
         plt.legend()
@@ -116,7 +117,7 @@ def train(args):
         save_path = os.path.join(args.exp_dir + '/train/', fig_file_name)
         plt.savefig(args.exp_dir + '/train/' + fig_file_name)  
         
-        plt.subplot() 
+        plt.subplots() 
         plt.plot(counter,train_accuracy_history, label = 'train accuracy')
         plt.plot(counter,val_accuracy_history, label = 'validation accuracy')
         plt.legend()
@@ -127,6 +128,7 @@ def train(args):
         save_path = os.path.join(args.exp_dir + '/train/', fig_file_name)
         plt.savefig(args.exp_dir + '/train/' + fig_file_name)  
         
+        plt.close('all')
         if curr_epoch % 10 == 0 and curr_epoch != 0:    
             # save model   
             save_model_path = args.exp_dir + '/train/model_at_epoch{}.pth'.format(curr_epoch)

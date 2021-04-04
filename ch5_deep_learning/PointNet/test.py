@@ -1,10 +1,10 @@
-import os
+import open3d as o3d
+import sys
+from util.data_loader import read_cloud_from_txt
+from util.utils import vis_point_cloud
 
-path = '/mvtec/home/jinx/privat/modelnet40_normal_resampled'
+if __name__ == '__main__':
+    path = '/home/gfeng/gfeng_ws/modelnet40_dataset/vase/vase_0001.txt'
+    point_cloud = read_cloud_from_txt(path)
+    vis_point_cloud(point_cloud)
 
-path_train_id = '/mvtec/home/jinx/privat/modelnet40_normal_resampled/modelnet40_train.txt'
-
-with open(path_train_id, 'r') as f:
-    for line in f:
-        ls = line.strip().split()
-        import pdb; pdb.set_trace()
