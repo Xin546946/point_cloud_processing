@@ -219,7 +219,7 @@ This main components of deep learning in pytorch are **dataloader, model, train 
 * ***Evaluation pipline***:
   * The classification quality on test dataset will be evaluated. In addition, the wrong classified objectes are written onto the classification report.txt, so that we can know which object at specific path are wrongly classified after evaluation.
   ~~~python
-def evaluate(args):
+  def evaluate(args):
       test_loader = load_data(cloud_folder_path=args.data_dir, data_mode='test',batch_size=args.batch_size, num_class=args.num_class)
 
       cur_time = round(time.time())
@@ -284,3 +284,16 @@ def evaluate(args):
     padding: 2px;">Fig.3. Report of wrong classification object with path</div>
 </center><br>
 
+## 2. PointNet++
+### 2.1 Why PointNet++
+* The idea of PointNet is to learn a spatial encoding of each point and then aggregate all **individual point features** to a global point cloud signature. By its design, PointNet does not capture **local stucture** induced by the metric. However, exploiting local structure has proven to be important for the succes of conbolutional architectures.
+* PointNet++ is a hierarchical neural network to process a set of points sampled in a metric space in a **hierarchical fashion**. The set of points are partitioned into overlapping local regions by the distance metric of the underlying space. Similar to CNNs, the local features are extracted to capture **fine geometric structures** from small neighborhoods.
+
+### 2.2 How to capture local features
+  <center>
+    <img src="./figure/fig5.png" width="500"/>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Fig.3. Flowchart of SetAbstraction</div>
+</center><br>
