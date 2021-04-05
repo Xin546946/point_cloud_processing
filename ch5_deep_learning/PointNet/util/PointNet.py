@@ -8,6 +8,8 @@ class PointNet(torch.nn.Module):
         super(PointNet, self).__init__()
         self.num_class_ = num_class
         self.inchannel = 6 if normal_channel else 3
+        self.normal_channel = normal_channel
+        
         self.dropout = torch.nn.Dropout(p=0.7)
         
         self.conv1 = torch.nn.Conv1d(self.inchannel, 64, 1)
