@@ -9,32 +9,10 @@ import math
 import matplotlib.pyplot as plt
 from util.utils import read_cloud_from_txt, vis_point_cloud
 
-def read_off(filename):
-    points = []
-    faces = []
-    with open(filename, 'r') as f:
-        first = f.readline()
-        if (len(first) > 4): 
-            n, m, c = first[3:].split(' ')[:]
-        else:
-            n, m, c = f.readline().rstrip().split(' ')[:]
-        n = int(n)
-        m = int(m)
-        for i in range(n):
-            value = f.readline().rstrip().split(' ')
-            points.append([float(x) for x in value])
-        for i in range(m):
-            value = f.readline().rstrip().split(' ')
-            faces.append([int(x) for x in value])
-    points = np.array(points)
-    faces = np.array(faces)
-    return points, faces
-
-
          
 class ModelNetDataset(torch.utils.data.Dataset):
     
-    def __init__(self, cloud_folder, data_mode = 'train', data_augmentation = True, num_class_to_use : int=10):
+    def __init__(self, cloud_folder, data_mode = 'train', data_augmentation = True, num_class_to_use : int=10, normal_channel = False):
         assert data_mode in ['train', 'validation', 'test'] 
         self.cloud_folder_ = cloud_folder
         self.data_augmentation_ = data_augmentation
@@ -43,6 +21,7 @@ class ModelNetDataset(torch.utils.data.Dataset):
         self.num_class_to_use_ = num_class_to_use
         self.data_mode_ = data_mode
         self.labels = None
+        self.normal_channel = normal_channel
         self.get_clouds_labels_from_txt_file()
     
     def get_clouds_labels_from_txt_file(self):
@@ -73,8 +52,10 @@ class ModelNetDataset(torch.utils.data.Dataset):
             for id_, cloud in enumerate(tqdm.tqdm(clouds)):
                 current_cloud_path = os.path.join(current_cloud_folder, cloud)
                 points = read_cloud_from_txt(current_cloud_path)
-                self.clouds_labels_.append([points, num_label, current_cloud_path])
-                    
+                if self.normal_channel:
+                    self.clouds_labels_.append([points, num_label, current_cloud_path])
+                else:
+                    self.clouds_labels_.append([points[0:3], num_label, current_cloud_path])
     def __getitem__(self, index):
         
 

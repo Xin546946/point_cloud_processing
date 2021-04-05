@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 from torch.autograd import Variable
 from util.data_loader import ModelNetDataset
-from util.model import PointNet
+from util.PointNet import PointNet
 from util.argparser import parse_arguments
 import time
 

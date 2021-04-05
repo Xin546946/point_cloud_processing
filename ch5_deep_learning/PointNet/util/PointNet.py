@@ -4,12 +4,13 @@ import numpy as np
 import torch.nn.functional as F
 
 class PointNet(torch.nn.Module):
-    def __init__(self, num_class: int =10):
+    def __init__(self, num_class: int =10, normal_channel = False):
         super(PointNet, self).__init__()
         self.num_class_ = num_class
+        self.inchannel = 6 if normal_channel else 3
         self.dropout = torch.nn.Dropout(p=0.7)
         
-        self.conv1 = torch.nn.Conv1d(3, 64, 1)
+        self.conv1 = torch.nn.Conv1d(self.inchannel, 64, 1)
         #self.conv2 = torch.nn.Conv1d(64, 64, 1)
         self.conv2 = torch.nn.Conv1d(64, 128, 1)
         self.conv3 = torch.nn.Conv1d(128, 1024, 1)
