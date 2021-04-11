@@ -60,15 +60,15 @@ include up_sampling/CMakeFiles/up_sampling.dir/flags.make
 up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.o: up_sampling/CMakeFiles/up_sampling.dir/flags.make
 up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.o: ../up_sampling/up_sampling.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.o"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/up_sampling.dir/up_sampling.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/up_sampling.dir/up_sampling.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp
 
 up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/up_sampling.dir/up_sampling.cpp.i"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp > CMakeFiles/up_sampling.dir/up_sampling.cpp.i
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp > CMakeFiles/up_sampling.dir/up_sampling.cpp.i
 
 up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/up_sampling.dir/up_sampling.cpp.s"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp -o CMakeFiles/up_sampling.dir/up_sampling.cpp.s
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/up_sampling && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/up_sampling/up_sampling.cpp -o CMakeFiles/up_sampling.dir/up_sampling.cpp.s
 
 up_sampling/CMakeFiles/up_sampling.dir/up_sampling.cpp.o.requires:
 

@@ -60,15 +60,15 @@ include src/CMakeFiles/bilateral_filter.dir/flags.make
 src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o: src/CMakeFiles/bilateral_filter.dir/flags.make
 src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o: ../src/bilateral_filter.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp
 
 src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.i"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp > CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.i
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp > CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.i
 
 src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.s"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp -o CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.s
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/build/src && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch1_introduction/point_cloud_up_sampling/src/bilateral_filter.cpp -o CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.s
 
 src/CMakeFiles/bilateral_filter.dir/bilateral_filter.cpp.o.requires:
 
