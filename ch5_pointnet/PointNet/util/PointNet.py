@@ -34,8 +34,10 @@ class PointNet(torch.nn.Module):
         x = F.relu(self.bn3(self.conv3(x)))
         
         x = torch.max(x, 2, keepdim=True)[0]
+        s1 = x.size()
         #TODO bug! at last batch!
         x = x.view(-1, 1024)
+        s = x.size()
         
         x = F.relu(self.bn4(self.dropout(self.fc1(x))))
         x = F.relu(self.bn5(self.dropout(self.fc2(x))))
