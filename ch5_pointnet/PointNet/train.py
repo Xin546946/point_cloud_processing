@@ -49,7 +49,7 @@ def run_epoch(data_loader, model, mode, learning_rate=0.0001, weight_decay=1e-5)
 
         pred_choice = predict.data.max(1)[1]
         correct = pred_choice.eq(label.data).cpu().sum()
-        #import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         loss_list.append(loss_.item())
         accuracy_list.append(correct / batch_size)
         

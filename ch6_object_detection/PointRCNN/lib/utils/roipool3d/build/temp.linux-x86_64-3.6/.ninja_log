@@ -1,0 +1,3 @@
+# ninja log v5
+0	450	1618605459726567425	/home/gfeng/gfeng_ws/point_cloud_processing/ch6_object_detection/PointRCNN/lib/utils/roipool3d/build/temp.linux-x86_64-3.6/src/roipool3d_kernel.o	855b6876b880fbdc
+0	12005	1618608605595153217	/home/gfeng/gfeng_ws/point_cloud_processing/ch6_object_detection/PointRCNN/lib/utils/roipool3d/build/temp.linux-x86_64-3.6/src/roipool3d.o	566111ba59bb2a2b

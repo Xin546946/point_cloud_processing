@@ -1,0 +1,2 @@
+/usr/bin/ar qc libiss.a  CMakeFiles/iss.dir/iss.cpp.o
+/usr/bin/ranlib libiss.a
