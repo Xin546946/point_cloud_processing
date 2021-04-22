@@ -9,6 +9,8 @@ set(CMAKE_CXX_FLAGS  -g)
 find_package(OpenCV 3.2.0 REQUIRED)
 find_package(PCL 1.11 REQUIRED)
 
+
+include_directories(/usr/include/eigen3)
 include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src)
 # include_directories(${CMAKE_SOURCE_DIR}/utils)
