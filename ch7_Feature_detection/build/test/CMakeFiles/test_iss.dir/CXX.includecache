@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+../src/iss.h
+cstdint
+-
+iostream
+-
+vector
+-
+Eigen/Dense
+../src/Eigen/Dense
+pcl/io/pcd_io.h
+-
+pcl/point_types.h
+-
+pcl/visualization/cloud_viewer.h
+-
+pcl/kdtree/kdtree_flann.h
+-
+
 /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp
 pcl/registration/ia_ransac.h
 -
@@ -34,6 +52,8 @@ pcl/common/io.h
 iostream
 -
 pcl/keypoints/iss_3d.h
+-
+iss.h
 -
 
 /usr/include/eigen3/Eigen/Cholesky
@@ -2520,6 +2540,12 @@ boost/foreach.hpp
 boost/date_time/posix_time/posix_time.hpp
 -
 boost/filesystem.hpp
+-
+
+/usr/include/pcl-1.8/pcl/visualization/cloud_viewer.h
+pcl/visualization/pcl_visualizer.h
+-
+string
 -
 
 /usr/include/pcl-1.8/pcl/visualization/common/actor_map.h

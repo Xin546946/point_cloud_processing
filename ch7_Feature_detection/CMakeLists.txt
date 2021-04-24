@@ -14,7 +14,8 @@ endif()
 
 find_package(OpenCV)
 find_package(PCL 1.8 REQUIRED)
-find_package(Boost COMPONENTS program_options REQUIRED )
+find_package(Boost COMPONENTS program_options REQUIRED)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
 add_definitions(${PCL_DEFINITIONS})
 
@@ -27,6 +28,7 @@ include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${EIGEN_INCLUDE_DIRS})
 
 link_directories(${PCL_LIBRARY_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})

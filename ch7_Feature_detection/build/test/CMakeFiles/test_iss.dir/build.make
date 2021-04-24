@@ -60,15 +60,15 @@ include test/CMakeFiles/test_iss.dir/flags.make
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: test/CMakeFiles/test_iss.dir/flags.make
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: ../test/test_iss.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/test_iss.dir/test_iss.cpp.o"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_iss.dir/test_iss.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_iss.dir/test_iss.cpp.o -c /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp
 
 test/CMakeFiles/test_iss.dir/test_iss.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_iss.dir/test_iss.cpp.i"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp > CMakeFiles/test_iss.dir/test_iss.cpp.i
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp > CMakeFiles/test_iss.dir/test_iss.cpp.i
 
 test/CMakeFiles/test_iss.dir/test_iss.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_iss.dir/test_iss.cpp.s"
-	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp -o CMakeFiles/test_iss.dir/test_iss.cpp.s
+	cd /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/build/test && /usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/test/test_iss.cpp -o CMakeFiles/test_iss.dir/test_iss.cpp.s
 
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o.requires:
 

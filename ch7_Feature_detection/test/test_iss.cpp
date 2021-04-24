@@ -12,6 +12,7 @@
 #include <pcl/common/io.h>
 #include <iostream>
 #include <pcl/keypoints/iss_3d.h>//关键点检测
+#include <iss.h>
 
 using pcl::NormalEstimation;
 using pcl::search::KdTree;
@@ -46,57 +47,39 @@ void visualize_pcd(PointCloud::Ptr pcd_src,
 int main(int argc, char** argv)
 {
     //加载点云文件
-    PointCloud::Ptr cloud_src_o(new PointCloud);//原点云，待配准
-    if(pcl::io::loadPCDFile("/home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/data/0.pcd", *cloud_src_o) == -1){
+    PointCloud::Ptr input_cloud(new PointCloud);//原点云，待配准
+    if(pcl::io::loadPCDFile("/home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/data/0.pcd", *input_cloud) == -1){
         PCL_ERROR ("Couldn't read file\n");
         return (-1);
     }
     std::cout << "/////////////////////////////////////////////////" <<std::endl;
-    std::cout << "原始点云数量："<<cloud_src_o->size() <<std::endl;
-    //PointCloud::Ptr cloud_tgt_o(new PointCloud);//目标点云
-    //pcl::io::loadPCDFile("E:/PointCloud/data/pc_4.pcd", *cloud_tgt_o);
+    std::cout << "原始点云数量："<<input_cloud->size() <<std::endl;
 
     clock_t start = clock();
-    //去除NAN点
-    //std::vector<int> indices_src; //保存去除的点的索引
-    //pcl::removeNaNFromPointCloud(*cloud_src_o, *cloud_src_o, indices_src);
-    //std::cout << "remove *cloud_src_o nan" << cloud_src_o->size()<<endl;
 
-    //std::vector<int> indices_tgt;
-    //pcl::removeNaNFromPointCloud(*cloud_tgt_o, *cloud_tgt_o, indices_tgt);
-    //std::cout << "remove *cloud_tgt_o nan" << cloud_tgt_o->size()<<endl;
-
-
-
-    //iss关键点提取
-    PointCloud::Ptr cloud_src_is(new PointCloud);
     //pcl::PointCloud<pcl::PointXYZ>::Ptr model_keypoint(new pcl::PointCloud<pcl::PointXYZ>());
-    pcl::ISSKeypoint3D<pcl::PointXYZ, pcl::PointXYZ> iss_det;
-    pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_1(new pcl::search::KdTree<pcl::PointXYZ>());
-
+    ISSKeypoint iss;
+    PointCloud::Ptr keypointscloud(new PointCloud);
     double model_solution = 0.4;//参数小，采取的关键点多，论文中为500左右
 
     //参数设置
-    iss_det.setSearchMethod(tree_1);
-    iss_det.setSalientRadius(2.4);//
-    iss_det.setNonMaxRadius(1.6);//
-    iss_det.setThreshold21(0.975);
-    iss_det.setThreshold32(0.975);
-    iss_det.setMinNeighbors(5);
-    iss_det.setNumberOfThreads(4);
-    iss_det.setInputCloud(cloud_src_o);
-    iss_det.compute(*cloud_src_is);
+    iss.useWeightedCovMat(true);
+    iss.setLocalRadius(2.4);
+    iss.setNonMaxRadius(1.6);
+    iss.setThreshold(0.975, 0.975);
+    iss.setMinNeighbors(5);
+    iss.setInputPointCloud(input_cloud);
+    iss.compute(keypointscloud);
 
 
     clock_t end = clock();
     cout << "iss关键点提取时间:" << (double)(end - start) / CLOCKS_PER_SEC << endl;
-    cout << "iss关键点数量" << cloud_src_is->size() << endl;
+    cout << "iss关键点数量" << keypointscloud->size() << endl;
     
     PointCloud::Ptr cloud_src(new PointCloud);
-    pcl::copyPointCloud(*cloud_src_is, *cloud_src);
-
+    pcl::copyPointCloud(*keypointscloud, *cloud_src);
 
     //可视化
-    visualize_pcd(cloud_src_o, cloud_src);
+    visualize_pcd(input_cloud, cloud_src);
     return 0;
 }
