@@ -26,4 +26,6 @@ void ISSKeypoints::set_threshold(float g21, float g32) {
 void ISSKeypoints::set_min_neighbors(int min_neighbor) {
   this->min_neighbors_ = min_neighbor;
 }
-void compute(std::vector<std::vector<float>> &key_points) {}
+void ISSKeypoints::compute(std::vector<std::vector<float>> &key_points) {
+  key_points.clear();
+}

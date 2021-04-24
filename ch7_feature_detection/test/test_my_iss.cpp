@@ -1,18 +1,17 @@
 // #include "iss.cpp"
+#include "iss.h"
 #include <chrono>
-#include <iostream>
-#include <pcl/io/ply_io.h>
-#include <pcl/keypoints/iss_3d.h>
-#include <pcl/search/impl/search.hpp>
-#include <pcl/visualization/pcl_visualizer.h>
-
 #include <iostream>
 #include <pcl/features/fpfh.h>
 #include <pcl/features/fpfh_omp.h>
 #include <pcl/features/normal_3d.h>
 #include <pcl/features/normal_3d_omp.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/keypoints/iss_3d.h>
+#include <pcl/search/impl/search.hpp>
 #include <pcl/search/kdtree.h>
+#include <pcl/visualization/pcl_visualizer.h>
 
 typedef std::vector<std::vector<float>> PCDType;
 
@@ -37,7 +36,7 @@ int main(int argc, char **argv) {
   iss_detector.use_weighted_conv_matrix(true);
   iss_detector.set_input_cloud(point_cloud);
   iss_detector.set_local_radius(6 * radius);
-  iss_detector.set_nom_max_radius(4 * radius);
+  iss_detector.set_non_max_radius(4 * radius);
   iss_detector.set_threshold(0.9, 0.9);
   iss_detector.set_min_neighbors(5);
 

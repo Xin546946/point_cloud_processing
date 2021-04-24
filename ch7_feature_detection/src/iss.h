@@ -1,9 +1,10 @@
 #pragma once
+
 #include <vector>
 #include "Eigen/Eigenvalues"
 class ISSKeypoints{
     public:
-    ISSKeypoints();
+    ISSKeypoints() = default;
     void use_weighted_conv_matrix(bool should_use_weighted_conv_matrix);
     void set_input_cloud(std::vector<std::vector<float>>& point_cloud);
     void set_local_radius(float radius);
@@ -21,7 +22,7 @@ class ISSKeypoints{
     float gama21_;
     float gama32_;
     int min_neighbors_;
-    std::vector<std::vector<int>>& rnn_idx_;
+    std::vector<std::vector<int>> rnn_idx_;
     std::vector<std::vector<float>> point_cloud_;
 
 };
