@@ -20,13 +20,13 @@ void ISSKeypoints::set_non_max_radius(float radius) {
 
 void ISSKeypoints::set_threshold(float g21, float g32) {
   this->gamma21_ = g21;
-  this->gamma21_ = g32;
+  this->gamma32_ = g32;
 }
 
 void ISSKeypoints::set_min_neighbors(int min_neighbor) {
   this->min_neighbors_ = min_neighbor;
 }
-void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ> key_points) {
+void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
 
   // build kdtree
   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
@@ -43,8 +43,8 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ> key_points) {
     kdtree.radiusSearch(search_point, this->rnn_radius_, rnn_idx, distances);
     rnn_indices[i] = rnn_idx;
   }
-  std::vector<float> lamda3_vec(num_points, -1.f);
 
+  std::vector<float> lamda3_vec(num_points, -1);
   // compute covariance matrix for each point
   for (int i = 0; i < num_points; i++) {
     // std::cout << "Process the " << i << "-th point" << '\n';
@@ -100,30 +100,46 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ> key_points) {
       float lamda1 = eigenvalues[2];
       float lamda2 = eigenvalues[1];
       float lamda3 = eigenvalues[0];
+      // std::cout << lamda1 << s" " << lamda2 << " " << lamda3 << '\n';
       if (lamda2 / lamda1 < this->gamma21_ &&
           lamda3 / lamda2 < this->gamma32_ && lamda3 > 0) {
-        // std::cout << "This point is key point" << '\n';
+        // std::cout << "This point is key spoint" << '\n';
         lamda3_vec[i] = lamda3;
       }
     }
   }
 
+  for (auto lam3 : lamda3_vec)
+    std::cout << lam3 << " ";
+  std::cout << std::endl;
+
   // apply non-max_suppression
   for (int i = 0; i < num_points; i++) {
-    if (lamda3_vec[i] = -1) {
+    if (lamda3_vec[i] == -1) {
       continue;
     }
     bool is_key_point = true;
-    // for (int j = -3; j < 5; j++) {
-    //   if (lamda3_vec[i] <= lamda3_vec[j]) {
-    //     is_key_point = false;
-    //     break;
-    //   }
-    // }
+    pcl::PointXYZ search_point = this->point_cloud_->points[i];
+    std::vector<float> distances;
+    std::vector<int> rnn_idx;
+    kdtree.radiusSearch(search_point, this->non_max_radius_, rnn_idx,
+                        distances);
+
+    if (rnn_idx.size() < this->min_neighbors_) {
+      continue;
+    }
+
+    for (const auto &dist_idx : rnn_idx) {
+      if (lamda3_vec[i] < lamda3_vec[dist_idx]) {
+        is_key_point = false;
+        break;
+      }
+    }
 
     if (is_key_point) {
       std::cout << "Find a key points points[" << i << "]" << '\n';
-      key_points.push_back(this->point_cloud_->points[i]);
+      key_points->push_back(this->point_cloud_->points[i]);
+      std::cout << "Key point: " << this->point_cloud_->points[i] << '\n';
     }
   }
 }

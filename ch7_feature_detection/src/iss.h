@@ -13,7 +13,7 @@ class ISSKeypoints{
     void set_non_max_radius(float radius);
     void set_threshold(float g21, float g32);
     void set_min_neighbors(int min_neighbor);
-    void compute(pcl::PointCloud<pcl::PointXYZ> key_points);
+    void compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points);
 
     private:
     Eigen::Vector3f get_eigen_values(size_t i);

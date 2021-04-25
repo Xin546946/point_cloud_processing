@@ -35,8 +35,8 @@ int main(int argc, char **argv) {
   iss_detector.set_min_neighbors(5);
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr keys(new pcl::PointCloud<pcl::PointXYZ>);
-  iss_detector.compute(*keys);
-  std::cout << *keys << '\n';
+  iss_detector.compute(keys);
+  //   std::cout << *keys << '\n';
 
   pcl::visualization::PCLVisualizer::Ptr viewer(
       new pcl::visualization::PCLVisualizer("Viewer"));
