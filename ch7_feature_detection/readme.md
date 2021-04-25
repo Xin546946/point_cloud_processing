@@ -2,7 +2,8 @@
 
 ## Intrinsic shape signature
 * In this homework, ISS is implemented by c++. /test/test_iss_pcl uses pcl library while in /test/test_my_iss.cpp ISS is implemented from scratch.
-
+* The idea of ISS is simple. At first, compute RNN of all points. Then, use the nearest neighbors to compute covariance matrix and get the valid point through the eigenvalue condition. At last, use non-max-suppression to suppress the points, whose lamda3 is not the max value in the region.
+* The main code is as followings.
 ~~~ c++
 void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
 
