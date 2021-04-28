@@ -121,7 +121,8 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
       if (lamda2 / lamda1 < this->gamma21_ &&
           lamda3 / lamda2 < this->gamma32_ && lamda3 > 0) {
         // std::cout << "This point is key spoint" << '\n';
-        lamda3_vec[i] = lamda3;
+        lamda3_vec[i] = lamda3; // use push back
+        // create a empty vector and save the point which satisfies the condition
       }
     }
   }
@@ -145,6 +146,8 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
 
     pcl::PointXYZ search_point = this->point_cloud_->points[indices[0]];
 
+    std::cout << "Now key point is: points ["<< indices[0] <<"]" << '\n';  
+    
     std::vector<float> distances;
     std::vector<int> rnn_idx;
     kdtree.radiusSearch(search_point, this->non_max_radius_, rnn_idx,
@@ -159,11 +162,12 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
       if (it == indices.end())
         continue;
       indices.erase(it);
-      counter++;
       std::cout << "Delete a point" << '\n';
     }
+      counter++;
+      std::cout << "Delete the " << counter << "round." << '\n';
   }
-  std::cout << "Delete " << counter << "points" << '\n';
+  // std::cout << "Delete " << counter << "points" << '\n';
   std::cout << "Key points size: " << key_points->size() << '\n';
   // #pragma omp parallel for
   //   // apply non-max_suppression
