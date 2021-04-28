@@ -1,6 +1,6 @@
 # ch7 Feature Detection
 
-## Intrinsic shape signature
+## 1.Intrinsic shape signature
 * In this homework, ISS is implemented by c++. /test/test_iss_pcl uses pcl library while in /test/test_my_iss.cpp ISS is implemented from scratch.
 * The idea of ISS is simple. At first, compute RNN of all points. Then, use the nearest neighbors to compute covariance matrix and get the valid point through the eigenvalue condition. At last, use non-max-suppression to suppress the points, whose lamda3 is not the max value in the region.
 * The main code is as followings.
@@ -88,9 +88,9 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
     }
   }
 
-  for (auto lam3 : lamda3_vec)
-    std::cout << lam3 << " ";
-  std::cout << std::endl;
+  // for (auto lam3 : lamda3_vec)
+  //   std::cout << lam3 << " ";
+  // std::cout << std::endl;
 
   // apply non-max_suppression
   for (int i = 0; i < num_points; i++) {
@@ -134,3 +134,7 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
     color: #999;
     padding: 2px;">Fig.1. ISS keypoints detector in three objects.</div>
 </center>
+
+## 2. Acceleration
+* Normal case : detection takes 27788.4 ms
+* Now we try to add ***#pragma omp parallel for (  omp_set_num_threads(8))*** for acceleration : detection takes 12884.4 ms

@@ -13,6 +13,8 @@
 #include <pcl/search/kdtree.h>
 #include <pcl/visualization/pcl_visualizer.h>
 
+typedef std::chrono::high_resolution_clock Clock;
+typedef std::chrono::duration<float, std::milli> Duration;
 typedef std::vector<std::vector<float>> PCDType;
 
 int main(int argc, char **argv) {
@@ -35,8 +37,14 @@ int main(int argc, char **argv) {
   iss_detector.set_min_neighbors(5);
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr keys(new pcl::PointCloud<pcl::PointXYZ>);
+
+  auto start = Clock::now();
+
   iss_detector.compute(keys);
   //   std::cout << *keys << '\n';
+  auto end = Clock::now();
+  Duration duration = end - start;
+  std::cout << "detection takes " << duration.count() << " ms" << std::endl;
 
   pcl::visualization::PCLVisualizer::Ptr viewer(
       new pcl::visualization::PCLVisualizer("Viewer"));

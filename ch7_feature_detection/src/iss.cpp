@@ -1,4 +1,16 @@
 #include "iss.h"
+#include "omp.h"
+#include <algorithm>
+#include <numeric>
+#include <vector>
+
+template <typename T> std::vector<int> sort_indexes(const std::vector<T> &vec) {
+  std::vector<int> index(vec.size());
+  std::iota(index.begin(), index.end(), 0);
+  std::stable_sort(index.begin(), index.end(),
+                   [&vec](int lhs, int rhs) { return vec[lhs] > vec[rhs]; });
+  return index;
+}
 
 void ISSKeypoints::use_weighted_conv_matrix(
     bool should_use_weighted_conv_matrix) {
@@ -35,6 +47,9 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
 
   // compute rnn indices of all points
   std::vector<std::vector<int>> rnn_indices(num_points);
+  omp_set_num_threads(8);
+
+#pragma omp parallel for
   for (int i = 0; i < num_points; i++) {
     // std::cout << this->point_cloud_->points[i] << '\n';
     pcl::PointXYZ search_point = this->point_cloud_->points[i];
@@ -45,6 +60,8 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
   }
 
   std::vector<float> lamda3_vec(num_points, -1);
+
+#pragma omp parallel for
   // compute covariance matrix for each point
   for (int i = 0; i < num_points; i++) {
     // std::cout << "Process the " << i << "-th point" << '\n';
@@ -109,37 +126,75 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
     }
   }
 
-  for (auto lam3 : lamda3_vec)
-    std::cout << lam3 << " ";
-  std::cout << std::endl;
+  std::vector<int> indices = sort_indexes(lamda3_vec);
+  int position;
 
-  // apply non-max_suppression
-  for (int i = 0; i < num_points; i++) {
-    if (lamda3_vec[i] == -1) {
-      continue;
+  for (int i = 0; i < indices.size(); i++) {
+    if (lamda3_vec[indices[i]] == -1) {
+      position = i;
+      break;
     }
-    bool is_key_point = true;
-    pcl::PointXYZ search_point = this->point_cloud_->points[i];
+  }
+  std::cout << position << '\n';
+  // std::vector<int> new_indices(indices.begin() + position, indices.end());
+
+  indices.erase(indices.begin() + position, indices.end());
+  int counter = 0;
+  std::cout << "The number of good index are: " << indices.size() << '\n';
+  while (!indices.empty()) {
+
+    pcl::PointXYZ search_point = this->point_cloud_->points[indices[0]];
+
     std::vector<float> distances;
     std::vector<int> rnn_idx;
     kdtree.radiusSearch(search_point, this->non_max_radius_, rnn_idx,
                         distances);
-
-    if (rnn_idx.size() < this->min_neighbors_) {
-      continue;
+    if (rnn_idx.size() > this->min_neighbors_) {
+      key_points->push_back(search_point);
     }
+    // std::cout << indices.empty() << '\n';
+    for (int idx : rnn_idx) {
+      std::vector<int>::iterator it = find(indices.begin(), indices.end(), idx);
 
-    for (const auto &dist_idx : rnn_idx) {
-      if (lamda3_vec[i] < lamda3_vec[dist_idx]) {
-        is_key_point = false;
-        break;
-      }
-    }
-
-    if (is_key_point) {
-      std::cout << "Find a key points points[" << i << "]" << '\n';
-      key_points->push_back(this->point_cloud_->points[i]);
-      std::cout << "Key point: " << this->point_cloud_->points[i] << '\n';
+      if (it == indices.end())
+        continue;
+      indices.erase(it);
+      counter++;
+      std::cout << "Delete a point" << '\n';
     }
   }
+  std::cout << "Delete " << counter << "points" << '\n';
+  std::cout << "Key points size: " << key_points->size() << '\n';
+  // #pragma omp parallel for
+  //   // apply non-max_suppression
+  //   for (int i = 0; i < num_points; i++) {
+  //     if (lamda3_vec[i] == -1) {
+  //       continue;
+  //     }
+  //     bool is_key_point = true;
+  //     pcl::PointXYZ search_point =
+  //     this->point_cloud_->points[i]; std::vector<float>
+  //     distances; std::vector<int> rnn_idx;
+  //     kdtree.radiusSearch(search_point,
+  //     this->non_max_radius_, rnn_idx,
+  //                         distances);
+
+  //     if (rnn_idx.size() < this->min_neighbors_) {
+  //       continue;
+  //     }
+
+  //     for (const auto &dist_idx : rnn_idx) {
+  //       if (lamda3_vec[i] < lamda3_vec[dist_idx]) {
+  //         is_key_point = false;
+  //         break;
+  //       }
+  //     }
+
+  //     if (is_key_point) {
+  //       // std::cout << "Find a key points points[" << i << "]" << '\n';
+  //       key_points->push_back(this->point_cloud_->points[i]);
+  //       // std::cout << "Key point: " s<< this->point_cloud_->points[i] <<
+  //       '\n';
+  //     }
+  // }
 }
