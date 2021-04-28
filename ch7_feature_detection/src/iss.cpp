@@ -142,7 +142,7 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
   indices.erase(indices.begin() + position, indices.end());
   int counter = 0;
   std::cout << "The number of good index are: " << indices.size() << '\n';
-  while (!indices.empty()) {
+  while (!lamda3_vec.empty()) {
 
     pcl::PointXYZ search_point = this->point_cloud_->points[indices[0]];
 
@@ -157,11 +157,11 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
     }
     // std::cout << indices.empty() << '\n';
     for (int idx : rnn_idx) {
-      std::vector<int>::iterator it = find(indices.begin(), indices.end(), idx);
+      std::vector<int>::iterator it = lamda3_vec.begin() + idx;
 
       if (it == indices.end())
         continue;
-      indices.erase(it);
+      lamda3_vec.erase(it);
       std::cout << "Delete a point" << '\n';
     }
       counter++;
