@@ -3,7 +3,7 @@ project(ISS)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS -Wall -Wextra )
-set(CMAKE_CXX_FLAGS  -g)
+set(CMAKE_CXX_FLAGS  -o3)
 
 
 find_package(OpenMP)

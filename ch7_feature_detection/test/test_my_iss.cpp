@@ -37,7 +37,6 @@ int main(int argc, char **argv) {
   iss_detector.set_min_neighbors(5);
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr keys(new pcl::PointCloud<pcl::PointXYZ>);
-
   auto start = Clock::now();
 
   iss_detector.compute(keys);
@@ -45,6 +44,7 @@ int main(int argc, char **argv) {
   auto end = Clock::now();
   Duration duration = end - start;
   std::cout << "detection takes " << duration.count() << " ms" << std::endl;
+  std::cout << "Key points size: " << keys->size() << '\n';
 
   pcl::visualization::PCLVisualizer::Ptr viewer(
       new pcl::visualization::PCLVisualizer("Viewer"));

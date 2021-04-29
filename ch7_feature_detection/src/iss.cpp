@@ -127,74 +127,79 @@ void ISSKeypoints::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr key_points) {
   }
 
   std::vector<int> indices = sort_indexes(lamda3_vec);
-  int position;
+  // //s std::vector<int> new_indices(indices.begin() + position,
+  // indices.end());
 
-  for (int i = 0; i < indices.size(); i++) {
-    if (lamda3_vec[indices[i]] == -1) {
-      position = i;
-      break;
-    }
-  }
-  std::cout << position << '\n';
-  // std::vector<int> new_indices(indices.begin() + position, indices.end());
-
-  indices.erase(indices.begin() + position, indices.end());
-  int counter = 0;
-  std::cout << "The number of good index are: " << indices.size() << '\n';
+  // indices.erase(indices.begin() + position, indices.end());
+  // std::cout << "Non -1 indices remains: " << indices.size() << std::endl;
+  // int counter =s 0;
+  // int count_whisle = 0;
+  // std::cout << "The number of good index are: " << indices.size() << '\n';
   while (!indices.empty()) {
-
+    // count_while++;
     pcl::PointXYZ search_point = this->point_cloud_->points[indices[0]];
-
+    // std::cout << "Now is biggest lamda: " << lamda3_vec[indices[0]] <<
+    // '\n';
     std::vector<float> distances;
     std::vector<int> rnn_idx;
     kdtree.radiusSearch(search_point, this->non_max_radius_, rnn_idx,
                         distances);
-    if (rnn_idx.size() > this->min_neighbors_) {
-      key_points->push_back(search_point);
-    }
+
     // std::cout << indices.empty() << '\n';
+    bool is_key_point = true;
     for (int idx : rnn_idx) {
+      // Here should tell if the lamda3_vec[max_indicex_idx] bigger than RNN
+      // points
+      if (lamda3_vec[idx] > lamda3_vec[indices[0]]) {
+        is_key_point = false;
+      }
       std::vector<int>::iterator it = find(indices.begin(), indices.end(), idx);
 
       if (it == indices.end())
         continue;
       indices.erase(it);
-      counter++;
-      std::cout << "Delete a point" << '\n';
+      // counter++;
     }
+    if (is_key_point) {
+      key_points->push_back(search_point);
+    }
+    // std::cout << "After one rnn deletion, it remains: " << indices.size()
+    // << "indices."
+    // << "RNN points: " << rnn_idx.size() << '\n';
   }
-  std::cout << "Delete " << counter << "points" << '\n';
-  std::cout << "Key points size: " << key_points->size() << '\n';
+  // std::cout << "Delete " << counter << "points" << '\n';
+  // std::cout << "NUm of while counter: " << count_while << '\n';
+  // std::cout << "Key points size: " << key_points->size() << '\n';
   // #pragma omp parallel for
-  //   // apply non-max_suppression
-  //   for (int i = 0; i < num_points; i++) {
-  //     if (lamda3_vec[i] == -1) {
-  //       continue;
-  //     }
-  //     bool is_key_point = true;
-  //     pcl::PointXYZ search_point =
-  //     this->point_cloud_->points[i]; std::vector<float>
-  //     distances; std::vector<int> rnn_idx;
-  //     kdtree.radiusSearch(search_point,
-  //     this->non_max_radius_, rnn_idx,
-  //                         distances);
+  // apply non-max_suppression
+  // for (int i = 0; i < num_points; i++) {
+  //   if (lamda3_vec[i] == -1) {
+  //     continue;
+  //   }
+  //   bool is_key_point = true;
+  //   pcl::PointXYZ search_point = this->point_cloud_->points[i];
+  //   std::vector<float> distances;
+  //   std::vector<int> rnn_idx;
+  //   kdtree.radiusSearch(search_point, this->non_max_radius_, rnn_idx,
+  //                       distances);
 
-  //     if (rnn_idx.size() < this->min_neighbors_) {
-  //       continue;
-  //     }
+  //   if (rnn_idx.size() < this->min_neighbors_) {
+  //     continue;
+  //   }
 
-  //     for (const auto &dist_idx : rnn_idx) {
-  //       if (lamda3_vec[i] < lamda3_vec[dist_idx]) {
-  //         is_key_point = false;
-  //         break;
-  //       }
+  //   for (const auto &dist_idx : rnn_idx) {
+  //     if (lamda3_vec[i] < lamda3_vec[dist_idx]) {
+  //       is_key_point = false;
+  //       break;
   //     }
+  //   }
 
-  //     if (is_key_point) {
-  //       // std::cout << "Find a key points points[" << i << "]" << '\n';
-  //       key_points->push_back(this->point_cloud_->points[i]);
-  //       // std::cout << "Key point: " s<< this->point_cloud_->points[i] <<
-  //       '\n';
-  //     }
+  //   if (is_key_point) {
+  //     // std::cout << "Find a key points points[" << i << "]" << '\n';
+  //     key_points->push_back(this->point_cloud_->points[i]);
+  //     // std::cout << "Key point: " s<< this->point_cloud_->points[i] <<
+  //     '\n';
+  //   }
   // }
+  // std::cout << "Key points: " << key_points->size() << std::endl;
 }
