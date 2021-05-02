@@ -17,13 +17,14 @@ int main(int argc, char **argv) {
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
   pcl::io::loadPLYFile(argv[1], *cloud);
 
+  // define kdtree
   pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(
       new pcl::search::KdTree<pcl::PointXYZ>());
 
   double radius = 0.02;
 
   pcl::ISSKeypoint3D<pcl::PointXYZ, pcl::PointXYZ> iss_key_point_detector;
-
+  // set iss parameters
   iss_key_point_detector.setSearchMethod(tree);
   iss_key_point_detector.setSalientRadius(6 * radius);
   iss_key_point_detector.setNonMaxRadius(4 * radius);
@@ -38,6 +39,7 @@ int main(int argc, char **argv) {
 
   std::cout << "key points size : " << keys->size() << std::endl;
 
+  // vis iss
   pcl::visualization::PCLVisualizer::Ptr viewer(
       new pcl::visualization::PCLVisualizer("Viewer"));
   viewer->setBackgroundColor(0, 0, 0);
@@ -54,5 +56,6 @@ int main(int argc, char **argv) {
   while (!viewer->wasStopped()) {
     viewer->spinOnce();
   }
+
   return 0;
 }
