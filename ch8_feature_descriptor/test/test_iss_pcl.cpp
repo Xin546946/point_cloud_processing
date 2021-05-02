@@ -56,6 +56,40 @@ int main(int argc, char **argv) {
   while (!viewer->wasStopped()) {
     viewer->spinOnce();
   }
+  // compute normal vector
+  pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>());
+
+  pcl::NormalEstimationOMP<pcl::PointXYZ, pcl::Normal> cloud_normal_estimator;
+  cloud_normal_estimator.setKSearch(10);
+  cloud_normal_estimator.setSearchSurface(cloud);
+  cloud_normal_estimator.setInputCloud(cloud);
+  cloud_normal_estimator.compute(*normals);
+
+  // create fpfh estimator, pass the cloud & normals
+  pcl::FPFHEstimationOMP<pcl::PointXYZ, pcl::Normal, pcl::FPFHSignature33>
+      fpfh_estimator;
+  fpfh_estimator.setInputCloud(keys);
+  fpfh_estimator.setInputNormals(normals);
+  fpfh_estimator.setSearchSurface(cloud);
+
+  pcl::search::KdTree<pcl::PointXYZ>::Ptr fpfh_tree(
+      new pcl::search::KdTree<pcl::PointXYZ>);
+  fpfh_estimator.setSearchMethod(fpfh_tree);
+
+  // declare descriptor
+  pcl::PointCloud<pcl::FPFHSignature33>::Ptr fpfh_descriptors(
+      new pcl::PointCloud<pcl::FPFHSignature33>());
+
+  fpfh_estimator.setRadiusSearch(0.18);
+
+  fpfh_estimator.compute(*fpfh_descriptors);
+
+  std::cout << "FPFH descriptor size: " << fpfh_descriptors->size()
+            << std::endl;
+
+  for (int i = 0; i < 33; i++) {
+    std::cout << fpfh_descriptors->points[0].histogram[i] << '\n';
+  }
 
   return 0;
 }
