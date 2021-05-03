@@ -5,6 +5,7 @@
 #include <pcl/features/fpfh.h>
 #include <pcl/search/kdtree.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/filters/filter.h>
 #include <pcl/registration/icp.h>
 #include <pcl/visualization/pcl_visualizer.h>
@@ -46,9 +47,11 @@ void visualize_pcd(PointCloud::Ptr pcd_src,
 
 int main(int argc, char** argv)
 {
+    std::string path = argv[1];
     //加载点云文件
     PointCloud::Ptr input_cloud(new PointCloud);//原点云，待配准
-    if(pcl::io::loadPCDFile("/home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/data/0.pcd", *input_cloud) == -1){
+    //"/home/gfeng/gfeng_ws/point_cloud_processing/ch7_Feature_detection/data/airplane.ply"
+    if(pcl::io::loadPLYFile(path, *input_cloud) == -1){
         PCL_ERROR ("Couldn't read file\n");
         return (-1);
     }
@@ -64,8 +67,8 @@ int main(int argc, char** argv)
 
     //参数设置
     iss.useWeightedCovMat(true);
-    iss.setLocalRadius(2.4);
-    iss.setNonMaxRadius(1.6);
+    iss.setLocalRadius(0.12);
+    iss.setNonMaxRadius(0.08);
     iss.setThreshold(0.975, 0.975);
     iss.setMinNeighbors(5);
     iss.setInputPointCloud(input_cloud);

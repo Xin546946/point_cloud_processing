@@ -40,6 +40,7 @@ void ISSKeypoint::compute(CloudPtr keypoints){
     }
 
     for(int i = 0; i < point_cloud->size(); i++){
+        std::cout<<"processing "<<i<<"th point"<<std::endl;
         if(neighbors[i].size() > min_neighbors){
             
         //create weighted cov
@@ -81,7 +82,7 @@ void ISSKeypoint::compute(CloudPtr keypoints){
             Eigen::Vector3f eigenvalues = eigensolver.eigenvalues().real();
             //std::cout<<eigenvalues<<std::endl;
             if(eigenvalues[1] / eigenvalues[2] < gamma21 && eigenvalues[0] / eigenvalues[1] < gamma32 && eigenvalues[0] > 0){
-                potkps.push_back(eigenvalues[0]);
+                potkps[i] = eigenvalues[0];
             }
         }
     }

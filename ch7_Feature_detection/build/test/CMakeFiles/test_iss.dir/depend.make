@@ -299,6 +299,11 @@ test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/file_io
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/impl/pcd_io.hpp
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/lzf.h
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/pcd_io.h
+test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/ply/byte_order.h
+test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/ply/io_operators.h
+test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/ply/ply.h
+test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/ply/ply_parser.h
+test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/io/ply_io.h
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/kdtree/flann.h
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/kdtree/impl/kdtree_flann.hpp
 test/CMakeFiles/test_iss.dir/test_iss.cpp.o: /usr/include/pcl-1.8/pcl/kdtree/kdtree.h

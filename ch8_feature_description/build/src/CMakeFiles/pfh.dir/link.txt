@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpfh.a  CMakeFiles/pfh.dir/pfh.cpp.o
+/usr/bin/ranlib libpfh.a
