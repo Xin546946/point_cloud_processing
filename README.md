@@ -1,5 +1,5 @@
 ## Fundamental of Point cloud processing
-### In this repository, we have implemented several point cloud processing algorithms in C++ and python. For each project, you can have an overview from the readme file, where we introduce the idea of the algorithms and some illustrations of the results.
+### In this repository, we have implemented several point cloud processing algorithms in C++ and python. For each project, you will have an overview from the readme file, where we introduce the idea of the algorithms and some illustrations of the results.
 ### In this file, we will briefly introduce some results of implementation to draw your interests. 
 
 ### 1.1 PCA and Surface Normal (python)
