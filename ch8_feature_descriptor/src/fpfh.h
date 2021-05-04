@@ -19,7 +19,6 @@ class FPFHEstimator{
     pcl::PointCloud<pcl::PointXYZ>::Ptr keys_;
     pcl::PointCloud<pcl::Normal>::Ptr normals_;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_;
+    std::vector<FPFHSignature33> spfh_;
     float radius_;
 };
-
-std::cout << fpfh_descriptors [i].histogram[i]

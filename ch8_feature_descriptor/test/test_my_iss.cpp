@@ -1,4 +1,5 @@
 // #include "iss.cpp"
+#include "fpfh.h"
 #include "iss.h"
 #include <chrono>
 #include <iostream>
@@ -58,9 +59,35 @@ int main(int argc, char **argv) {
   viewer->setPointCloudRenderingProperties(
       pcl::visualization::PCL_VISUALIZER_COLOR, 1., 0., 0., "keys");
 
-  while (!viewer->wasStopped()) {
-    viewer->spinOnce();
-  }
+  //   while (!viewer->wasStopped()) {
+  //     viewer->spinOnce();
+  //   }
+
+  pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>());
+
+  pcl::NormalEstimationOMP<pcl::PointXYZ, pcl::Normal> cloud_normal_estimator;
+  cloud_normal_estimator.setKSearch(10);
+  cloud_normal_estimator.setSearchSurface(point_cloud);
+  cloud_normal_estimator.setInputCloud(point_cloud);
+  cloud_normal_estimator.compute(*normals);
+
+  // create fpfh estimator, pass the cloud & normals
+  FPFHEstimator fpfh_estimator;
+  fpfh_estimator.set_input_cloud(keys);
+  fpfh_estimator.set_input_normal(normals);
+  fpfh_estimator.set_search_surface(point_cloud);
+
+  // declare descriptor
+
+  fpfh_estimator.set_radius_search(0.18);
+  std::vector<FPFHSignature33> fpfh_descriptors;
+  fpfh_estimator.compute(fpfh_descriptors);
+
+  std::cout << "FPFH descriptor size: " << fpfh_descriptors.size() << std::endl;
+
+  //   for (int i = 0; i < 33; i++) {
+  // std::cout << fpfh_descriptors->points[0].histogram[i] << '\n';
+  //   }
 
   return 0;
 }
