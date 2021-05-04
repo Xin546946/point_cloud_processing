@@ -4,7 +4,7 @@
 
 ### 1.1 PCA and Surface Normal (python)
 <center class="half">
-    <img src="../point_cloud_processing/ch1_introduction/figures/figure1.png" width="300"/><img src="../point_cloud_processing/ch1_introduction/figures/figure5.png" width="280"/>
+    <img src="./doc/fig1.png" width="300"/><img src="./doc/fig2.png" width="280"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
@@ -14,7 +14,7 @@
 
 ### 1.2 Upsampling(C++)
 <center>
-    <img src="../point_cloud_processing/ch1_introduction/figures/figure9.png" width="500"/>
+    <img src="./doc/fig3.png" width="500"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
