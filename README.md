@@ -32,7 +32,7 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 ~~~
 ### 3. Clustering (python)
   <center class="half">
-    <img src="../point_cloud_processing/ch3_clustering/hw/figure/fig3.png" width="500"/> <br>
+    <img src="./doc/fig5.png" width="500"/> <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
@@ -41,14 +41,14 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 
 ### 4. Ground Segmentation and Clustering (python)
   <center class="half">
-      <img src="../point_cloud_processing/ch4_model_fitting/figure/fig1.png" width="500"/>
+      <img src="./doc/fig6.png" width="500"/>
       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
       display: inline-block;
       color: #999;
       padding: 2px;">Fig.4 Ground segmentation(RANSAC + Least square optimization). Blue part is the segmented ground</div>
   </center><br>
   <center>
-      <img src="../point_cloud_processing/ch4_model_fitting/figure/fig4.png" width="500"/>
+      <img src="./doc/fig7.png" width="500"/>
       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
       display: inline-block;
       color: #999;
@@ -57,7 +57,7 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 
 ### 5. Deep Learning for Classification (python)
   <center class="half">
-    <img src="../point_cloud_processing/ch5_deep_learning/PointNet/figure/fig1.png" width="350"/><img src="../point_cloud_processing/ch5_deep_learning/PointNet/figure/fig2.png" width="350"/>
+    <img src="./doc/fig8.png" width="350"/><img src="./doc/fig9.png" width="350"/>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
@@ -66,8 +66,8 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 
 ### 6. Deep Learning for Object Detection (python)
 <center class="half">
-    <img src="../point_cloud_processing/ch6_object_detection/PointRCNN/output/rcnn/default/eval/epoch_no_number/val/final_result/plot/car_detection_3d.png" width="300"/>
-    <img src="../point_cloud_processing/ch6_object_detection/PointRCNN/output/rcnn/default/eval/epoch_no_number/val/final_result/plot/car_detection_ground.png" width="300"/>
+    <img src="./doc/fig10.png" width="300"/>
+    <img src="./doc/fig11.png" width="300"/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -76,8 +76,8 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 </center>
 
 <center class="half">
-    <img src="../point_cloud_processing/ch6_object_detection/PointRCNN/output/rcnn/default/eval/epoch_no_number/val/final_result/plot/car_detection.png" width="300"/>
-    <img src="../point_cloud_processing/ch6_object_detection/PointRCNN/output/rcnn/default/eval/epoch_no_number/val/final_result/plot/car_orientation.png" width="300"/>
+    <img src="./doc/fig12.png" width="300"/>
+    <img src="./doc/fig13.png" width="300"/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -87,8 +87,8 @@ Octree: build 11727.653ms, knn 0.981ms, radius 0.732ms, brute 17.305ms
 
 ### 7. Feature Detection (C++)
 <center class="half">
-    <img src="../point_cloud_processing/ch7_feature_detection/fig/fig1.png" width="300"/>
-    <img src="../point_cloud_processing/ch7_feature_detection/fig/fig2.png" width="315"/>
+    <img src="./doc/fig14.png" width="300"/>
+    <img src="./doc/fig15.png" width="315"/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
