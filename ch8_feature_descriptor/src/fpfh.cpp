@@ -1,17 +1,17 @@
 #include "fpfh.h"
 #include <math.h>
 
-Eigen::Vector3f compute_triplet_feature(diff, normal1, normal2){
-  
+Eigen::Vector3f compute_triplet_feature(diff, normal1, normal2) {
+
   Eigen::Vector3f v = normal1.cross(diff / diff.norm());
   Eigen::Vector3f w = normal1.cross(v);
 
   float alpha = v.dot(normal2);
   float phi = normal1.dot(diff);
   float theta = atan2(w.dot(normal2), normal1.dot(normal2));
-  
+
   return Eigen::Vector3f(alpha, phi, theta);
-} 
+}
 
 void FPFHEstimator::set_input_cloud(pcl::PointCloud<pcl::PointXYZ>::Ptr keys) {
   this->keys_ = keys;
@@ -29,36 +29,39 @@ void FPFHEstimator::set_search_surface(
 
 void FPFHEstimator::set_radius_search(float radius) { this->radius_ = radius; }
 
-
-void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor){
+void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
 
   int num_keys = this->keys_->size();
-  
+
   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
   kdtree.setInputCloud(this->cloud_);
-  
-  FPFHResultset fpfh_result_set; // add_histogram(std::vector<float> histogram, float weight); get_histogram(); 
-  
+
+  FPFHResultset fpfh_result_set; // add_histogram(std::vector<float> histogram,
+                                 // float weight); get_histogram();
+
   for (int i = 0; i < num_keys; i++) {
-    
+
     SPFHResultset key_spfh_resultset; // spfh for key point
 
-   // compute rnn of key point
+    // compute rnn of key point
     std::vector<float> distances;
     std::vector<int> rnn_idx;
     kdtree.radiusSearch(this->keys_->points[i], this->radius_, rnn_idx,
                         distances);
     int num_rnn_point = rnn_idx.size() - 1;
     std::vector<float> alpha_vec, phi_vec, theta_vec;
-    
+
     // compute rnn for key
-    for(int idx : rnn_idx){
-      
+    for (int idx : rnn_idx) {
+
       // compute spsh for key point
-      Eigen::Vector3f key(this->keys_->points[i].x, this->keys_->points[i].y, this->keys_->points[i].z);
-      Eigen::Vector3f point(this->cloud_->points[idx].x, this->cloud_->points[idx].y, this->cloud_->points[idx].z);
+      Eigen::Vector3f key(this->keys_->points[i].x, this->keys_->points[i].y,
+                          this->keys_->points[i].z);
+      Eigen::Vector3f point(this->cloud_->points[idx].x,
+                            this->cloud_->points[idx].y,
+                            this->cloud_->points[idx].z);
       Eigen::Vector3f diff = point - key;
-      
+
       // key normal is u
       Eigen::Vector3f key_normal(this->normals_->points[rnn_idx[0]].normal_x,
                                  this->normals_->points[rnn_idx[0]].normal_y,
@@ -68,7 +71,8 @@ void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor){
                                    this->normals_->points[idx].normal_y,
                                    this->normals_->points[idx].normal_z);
 
-      Eigen::Vector3f triplet_feature = compute_triplet_feature(diff, key_normal, point_normal);
+      Eigen::Vector3f triplet_feature =
+          compute_triplet_feature(diff, key_normal, point_normal);
 
       alpha_vec.push_back(triplet_feature[0]);
       phi_vec.push_back(triplet_feature[1]);
@@ -77,106 +81,114 @@ void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor){
       kdtree.radiusSearch(this->cloud_->points[idx], this->radius_, sub_rnn_idx,
                           sub_distances);
 
-      SPFHResultset neighbour_spfh_result_set;  //spfh for neighbour
+      SPFHResultset neighbour_spfh_result_set; // spfh for neighbour
 
-      std::vector<float> alpha_neighbour_vec, phi_neighbour_vec, theta_neighbour_vec;
+      std::vector<float> alpha_neighbour_vec, phi_neighbour_vec,
+          theta_neighbour_vec;
 
       std::vector<float> sub_distances;
       std::vector<int> sub_rnn_idx;
       kdtree.radiusSearch(this->cloud_->points[idx], this->radius_, sub_rnn_idx,
                           sub_distances);
 
-      // compute rnn for points[idx] , where we compute histogram on each points[idx]  
-      for(int sub_idx : sub_rnn_idx){
-        // compute spsh for point[idx] 
-                          
-        Eigen::Vector3f point_neighbour(this->cloud_->points[sub_idx].x, this->cloud_->points[sub_idx].y, this->cloud_->points[sub_idx].z);
+      // compute rnn for points[idx] , where we compute histogram on each
+      // points[idx]
+      for (int sub_idx : sub_rnn_idx) {
+        // compute spsh for point[idx]
+
+        Eigen::Vector3f point_neighbour(this->cloud_->points[sub_idx].x,
+                                        this->cloud_->points[sub_idx].y,
+                                        this->cloud_->points[sub_idx].z);
         Eigen::Vector3f diff_neighbour = point_neighbour - point;
 
-        Eigen::Vector3f point_neighbour_normal(this->normals_->points[sub_idx].normal_x,
-                                     this->normals_->points[sub_idx].normal_y,
-                                     this->normals_->points[sub_idx].normal_z);
+        Eigen::Vector3f point_neighbour_normal(
+            this->normals_->points[sub_idx].normal_x,
+            this->normals_->points[sub_idx].normal_y,
+            this->normals_->points[sub_idx].normal_z);
 
-        Eigen::Vector3f triplet_feature_neighbour = compute_triplet_feature(diff_neighbour, point_normal, point_neighbour_normal);
-        
+        Eigen::Vector3f triplet_feature_neighbour = compute_triplet_feature(
+            diff_neighbour, point_normal, point_neighbour_normal);
+
         alpha_neighbour_vec.push_back(triplet_feature_neighbour[0]);
         phi_neighbour_vec.push_back(triplet_feature_neighbour[1]);
         theta_neighbour_vec.push_back(triplet_feature_neighbour[2]);
-      } 
+      }
 
       float weight = 1.f / diff.norm() / num_rnn_point;
-      neighbour_spfh_result_set.set_triplet_features(alpha_neighbour_vec, phi_neighbour_vec,theta_neighbour_vec);
-      fpfh_result_set.add_histogram(neighbour_spfh_result_set,weight);
-      
-      // delete the object
-      ~neighbour_spfh_result_set(); 
-    } 
+      neighbour_spfh_result_set.set_triplet_features(
+          alpha_neighbour_vec, phi_neighbour_vec, theta_neighbour_vec);
+      fpfh_result_set.add_histogram(neighbour_spfh_result_set, weight);
+    }
 
-    
     key_spfh_resultset.set_triplet_features(alpha_vec, phi_vec, theta_vec);
 
     fpfh_result_set.add_histogram(key_spfh_resultset.get_histogram(), 1.f);
     fpfh_descriptor = fpfh_result_set.get_histogram();
-} 
+  }
 
+  // void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
+  //   int num_keys = this->keys_->size();
+  //   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
+  //   kdtree.setInputCloud(this->cloud_);
 
+  //   Histogram histogram(11);
 
-// void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
-//   int num_keys = this->keys_->size();
-//   pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
-//   kdtree.setInputCloud(this->cloud_);
+  //   for (int i = 0; i < num_keys; i++) {
+  //     std::vector<float> distances;
+  //     std::vector<int> rnn_idx;
+  //     kdtree.radiusSearch(this->keys_->points[i], this->radius_, rnn_idx,
+  //                         distances);
+  //     // key normal is u
+  //     Eigen::Vector3f key_normal(this->normals_->points[rnn_idx[0]].normal_x,
+  //                                this->normals_->points[rnn_idx[0]].normal_y,
+  //                                this->normals_->points[rnn_idx[0]].normal_z);
+  //     std::vector<float> alpha_vec;
+  //     std::vector<float> phi_vec;
+  //     std::vector<float> theta_vec;
+  //     for (int idx : rnn_idx) {
 
-//   Histogram histogram(11);
+  //       Eigen::Vector3f diff(
+  //           this->cloud_->points[idx].x - this->keys_->points[i].x,
+  //           this->cloud_->points[idx].y - this->keys_->points[i].y,
+  //           this->cloud_->points[idx].z - this->keys_->points[i].z);
+  //       Eigen::Vector3f v = key_normal.cross(diff / diff.norm());
+  //       Eigen::Vector3f w = key_normal.cross(v);
 
-//   for (int i = 0; i < num_keys; i++) {
-//     std::vector<float> distances;
-//     std::vector<int> rnn_idx;
-//     kdtree.radiusSearch(this->keys_->points[i], this->radius_, rnn_idx,
-//                         distances);
-//     // key normal is u
-//     Eigen::Vector3f key_normal(this->normals_->points[rnn_idx[0]].normal_x,
-//                                this->normals_->points[rnn_idx[0]].normal_y,
-//                                this->normals_->points[rnn_idx[0]].normal_z);
-//     std::vector<float> alpha_vec;
-//     std::vector<float> phi_vec;
-//     std::vector<float> theta_vec;
-//     for (int idx : rnn_idx) {
+  //       // normal point is n2
+  //       Eigen::Vector3f normal_point(this->normals_->points[idx].normal_x,
+  //                                    this->normals_->points[idx].normal_y,
+  //                                    this->normals_->points[idx].normal_z);
+  //       float alpha = v.dot(normal_points);
+  //       float phi = key_normal.dot(diff);
+  //       float theta = atan2(w.dot(normal_point),
+  //       key_normal.dot(normal_point)); alpha_vec.push_back(alpha);
+  //       phi_vec.push_back(phi);
+  //       theta_vec.push_back(theta);
 
-//       Eigen::Vector3f diff(
-//           this->cloud_->points[idx].x - this->keys_->points[i].x,
-//           this->cloud_->points[idx].y - this->keys_->points[i].y,
-//           this->cloud_->points[idx].z - this->keys_->points[i].z);
-//       Eigen::Vector3f v = key_normal.cross(diff / diff.norm());
-//       Eigen::Vector3f w = key_normal.cross(v);
+  //       std::vector<float> sub_distances;
+  //       std::vector<int> sub_rnn_idx;
+  //       kdtree.radiusSearch(this->cloud_->points[idx], this->radius_,
+  //       sub_rnn_idx,
+  //                           sub_distances);
+  //     }
+  //     histogram.set_input(alpha_vec);
+  //     std::vector<float> hist_alpha = histogram.get_histogram();
 
-//       // normal point is n2
-//       Eigen::Vector3f normal_point(this->normals_->points[idx].normal_x,
-//                                    this->normals_->points[idx].normal_y,
-//                                    this->normals_->points[idx].normal_z);
-//       float alpha = v.dot(normal_points);
-//       float phi = key_normal.dot(diff);
-//       float theta = atan2(w.dot(normal_point), key_normal.dot(normal_point));
-//       alpha_vec.push_back(alpha);
-//       phi_vec.push_back(phi);
-//       theta_vec.push_back(theta);
+  //     histogram.set_input(phi_vec);
+  //     std::vector<float> hist_phi = histogram.get_histogram();
 
-//       std::vector<float> sub_distances;
-//       std::vector<int> sub_rnn_idx;
-//       kdtree.radiusSearch(this->cloud_->points[idx], this->radius_, sub_rnn_idx,
-//                           sub_distances);
-//     }
-//     histogram.set_input(alpha_vec);
-//     std::vector<float> hist_alpha = histogram.get_histogram();
+  //     histogram.set_input(theta_vec);
+  //     std::vector<float> hist_theta = histogram.get_histogram();
 
-//     histogram.set_input(phi_vec);
-//     std::vector<float> hist_phi = histogram.get_histogram();
+  //     hist_alpha.insert(hist_alpha.end(), hist_phi.begin(), hist_phi.end());
+  //     hist_alpha.insert(hist_alpha.end(), hist_theta.begin(),
+  //     hist_theta.end());
 
-//     histogram.set_input(theta_vec);
-//     std::vector<float> hist_theta = histogram.get_histogram();
+  //     spfh_.push_back(hist_alpha);
+  //   }
+  // }
 
-//     hist_alpha.insert(hist_alpha.end(), hist_phi.begin(), hist_phi.end());
-//     hist_alpha.insert(hist_alpha.end(), hist_theta.begin(), hist_theta.end());
-
-//     spfh_.push_back(hist_alpha);
-//   }
-// }
+  /*--------------------------------------------------------
+  #####################implementation: FPFHResult #####################
+  ---------------------------------------------------------*/
+  void FPFHResultset::add_histogram(Eigen::VectorXf histogram) {}

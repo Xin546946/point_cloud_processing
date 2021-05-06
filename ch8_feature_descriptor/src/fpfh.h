@@ -13,13 +13,13 @@ class FPFHEstimator{
     void set_input_normal(pcl::PointCloud<pcl::Normal>::Ptr normals);
     void set_search_surface(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
     void set_radius_search(float radius);
-    void compute(std::vector<FPFHSignature33> fpfh_descriptor);
+    void compute(std::vector<FPFHSignature33>& fpfh_descriptor);
 
     private:
     pcl::PointCloud<pcl::PointXYZ>::Ptr keys_;
     pcl::PointCloud<pcl::Normal>::Ptr normals_;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_;
-    std::vector<FPFHSignature33> spfh_;
+    std::vector<FPFHSignature33> fpfh_;
     float radius_;
 };
 
@@ -27,15 +27,11 @@ class FPFHResultset{
     public: 
     FPFHResultset() = default;
     FPFHResultset(int num_bin):num_bin_(num_bin){}; 
-    void add_histogram(std::vector<float> alpha_vec, std::vector<float> phi_vec, std::vector<float> theta_vec); // compute histogram, set alpha_hist->phi_hist->theta_hist
-
-
+    void add_histogran(std::vector<float> histogram); // compute histogram, set alpha_hist->phi_hist->theta_hist
+    std::vector<FPFHSignature33> get_histogram();
 
     private:
-    void compute_histogram_from_vector(std::vector<float> vec, int num_bin);
-
     int num_bin_ = 11;
-    std::vector<float> histogram_(num_bin_,0.f);
-
+    std::vector<float> histogram_(num_bin);
 
 } 
