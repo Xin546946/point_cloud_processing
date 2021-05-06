@@ -13,11 +13,13 @@ if (OPENMP_FOUND)
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-find_package(OpenCV 3.2.0 REQUIRED)
-find_package(PCL 1.11 REQUIRED)
+find_package(OpenCV)
+find_package(PCL 1.8 REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
-
-include_directories(/usr/include/eigen3)
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${EIGEN_INCLUDE_DIRS})
 include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src)
 # include_directories(${CMAKE_SOURCE_DIR}/utils)

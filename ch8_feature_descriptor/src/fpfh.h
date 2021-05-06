@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <Eigen/Dense>
 #include "Eigen/Eigenvalues"
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/point_types.h>
@@ -24,7 +25,7 @@ class FPFHEstimator{
 };
 
 class FPFHResultset{
-    public: 
+public: 
     FPFHResultset() = default;
     FPFHResultset(int num_bin):num_bin_(num_bin){}; 
     void add_histogran(std::vector<float> histogram); // compute histogram, set alpha_hist->phi_hist->theta_hist
