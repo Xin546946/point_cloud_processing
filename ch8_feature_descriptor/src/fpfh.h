@@ -22,3 +22,20 @@ class FPFHEstimator{
     std::vector<FPFHSignature33> spfh_;
     float radius_;
 };
+
+class FPFHResultset{
+    public: 
+    FPFHResultset() = default;
+    FPFHResultset(int num_bin):num_bin_(num_bin){}; 
+    void add_histogram(std::vector<float> alpha_vec, std::vector<float> phi_vec, std::vector<float> theta_vec); // compute histogram, set alpha_hist->phi_hist->theta_hist
+
+
+
+    private:
+    void compute_histogram_from_vector(std::vector<float> vec, int num_bin);
+
+    int num_bin_ = 11;
+    std::vector<float> histogram_(num_bin_,0.f);
+
+
+} 
