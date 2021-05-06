@@ -30,7 +30,7 @@ void FPFHEstimator::set_search_surface(
 void FPFHEstimator::set_radius_search(float radius) { this->radius_ = radius; }
 
 
-void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor){
+void FPFHEstimator::compute(std::vector<FPFHSignature33>& fpfh_descriptor){
 
   int num_keys = this->keys_->size();
   

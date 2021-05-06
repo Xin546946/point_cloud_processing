@@ -3,3 +3,6 @@ target_link_libraries(test_iss_pcl  ${PCL_LIBRARIES})
 
 add_executable(test_my_iss test_my_iss.cpp)
 target_link_libraries(test_my_iss fpfh iss ${PCL_LIBRARIES})
+
+add_executable(test_my_fpfh test_my_fpfh.cpp)
+target_link_libraries(test_my_fpfh fpfh ${PCL_LIBRARIES})
