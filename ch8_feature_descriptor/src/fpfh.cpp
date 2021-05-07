@@ -191,4 +191,21 @@ void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
   /*--------------------------------------------------------
   #####################implementation: FPFHResult #####################
   ---------------------------------------------------------*/
-  void FPFHResultset::add_histogram(Eigen::VectorXf histogram) {}
+  // void FPFHResultset::add_histogram(Eigen::VectorXf histogram) {}
+
+  std::vector<float> &operator+=(std::vector<float> &histogram1,
+                                 std::vector<float> &histogram2) {
+    std::vector<float> result(33);
+    for (int i = 0; i < 33; i++) {
+      result[i] = histogram1[i] + histogram2[i];
+    }
+    return result;
+  }
+
+  std::vector<float> &operator*(float factor, std::vector<float> &vec) {
+    std::vector<float> result(33);
+    for (int i = 0; i < 33; i++) {
+      result[i] = factor * vec[i];
+    }
+    return result;
+  }

@@ -27,12 +27,10 @@ class FPFHEstimator{
 class FPFHResultset{
 public: 
     FPFHResultset() = default;
-    FPFHResultset(int num_bin):num_bin_(num_bin){}; 
     void add_histogran(std::vector<float> histogram); // compute histogram, set alpha_hist->phi_hist->theta_hist
     std::vector<FPFHSignature33> get_histogram();
 
     private:
-    int num_bin_ = 11;
-    std::vector<float> histogram_(num_bin);
+    std::vector<float> histogram_;
 
 } 
