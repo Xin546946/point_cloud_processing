@@ -1,6 +1,36 @@
 #include "fpfh.h"
 #include <math.h>
 
+/*--------------------------------------------------------
+  #####################implementation: FPFHResult #####################
+  ---------------------------------------------------------*/
+
+std::vector<float> operator+(std::vector<float> &histogram1,
+                             std::vector<float> &histogram2) {
+  //   assert(histogram1.size() == histogram2.size());
+  int num_elem = histogram1.size();
+  std::vector<float> result(num_elem);
+  for (int i = 0; i < histogram1.size(); i++) {
+    result[i] = histogram1[i] + histogram2[i];
+  }
+  return result;
+}
+
+std::vector<float> operator*(float factor, std::vector<float> &vec) {
+  std::vector<float> result(vec.size());
+  for (int i = 0; i < vec.size(); i++) {
+    result[i] = vec[i] * factor;
+  }
+  return result;
+}
+
+void FPFHResult::add_histogran(std::vector<float> histogram, float weight) {
+  histogram = weight * histogram;
+  this->histogram_ = this->histogram_ + histogram;
+}
+
+std::vector<float> FPFHResult::get_histogram() { return this->histogram_; }
+
 Eigen::Vector3f compute_triplet_feature(diff, normal1, normal2) {
 
   Eigen::Vector3f v = normal1.cross(diff / diff.norm());
@@ -117,7 +147,8 @@ void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
       float weight = 1.f / diff.norm() / num_rnn_point;
       neighbour_spfh_result_set.set_triplet_features(
           alpha_neighbour_vec, phi_neighbour_vec, theta_neighbour_vec);
-      fpfh_result_set.add_histogram(neighbour_spfh_result_set, weight);
+      fpfh_result_set.add_histogram(neighbour_spfh_result_set.get_histogram(),
+                                    weight);
     }
 
     key_spfh_resultset.set_triplet_features(alpha_vec, phi_vec, theta_vec);
@@ -187,25 +218,3 @@ void FPFHEstimator::compute(std::vector<FPFHSignature33> fpfh_descriptor) {
   //     spfh_.push_back(hist_alpha);
   //   }
   // }
-
-  /*--------------------------------------------------------
-  #####################implementation: FPFHResult #####################
-  ---------------------------------------------------------*/
-  // void FPFHResultset::add_histogram(Eigen::VectorXf histogram) {}
-
-  std::vector<float> &operator+=(std::vector<float> &histogram1,
-                                 std::vector<float> &histogram2) {
-    std::vector<float> result(33);
-    for (int i = 0; i < 33; i++) {
-      result[i] = histogram1[i] + histogram2[i];
-    }
-    return result;
-  }
-
-  std::vector<float> &operator*(float factor, std::vector<float> &vec) {
-    std::vector<float> result(33);
-    for (int i = 0; i < 33; i++) {
-      result[i] = factor * vec[i];
-    }
-    return result;
-  }
