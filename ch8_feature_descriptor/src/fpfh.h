@@ -7,6 +7,10 @@
 
 typedef std::vector<float> FPFHSignature33;
 
+// std::vector<float> operator+(std::vector<float> &histogram1,
+//                              std::vector<float> &histogram2) ;
+
+// std::vector<float> operator*(float factor, std::vector<float> &vec) ;
 class FPFHEstimator{
     public:
     FPFHEstimator() = default;

@@ -5,13 +5,13 @@
 #include <pcl/search/impl/search.hpp>
 #include <pcl/visualization/pcl_visualizer.h>
 
+#include <fpfh.h>
 #include <pcl/features/fpfh.h>
 #include <pcl/features/fpfh_omp.h>
 #include <pcl/features/normal_3d.h>
 #include <pcl/features/normal_3d_omp.h>
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/search/kdtree.h>
-#include <fpfh.h>
 
 int main(int argc, char **argv) {
   // resd ply data
@@ -66,10 +66,6 @@ int main(int argc, char **argv) {
   cloud_normal_estimator.setInputCloud(cloud);
   cloud_normal_estimator.compute(*normals);
 
-
-
-
-   
   // create fpfh estimator, pass the cloud & normals
   FPFHEstimator fpfh_estimator;
   fpfh_estimator.set_input_cloud(keys);
@@ -81,12 +77,10 @@ int main(int argc, char **argv) {
   fpfh_estimator.set_radius_search(0.18);
   fpfh_estimator.compute(fpfh_descriptors);
 
-  std::cout << "FPFH descriptor size: " << fpfh_descriptors.size()
-            << std::endl;
+  std::cout << "FPFH descriptor size: " << fpfh_descriptors.size() << std::endl;
 
   for (int i = 0; i < 33; i++) {
-    std::cout << fpfh_descriptors[i][0]<< '\n';
+    std::cout << fpfh_descriptors[0][i] << '\n';
   }
-
   return 0;
 }
