@@ -1,6 +1,5 @@
 # ch8. Feature Description
 
-###
 *  In this report, we implement a feature description algorithm, namely Fast Point Feature Histogram(FPFH). Due to the limited time, we have not tested the algorithm quantitively. The correctness will be tested in the next homework (Registration).
 
 ## FPFHEstimator

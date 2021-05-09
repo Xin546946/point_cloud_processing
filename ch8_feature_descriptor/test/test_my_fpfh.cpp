@@ -27,12 +27,12 @@ int main(int argc, char **argv) {
   pcl::ISSKeypoint3D<pcl::PointXYZ, pcl::PointXYZ> iss_key_point_detector;
   // set iss parameters
   iss_key_point_detector.setSearchMethod(tree);
-  iss_key_point_detector.setSalientRadius(6 * radius);
-  iss_key_point_detector.setNonMaxRadius(4 * radius);
+  iss_key_point_detector.setSalientRadius(20 * radius);
+  iss_key_point_detector.setNonMaxRadius(10 * radius);
   iss_key_point_detector.setThreshold21(0.9);
   iss_key_point_detector.setThreshold32(0.9);
-  iss_key_point_detector.setMinNeighbors(5);
-  iss_key_point_detector.setNumberOfThreads(4);
+  iss_key_point_detector.setMinNeighbors(30);
+  iss_key_point_detector.setNumberOfThreads(10);
   iss_key_point_detector.setInputCloud(cloud);
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr keys(new pcl::PointCloud<pcl::PointXYZ>);
@@ -78,9 +78,12 @@ int main(int argc, char **argv) {
   fpfh_estimator.compute(fpfh_descriptors);
 
   std::cout << "FPFH descriptor size: " << fpfh_descriptors.size() << std::endl;
+  for (int id_key = 0; id_key < keys->size(); id_key++) {
+    for (int i = 0; i < 33; i++) {
+      std::cout << fpfh_descriptors[id_key][i] << ' ';
+    }
 
-  for (int i = 0; i < 33; i++) {
-    std::cout << fpfh_descriptors[0][i] << '\n';
+    std::cout << '\n';
   }
   return 0;
 }
